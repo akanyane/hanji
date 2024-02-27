@@ -9,5 +9,5 @@ export default function App() {
         {data.map((data: any,key: number) => <Card key={key} hangul={data.hangul} romanization={data.romanization} type={data.type} id={data.id} />)}
       </header>
     </div>
-  );
+  )
 }
