@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Hangul</title>
+  <rect width="32" height="32" rx="6" fill="#0284c7" />
+  <text x="16" y="23" font-family="'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">한</text>
+</svg>
