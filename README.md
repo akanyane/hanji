@@ -2,6 +2,8 @@
 
 Named after _hanji_, the traditional Korean paper that calligraphy is written on. Hanji is a free platform to learn Korean, from Hangul up to TOPIK II. It runs entirely in the browser, needs no account, and keeps progress only on the user's device (IndexedDB).
 
+**Use it at [hanji.akanyane.dev](https://hanji.akanyane.dev)**: free, no sign-up.
+
 The interface **and** the learning content are multilingual: English and Brazilian Portuguese today, with more languages easy to add (see [Adding a language](#adding-a-language)). Code and documentation are in English.
 
 Modules:
@@ -20,7 +22,7 @@ Modules:
 - **Progress**: XP, levels, day streak, study time, an activity heatmap, accuracy per skill and 22 achievements; a placement test that suggests where to start; an original TOPIK I-style mock exam (timed listening and reading, audio played at most twice, level estimate with the official ratios); export/import of all progress as a JSON backup.
 - **Tools**: "how is it pronounced?" (applies the standard sound-change rules and explains each step), Hangul ↔ Revised Romanization converter, and syllable decomposer.
 
-It is an installable PWA that works offline after the first visit (every page is precached). Speech synthesis uses the voices installed on the device; speech recognition, where supported (Chrome), may need a connection.
+It is an installable PWA that works offline after the first visit (every page is precached): open [hanji.akanyane.dev](https://hanji.akanyane.dev) and use your browser's "Install" option, or "Add to Home Screen" on iPhone/iPad. Speech synthesis uses the voices installed on the device; speech recognition, where supported (Chrome), may need a connection.
 
 ## Getting started
 
