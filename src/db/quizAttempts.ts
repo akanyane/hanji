@@ -7,6 +7,8 @@ import type { QuizAttempt } from './types'
 /** Stable quiz ids (stored in the database: never rename). */
 export const QUIZ_IDS = {
   hangulBasic: 'hangul-basic',
+  hangulListen: 'hangul-listen',
+  hangulRead: 'hangul-read',
 } as const
 
 export interface NewQuizAttempt {

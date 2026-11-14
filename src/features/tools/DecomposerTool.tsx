@@ -1,4 +1,7 @@
+import { AnimatePresence, motion } from 'motion/react'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { spring } from '../../components/motion/presets'
 import { TextField } from '../../components/ui/TextField'
 import { jamoName } from '../../content/hangul/jamoNames'
 import {
@@ -16,18 +19,35 @@ interface DecomposerToolProps {
   onTextChange: (text: string) => void
 }
 
-function JamoLine({ label, jamo }: { label: string; jamo: string }) {
+const ROLE_COLOR = {
+  initial: 'text-sky-600 dark:text-sky-400',
+  medial: 'text-violet-600 dark:text-violet-400',
+  final: 'text-amber-600 dark:text-amber-400',
+} as const
+
+function JamoLine({
+  label,
+  jamo,
+  part,
+}: {
+  label: string
+  jamo: string
+  part: keyof typeof ROLE_COLOR
+}) {
+  const { t } = useTranslation()
   const parts = splitCompound(jamo)
   const name = jamo ? jamoName(jamo) : undefined
   return (
     <div className="flex items-baseline justify-between gap-2">
-      <dt className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+      <dt className="text-xs tracking-wide text-slate-500 uppercase dark:text-slate-400">
         {label}
       </dt>
       <dd lang="ko" className="text-right">
         {jamo ? (
           <>
-            <span className="text-lg font-semibold">{jamo}</span>
+            <span className={`text-lg font-semibold ${ROLE_COLOR[part]}`}>
+              {jamo}
+            </span>
             {parts.length > 1 && (
               <span className="text-sm text-slate-500 dark:text-slate-400">
                 {' '}
@@ -45,7 +65,7 @@ function JamoLine({ label, jamo }: { label: string; jamo: string }) {
             <span className="text-slate-400" aria-hidden="true">
               —
             </span>
-            <span className="sr-only">nenhum</span>
+            <span className="sr-only">{t('common.none')}</span>
           </>
         )}
       </dd>
@@ -54,6 +74,7 @@ function JamoLine({ label, jamo }: { label: string; jamo: string }) {
 }
 
 export function DecomposerTool({ text, onTextChange }: DecomposerToolProps) {
+  const { t } = useTranslation()
   // Keep each character's position in the input: it is a stable key even
   // when the same character repeats.
   const chars = useMemo(
@@ -68,58 +89,85 @@ export function DecomposerTool({ text, onTextChange }: DecomposerToolProps) {
   return (
     <div className="flex flex-col gap-5">
       <TextField
-        label="Texto em hangul"
+        label={t('tools.decomposer.inputLabel')}
         value={text}
         onChange={onTextChange}
-        placeholder="Ex.: 한국어"
+        placeholder={t('tools.decomposer.placeholder')}
         lang="ko"
-        hint="Mostra a consoante inicial, a vogal e o batchim de cada sílaba."
+        hint={t('tools.decomposer.hint')}
       />
 
       {shown.length > 0 && (
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {shown.map(({ char, position }) => {
-            const syllable = decompose(char)
-            const code = `U+${char.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`
-            return (
-              <li
-                key={position}
-                className="flex flex-col gap-2 rounded-lg border border-slate-300 bg-white p-3 dark:border-slate-700 dark:bg-slate-800"
-              >
-                <div className="flex items-baseline justify-between">
-                  <span lang="ko" className="text-4xl font-semibold">
-                    {char}
-                  </span>
-                  <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
-                    {code}
-                  </span>
-                </div>
-                {syllable ? (
-                  <dl className="flex flex-col gap-1">
-                    <JamoLine label="Inicial" jamo={syllable.initial} />
-                    <JamoLine label="Vogal" jamo={syllable.medial} />
-                    <JamoLine label="Batchim" jamo={syllable.final} />
-                  </dl>
-                ) : isConsonant(char) || isMedial(char) ? (
-                  <dl>
-                    <JamoLine
-                      label={isMedial(char) ? 'Vogal' : 'Consoante'}
-                      jamo={char}
-                    />
-                  </dl>
-                ) : (
-                  <p className="text-sm text-slate-500 dark:text-slate-400">
-                    Não é hangul.
-                  </p>
-                )}
-              </li>
-            )
-          })}
+          <AnimatePresence initial={false} mode="popLayout">
+            {shown.map(({ char, position }) => {
+              const syllable = decompose(char)
+              const code = `U+${char.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`
+              return (
+                <motion.li
+                  key={`${position}-${char}`}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={spring}
+                  className="flex flex-col gap-2 rounded-2xl border border-slate-300 bg-white p-3 dark:border-slate-700 dark:bg-slate-800"
+                >
+                  <div className="flex items-baseline justify-between">
+                    <span lang="ko" className="text-4xl font-semibold">
+                      {char}
+                    </span>
+                    <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
+                      {code}
+                    </span>
+                  </div>
+                  {syllable ? (
+                    <dl className="flex flex-col gap-1">
+                      <JamoLine
+                        label={t('tools.decomposer.initial')}
+                        jamo={syllable.initial}
+                        part="initial"
+                      />
+                      <JamoLine
+                        label={t('tools.decomposer.medial')}
+                        jamo={syllable.medial}
+                        part="medial"
+                      />
+                      <JamoLine
+                        label={t('tools.decomposer.final')}
+                        jamo={syllable.final}
+                        part="final"
+                      />
+                    </dl>
+                  ) : isConsonant(char) || isMedial(char) ? (
+                    <dl>
+                      <JamoLine
+                        label={
+                          isMedial(char)
+                            ? t('tools.decomposer.medial')
+                            : t('tools.decomposer.consonant')
+                        }
+                        jamo={char}
+                        part={isMedial(char) ? 'medial' : 'initial'}
+                      />
+                    </dl>
+                  ) : (
+                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                      {t('tools.decomposer.notHangul')}
+                    </p>
+                  )}
+                </motion.li>
+              )
+            })}
+          </AnimatePresence>
         </ul>
       )}
       {chars.length > MAX_CHARS && (
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Mostrando os primeiros {MAX_CHARS} de {chars.length} caracteres.
+          {t('tools.decomposer.truncated', {
+            shown: MAX_CHARS,
+            total: chars.length,
+          })}
         </p>
       )}
     </div>

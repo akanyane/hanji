@@ -1,28 +1,16 @@
 import type { LinkProps } from '@tanstack/react-router'
 
+export type ToolId = 'pronunciation' | 'romanization' | 'decomposer'
+
 export interface ToolInfo {
+  /** Also the i18n key under `tools`. */
+  id: ToolId
   to: LinkProps['to']
-  title: string
-  description: string
+  icon: string
 }
 
 export const TOOLS: ToolInfo[] = [
-  {
-    to: '/tools/pronunciation',
-    title: 'Como se pronuncia?',
-    description:
-      'Digite uma palavra e veja a pronúncia real, com cada regra de mudança de som explicada.',
-  },
-  {
-    to: '/tools/romanization',
-    title: 'Romanização',
-    description:
-      'Converta entre hangul e a Romanização Revisada oficial, nos dois sentidos.',
-  },
-  {
-    to: '/tools/decomposer',
-    title: 'Decompositor de sílabas',
-    description:
-      'Veja a consoante inicial, a vogal e o batchim de cada sílaba de um texto.',
-  },
+  { id: 'pronunciation', to: '/tools/pronunciation', icon: '🗣️' },
+  { id: 'romanization', to: '/tools/romanization', icon: '🔤' },
+  { id: 'decomposer', to: '/tools/decomposer', icon: '🧩' },
 ]

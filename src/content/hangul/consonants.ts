@@ -1,6 +1,9 @@
 import type { HangulEntry } from './types'
 
-const TENSE = 'Consoante tensa (dupla): pronunciada com mais tensão, sem sopro.'
+const TENSE = {
+  'pt-BR': 'Consoante tensa (dupla): pronunciada com mais tensão, sem sopro.',
+  en: 'Tense (double) consonant: said with a tight throat and no puff of air.',
+}
 
 export const consonants: HangulEntry[] = [
   {
@@ -8,7 +11,10 @@ export const consonants: HangulEntry[] = [
     hangul: 'ㄱ',
     romanization: 'g/k',
     category: 'consonant',
-    notes: 'Romanizada como g antes de vogal e k no fim da sílaba.',
+    notes: {
+      'pt-BR': 'Romanizada como g antes de vogal e k no fim da sílaba.',
+      en: 'Romanized as g before a vowel and k at the end of a syllable.',
+    },
   },
   { id: 'cons-n', hangul: 'ㄴ', romanization: 'n', category: 'consonant' },
   {
@@ -16,14 +22,20 @@ export const consonants: HangulEntry[] = [
     hangul: 'ㄷ',
     romanization: 'd/t',
     category: 'consonant',
-    notes: 'Romanizada como d antes de vogal e t no fim da sílaba.',
+    notes: {
+      'pt-BR': 'Romanizada como d antes de vogal e t no fim da sílaba.',
+      en: 'Romanized as d before a vowel and t at the end of a syllable.',
+    },
   },
   {
     id: 'cons-r',
     hangul: 'ㄹ',
     romanization: 'r/l',
     category: 'consonant',
-    notes: 'Romanizada como r antes de vogal e l no fim da sílaba.',
+    notes: {
+      'pt-BR': 'Romanizada como r antes de vogal e l no fim da sílaba.',
+      en: 'Romanized as r before a vowel and l at the end of a syllable.',
+    },
   },
   { id: 'cons-m', hangul: 'ㅁ', romanization: 'm', category: 'consonant' },
   {
@@ -31,7 +43,10 @@ export const consonants: HangulEntry[] = [
     hangul: 'ㅂ',
     romanization: 'b/p',
     category: 'consonant',
-    notes: 'Romanizada como b antes de vogal e p no fim da sílaba.',
+    notes: {
+      'pt-BR': 'Romanizada como b antes de vogal e p no fim da sílaba.',
+      en: 'Romanized as b before a vowel and p at the end of a syllable.',
+    },
   },
   { id: 'cons-s', hangul: 'ㅅ', romanization: 's', category: 'consonant' },
   {
@@ -39,7 +54,10 @@ export const consonants: HangulEntry[] = [
     hangul: 'ㅇ',
     romanization: '',
     category: 'consonant',
-    notes: 'Muda no início da sílaba; soa como "ng" no final (batchim).',
+    notes: {
+      'pt-BR': 'Muda no início da sílaba; soa como "ng" no final (batchim).',
+      en: 'Silent at the start of a syllable; sounds like "ng" as a final (batchim).',
+    },
   },
   { id: 'cons-j', hangul: 'ㅈ', romanization: 'j', category: 'consonant' },
   { id: 'cons-ch', hangul: 'ㅊ', romanization: 'ch', category: 'consonant' },

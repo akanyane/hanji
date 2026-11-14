@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from './Button'
 
 export function CopyButton({ text }: { text: string }) {
+  const { t } = useTranslation()
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
@@ -26,7 +28,9 @@ export function CopyButton({ text }: { text: string }) {
       disabled={!text}
       className="px-3 py-1 text-sm"
     >
-      <span aria-live="polite">{copied ? 'Copiado!' : 'Copiar'}</span>
+      <span aria-live="polite">
+        {copied ? t('common.copied') : t('common.copy')}
+      </span>
     </Button>
   )
 }

@@ -4,9 +4,13 @@ import {
   type ErrorComponentProps,
   Link,
   Outlet,
+  useLocation,
 } from '@tanstack/react-router'
+import { MotionConfig, motion } from 'motion/react'
 import { lazy, Suspense, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { AppHeader } from '../components/layout/AppHeader'
+import { PageTransition } from '../components/motion/PageTransition'
 import { useSettings } from '../stores/settings'
 
 export interface RouterContext {
@@ -27,59 +31,76 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 })
 
 function RootLayout() {
+  const { t } = useTranslation()
   const theme = useSettings((s) => s.theme)
+  // Animate between top-level sections only; nested layouts animate their own content.
+  const section = useLocation({ select: (l) => l.pathname.split('/')[1] ?? '' })
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
   }, [theme])
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
-      <a
-        href="#main-content"
-        className="sr-only rounded-md bg-sky-700 px-4 py-2 text-white focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50"
-      >
-        Pular para o conteúdo
-      </a>
-      <AppHeader />
-      <main
-        id="main-content"
-        tabIndex={-1}
-        className="mx-auto max-w-5xl px-4 py-6 outline-none sm:px-8"
-      >
-        <Outlet />
-      </main>
-      <Suspense>
-        <Devtools />
-      </Suspense>
-    </div>
+    // reducedMotion="user": transform/layout animations are disabled when the
+    // OS asks for reduced motion.
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
+        <a
+          href="#main-content"
+          className="sr-only rounded-md bg-sky-700 px-4 py-2 text-white focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50"
+        >
+          {t('nav.skipToContent')}
+        </a>
+        <AppHeader />
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="mx-auto max-w-5xl px-4 py-6 outline-none sm:px-8"
+        >
+          <PageTransition transitionKey={section}>
+            <Outlet />
+          </PageTransition>
+        </main>
+        <Suspense>
+          <Devtools />
+        </Suspense>
+      </div>
+    </MotionConfig>
   )
 }
 
 function NotFound() {
+  const { t } = useTranslation()
   return (
     <div className="flex flex-col items-center gap-4 py-16 text-center">
-      <p lang="ko" className="text-5xl font-bold">
+      <motion.p
+        lang="ko"
+        className="text-6xl font-bold"
+        initial={{ rotate: -10, scale: 0.5, opacity: 0 }}
+        animate={{ rotate: 0, scale: 1, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 12 }}
+      >
         404
-      </p>
-      <p>Página não encontrada.</p>
+      </motion.p>
+      <p>{t('errors.notFound')}</p>
       <Link
         to="/"
         className="font-medium text-sky-700 underline dark:text-sky-400"
       >
-        Voltar ao início
+        {t('errors.backHome')}
       </Link>
     </div>
   )
 }
 
 function RouteError({ error, reset }: ErrorComponentProps) {
+  const { t } = useTranslation()
   return (
     <div
       role="alert"
       className="flex flex-col items-center gap-4 py-16 text-center"
     >
-      <p className="text-xl font-semibold">Algo deu errado.</p>
+      <p className="text-xl font-semibold">{t('errors.generic')}</p>
       <pre className="max-w-full overflow-x-auto text-sm text-slate-500">
         {error instanceof Error ? error.message : String(error)}
       </pre>
@@ -88,7 +109,7 @@ function RouteError({ error, reset }: ErrorComponentProps) {
         onClick={reset}
         className="font-medium text-sky-700 underline dark:text-sky-400"
       >
-        Tentar de novo
+        {t('errors.tryAgain')}
       </button>
     </div>
   )

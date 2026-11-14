@@ -18,6 +18,7 @@ function storage(values: Record<string, string> = {}) {
 describe('loadSettings', () => {
   it('falls back to the system preference and normal speed', () => {
     expect(loadSettings(storage(), true)).toEqual({
+      locale: 'en',
       theme: 'dark',
       speechRate: 1,
     })
@@ -28,7 +29,11 @@ describe('loadSettings', () => {
     const s = storage({
       [SETTINGS_KEY]: JSON.stringify({ theme: 'dark', speechRate: 0.75 }),
     })
-    expect(loadSettings(s, false)).toEqual({ theme: 'dark', speechRate: 0.75 })
+    expect(loadSettings(s, false)).toEqual({
+      locale: 'en',
+      theme: 'dark',
+      speechRate: 0.75,
+    })
   })
 
   it('migrates the theme saved by the old app version', () => {
@@ -40,7 +45,11 @@ describe('loadSettings', () => {
     const s = storage({
       [SETTINGS_KEY]: JSON.stringify({ theme: 'purple', speechRate: 'fast' }),
     })
-    expect(loadSettings(s, false)).toEqual({ theme: 'light', speechRate: 1 })
+    expect(loadSettings(s, false)).toEqual({
+      locale: 'en',
+      theme: 'light',
+      speechRate: 1,
+    })
     expect(loadSettings(storage({ [SETTINGS_KEY]: '{oops' }), true).theme).toBe(
       'dark',
     )
@@ -49,6 +58,23 @@ describe('loadSettings', () => {
   it('clamps the speech rate', () => {
     const s = storage({ [SETTINGS_KEY]: JSON.stringify({ speechRate: 9 }) })
     expect(loadSettings(s, false).speechRate).toBe(1.5)
+  })
+})
+
+describe('locale', () => {
+  it('detects the locale from the browser languages on first visit', () => {
+    expect(loadSettings(storage(), false, ['pt-BR', 'en']).locale).toBe('pt-BR')
+    expect(loadSettings(storage(), false, ['fr-FR']).locale).toBe('en')
+  })
+
+  it('prefers the saved locale over the browser languages', () => {
+    const s = storage({ [SETTINGS_KEY]: JSON.stringify({ locale: 'en' }) })
+    expect(loadSettings(s, false, ['pt-BR']).locale).toBe('en')
+  })
+
+  it('ignores an unsupported saved locale', () => {
+    const s = storage({ [SETTINGS_KEY]: JSON.stringify({ locale: 'xx' }) })
+    expect(loadSettings(s, false, ['pt-BR']).locale).toBe('pt-BR')
   })
 })
 

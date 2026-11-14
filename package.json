@@ -23,8 +23,11 @@
     "@tanstack/react-router": "^1.170.46",
     "@tanstack/react-store": "^0.11.2",
     "dexie": "^4.4.7",
+    "i18next": "^27.1.1",
+    "motion": "^14.14.0",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "react-i18next": "^18.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.4",

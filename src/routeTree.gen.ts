@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as HangulRouteRouteImport } from './routes/hangul/route'
 import { Route as ToolsRouteRouteImport } from './routes/tools/route'
 import { Route as HangulIndexRouteImport } from './routes/hangul/index'
+import { Route as HangulEntryIdRouteImport } from './routes/hangul/$entryId'
+import { Route as HangulBuilderRouteImport } from './routes/hangul/builder'
 import { Route as HangulQuizRouteImport } from './routes/hangul/quiz'
 import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as ToolsDecomposerRouteImport } from './routes/tools/decomposer'
@@ -37,6 +39,16 @@ const ToolsRouteRoute = ToolsRouteRouteImport.update({
 const HangulIndexRoute = HangulIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => HangulRouteRoute,
+} as any)
+const HangulEntryIdRoute = HangulEntryIdRouteImport.update({
+  id: '/$entryId',
+  path: '/$entryId',
+  getParentRoute: () => HangulRouteRoute,
+} as any)
+const HangulBuilderRoute = HangulBuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
   getParentRoute: () => HangulRouteRoute,
 } as any)
 const HangulQuizRoute = HangulQuizRouteImport.update({
@@ -69,6 +81,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/hangul': typeof HangulRouteRouteWithChildren
   '/tools': typeof ToolsRouteRouteWithChildren
+  '/hangul/$entryId': typeof HangulEntryIdRoute
+  '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
   '/tools/decomposer': typeof ToolsDecomposerRoute
   '/tools/pronunciation': typeof ToolsPronunciationRoute
@@ -78,6 +92,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/hangul/$entryId': typeof HangulEntryIdRoute
+  '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
   '/tools/decomposer': typeof ToolsDecomposerRoute
   '/tools/pronunciation': typeof ToolsPronunciationRoute
@@ -90,6 +106,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/hangul': typeof HangulRouteRouteWithChildren
   '/tools': typeof ToolsRouteRouteWithChildren
+  '/hangul/$entryId': typeof HangulEntryIdRoute
+  '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
   '/tools/decomposer': typeof ToolsDecomposerRoute
   '/tools/pronunciation': typeof ToolsPronunciationRoute
@@ -103,6 +121,8 @@ export interface FileRouteTypes {
     | '/'
     | '/hangul'
     | '/tools'
+    | '/hangul/$entryId'
+    | '/hangul/builder'
     | '/hangul/quiz'
     | '/tools/decomposer'
     | '/tools/pronunciation'
@@ -112,6 +132,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/hangul/$entryId'
+    | '/hangul/builder'
     | '/hangul/quiz'
     | '/tools/decomposer'
     | '/tools/pronunciation'
@@ -123,6 +145,8 @@ export interface FileRouteTypes {
     | '/'
     | '/hangul'
     | '/tools'
+    | '/hangul/$entryId'
+    | '/hangul/builder'
     | '/hangul/quiz'
     | '/tools/decomposer'
     | '/tools/pronunciation'
@@ -167,6 +191,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HangulIndexRouteImport
       parentRoute: typeof HangulRouteRoute
     }
+    '/hangul/$entryId': {
+      id: '/hangul/$entryId'
+      path: '/$entryId'
+      fullPath: '/hangul/$entryId'
+      preLoaderRoute: typeof HangulEntryIdRouteImport
+      parentRoute: typeof HangulRouteRoute
+    }
+    '/hangul/builder': {
+      id: '/hangul/builder'
+      path: '/builder'
+      fullPath: '/hangul/builder'
+      preLoaderRoute: typeof HangulBuilderRouteImport
+      parentRoute: typeof HangulRouteRoute
+    }
     '/hangul/quiz': {
       id: '/hangul/quiz'
       path: '/quiz'
@@ -206,11 +244,15 @@ declare module '@tanstack/react-router' {
 }
 
 interface HangulRouteRouteChildren {
+  HangulEntryIdRoute: typeof HangulEntryIdRoute
+  HangulBuilderRoute: typeof HangulBuilderRoute
   HangulQuizRoute: typeof HangulQuizRoute
   HangulIndexRoute: typeof HangulIndexRoute
 }
 
 const HangulRouteRouteChildren: HangulRouteRouteChildren = {
+  HangulEntryIdRoute: HangulEntryIdRoute,
+  HangulBuilderRoute: HangulBuilderRoute,
   HangulQuizRoute: HangulQuizRoute,
   HangulIndexRoute: HangulIndexRoute,
 }

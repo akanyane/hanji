@@ -1,3 +1,6 @@
+import { motion } from 'motion/react'
+import { softSpring } from '../motion/presets'
+
 interface ProgressBarProps {
   value: number
   max: number
@@ -16,11 +19,13 @@ export function ProgressBar({ value, max, label }: ProgressBarProps) {
       aria-valuemin={0}
       aria-valuemax={safeMax}
       aria-valuenow={clamped}
-      className="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
+      className="h-2.5 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
     >
-      <div
-        className="h-full rounded-full bg-sky-600 transition-[width] duration-300 dark:bg-sky-400"
-        style={{ width: `${percent}%` }}
+      <motion.div
+        className="h-full rounded-full bg-gradient-to-r from-sky-500 to-violet-500"
+        initial={false}
+        animate={{ width: `${percent}%` }}
+        transition={softSpring}
       />
     </div>
   )

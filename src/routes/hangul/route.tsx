@@ -1,46 +1,37 @@
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, useLocation } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
+import { PageTransition } from '../../components/motion/PageTransition'
 import { PageHeader } from '../../components/ui/PageHeader'
+import { TabNav } from '../../components/ui/TabNav'
 
 export const Route = createFileRoute('/hangul')({
   component: HangulLayout,
 })
 
-const tabClass =
-  'rounded-full px-4 py-1.5 text-sm font-medium text-slate-600 transition dark:text-slate-300'
-const activeTabClass =
-  'bg-white text-slate-900 shadow dark:bg-slate-600 dark:text-slate-50'
-
 function HangulLayout() {
+  const { t } = useTranslation()
+  const pathname = useLocation({ select: (l) => l.pathname })
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <PageHeader
-          title="Hangul"
-          description="O alfabeto coreano: toque num cartão para ver a romanização."
+          title={t('hangul.title')}
+          description={t('hangul.description')}
         />
-        <nav
-          aria-label="Seções do Hangul"
-          className="flex self-start rounded-full bg-slate-200 p-1 dark:bg-slate-800"
-        >
-          <Link
-            to="/hangul"
-            activeOptions={{ exact: true, includeSearch: false }}
-            className={tabClass}
-            activeProps={{ className: activeTabClass }}
-          >
-            Explorar
-          </Link>
-          <Link
-            to="/hangul/quiz"
-            activeOptions={{ includeSearch: false }}
-            className={tabClass}
-            activeProps={{ className: activeTabClass }}
-          >
-            Quiz
-          </Link>
-        </nav>
+        <TabNav
+          label={t('hangul.sections')}
+          layoutId="hangul-tab-pill"
+          items={[
+            { to: '/hangul', label: t('hangul.tabs.browse'), exact: true },
+            { to: '/hangul/builder', label: t('hangul.tabs.builder') },
+            { to: '/hangul/quiz', label: t('hangul.tabs.quiz') },
+          ]}
+        />
       </div>
-      <Outlet />
+      <PageTransition transitionKey={pathname}>
+        <Outlet />
+      </PageTransition>
     </div>
   )
 }

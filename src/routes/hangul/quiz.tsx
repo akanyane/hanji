@@ -3,30 +3,44 @@ import type { HangulCategory } from '../../content/hangul'
 import { quizSummaryQuery } from '../../db/queries'
 import { QUIZ_IDS } from '../../db/quizAttempts'
 import { parseCategory } from '../../features/hangul/filter'
-import { QuizView } from '../../features/hangul/QuizView'
+import { HangulQuiz, type QuizMode } from '../../features/hangul/HangulQuiz'
+
+interface QuizSearch {
+  mode?: Exclude<QuizMode, 'recognize'>
+  category?: HangulCategory
+}
 
 export const Route = createFileRoute('/hangul/quiz')({
-  validateSearch: (
-    search: Record<string, unknown>,
-  ): { category?: HangulCategory } => ({
+  validateSearch: (search: Record<string, unknown>): QuizSearch => ({
+    mode:
+      search.mode === 'listen' || search.mode === 'read'
+        ? search.mode
+        : undefined,
     category: parseCategory(search.category),
   }),
-  // Preload the summary from IndexedDB before showing the page.
+  // Preload the default mode's summary from IndexedDB before showing the page.
   loader: ({ context }) =>
     context.queryClient.ensureQueryData(quizSummaryQuery(QUIZ_IDS.hangulBasic)),
   component: QuizPage,
 })
 
 function QuizPage() {
-  const { category = 'all' } = Route.useSearch()
+  const { mode = 'recognize', category = 'all' } = Route.useSearch()
   const navigate = Route.useNavigate()
 
   return (
-    <QuizView
+    <HangulQuiz
+      mode={mode}
       category={category}
+      onModeChange={(m) =>
+        navigate({
+          search: (s) => ({ ...s, mode: m === 'recognize' ? undefined : m }),
+          replace: true,
+        })
+      }
       onCategoryChange={(c) =>
         navigate({
-          search: { category: c === 'all' ? undefined : c },
+          search: (s) => ({ ...s, category: c === 'all' ? undefined : c }),
           replace: true,
         })
       }

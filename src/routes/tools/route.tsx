@@ -1,40 +1,35 @@
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, useLocation } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
+import { PageTransition } from '../../components/motion/PageTransition'
 import { PageHeader } from '../../components/ui/PageHeader'
+import { TabNav } from '../../components/ui/TabNav'
 import { TOOLS } from '../../features/tools/tools'
 
 export const Route = createFileRoute('/tools')({
   component: ToolsLayout,
 })
 
-const tabClass =
-  'shrink-0 rounded-full px-4 py-1.5 text-sm font-medium text-slate-600 transition dark:text-slate-300'
-const activeTabClass =
-  'bg-white text-slate-900 shadow dark:bg-slate-600 dark:text-slate-50'
-
 function ToolsLayout() {
+  const { t } = useTranslation()
+  const pathname = useLocation({ select: (l) => l.pathname })
+
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        title="Ferramentas"
-        description="Utilitários para consultar a qualquer momento. Tudo roda no seu navegador."
+        title={t('tools.title')}
+        description={t('tools.description')}
       />
-      <nav
-        aria-label="Ferramentas"
-        className="flex max-w-full gap-1 self-start overflow-x-auto rounded-full bg-slate-200 p-1 dark:bg-slate-800"
-      >
-        {TOOLS.map((tool) => (
-          <Link
-            key={tool.title}
-            to={tool.to}
-            activeOptions={{ includeSearch: false }}
-            className={tabClass}
-            activeProps={{ className: activeTabClass }}
-          >
-            {tool.title}
-          </Link>
-        ))}
-      </nav>
-      <Outlet />
+      <TabNav
+        label={t('tools.nav')}
+        layoutId="tools-tab-pill"
+        items={TOOLS.map((tool) => ({
+          to: tool.to,
+          label: t(`tools.${tool.id}.title`),
+        }))}
+      />
+      <PageTransition transitionKey={pathname}>
+        <Outlet />
+      </PageTransition>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { createStore, useSelector } from '@tanstack/react-store'
+import { detectLocale, isLocale, type Locale } from '../i18n/locales'
 
 // UI preferences for this device. They live in localStorage (not IndexedDB)
 // because the theme must be read synchronously at startup, before React
@@ -7,6 +8,8 @@ import { createStore, useSelector } from '@tanstack/react-store'
 export type Theme = 'light' | 'dark'
 
 export interface Settings {
+  /** Interface and content language. */
+  locale: Locale
   theme: Theme
   /** Speech synthesis rate (1 = normal). */
   speechRate: number
@@ -38,6 +41,7 @@ function readJson(storage: StorageLike | null, key: string): unknown {
 export function loadSettings(
   storage: StorageLike | null,
   prefersDark: boolean,
+  languages: readonly string[] = [],
 ): Settings {
   const saved = readJson(storage, SETTINGS_KEY) as Partial<Settings> | null
   const legacyTheme = readJson(storage, LEGACY_THEME_KEY)
@@ -55,7 +59,11 @@ export function loadSettings(
       ? clampRate(saved.speechRate)
       : 1
 
-  return { theme, speechRate }
+  const locale = isLocale(saved?.locale)
+    ? saved.locale
+    : detectLocale(languages)
+
+  return { locale, theme, speechRate }
 }
 
 function getStorage(): StorageLike | null {
@@ -72,8 +80,15 @@ const prefersDark =
   typeof window.matchMedia === 'function' &&
   window.matchMedia('(prefers-color-scheme: dark)').matches
 
+const browserLanguages =
+  typeof navigator === 'undefined'
+    ? []
+    : navigator.languages?.length
+      ? navigator.languages
+      : [navigator.language]
+
 export const settingsStore = createStore<Settings>(
-  loadSettings(getStorage(), prefersDark),
+  loadSettings(getStorage(), prefersDark, browserLanguages),
 )
 
 settingsStore.subscribe((settings) => {
@@ -90,6 +105,9 @@ export const settingsActions = {
       ...s,
       theme: s.theme === 'dark' ? 'light' : 'dark',
     }))
+  },
+  setLocale(locale: Locale) {
+    settingsStore.setState((s) => ({ ...s, locale }))
   },
   setSpeechRate(rate: number) {
     settingsStore.setState((s) => ({ ...s, speechRate: clampRate(rate) }))

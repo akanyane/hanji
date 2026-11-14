@@ -1,4 +1,6 @@
+import { AnimatePresence, motion } from 'motion/react'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { AudioButton } from '../../components/ui/AudioButton'
 import { Chip } from '../../components/ui/Chip'
 import { CopyButton } from '../../components/ui/CopyButton'
@@ -25,41 +27,47 @@ export function RomanizationTool({
   onDirectionChange,
   onKeepHChange,
 }: RomanizationToolProps) {
+  const { t } = useTranslation()
   const toLatin = direction === 'to-latin'
-  const result = useMemo(
-    () =>
-      toLatin
-        ? {
-            output: romanize(text, { keepHAfterObstruent: keepH }),
-            unrecognized: [],
-          }
-        : (({ hangul, unrecognized }) => ({ output: hangul, unrecognized }))(
-            romanizationToHangul(text),
-          ),
-    [text, toLatin, keepH],
-  )
+  const result = useMemo(() => {
+    if (toLatin)
+      return {
+        output: romanize(text, { keepHAfterObstruent: keepH }),
+        unrecognized: [],
+      }
+    const { hangul, unrecognized } = romanizationToHangul(text)
+    return { output: hangul, unrecognized }
+  }, [text, toLatin, keepH])
   const hangulText = toLatin ? text : result.output
 
   return (
     <div className="flex flex-col gap-5">
       <fieldset className="flex flex-wrap gap-2">
-        <legend className="sr-only">Direção da conversão</legend>
+        <legend className="sr-only">{t('tools.romanization.direction')}</legend>
         <Chip selected={toLatin} onClick={() => onDirectionChange('to-latin')}>
-          Hangul → Latino
+          {t('tools.romanization.toLatin')}
         </Chip>
         <Chip
           selected={!toLatin}
           onClick={() => onDirectionChange('to-hangul')}
         >
-          Latino → Hangul
+          {t('tools.romanization.toHangul')}
         </Chip>
       </fieldset>
 
       <TextField
-        label={toLatin ? 'Texto em hangul' : 'Texto romanizado'}
+        label={
+          toLatin
+            ? t('tools.romanization.hangulLabel')
+            : t('tools.romanization.latinLabel')
+        }
         value={text}
         onChange={onTextChange}
-        placeholder={toLatin ? 'Ex.: 안녕하세요' : 'Ex.: annyeonghaseyo'}
+        placeholder={
+          toLatin
+            ? t('tools.romanization.hangulPlaceholder')
+            : t('tools.romanization.latinPlaceholder')
+        }
         lang={toLatin ? 'ko' : 'en'}
       />
 
@@ -71,48 +79,49 @@ export function RomanizationTool({
             onChange={(e) => onKeepHChange(e.target.checked)}
             className="mt-1"
           />
-          <span>
-            É um substantivo: manter o <strong>h</strong> depois de ㄱ, ㄷ, ㅂ,
-            como manda a regra oficial (<span lang="ko">묵호</span> → Mukho, em
-            vez de Muko).
-          </span>
+          <span>{t('tools.romanization.keepH')}</span>
         </label>
       ) : (
         <p className="text-sm text-slate-600 dark:text-slate-300">
-          A conversão é aproximada: a romanização representa a pronúncia, então
-          "silla" vira <span lang="ko">실라</span> (e não{' '}
-          <span lang="ko">신라</span>). Use hífen para separar sílabas ambíguas:
-          "jung-ang" → <span lang="ko">중앙</span>.
+          {t('tools.romanization.approximate')}
         </p>
       )}
 
       <section
         aria-live="polite"
-        aria-label="Resultado"
-        className="flex flex-col gap-3 rounded-lg border border-slate-300 bg-white p-4 dark:border-slate-700 dark:bg-slate-800"
+        aria-label={t('common.result')}
+        className="flex flex-col gap-3 rounded-2xl bg-gradient-to-br from-sky-50 to-violet-50 p-5 dark:from-slate-800 dark:to-slate-800/50"
       >
         <div className="flex items-center justify-between gap-2">
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            Resultado
+            {t('common.result')}
           </p>
           <div className="flex items-center gap-2">
             {hangulText.trim() && <AudioButton text={hangulText} />}
             <CopyButton text={result.output} />
           </div>
         </div>
-        <p
-          lang={toLatin ? 'en' : 'ko'}
-          className="min-h-8 break-words text-2xl"
-        >
-          {result.output || (
-            <span className="text-base text-slate-400">
-              O resultado aparece aqui.
-            </span>
-          )}
-        </p>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.p
+            key={result.output === '' ? 'empty' : 'filled'}
+            lang={toLatin ? 'en' : 'ko'}
+            className="min-h-8 text-2xl break-words"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+          >
+            {result.output || (
+              <span className="text-base text-slate-400">
+                {t('common.resultPlaceholder')}
+              </span>
+            )}
+          </motion.p>
+        </AnimatePresence>
         {result.unrecognized.length > 0 && (
           <p className="text-sm text-amber-800 dark:text-amber-300">
-            Não reconhecido como romanização: {result.unrecognized.join(', ')}
+            {t('tools.romanization.unrecognized', {
+              words: result.unrecognized.join(', '),
+            })}
           </p>
         )}
       </section>
