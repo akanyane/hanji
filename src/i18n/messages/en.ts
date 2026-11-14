@@ -4,7 +4,7 @@
 
 export const en = {
   common: {
-    appName: 'Learn Korean',
+    appName: 'Hanji · Learn Korean',
     comingSoon: 'Coming soon',
     silent: '(silent)',
     none: 'none',
@@ -38,7 +38,7 @@ export const en = {
     tools: 'Tools',
     progress: 'Progress',
     skipToContent: 'Skip to content',
-    homeLabel: 'Learn Korean: home page',
+    homeLabel: 'Hanji: home page',
     language: 'Language',
   },
   theme: {
@@ -1042,7 +1042,7 @@ export const en = {
       },
       errors: {
         notJson: 'This file is not a valid backup (it is not JSON).',
-        notBackup: 'This file is not a Learn Korean backup.',
+        notBackup: 'This file is not a Hanji backup.',
         newerVersion:
           'This backup comes from a newer version of the app. Reload the app and try again.',
         invalid: 'This backup is damaged or incomplete.',

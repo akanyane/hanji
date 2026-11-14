@@ -4,6 +4,8 @@ import { db } from './db'
 // Progress backup: everything the learner produced, as one JSON file.
 // Used to move progress between browsers/devices until sync exists.
 
+// Format tag inside backup files, from before the app was named Hanji:
+// kept so existing backups stay importable.
 export const BACKUP_APP = 'learn-korean'
 export const BACKUP_VERSION = 1
 
@@ -82,7 +84,7 @@ export function serializeBackup(backup: Backup): string {
 }
 
 export function backupFileName(now = new Date()): string {
-  return `learn-korean-backup-${now.toISOString().slice(0, 10)}.json`
+  return `hanji-backup-${now.toISOString().slice(0, 10)}.json`
 }
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/

@@ -17,6 +17,7 @@ export interface Settings {
   newPerSession: number
 }
 
+// Storage keys keep the pre-Hanji prefix so saved settings survive.
 export const SETTINGS_KEY = 'learn-korean:settings'
 const LEGACY_THEME_KEY = 'hangul:theme'
 export const SPEECH_RATE_MIN = 0.5

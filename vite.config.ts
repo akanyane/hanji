@@ -25,8 +25,8 @@ export default defineConfig(({ mode }) => ({
         'apple-touch-icon-180x180.png',
       ],
       manifest: {
-        name: 'Learn Korean',
-        short_name: 'Korean',
+        name: 'Hanji · Learn Korean',
+        short_name: 'Hanji',
         description:
           'Free platform to learn Korean, from Hangul to TOPIK. Works offline.',
         lang: 'en',

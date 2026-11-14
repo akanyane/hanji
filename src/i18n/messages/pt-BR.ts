@@ -3,7 +3,7 @@ import type { Messages } from './en'
 // Brazilian Portuguese UI messages.
 export const ptBR: Messages = {
   common: {
-    appName: 'Aprenda Coreano',
+    appName: 'Hanji · Aprenda coreano',
     comingSoon: 'Em breve',
     silent: '(muda)',
     none: 'nenhum',
@@ -37,7 +37,7 @@ export const ptBR: Messages = {
     tools: 'Ferramentas',
     progress: 'Progresso',
     skipToContent: 'Pular para o conteúdo',
-    homeLabel: 'Aprenda Coreano: página inicial',
+    homeLabel: 'Hanji: página inicial',
     language: 'Idioma',
   },
   theme: {
@@ -1042,7 +1042,7 @@ export const ptBR: Messages = {
       },
       errors: {
         notJson: 'Este arquivo não é um backup válido (não é JSON).',
-        notBackup: 'Este arquivo não é um backup do Aprenda Coreano.',
+        notBackup: 'Este arquivo não é um backup do Hanji.',
         newerVersion:
           'Este backup vem de uma versão mais nova do app. Recarregue o app e tente de novo.',
         invalid: 'Este backup está danificado ou incompleto.',

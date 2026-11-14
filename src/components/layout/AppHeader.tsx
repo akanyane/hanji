@@ -205,11 +205,17 @@ export function AppHeader() {
           >
             <Seal text="한" size="sm" />
           </motion.span>
-          <span
-            lang="ko"
-            className="hidden font-serif text-lg font-bold tracking-tight sm:inline"
-          >
-            한국어
+          <span className="hidden items-baseline gap-1.5 sm:flex">
+            <span className="font-serif text-lg font-bold tracking-tight">
+              Hanji
+            </span>
+            <span
+              lang="ko"
+              aria-hidden="true"
+              className="font-serif text-xs text-seal-600 dark:text-seal-400"
+            >
+              한지
+            </span>
           </span>
         </Link>
         <nav

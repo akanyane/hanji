@@ -60,5 +60,8 @@
     "vitest": "^4.1.10"
   },
   "packageManager": "bun@1.4.4",
-  "license": "MIT"
+  "license": "MIT",
+  "overrides": {
+    "glob": "^14.0.2"
+  }
 }
