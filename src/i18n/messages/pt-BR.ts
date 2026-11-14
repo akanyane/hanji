@@ -2,6 +2,51 @@ import type { Messages } from './en'
 
 // Brazilian Portuguese UI messages.
 export const ptBR: Messages = {
+  today: {
+    title: 'Hoje',
+    goal: 'Meta do dia',
+    goalReached: 'Meta cumprida!',
+    goalOf: '{{xp}} de {{goal}} XP hoje',
+    goalLabel: 'Meta',
+    goals: {
+      light: 'Leve · {{xp}} XP',
+      regular: 'Normal · {{xp}} XP',
+      intense: 'Intensa · {{xp}} XP',
+    },
+    streak_one: '{{count}} dia seguido. Continue assim!',
+    streak_other: '{{count}} dias seguidos. Continue assim!',
+    streakStart: 'Estude hoje para começar uma sequência.',
+    progress: '{{done}} de {{total}} feitas',
+    start: 'Começar',
+    again: 'Fazer mais',
+    done: 'Feito',
+    continue: 'Continuar a sessão de hoje',
+    tasks: {
+      hangul: {
+        title: 'Aprender a ler Hangul',
+        detail: 'Explore as letras e depois faça o quiz de reconhecimento.',
+      },
+      vocabulary: {
+        title: 'Palavras',
+        detail: '{{due}} revisões · {{fresh}} palavras novas',
+        detailDue_one: '{{count}} revisão pendente',
+        detailDue_other: '{{count}} revisões pendentes',
+        detailNew_one: '{{count}} palavra nova',
+        detailNew_other: '{{count}} palavras novas',
+        reviewed_one: '{{count}} palavra revisada hoje',
+        reviewed_other: '{{count}} palavras revisadas hoje',
+      },
+      grammar: { title: 'Lição de gramática' },
+      reading: { title: 'Leitura' },
+      dialogue: { title: 'Diálogo' },
+    },
+    allDone: 'Tudo feito por hoje!',
+    allDoneText:
+      'Volte amanhã para manter a sequência. Quer continuar enquanto isso?',
+    more: { exam: 'Fazer um simulado', dictionary: 'Explorar o dicionário' },
+    empty:
+      'Você terminou todas as lições e textos. Impressionante! Experimente os simulados.',
+  },
   common: {
     appName: 'Hanji · Aprenda coreano',
     comingSoon: 'Em breve',
@@ -21,6 +66,7 @@ export const ptBR: Messages = {
   nav: {
     main: 'Navegação principal',
     home: 'Início',
+    today: 'Hoje',
     hangul: 'Hangul',
     vocabulary: 'Vocabulário',
     grammar: 'Gramática',

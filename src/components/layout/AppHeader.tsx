@@ -23,6 +23,7 @@ type NavKey =
   | 'culture'
   | 'tools'
   | 'progress'
+  | 'today'
 
 interface NavItem {
   key: NavKey
@@ -225,6 +226,7 @@ export function AppHeader() {
           {/* Desktop: grouped menus. Mobile: everything in one menu. */}
           <div className="hidden items-center gap-1 md:flex">
             <NavLink item={{ key: 'home', to: '/', icon: '' }} exact />
+            <NavLink item={{ key: 'today', to: '/today', icon: '오늘' }} />
             <NavMenu label={t('nav.learn')} items={LEARN} />
             <NavMenu label={t('nav.practice')} items={PRACTICE} />
             {SINGLE.map((item) => (
@@ -235,6 +237,7 @@ export function AppHeader() {
             label="☰ Menu"
             items={[
               { key: 'home', to: '/', icon: '홈' },
+              { key: 'today', to: '/today', icon: '오늘' },
               ...LEARN,
               ...PRACTICE,
               ...SINGLE,
