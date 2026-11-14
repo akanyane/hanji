@@ -89,6 +89,8 @@ export const PLATFORM_MODULES: PlatformModule[] = [
     id: 'tools',
     title: 'Ferramentas',
     korean: '도구',
-    description: 'Dicionário, conversor de romanização e decompositor.',
+    description:
+      'Como se pronuncia?, conversor de romanização e decompositor de sílabas.',
+    to: '/tools',
   },
 ]

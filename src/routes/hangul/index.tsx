@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import type { HangulCategory } from '../../content/hangul'
 import { BrowseView } from '../../features/hangul/BrowseView'
 import { parseCategory } from '../../features/hangul/filter'
+import { useUrlSyncedText } from '../../hooks/useUrlSyncedText'
 
 interface BrowseSearch {
   category?: HangulCategory
@@ -21,23 +22,24 @@ export const Route = createFileRoute('/hangul/')({
 function BrowsePage() {
   const { category = 'all', q = '' } = Route.useSearch()
   const navigate = Route.useNavigate()
+  const [query, setQuery] = useUrlSyncedText(q, (value) =>
+    navigate({
+      search: (s) => ({ ...s, q: value === '' ? undefined : value }),
+      replace: true,
+    }),
+  )
 
   return (
     <BrowseView
       category={category}
-      query={q}
+      query={query}
       onCategoryChange={(c) =>
         navigate({
           search: (s) => ({ ...s, category: c === 'all' ? undefined : c }),
           replace: true,
         })
       }
-      onQueryChange={(value) =>
-        navigate({
-          search: (s) => ({ ...s, q: value === '' ? undefined : value }),
-          replace: true,
-        })
-      }
+      onQueryChange={setQuery}
     />
   )
 }

@@ -2,7 +2,12 @@
 
 A free platform for Brazilian Portuguese speakers to learn Korean, from Hangul up to TOPIK II. It runs entirely in the browser, needs no account, and keeps progress only on the user's device (IndexedDB). The user interface is in Brazilian Portuguese; the code and documentation are in English.
 
-> Work in progress, built in phases. The **Hangul** module (character browser and quiz) is available today; the remaining modules show up on the home page as "Em breve" (coming soon).
+> Work in progress, built in phases. Available today:
+>
+> - **Hangul**: character browser and quiz.
+> - **Tools**: "how is it pronounced?" (applies the standard sound-change rules and explains each step), Hangul ↔ Revised Romanization converter, and syllable decomposer.
+>
+> The remaining modules show up on the home page as "Em breve" (coming soon).
 
 ## Getting started
 
@@ -34,10 +39,18 @@ bun run dev
 src/
   routes/      TanStack Router file-based routes (thin: they only wire URL → feature)
   features/    One folder per module (components and hooks)
-  lib/         Pure, tested logic with no React (quiz; later hangul, pronunciation, conjugation, SRS)
+  lib/         Pure, tested logic with no React:
+                 hangul/         Unicode syllable composition/decomposition
+                 pronunciation/  Standard pronunciation rules engine (표준 발음법)
+                 romanization/   Revised Romanization, both directions
+                 ime/            2-set (두벌식) keyboard composition automaton
+                 similarity/     Jamo-level text comparison (for speaking practice)
+                 quiz/           Generic multiple-choice generator
   content/     Typed learning content, kept separate from the code
   db/          Local database (Dexie/IndexedDB), repositories and TanStack Query hooks
   stores/      Global UI state (TanStack Store)
+  services/    Browser APIs (speech synthesis)
+  hooks/       Shared React hooks
   components/  Reusable components (layout and ui)
 ```
 
@@ -57,3 +70,7 @@ src/
 ## Releases
 
 Versioning and changelogs are automated with [release-please](https://github.com/googleapis/release-please), driven by [Conventional Commits](https://www.conventionalcommits.org/) on `main`.
+
+## License
+
+[MIT](LICENSE)

@@ -40,6 +40,13 @@ export function AppHeader() {
           >
             Hangul
           </Link>
+          <Link
+            to="/tools"
+            className={linkClass}
+            activeProps={{ className: activeClass }}
+          >
+            Ferramentas
+          </Link>
         </nav>
         <ThemeToggle />
       </div>

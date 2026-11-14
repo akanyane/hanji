@@ -11,8 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HangulRouteRouteImport } from './routes/hangul/route'
+import { Route as ToolsRouteRouteImport } from './routes/tools/route'
 import { Route as HangulIndexRouteImport } from './routes/hangul/index'
 import { Route as HangulQuizRouteImport } from './routes/hangul/quiz'
+import { Route as ToolsIndexRouteImport } from './routes/tools/index'
+import { Route as ToolsDecomposerRouteImport } from './routes/tools/decomposer'
+import { Route as ToolsPronunciationRouteImport } from './routes/tools/pronunciation'
+import { Route as ToolsRomanizationRouteImport } from './routes/tools/romanization'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,6 +27,11 @@ const IndexRoute = IndexRouteImport.update({
 const HangulRouteRoute = HangulRouteRouteImport.update({
   id: '/hangul',
   path: '/hangul',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsRouteRoute = ToolsRouteRouteImport.update({
+  id: '/tools',
+  path: '/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HangulIndexRoute = HangulIndexRouteImport.update({
@@ -34,36 +44,97 @@ const HangulQuizRoute = HangulQuizRouteImport.update({
   path: '/quiz',
   getParentRoute: () => HangulRouteRoute,
 } as any)
+const ToolsIndexRoute = ToolsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ToolsRouteRoute,
+} as any)
+const ToolsDecomposerRoute = ToolsDecomposerRouteImport.update({
+  id: '/decomposer',
+  path: '/decomposer',
+  getParentRoute: () => ToolsRouteRoute,
+} as any)
+const ToolsPronunciationRoute = ToolsPronunciationRouteImport.update({
+  id: '/pronunciation',
+  path: '/pronunciation',
+  getParentRoute: () => ToolsRouteRoute,
+} as any)
+const ToolsRomanizationRoute = ToolsRomanizationRouteImport.update({
+  id: '/romanization',
+  path: '/romanization',
+  getParentRoute: () => ToolsRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/hangul': typeof HangulRouteRouteWithChildren
+  '/tools': typeof ToolsRouteRouteWithChildren
   '/hangul/quiz': typeof HangulQuizRoute
+  '/tools/decomposer': typeof ToolsDecomposerRoute
+  '/tools/pronunciation': typeof ToolsPronunciationRoute
+  '/tools/romanization': typeof ToolsRomanizationRoute
   '/hangul/': typeof HangulIndexRoute
+  '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/hangul/quiz': typeof HangulQuizRoute
+  '/tools/decomposer': typeof ToolsDecomposerRoute
+  '/tools/pronunciation': typeof ToolsPronunciationRoute
+  '/tools/romanization': typeof ToolsRomanizationRoute
   '/hangul': typeof HangulIndexRoute
+  '/tools': typeof ToolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/hangul': typeof HangulRouteRouteWithChildren
+  '/tools': typeof ToolsRouteRouteWithChildren
   '/hangul/quiz': typeof HangulQuizRoute
+  '/tools/decomposer': typeof ToolsDecomposerRoute
+  '/tools/pronunciation': typeof ToolsPronunciationRoute
+  '/tools/romanization': typeof ToolsRomanizationRoute
   '/hangul/': typeof HangulIndexRoute
+  '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/hangul' | '/hangul/quiz' | '/hangul/'
+  fullPaths:
+    | '/'
+    | '/hangul'
+    | '/tools'
+    | '/hangul/quiz'
+    | '/tools/decomposer'
+    | '/tools/pronunciation'
+    | '/tools/romanization'
+    | '/hangul/'
+    | '/tools/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/hangul/quiz' | '/hangul'
-  id: '__root__' | '/' | '/hangul' | '/hangul/quiz' | '/hangul/'
+  to:
+    | '/'
+    | '/hangul/quiz'
+    | '/tools/decomposer'
+    | '/tools/pronunciation'
+    | '/tools/romanization'
+    | '/hangul'
+    | '/tools'
+  id:
+    | '__root__'
+    | '/'
+    | '/hangul'
+    | '/tools'
+    | '/hangul/quiz'
+    | '/tools/decomposer'
+    | '/tools/pronunciation'
+    | '/tools/romanization'
+    | '/hangul/'
+    | '/tools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HangulRouteRoute: typeof HangulRouteRouteWithChildren
+  ToolsRouteRoute: typeof ToolsRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +153,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HangulRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/hangul/': {
       id: '/hangul/'
       path: '/'
@@ -95,6 +173,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/hangul/quiz'
       preLoaderRoute: typeof HangulQuizRouteImport
       parentRoute: typeof HangulRouteRoute
+    }
+    '/tools/': {
+      id: '/tools/'
+      path: '/'
+      fullPath: '/tools/'
+      preLoaderRoute: typeof ToolsIndexRouteImport
+      parentRoute: typeof ToolsRouteRoute
+    }
+    '/tools/decomposer': {
+      id: '/tools/decomposer'
+      path: '/decomposer'
+      fullPath: '/tools/decomposer'
+      preLoaderRoute: typeof ToolsDecomposerRouteImport
+      parentRoute: typeof ToolsRouteRoute
+    }
+    '/tools/pronunciation': {
+      id: '/tools/pronunciation'
+      path: '/pronunciation'
+      fullPath: '/tools/pronunciation'
+      preLoaderRoute: typeof ToolsPronunciationRouteImport
+      parentRoute: typeof ToolsRouteRoute
+    }
+    '/tools/romanization': {
+      id: '/tools/romanization'
+      path: '/romanization'
+      fullPath: '/tools/romanization'
+      preLoaderRoute: typeof ToolsRomanizationRouteImport
+      parentRoute: typeof ToolsRouteRoute
     }
   }
 }
@@ -113,9 +219,28 @@ const HangulRouteRouteWithChildren = HangulRouteRoute._addFileChildren(
   HangulRouteRouteChildren,
 )
 
+interface ToolsRouteRouteChildren {
+  ToolsDecomposerRoute: typeof ToolsDecomposerRoute
+  ToolsPronunciationRoute: typeof ToolsPronunciationRoute
+  ToolsRomanizationRoute: typeof ToolsRomanizationRoute
+  ToolsIndexRoute: typeof ToolsIndexRoute
+}
+
+const ToolsRouteRouteChildren: ToolsRouteRouteChildren = {
+  ToolsDecomposerRoute: ToolsDecomposerRoute,
+  ToolsPronunciationRoute: ToolsPronunciationRoute,
+  ToolsRomanizationRoute: ToolsRomanizationRoute,
+  ToolsIndexRoute: ToolsIndexRoute,
+}
+
+const ToolsRouteRouteWithChildren = ToolsRouteRoute._addFileChildren(
+  ToolsRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HangulRouteRoute: HangulRouteRouteWithChildren,
+  ToolsRouteRoute: ToolsRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
