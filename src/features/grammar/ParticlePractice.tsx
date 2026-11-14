@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { InkMark } from '../../components/brand/InkMark'
 import { pop, shake, spring } from '../../components/motion/presets'
 import { Button } from '../../components/ui/Button'
 import { useRecordPractice } from '../../db/queries'
@@ -67,7 +68,7 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
 
   return (
     <div className="mx-auto flex w-full max-w-lg flex-col gap-5">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('grammar.particles.description')}
       </p>
 
@@ -77,12 +78,12 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
           initial={{ scale: 1.4 }}
           animate={{ scale: 1 }}
           transition={spring}
-          className="rounded-full bg-orange-100 px-3 py-1 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200"
+          className="rounded-full bg-amber-100 px-3 py-1 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200"
         >
-          🔥 {t('grammar.particles.streak', { count: streak })}
+          {t('grammar.particles.streak', { count: streak })}
         </motion.span>
-        <span className="rounded-full bg-slate-100 px-3 py-1 dark:bg-slate-800">
-          🏆 {t('grammar.particles.best', { count: best })}
+        <span className="rounded-full bg-ink-100 px-3 py-1 dark:bg-ink-800">
+          {t('grammar.particles.best', { count: best })}
         </span>
       </div>
 
@@ -93,9 +94,9 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
           animate={{ opacity: 1, y: 0, rotateX: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={spring}
-          className="flex flex-col items-center gap-2 rounded-3xl bg-gradient-to-br from-sky-50 to-violet-50 p-8 dark:from-slate-800 dark:to-slate-800/40"
+          className="flex flex-col items-center gap-2 rounded-xl panel-paper p-8 dark:from-ink-800 dark:to-ink-800/40"
         >
-          <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <span className="text-sm font-medium text-ink-500 dark:text-ink-400">
             {t(`grammar.particles.types.${question.type}`)}
           </span>
           <p lang="ko" className="text-5xl font-bold">
@@ -107,7 +108,7 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
                   ? correct
                     ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400'
                     : 'border-rose-500 text-rose-600 dark:text-rose-400'
-                  : 'border-sky-500',
+                  : 'border-pine-500',
               )}
             >
               {picked ? question.answer : ' '}
@@ -137,15 +138,15 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
                     : {}
               }
               className={cn(
-                'rounded-2xl border-2 py-4 text-3xl font-bold transition-colors',
+                'rounded-lg border-2 py-4 text-3xl font-bold transition-colors',
                 picked && isAnswer
                   ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/50'
                   : picked && isPicked
                     ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/50'
-                    : 'border-slate-200 bg-white hover:border-sky-400 dark:border-slate-700 dark:bg-slate-800',
+                    : 'border-ink-200 bg-white hover:border-pine-400 dark:border-ink-700 dark:bg-ink-900',
               )}
             >
-              <span className="mr-2 align-middle text-xs text-slate-400">
+              <span className="mr-2 align-middle text-xs text-ink-400">
                 {i + 1}
               </span>
               {choice}
@@ -161,7 +162,7 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
             initial="hidden"
             animate="visible"
             className={cn(
-              'flex flex-col gap-3 rounded-2xl p-4 sm:flex-row sm:items-center sm:justify-between',
+              'flex flex-col gap-3 rounded-lg p-4 sm:flex-row sm:items-center sm:justify-between',
               correct
                 ? 'bg-emerald-50 dark:bg-emerald-950/50'
                 : 'bg-rose-50 dark:bg-rose-950/50',
@@ -169,11 +170,15 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
           >
             <div>
               <p className="font-semibold">
-                {correct
-                  ? `🎉 ${t('grammar.particles.correct')}`
-                  : t('grammar.particles.incorrect', {
-                      answer: question.answer,
-                    })}
+                {correct ? (
+                  <>
+                    <InkMark kind="correct" /> {t('grammar.particles.correct')}
+                  </>
+                ) : (
+                  t('grammar.particles.incorrect', {
+                    answer: question.answer,
+                  })
+                )}
               </p>
               <p className="text-sm">
                 {t(`grammar.particles.why.${question.reason}`, {

@@ -58,13 +58,13 @@ export function DecksPage() {
           </h2>
           <Link
             to="/vocabulary/decks/new"
-            className="rounded-full bg-gradient-to-r from-sky-600 to-indigo-600 px-4 py-1.5 text-sm font-medium text-white shadow-md"
+            className="rounded-full panel-ink px-4 py-1.5 text-sm font-medium text-white shadow-paper"
           >
             + {t('vocabulary.deck.create')}
           </Link>
         </div>
         {customDecks.length === 0 ? (
-          <p className="rounded-2xl border border-dashed border-slate-300 p-6 text-center text-slate-500 dark:border-slate-600 dark:text-slate-400">
+          <p className="rounded-lg border border-dashed border-ink-300 p-6 text-center text-ink-500 dark:border-ink-600 dark:text-ink-400">
             {t('vocabulary.deck.empty')}
           </p>
         ) : (
@@ -75,7 +75,7 @@ export function DecksPage() {
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-semibold">
           {t('vocabulary.deck.levels')}{' '}
-          <span className="text-sm font-normal text-slate-500 dark:text-slate-400">
+          <span className="text-sm font-normal text-ink-500 dark:text-ink-400">
             ({t('vocabulary.deck.levelHint')})
           </span>
         </h2>

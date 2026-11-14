@@ -6,14 +6,15 @@ import { Button } from '../ui/Button'
 
 /** One hue per stroke (cycled), so the order is easy to follow. */
 const STROKE_COLORS = [
-  '#0ea5e9',
-  '#8b5cf6',
-  '#f59e0b',
-  '#10b981',
-  '#f43f5e',
-  '#6366f1',
-  '#14b8a6',
-  '#ec4899',
+  // Palette colors, readable on paper and on ink.
+  'var(--color-seal-500)',
+  'var(--color-pine-500)',
+  'var(--color-amber-500)',
+  'var(--color-emerald-500)',
+  'var(--color-seal-300)',
+  'var(--color-pine-300)',
+  'var(--color-amber-300)',
+  'var(--color-rose-400)',
 ]
 const DRAW_SECONDS = 0.6
 const GAP_SECONDS = 0.25
@@ -40,11 +41,11 @@ export function StrokeOrder({ jamo, className }: StrokeOrderProps) {
         viewBox="0 0 100 100"
         role="img"
         aria-label={`${t('hangul.detail.strokeDiagram', { char: jamo })}: ${t('hangul.detail.strokes', { count: strokes.length })}`}
-        className="aspect-square w-full max-w-64 rounded-2xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800"
+        className="aspect-square w-full max-w-64 rounded-lg border border-ink-200 bg-white dark:border-ink-700 dark:bg-ink-900"
       >
         {/* Practice-sheet guide lines */}
         <g
-          className="stroke-slate-200 dark:stroke-slate-700"
+          className="stroke-ink-200 dark:stroke-ink-700"
           strokeWidth="0.5"
           strokeDasharray="2 2"
         >
@@ -53,7 +54,7 @@ export function StrokeOrder({ jamo, className }: StrokeOrderProps) {
         </g>
         {/* Faded full letter underneath */}
         <g
-          className="stroke-slate-200 dark:stroke-slate-700"
+          className="stroke-ink-200 dark:stroke-ink-700"
           fill="none"
           strokeWidth="8"
           strokeLinecap="round"
@@ -128,7 +129,7 @@ export function StrokeOrder({ jamo, className }: StrokeOrderProps) {
         </g>
       </svg>
       <div className="flex items-center gap-3">
-        <span className="text-sm text-slate-500 dark:text-slate-400">
+        <span className="text-sm text-ink-500 dark:text-ink-400">
           {t('hangul.detail.strokes', { count: strokes.length })}
         </span>
         <Button

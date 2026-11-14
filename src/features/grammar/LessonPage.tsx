@@ -23,7 +23,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <motion.section
       variants={fadeUp}
-      className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+      className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
     >
       <h2 className="text-lg font-semibold">{title}</h2>
       {children}
@@ -37,7 +37,7 @@ function Gapped({ text }: { text: string }) {
   return (
     <span lang="ko" className="text-2xl font-semibold sm:text-3xl">
       {before}
-      <span className="mx-1 inline-block min-w-12 border-b-4 border-sky-500 align-baseline">
+      <span className="mx-1 inline-block min-w-12 border-b-4 border-pine-500 align-baseline">
         &nbsp;
       </span>
       {after}
@@ -52,7 +52,7 @@ function ConjugationTable({ lesson }: { lesson: GrammarLesson }) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left">
-        <thead className="text-sm text-slate-500 dark:text-slate-400">
+        <thead className="text-sm text-ink-500 dark:text-ink-400">
           <tr>
             <th scope="col" className="py-2 pr-4 font-medium">
               {t('grammar.lesson.verb')}
@@ -79,14 +79,14 @@ function ConjugationTable({ lesson }: { lesson: GrammarLesson }) {
             return (
               <tr
                 key={verb}
-                className="border-t border-slate-100 dark:border-slate-700"
+                className="border-t border-ink-100 dark:border-ink-700"
               >
                 <th scope="row" className="py-2 pr-4 font-normal">
                   <Link
                     to="/grammar/conjugator"
                     search={{ verb }}
                     lang="ko"
-                    className="text-sky-700 hover:underline dark:text-sky-300"
+                    className="text-pine-700 hover:underline dark:text-pine-300"
                   >
                     {verb}
                   </Link>
@@ -132,7 +132,7 @@ function Exercises({ lesson }: { lesson: GrammarLesson }) {
         prompt: (
           <>
             <Gapped text={ex.prompt} />
-            <span className="text-sm text-slate-500 dark:text-slate-400">
+            <span className="text-sm text-ink-500 dark:text-ink-400">
               {l(ex.translation)}
             </span>
           </>
@@ -173,7 +173,7 @@ function Exercises({ lesson }: { lesson: GrammarLesson }) {
         {score === total && <Confetti />}
         <p className="text-5xl font-extrabold">
           <AnimatedNumber value={score} />
-          <span className="text-2xl text-slate-400">/{total}</span>
+          <span className="text-2xl text-ink-400">/{total}</span>
         </p>
         <p className="font-semibold">
           {t('grammar.lesson.score', { score, total })}
@@ -192,7 +192,7 @@ function Exercises({ lesson }: { lesson: GrammarLesson }) {
             <Link
               to="/grammar/$lessonId"
               params={{ lessonId: next.id }}
-              className="inline-flex items-center rounded-full bg-gradient-to-r from-sky-600 to-indigo-600 px-5 py-2 font-medium text-white shadow-md"
+              className="inline-flex items-center rounded-full panel-ink px-5 py-2 font-medium text-white shadow-paper"
             >
               {t('grammar.lesson.next')} →
             </Link>
@@ -225,14 +225,14 @@ export function LessonPage({ lesson }: { lesson: GrammarLesson }) {
     >
       <Link
         to="/grammar"
-        className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
+        className="self-start text-sm font-medium text-pine-700 hover:underline dark:text-pine-400"
       >
         ← {t('grammar.lesson.back')}
       </Link>
 
       <motion.header
         variants={fadeUp}
-        className="rounded-3xl bg-gradient-to-br from-sky-500 via-indigo-500 to-violet-600 p-6 text-white shadow-lg"
+        className="rounded-xl panel-ink p-6 text-white shadow-paper"
       >
         <p className="text-sm text-white/80">
           {t('vocabulary.deck.level', { level: lesson.level })}
@@ -255,7 +255,7 @@ export function LessonPage({ lesson }: { lesson: GrammarLesson }) {
       <Section title={t('grammar.lesson.formation')}>
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="text-sm text-slate-500 dark:text-slate-400">
+            <thead className="text-sm text-ink-500 dark:text-ink-400">
               <tr>
                 <th scope="col" className="py-2 pr-4 font-medium">
                   {t('grammar.lesson.when')}
@@ -272,12 +272,12 @@ export function LessonPage({ lesson }: { lesson: GrammarLesson }) {
               {lesson.formation.map((row) => (
                 <tr
                   key={row.form + row.example}
-                  className="border-t border-slate-100 dark:border-slate-700"
+                  className="border-t border-ink-100 dark:border-ink-700"
                 >
                   <td className="py-2 pr-4">{l(row.when)}</td>
                   <td
                     lang="ko"
-                    className="py-2 pr-4 text-lg font-bold text-sky-700 dark:text-sky-300"
+                    className="py-2 pr-4 text-lg font-bold text-pine-700 dark:text-pine-300"
                   >
                     {row.form}
                   </td>
@@ -309,7 +309,7 @@ export function LessonPage({ lesson }: { lesson: GrammarLesson }) {
                 <p lang="ko" className="text-lg">
                   {ex.ko}
                 </p>
-                <p className="text-sm text-slate-600 dark:text-slate-300">
+                <p className="text-sm text-ink-600 dark:text-ink-300">
                   {l(ex.translation)}
                 </p>
               </div>
@@ -325,7 +325,12 @@ export function LessonPage({ lesson }: { lesson: GrammarLesson }) {
               key={m.en}
               className="flex gap-2 rounded-xl bg-amber-50 p-3 dark:bg-amber-950/40"
             >
-              <span aria-hidden="true">⚠️</span>
+              <span
+                aria-hidden="true"
+                className="font-serif font-bold text-seal-600 dark:text-seal-400"
+              >
+                !
+              </span>
               <span>{l(m)}</span>
             </li>
           ))}

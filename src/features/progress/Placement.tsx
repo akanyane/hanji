@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { motion } from 'motion/react'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Seal } from '../../components/brand/Seal'
 import {
   QuizSession,
   type SessionQuestion,
@@ -45,7 +46,7 @@ function toSessionQuestion(
     id: q.id,
     prompt: (
       <div className="flex flex-col items-center gap-3 text-center">
-        <p className="text-sm font-medium text-slate-600 dark:text-slate-300">
+        <p className="text-sm font-medium text-ink-600 dark:text-ink-300">
           {l(q.instruction)}
         </p>
         {q.ko && (
@@ -75,23 +76,24 @@ function Recommendation({ result }: { result: PlacementResult }) {
       variants={stagger(0.1, 0.1)}
       initial="hidden"
       animate="visible"
-      className="relative flex flex-col items-center gap-4 rounded-3xl bg-white p-8 text-center shadow-sm dark:bg-slate-800"
+      className="relative flex flex-col items-center gap-4 rounded-xl border border-ink-200 bg-white dark:border-ink-800 p-8 text-center shadow-paper dark:bg-ink-900"
       role="status"
     >
       {result.level >= 2 && <Confetti />}
       <motion.p variants={pop} className="text-6xl" aria-hidden="true">
-        {['🌱', '🌿', '🌳', '🏔️', '🚀'][result.level]}
+        <Seal
+          text={['시작', '기초', '초급', '중급', '도전'][result.level]}
+          size="xl"
+          animate="stamp"
+        />
       </motion.p>
       <motion.h2 variants={fadeUp} className="text-2xl font-bold">
         {t(`progress.placement.levels.${result.level}.title` as never)}
       </motion.h2>
-      <motion.p
-        variants={fadeUp}
-        className="text-slate-600 dark:text-slate-300"
-      >
+      <motion.p variants={fadeUp} className="text-ink-600 dark:text-ink-300">
         {t(`progress.placement.levels.${result.level}.description` as never)}
       </motion.p>
-      <motion.p variants={fadeUp} className="text-sm text-slate-500">
+      <motion.p variants={fadeUp} className="text-sm text-ink-500">
         {t('progress.placement.score', {
           correct: result.correct,
           total: result.total,
@@ -105,7 +107,7 @@ function Recommendation({ result }: { result: PlacementResult }) {
       <motion.div variants={fadeUp}>
         <Link
           to={rec.to}
-          className="inline-block rounded-full bg-sky-600 px-5 py-2.5 font-semibold text-white shadow hover:bg-sky-700"
+          className="inline-block rounded-full bg-pine-600 px-5 py-2.5 font-semibold text-white shadow hover:bg-pine-700"
         >
           {t('progress.placement.goTo', {
             module: t(`progress.placement.modules.${rec.module}` as never),
@@ -205,7 +207,7 @@ export function Placement({ random = Math.random }: { random?: () => number }) {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="flex flex-col gap-3 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 p-6 text-white shadow-xl"
+          className="flex flex-col gap-3 rounded-xl panel-pine p-6 text-white shadow-lift"
         >
           <p className="text-4xl" aria-hidden="true">
             🧭
@@ -221,7 +223,7 @@ export function Placement({ random = Math.random }: { random?: () => number }) {
         </motion.div>
       )}
       {phase === 'intro' && shown && (
-        <p className="text-sm text-slate-600 dark:text-slate-300">
+        <p className="text-sm text-ink-600 dark:text-ink-300">
           {t('progress.placement.previous', {
             level: t(`progress.placement.levels.${shown.level}.title` as never),
           })}

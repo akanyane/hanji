@@ -29,14 +29,14 @@ export function WordDetail({ word }: { word: VocabWord }) {
     >
       <Link
         to="/vocabulary/dictionary"
-        className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
+        className="self-start text-sm font-medium text-pine-700 hover:underline dark:text-pine-400"
       >
         ← {t('vocabulary.word.back')}
       </Link>
 
       <motion.div
         variants={fadeUp}
-        className="flex flex-wrap items-center gap-5 rounded-3xl bg-gradient-to-br from-sky-500 via-indigo-500 to-violet-600 p-6 text-white shadow-lg"
+        className="flex flex-wrap items-center gap-5 rounded-xl panel-ink p-6 text-white shadow-paper"
       >
         <motion.span
           variants={pop}
@@ -56,22 +56,22 @@ export function WordDetail({ word }: { word: VocabWord }) {
       </motion.div>
 
       <motion.dl variants={fadeUp} className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-2xl bg-white p-4 dark:bg-slate-800">
-          <dt className="text-xs tracking-wide text-slate-500 uppercase dark:text-slate-400">
+        <div className="rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-4 dark:bg-ink-900">
+          <dt className="text-xs tracking-wide text-ink-500 uppercase dark:text-ink-400">
             {t('vocabulary.word.partOfSpeech')}
           </dt>
           <dd className="font-semibold">{l(PARTS_OF_SPEECH[word.pos])}</dd>
         </div>
-        <div className="rounded-2xl bg-white p-4 dark:bg-slate-800">
-          <dt className="text-xs tracking-wide text-slate-500 uppercase dark:text-slate-400">
+        <div className="rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-4 dark:bg-ink-900">
+          <dt className="text-xs tracking-wide text-ink-500 uppercase dark:text-ink-400">
             {t('vocabulary.word.level')}
           </dt>
           <dd className="font-semibold">
             {t('vocabulary.deck.level', { level: word.level })}
           </dd>
         </div>
-        <div className="rounded-2xl bg-white p-4 dark:bg-slate-800">
-          <dt className="text-xs tracking-wide text-slate-500 uppercase dark:text-slate-400">
+        <div className="rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-4 dark:bg-ink-900">
+          <dt className="text-xs tracking-wide text-ink-500 uppercase dark:text-ink-400">
             {t('vocabulary.word.themes')}
           </dt>
           <dd className="font-semibold">
@@ -81,8 +81,8 @@ export function WordDetail({ word }: { word: VocabWord }) {
           </dd>
         </div>
         {word.hanja && (
-          <div className="rounded-2xl bg-white p-4 dark:bg-slate-800">
-            <dt className="text-xs tracking-wide text-slate-500 uppercase dark:text-slate-400">
+          <div className="rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-4 dark:bg-ink-900">
+            <dt className="text-xs tracking-wide text-ink-500 uppercase dark:text-ink-400">
               {t('vocabulary.word.hanja')}
             </dt>
             <dd lang="zh-Hant" className="text-2xl font-semibold">
@@ -94,9 +94,9 @@ export function WordDetail({ word }: { word: VocabWord }) {
 
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-2 rounded-2xl bg-white p-4 dark:bg-slate-800"
+        className="flex flex-col gap-2 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-4 dark:bg-ink-900"
       >
-        <h2 className="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+        <h2 className="text-xs font-semibold tracking-wide text-ink-500 uppercase dark:text-ink-400">
           {t('vocabulary.word.example')}
         </h2>
         <div className="flex items-center gap-3">
@@ -105,16 +105,16 @@ export function WordDetail({ word }: { word: VocabWord }) {
           </p>
           <AudioButton text={word.example.ko} />
         </div>
-        <p className="text-slate-600 dark:text-slate-300">
+        <p className="text-ink-600 dark:text-ink-300">
           {l(word.example.translation)}
         </p>
       </motion.section>
 
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-2 rounded-2xl border border-slate-200 p-4 dark:border-slate-700"
+        className="flex flex-col gap-2 rounded-lg border border-ink-200 p-4 dark:border-ink-700"
       >
-        <h2 className="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+        <h2 className="text-xs font-semibold tracking-wide text-ink-500 uppercase dark:text-ink-400">
           {t('vocabulary.word.srs')}
         </h2>
         {card ? (
@@ -131,7 +131,7 @@ export function WordDetail({ word }: { word: VocabWord }) {
             <li>{t('vocabulary.word.lapses', { count: card.card.lapses })}</li>
           </ul>
         ) : (
-          <p className="text-slate-600 dark:text-slate-300">
+          <p className="text-ink-600 dark:text-ink-300">
             {t('vocabulary.word.notStudied')}
           </p>
         )}
@@ -139,7 +139,7 @@ export function WordDetail({ word }: { word: VocabWord }) {
           <Link
             to="/vocabulary/study"
             search={{ deck: `theme-${firstTheme}` }}
-            className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
+            className="self-start text-sm font-medium text-pine-700 hover:underline dark:text-pine-400"
           >
             {t('vocabulary.word.studyTheme', {
               theme: l(THEMES[firstTheme].label),

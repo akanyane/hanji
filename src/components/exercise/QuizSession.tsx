@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { type ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '../../lib/cn'
+import { InkMark } from '../brand/InkMark'
 import { pop, shake, spring } from '../motion/presets'
 import { Button } from '../ui/Button'
 import { ProgressBar } from '../ui/ProgressBar'
@@ -105,7 +106,7 @@ export function QuizSession({
   return (
     <div className="mx-auto flex w-full max-w-lg flex-col gap-6 py-4">
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-ink-500 dark:text-ink-400">
           {t('hangul.quiz.question', {
             current: index + 1,
             total: questions.length,
@@ -128,7 +129,7 @@ export function QuizSession({
           exit={{ opacity: 0, x: -40 }}
           transition={spring}
         >
-          <div className="flex min-h-36 flex-col items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-sky-50 to-violet-50 p-6 dark:from-slate-800 dark:to-slate-800/40">
+          <div className="flex min-h-36 flex-col items-center justify-center gap-2 rounded-lg panel-paper p-6 dark:from-ink-800 dark:to-ink-800/40">
             {question.prompt}
           </div>
           <p className="sr-only">
@@ -164,11 +165,11 @@ export function QuizSession({
                       ? 'border-emerald-500 bg-emerald-100 text-emerald-900 dark:bg-emerald-900/60 dark:text-emerald-50'
                       : answered && isSelected
                         ? 'border-rose-500 bg-rose-100 text-rose-900 dark:bg-rose-900/60 dark:text-rose-50'
-                        : 'border-slate-200 bg-white hover:border-sky-400 dark:border-slate-700 dark:bg-slate-800',
+                        : 'border-ink-200 bg-white hover:border-pine-400 dark:border-ink-700 dark:bg-ink-900',
                     answered && !isAnswer && !isSelected && 'opacity-50',
                   )}
                 >
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs text-slate-500 dark:bg-slate-700 dark:text-slate-300">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink-100 text-xs text-ink-500 dark:bg-ink-700 dark:text-ink-300">
                     {i + 1}
                   </span>
                   <span lang={choice.lang}>{choice.label}</span>
@@ -199,7 +200,7 @@ export function QuizSession({
               exit={{ opacity: 0 }}
               transition={spring}
               className={cn(
-                'flex flex-col gap-3 rounded-2xl p-4 sm:flex-row sm:items-center sm:justify-between',
+                'flex flex-col gap-3 rounded-lg p-4 sm:flex-row sm:items-center sm:justify-between',
                 correct
                   ? 'bg-emerald-50 dark:bg-emerald-950/50'
                   : 'bg-rose-50 dark:bg-rose-950/50',
@@ -207,11 +208,15 @@ export function QuizSession({
             >
               <div>
                 <p className="font-semibold">
-                  {correct
-                    ? `🎉 ${t('hangul.quiz.correct')}`
-                    : t('hangul.quiz.incorrect', {
-                        answer: answerChoice?.label ?? '',
-                      })}
+                  {correct ? (
+                    <>
+                      <InkMark kind="correct" /> {t('hangul.quiz.correct')}
+                    </>
+                  ) : (
+                    t('hangul.quiz.incorrect', {
+                      answer: answerChoice?.label ?? '',
+                    })
+                  )}
                 </p>
                 {question.reveal}
               </div>

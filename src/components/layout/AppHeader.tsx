@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '../../lib/cn'
+import { Seal } from '../brand/Seal'
 import { spring } from '../motion/presets'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { ThemeToggle } from './ThemeToggle'
@@ -30,34 +31,35 @@ interface NavItem {
 }
 
 const LEARN: NavItem[] = [
-  { key: 'hangul', to: '/hangul', icon: '한' },
-  { key: 'pronunciation', to: '/pronunciation', icon: '🗣️' },
-  { key: 'vocabulary', to: '/vocabulary', icon: '📚' },
-  { key: 'grammar', to: '/grammar', icon: '🧩' },
-  { key: 'numbers', to: '/numbers', icon: '🔢' },
+  { key: 'hangul', to: '/hangul', icon: '한글' },
+  { key: 'pronunciation', to: '/pronunciation', icon: '발음' },
+  { key: 'vocabulary', to: '/vocabulary', icon: '어휘' },
+  { key: 'grammar', to: '/grammar', icon: '문법' },
+  { key: 'numbers', to: '/numbers', icon: '숫자' },
 ]
 const PRACTICE: NavItem[] = [
-  { key: 'reading', to: '/reading', icon: '📖' },
-  { key: 'listening', to: '/listening', icon: '🎧' },
-  { key: 'speaking', to: '/speaking', icon: '🎤' },
-  { key: 'writing', to: '/writing', icon: '✍️' },
-  { key: 'dialogues', to: '/dialogues', icon: '💬' },
+  { key: 'reading', to: '/reading', icon: '읽기' },
+  { key: 'listening', to: '/listening', icon: '듣기' },
+  { key: 'speaking', to: '/speaking', icon: '말하기' },
+  { key: 'writing', to: '/writing', icon: '쓰기' },
+  { key: 'dialogues', to: '/dialogues', icon: '대화' },
 ]
 const SINGLE: NavItem[] = [
-  { key: 'culture', to: '/culture', icon: '🏮' },
-  { key: 'tools', to: '/tools', icon: '🛠️' },
-  { key: 'progress', to: '/progress', icon: '📈' },
+  { key: 'culture', to: '/culture', icon: '문화' },
+  { key: 'tools', to: '/tools', icon: '도구' },
+  { key: 'progress', to: '/progress', icon: '진도' },
 ]
 
 const pillClass =
-  'relative shrink-0 rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-50'
+  'relative shrink-0 px-2.5 py-1.5 text-sm font-medium text-ink-600 transition-colors hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-50'
 
+/** Vermilion brush underline that glides to the active section. */
 function Pill() {
   return (
     <motion.span
       layoutId="main-nav-pill"
       transition={spring}
-      className="absolute inset-0 rounded-full bg-white shadow dark:bg-slate-700"
+      className="absolute inset-x-2 -bottom-0.5 h-[3px] rounded-full bg-seal-500"
     />
   )
 }
@@ -70,7 +72,7 @@ function NavLink({ item, exact }: { item: NavItem; exact?: boolean }) {
       activeOptions={{ exact, includeSearch: false }}
       className={cn(
         pillClass,
-        'data-[status=active]:text-slate-900 dark:data-[status=active]:text-slate-50',
+        'data-[status=active]:text-ink-900 dark:data-[status=active]:text-ink-50',
       )}
     >
       {({ isActive }) => (
@@ -129,7 +131,7 @@ function NavMenu({
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((o) => !o)}
-        className={cn(pillClass, active && 'text-slate-900 dark:text-slate-50')}
+        className={cn(pillClass, active && 'text-ink-900 dark:text-ink-50')}
       >
         {active && <Pill />}
         <span className="relative">
@@ -147,29 +149,35 @@ function NavMenu({
         {open && (
           <motion.ul
             id={menuId}
-            initial={{ opacity: 0, y: -8, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.96 }}
-            transition={{ duration: 0.15 }}
-            className="absolute top-full left-0 z-40 mt-2 flex min-w-52 origin-top-left flex-col gap-0.5 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl dark:border-slate-700 dark:bg-slate-800"
+            // Unrolls like a scroll.
+            initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="hanji absolute top-full left-0 z-40 mt-3 flex min-w-56 flex-col gap-0.5 rounded-lg border border-ink-300 bg-ink-50 p-2 shadow-lift dark:border-ink-700 dark:bg-ink-900"
           >
-            {items.map((item) => (
-              <li key={item.key}>
+            {items.map((item, i) => (
+              <motion.li
+                key={item.key}
+                initial={{ opacity: 0, x: -6 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.04 * i, duration: 0.25 }}
+              >
                 <Link
                   to={item.to}
                   activeOptions={{ exact: item.to === '/' }}
-                  className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium hover:bg-slate-100 data-[status=active]:bg-sky-50 data-[status=active]:text-sky-800 dark:hover:bg-slate-700 dark:data-[status=active]:bg-sky-950 dark:data-[status=active]:text-sky-200"
+                  className="group flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium hover:bg-ink-900/5 data-[status=active]:text-seal-700 dark:hover:bg-ink-50/10 dark:data-[status=active]:text-seal-300"
                 >
                   <span
                     aria-hidden="true"
                     lang="ko"
-                    className="w-6 text-center"
+                    className="w-12 font-serif text-xs text-ink-400 transition-colors group-hover:text-seal-600 group-data-[status=active]:text-seal-600 dark:text-ink-500"
                   >
                     {item.icon}
                   </span>
                   {t(`nav.${item.key}`)}
                 </Link>
-              </li>
+              </motion.li>
             ))}
           </motion.ul>
         )}
@@ -182,21 +190,27 @@ export function AppHeader() {
   const { t } = useTranslation()
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80">
+    <header className="sticky top-0 z-30 border-b-[3px] border-double border-ink-900/25 bg-ink-50/85 backdrop-blur-md dark:border-ink-50/15 dark:bg-ink-950/85">
       <div className="mx-auto flex max-w-5xl items-center gap-2 px-4 py-3 sm:gap-3 sm:px-8">
         <Link
           to="/"
-          className="shrink-0 text-lg font-bold sm:text-xl"
+          className="group flex shrink-0 items-center gap-2"
           aria-label={t('nav.homeLabel')}
         >
           <motion.span
-            lang="ko"
-            className="inline-block bg-gradient-to-r from-sky-500 to-violet-500 bg-clip-text text-transparent"
-            whileHover={{ scale: 1.08, rotate: -3 }}
+            className="inline-flex"
+            whileHover={{ rotate: -10, scale: 1.08 }}
+            whileTap={{ scale: 0.9 }}
             transition={spring}
           >
-            한국어
+            <Seal text="한" size="sm" />
           </motion.span>
+          <span
+            lang="ko"
+            className="hidden font-serif text-lg font-bold tracking-tight sm:inline"
+          >
+            한국어
+          </span>
         </Link>
         <nav
           aria-label={t('nav.main')}
@@ -214,7 +228,7 @@ export function AppHeader() {
           <NavMenu
             label="☰ Menu"
             items={[
-              { key: 'home', to: '/', icon: '🏠' },
+              { key: 'home', to: '/', icon: '홈' },
               ...LEARN,
               ...PRACTICE,
               ...SINGLE,

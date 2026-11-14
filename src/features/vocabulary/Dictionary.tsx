@@ -153,7 +153,7 @@ export function Dictionary({
         onChange={(e) => onQueryChange(e.target.value)}
         placeholder={t('vocabulary.dictionary.placeholder')}
         aria-label={t('vocabulary.dictionary.search')}
-        className="w-full rounded-full border border-slate-300 bg-white px-5 py-2.5 text-lg dark:border-slate-600 dark:bg-slate-800"
+        className="w-full rounded-lg border border-ink-300 bg-white px-5 py-2.5 text-lg dark:border-ink-600 dark:bg-ink-900"
       />
       <fieldset className="flex flex-wrap gap-2">
         <legend className="sr-only">{t('vocabulary.dictionary.level')}</legend>
@@ -187,24 +187,21 @@ export function Dictionary({
         ))}
       </fieldset>
 
-      <p
-        className="text-sm text-slate-500 dark:text-slate-400"
-        aria-live="polite"
-      >
+      <p className="text-sm text-ink-500 dark:text-ink-400" aria-live="polite">
         {t('vocabulary.dictionary.results', { count: rows.length })}
       </p>
 
       {rows.length === 0 ? (
-        <p className="py-8 text-center text-slate-500 dark:text-slate-400">
+        <p className="py-8 text-center text-ink-500 dark:text-ink-400">
           {t('vocabulary.dictionary.empty')}
         </p>
       ) : (
         <div
           ref={scrollRef}
-          className="max-h-[32rem] overflow-auto rounded-2xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800"
+          className="max-h-[32rem] overflow-auto rounded-lg border border-ink-200 bg-white dark:border-ink-700 dark:bg-ink-900"
         >
           <table className="w-full text-left">
-            <thead className="sticky top-0 z-10 bg-slate-100 text-sm dark:bg-slate-700">
+            <thead className="sticky top-0 z-10 bg-ink-100 text-sm dark:bg-ink-700">
               {table.getHeaderGroups().map((group) => (
                 <tr key={group.id}>
                   {group.headers.map((header) => {
@@ -233,7 +230,7 @@ export function Dictionary({
                           aria-label={t('vocabulary.dictionary.sortBy', {
                             column: String(header.column.columnDef.header),
                           })}
-                          className="flex items-center gap-1 hover:text-sky-700 dark:hover:text-sky-300"
+                          className="flex items-center gap-1 hover:text-pine-700 dark:hover:text-pine-300"
                         >
                           <table.FlexRender header={header} />
                           <span aria-hidden="true">
@@ -275,7 +272,7 @@ export function Dictionary({
                         })
                     }}
                     tabIndex={0}
-                    className="cursor-pointer border-t border-slate-100 transition-colors hover:bg-sky-50 focus:bg-sky-50 dark:border-slate-700 dark:hover:bg-slate-700/60 dark:focus:bg-slate-700/60"
+                    className="cursor-pointer border-t border-ink-100 transition-colors hover:bg-pine-50 focus:bg-pine-50 dark:border-ink-700 dark:hover:bg-ink-700/60 dark:focus:bg-ink-700/60"
                     style={{ height: ROW_HEIGHT }}
                   >
                     {row.getAllCells().map((cell) => (

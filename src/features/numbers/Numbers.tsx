@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { InkMark } from '../../components/brand/InkMark'
 import {
   fadeUp,
   pop,
@@ -29,10 +30,8 @@ import {
 
 function Reading({ label, value }: { label: string; value: string | null }) {
   return (
-    <div className="flex items-center justify-between gap-2 rounded-xl bg-slate-50 px-3 py-2 dark:bg-slate-900/60">
-      <span className="text-sm text-slate-500 dark:text-slate-400">
-        {label}
-      </span>
+    <div className="flex items-center justify-between gap-2 rounded-xl bg-ink-50 px-3 py-2 dark:bg-ink-900/60">
+      <span className="text-sm text-ink-500 dark:text-ink-400">{label}</span>
       <span className="flex items-center gap-2">
         <AnimatePresence mode="popLayout">
           <motion.span
@@ -72,14 +71,14 @@ export function NumbersLearn() {
       animate="visible"
     >
       <motion.section variants={fadeUp} className="grid gap-3 md:grid-cols-2">
-        <div className="rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 p-5 text-white shadow-lg">
+        <div className="rounded-lg panel-ink p-5 text-white shadow-paper">
           <h2 className="text-lg font-bold">{t('numbers.learn.sinoTitle')}</h2>
           <p className="mt-1 text-white/90">{t('numbers.learn.sinoUse')}</p>
           <p lang="ko" className="mt-3 text-2xl font-semibold">
             일 · 이 · 삼 · 사 · 오 · 육 · 칠 · 팔 · 구 · 십
           </p>
         </div>
-        <div className="rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 p-5 text-white shadow-lg">
+        <div className="rounded-lg panel-seal p-5 text-white shadow-paper">
           <h2 className="text-lg font-bold">
             {t('numbers.learn.nativeTitle')}
           </h2>
@@ -93,12 +92,12 @@ export function NumbersLearn() {
         variants={fadeUp}
         className="rounded-xl bg-amber-50 p-3 text-sm dark:bg-amber-950/40"
       >
-        💡 {t('numbers.learn.shortForms')}
+        {t('numbers.learn.shortForms')}
       </motion.p>
 
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+        className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
       >
         <h2 className="text-lg font-semibold">{t('numbers.learn.tryIt')}</h2>
         <label className="flex flex-col gap-1 text-sm font-medium">
@@ -109,7 +108,7 @@ export function NumbersLearn() {
             min={0}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className="w-48 rounded-full border border-slate-300 bg-white px-4 py-2 text-xl dark:border-slate-600 dark:bg-slate-900"
+            className="w-48 rounded-lg border border-ink-300 bg-white px-4 py-2 text-xl dark:border-ink-600 dark:bg-ink-900"
           />
         </label>
         <Reading
@@ -125,7 +124,7 @@ export function NumbersLearn() {
           value={nativeOk ? countWith(n, '개') : null}
         />
         {valid && !nativeOk && (
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-ink-500 dark:text-ink-400">
             {t('numbers.learn.outOfRange')}
           </p>
         )}
@@ -133,7 +132,7 @@ export function NumbersLearn() {
 
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+        className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
       >
         <h2 className="text-lg font-semibold">{t('numbers.learn.counters')}</h2>
         <div className="overflow-x-auto">
@@ -147,19 +146,19 @@ export function NumbersLearn() {
                 return (
                   <tr
                     key={counter}
-                    className="border-t border-slate-100 dark:border-slate-700"
+                    className="border-t border-ink-100 dark:border-ink-700"
                   >
                     <th
                       scope="row"
                       lang="ko"
-                      className="py-2 pr-4 text-lg font-bold text-sky-700 dark:text-sky-300"
+                      className="py-2 pr-4 text-lg font-bold text-pine-700 dark:text-pine-300"
                     >
                       {counter}
                     </th>
                     <td className="py-2 pr-4 text-sm">
                       {t(`numbers.counterNames.${counter}`)}
                     </td>
-                    <td className="py-2 pr-4 text-xs text-slate-500 dark:text-slate-400">
+                    <td className="py-2 pr-4 text-xs text-ink-500 dark:text-ink-400">
                       {COUNTERS[counter] === 'native'
                         ? t('numbers.learn.native')
                         : t('numbers.learn.sino')}
@@ -173,8 +172,8 @@ export function NumbersLearn() {
             </tbody>
           </table>
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-300">
-          📅 {t('numbers.learn.monthNote')}
+        <p className="text-sm text-ink-600 dark:text-ink-300">
+          {t('numbers.learn.monthNote')}
         </p>
       </motion.section>
     </motion.div>
@@ -240,7 +239,7 @@ export function NumberPractice({ initial }: { initial?: NumberExercise }) {
 
   return (
     <div className="mx-auto flex w-full max-w-lg flex-col gap-5">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('numbers.practice.description')}
       </p>
       <fieldset className="flex flex-wrap gap-2">
@@ -265,9 +264,9 @@ export function NumberPractice({ initial }: { initial?: NumberExercise }) {
         initial={{ scale: 1.4 }}
         animate={{ scale: 1 }}
         transition={spring}
-        className="self-start rounded-full bg-orange-100 px-3 py-1 text-sm font-medium text-orange-800 dark:bg-orange-900/50 dark:text-orange-200"
+        className="self-start rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-800 dark:bg-amber-900/50 dark:text-amber-200"
       >
-        🔥 {t('numbers.practice.streak', { count: streak })}
+        {t('numbers.practice.streak', { count: streak })}
       </motion.span>
 
       <AnimatePresence mode="wait">
@@ -277,7 +276,7 @@ export function NumberPractice({ initial }: { initial?: NumberExercise }) {
           animate={{ opacity: 1, rotateX: 0, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={spring}
-          className="flex flex-col items-center gap-1 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 p-8 text-white shadow-xl"
+          className="flex flex-col items-center gap-1 rounded-xl panel-pine p-8 text-white shadow-lift"
         >
           <span className="text-sm font-medium text-white/85">
             {t(`numbers.practice.kinds.${exercise.kind}`)}
@@ -308,15 +307,15 @@ export function NumberPractice({ initial }: { initial?: NumberExercise }) {
                     : {}
               }
               className={cn(
-                'flex items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left text-lg font-medium transition-colors',
+                'flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-lg font-medium transition-colors',
                 picked && isAnswer
                   ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/50'
                   : picked && isPicked
                     ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/50'
-                    : 'border-slate-200 bg-white hover:border-sky-400 dark:border-slate-700 dark:bg-slate-800',
+                    : 'border-ink-200 bg-white hover:border-pine-400 dark:border-ink-700 dark:bg-ink-900',
               )}
             >
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs dark:bg-slate-700">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink-100 text-xs dark:bg-ink-700">
                 {i + 1}
               </span>
               {choice}
@@ -332,16 +331,20 @@ export function NumberPractice({ initial }: { initial?: NumberExercise }) {
             initial="hidden"
             animate="visible"
             className={cn(
-              'flex flex-wrap items-center justify-between gap-3 rounded-2xl p-4',
+              'flex flex-wrap items-center justify-between gap-3 rounded-lg p-4',
               correct
                 ? 'bg-emerald-50 dark:bg-emerald-950/50'
                 : 'bg-rose-50 dark:bg-rose-950/50',
             )}
           >
             <p className="flex items-center gap-2 font-semibold">
-              {correct
-                ? `🎉 ${t('numbers.practice.correct')}`
-                : t('numbers.practice.incorrect', { answer: exercise.answer })}
+              {correct ? (
+                <>
+                  <InkMark kind="correct" /> {t('numbers.practice.correct')}
+                </>
+              ) : (
+                t('numbers.practice.incorrect', { answer: exercise.answer })
+              )}
               <AudioButton
                 text={exercise.answer}
                 className="h-8 w-8 [&_svg]:h-4 [&_svg]:w-4"

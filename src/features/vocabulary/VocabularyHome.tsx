@@ -32,10 +32,10 @@ function Stat({
   return (
     <motion.div
       variants={fadeUp}
-      className={`rounded-2xl bg-gradient-to-br ${accent} p-4 text-white shadow-lg`}
+      className={`rounded-lg ${accent} p-4 shadow-paper`}
     >
-      <p className="text-sm text-white/85">{label}</p>
-      <p className="text-4xl font-extrabold">
+      <p className="text-sm opacity-85">{label}</p>
+      <p className="font-serif text-4xl font-bold">
         <AnimatedNumber value={value} />
       </p>
     </motion.div>
@@ -70,30 +70,30 @@ export function VocabularyHome() {
         <Stat
           label={t('vocabulary.dashboard.dueNow')}
           value={counts.due}
-          accent="from-rose-500 to-orange-500"
+          accent="panel-seal"
         />
         <Stat
           label={t('vocabulary.dashboard.learning')}
           value={counts.total - counts.fresh}
-          accent="from-emerald-500 to-teal-500"
+          accent="panel-pine"
         />
         <Stat
           label={t('vocabulary.dashboard.reviewedToday')}
           value={reviewedToday}
-          accent="from-sky-500 to-indigo-500"
+          accent="panel-ink"
         />
         <Stat
           label={t('vocabulary.dashboard.newToday')}
           value={newPerSession}
-          accent="from-violet-500 to-fuchsia-500"
+          accent="panel-gold"
         />
       </motion.div>
 
       <ModePicker mode={mode} onChange={setMode} />
 
-      <div className="flex flex-col items-center gap-3 rounded-2xl bg-white p-6 text-center shadow-sm dark:bg-slate-800">
+      <div className="flex flex-col items-center gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-6 text-center shadow-paper dark:bg-ink-900">
         {counts.due === 0 && (
-          <p className="text-slate-600 dark:text-slate-300">
+          <p className="text-ink-600 dark:text-ink-300">
             {t('vocabulary.dashboard.allCaughtUp')}
           </p>
         )}
@@ -134,7 +134,7 @@ export function VocabularyHome() {
             onChange={(e) =>
               settingsActions.setNewPerSession(Number(e.target.value))
             }
-            className="w-20 rounded-full border border-slate-300 bg-white px-3 py-1 dark:border-slate-600 dark:bg-slate-900"
+            className="w-20 rounded-lg border border-ink-300 bg-white px-3 py-1 dark:border-ink-600 dark:bg-ink-900"
           />
         </label>
       </div>
@@ -146,7 +146,7 @@ export function VocabularyHome() {
           </h2>
           <Link
             to="/vocabulary/decks"
-            className="text-sm text-sky-700 hover:underline dark:text-sky-400"
+            className="text-sm text-pine-700 hover:underline dark:text-pine-400"
           >
             {t('vocabulary.dashboard.seeAllDecks')} →
           </Link>

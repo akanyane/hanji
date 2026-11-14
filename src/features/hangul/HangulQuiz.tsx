@@ -36,9 +36,9 @@ export type QuizMode = 'recognize' | 'listen' | 'read'
 const QUESTION_COUNT = 10
 const CHOICE_COUNT = 4
 const MODE_ICONS: Record<QuizMode, string> = {
-  recognize: '👀',
-  listen: '🎧',
-  read: '📖',
+  recognize: '보기',
+  listen: '듣기',
+  read: '읽기',
 }
 const MODE_QUIZ_ID: Record<QuizMode, string> = {
   recognize: QUIZ_IDS.hangulBasic,
@@ -154,7 +154,7 @@ export function HangulQuiz({
                 label={t('hangul.quiz.playSound')}
                 className="h-20 w-20 [&_svg]:h-9 [&_svg]:w-9"
               />
-              <span className="text-sm text-slate-500 dark:text-slate-400">
+              <span className="text-sm text-ink-500 dark:text-ink-400">
                 {t('hangul.quiz.playSound')}
               </span>
             </motion.div>
@@ -187,7 +187,7 @@ export function HangulQuiz({
             {answer.hangul}
           </span>
           {/* Without this label, initial ㄱ and final ㄱ would look identical. */}
-          <span className="text-sm text-slate-500 dark:text-slate-400">
+          <span className="text-sm text-ink-500 dark:text-ink-400">
             {t(`hangul.category.${answer.category}`)}
           </span>
         </>
@@ -235,12 +235,12 @@ export function HangulQuiz({
           {ratio >= 0.8 && <Confetti />}
           <p className="text-6xl font-extrabold">
             <AnimatedNumber value={result.score} />
-            <span className="text-3xl text-slate-400">/{result.total}</span>
+            <span className="text-3xl text-ink-400">/{result.total}</span>
           </p>
           <p className="text-xl font-semibold">
             {t('hangul.quiz.finished', result)}
           </p>
-          <p className="text-slate-600 dark:text-slate-300">
+          <p className="text-ink-600 dark:text-ink-300">
             {ratio === 1
               ? t('hangul.quiz.perfect')
               : ratio >= 0.6
@@ -264,17 +264,17 @@ export function HangulQuiz({
             whileHover={cardHover}
             whileTap={cardTap}
             className={cn(
-              'flex flex-col items-start gap-1 rounded-2xl border-2 p-4 text-left transition-colors',
+              'flex flex-col items-start gap-1 rounded-lg border-2 p-4 text-left transition-colors',
               mode === m
-                ? 'border-sky-500 bg-sky-50 dark:bg-sky-950/40'
-                : 'border-slate-200 bg-white hover:border-sky-300 dark:border-slate-700 dark:bg-slate-800',
+                ? 'border-pine-500 bg-pine-50 dark:bg-pine-950/40'
+                : 'border-ink-200 bg-white hover:border-pine-300 dark:border-ink-700 dark:bg-ink-900',
             )}
           >
             <span className="text-2xl" aria-hidden="true">
               {MODE_ICONS[m]}
             </span>
             <span className="font-semibold">{t(`hangul.quiz.${m}.title`)}</span>
-            <span className="text-sm text-slate-600 dark:text-slate-300">
+            <span className="text-sm text-ink-600 dark:text-ink-300">
               {t(`hangul.quiz.${m}.description`)}
             </span>
           </motion.button>
@@ -291,10 +291,7 @@ export function HangulQuiz({
         </motion.div>
       )}
 
-      <motion.p
-        variants={fadeUp}
-        className="text-slate-600 dark:text-slate-300"
-      >
+      <motion.p variants={fadeUp} className="text-ink-600 dark:text-ink-300">
         {t('hangul.quiz.summary', {
           best: summary?.bestScore ?? 0,
           attempts: summary?.attempts ?? 0,
@@ -318,7 +315,7 @@ export function HangulQuiz({
         </p>
       )}
       {!listenUnavailable && !canStart && (
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-ink-500 dark:text-ink-400">
           {t('hangul.quiz.notEnough')}
         </p>
       )}

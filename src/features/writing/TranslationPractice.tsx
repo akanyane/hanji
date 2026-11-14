@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { type FormEvent, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { InkMark } from '../../components/brand/InkMark'
 import { HangulKeyboard } from '../../components/hangul/HangulKeyboard'
 import { pop, shake, spring } from '../../components/motion/presets'
 import { SyllableDiff } from '../../components/speech/SyllableDiff'
@@ -114,10 +115,10 @@ export function TranslationPractice({
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('writing.translate.description')}
       </p>
-      <p className="text-sm text-slate-500 dark:text-slate-400">
+      <p className="text-sm text-ink-500 dark:text-ink-400">
         {t('writing.translate.progress', {
           current: (index % exercises.length) + 1,
           total: exercises.length,
@@ -142,7 +143,7 @@ export function TranslationPractice({
           transition={spring}
           className="flex flex-col gap-4"
         >
-          <p className="rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 p-6 text-center text-2xl font-semibold text-white shadow-lg">
+          <p className="rounded-xl panel-pine p-6 text-center text-2xl font-semibold text-white shadow-paper">
             {l(exercise.prompt)}
           </p>
           <label htmlFor="translation-input" className="text-sm font-semibold">
@@ -163,12 +164,12 @@ export function TranslationPractice({
               spellCheck={false}
               animate={verdict && verdict.kind !== 'correct' ? shake : {}}
               className={cn(
-                'min-w-0 flex-1 rounded-full border-2 bg-white px-5 py-3 text-xl dark:bg-slate-800',
+                'min-w-0 flex-1 rounded-lg border-2 bg-white px-5 py-3 text-xl dark:bg-ink-900',
                 verdict
                   ? verdict.kind === 'correct'
                     ? 'border-emerald-500'
                     : 'border-amber-500'
-                  : 'border-slate-300 dark:border-slate-600',
+                  : 'border-ink-300 dark:border-ink-600',
               )}
             />
             {!verdict && (
@@ -184,7 +185,6 @@ export function TranslationPractice({
               onClick={() => setKeyboard((k) => !k)}
               aria-pressed={keyboard}
             >
-              ⌨️{' '}
               {keyboard
                 ? t('writing.keyboard.hideKeyboard')
                 : t('writing.keyboard.showKeyboard')}
@@ -204,18 +204,23 @@ export function TranslationPractice({
                 initial="hidden"
                 animate="visible"
                 className={cn(
-                  'flex flex-col gap-3 rounded-2xl p-4',
+                  'flex flex-col gap-3 rounded-lg p-4',
                   verdict.kind === 'correct'
                     ? 'bg-emerald-50 dark:bg-emerald-950/50'
                     : 'bg-amber-50 dark:bg-amber-950/40',
                 )}
               >
                 <p className="font-semibold">
-                  {verdict.kind === 'correct'
-                    ? `🎉 ${t('writing.translate.correct')}`
-                    : verdict.kind === 'close'
-                      ? t('writing.translate.close')
-                      : t('writing.translate.incorrect')}
+                  {verdict.kind === 'correct' ? (
+                    <>
+                      <InkMark kind="correct" />{' '}
+                      {t('writing.translate.correct')}
+                    </>
+                  ) : verdict.kind === 'close' ? (
+                    t('writing.translate.close')
+                  ) : (
+                    t('writing.translate.incorrect')
+                  )}
                 </p>
                 <div className="flex items-center justify-center gap-2">
                   {diff ? (
@@ -231,7 +236,7 @@ export function TranslationPractice({
                   />
                 </div>
                 {exercise.answers.length > 1 && (
-                  <p className="text-sm text-slate-600 dark:text-slate-300">
+                  <p className="text-sm text-ink-600 dark:text-ink-300">
                     {t('writing.translate.otherAnswers')}{' '}
                     <span lang="ko">
                       {exercise.answers.filter((a) => a !== answer).join(' · ')}

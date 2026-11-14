@@ -152,10 +152,10 @@ export function KeyboardTrainer({ words: initialWords }: { words?: string[] }) {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('writing.keyboard.description')}
       </p>
-      <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+      <div className="flex items-center justify-between text-sm text-ink-500 dark:text-ink-400">
         <span>
           {t('writing.keyboard.progress', {
             current: wordIndex + 1,
@@ -179,9 +179,9 @@ export function KeyboardTrainer({ words: initialWords }: { words?: string[] }) {
         onKeyDown={onKeyDown}
         animate={missFlash ? shake : {}}
         key={`${wordIndex}-${missFlash}`}
-        className="flex cursor-text flex-col items-center gap-2 rounded-3xl bg-white p-6 shadow-sm outline-none ring-sky-400 focus:ring-4 dark:bg-slate-800"
+        className="flex cursor-text flex-col items-center gap-2 rounded-xl bg-white p-6 shadow-paper outline-none ring-pine-400 focus:ring-4 dark:bg-ink-900"
       >
-        <span className="text-sm text-slate-500 dark:text-slate-400">
+        <span className="text-sm text-ink-500 dark:text-ink-400">
           {t('writing.keyboard.type')} {meaning && <>({l(meaning.meaning)})</>}
         </span>
         <span lang="ko" className="text-5xl font-bold tracking-wide">
@@ -193,11 +193,11 @@ export function KeyboardTrainer({ words: initialWords }: { words?: string[] }) {
             'min-h-14 text-5xl font-bold',
             wordDone
               ? 'text-emerald-600 dark:text-emerald-400'
-              : 'text-sky-600 dark:text-sky-400',
+              : 'text-pine-600 dark:text-pine-400',
           )}
         >
           {imeText(ime) || (
-            <span className="text-base font-normal text-slate-400">
+            <span className="text-base font-normal text-ink-400">
               {t('writing.keyboard.focusHint')}
             </span>
           )}
@@ -223,7 +223,7 @@ export function KeyboardTrainer({ words: initialWords }: { words?: string[] }) {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={spring}
-                className="text-sm text-slate-500 dark:text-slate-400"
+                className="text-sm text-ink-500 dark:text-ink-400"
               >
                 {t('writing.keyboard.nextKey', {
                   key: `${expected} (${keysFor(expected).toUpperCase()}${keysFor(expected) !== keysFor(expected).toLowerCase() ? ' + Shift' : ''})`,
@@ -240,7 +240,6 @@ export function KeyboardTrainer({ words: initialWords }: { words?: string[] }) {
         onClick={() => setShowKeyboard((s) => !s)}
         aria-pressed={showKeyboard}
       >
-        ⌨️{' '}
         {showKeyboard
           ? t('writing.keyboard.hideKeyboard')
           : t('writing.keyboard.showKeyboard')}

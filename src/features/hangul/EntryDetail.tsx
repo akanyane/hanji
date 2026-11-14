@@ -18,9 +18,9 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <motion.section
       variants={fadeUp}
-      className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800"
+      className="flex flex-col gap-2 rounded-lg border border-ink-200 bg-white p-4 dark:border-ink-700 dark:bg-ink-900"
     >
-      <h2 className="text-sm font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+      <h2 className="text-sm font-semibold tracking-wide text-ink-500 uppercase dark:text-ink-400">
         {title}
       </h2>
       {children}
@@ -42,13 +42,13 @@ function JamoChip({
 }) {
   const entry = entryForJamo(jamo, category)
   const className =
-    'rounded-lg bg-slate-100 px-3 py-1 text-2xl font-semibold dark:bg-slate-700'
+    'rounded-lg bg-ink-100 px-3 py-1 text-2xl font-semibold dark:bg-ink-700'
   return entry ? (
     <Link
       to="/hangul/$entryId"
       params={{ entryId: entry.id }}
       lang="ko"
-      className={`${className} hover:bg-sky-100 dark:hover:bg-sky-900`}
+      className={`${className} hover:bg-pine-100 dark:hover:bg-pine-900`}
     >
       {jamo}
     </Link>
@@ -77,7 +77,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
     <div className="flex flex-col gap-6">
       <Link
         to="/hangul"
-        className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
+        className="self-start text-sm font-medium text-pine-700 hover:underline dark:text-pine-400"
       >
         ← {t('hangul.detail.back')}
       </Link>
@@ -97,7 +97,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
             <motion.span
               variants={pop}
               lang="ko"
-              className="bg-gradient-to-br from-sky-500 to-violet-600 bg-clip-text text-8xl font-bold text-transparent sm:text-9xl"
+              className="font-serif text-8xl font-bold text-ink-900 sm:text-9xl dark:text-ink-50"
             >
               {entry.hangul}
             </motion.span>
@@ -105,7 +105,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
               <span className="text-2xl font-semibold">
                 {entry.romanization || t('common.silent')}
               </span>
-              <span className="text-sm text-slate-500 dark:text-slate-400">
+              <span className="text-sm text-ink-500 dark:text-ink-400">
                 {t(`hangul.category.${entry.category}`)}
               </span>
               <AudioButton text={entrySound(entry)} />
@@ -113,7 +113,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
           </div>
           {hasStrokes && (
             <div className="flex w-full flex-col items-center gap-2">
-              <h2 className="text-sm font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+              <h2 className="text-sm font-semibold tracking-wide text-ink-500 uppercase dark:text-ink-400">
                 {t('hangul.detail.strokeOrder')}
               </h2>
               <StrokeOrder jamo={entry.hangul} className="w-full" />
@@ -130,7 +130,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
                 })}
               </p>
               {entry.notes && (
-                <p className="text-slate-600 dark:text-slate-300">
+                <p className="text-ink-600 dark:text-ink-300">
                   {l(entry.notes)}
                 </p>
               )}
@@ -142,7 +142,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
                 <p>{l(details.tip)}</p>
               </Section>
               <Section title={t('hangul.detail.origin')}>
-                <p className="text-slate-700 dark:text-slate-200">
+                <p className="text-ink-700 dark:text-ink-200">
                   {l(details.origin)}
                 </p>
                 {splitCompound(entry.hangul).length > 1 && (
@@ -158,7 +158,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
                   </span>
                   <AudioButton text={details.example.word} />
                 </div>
-                <p className="text-slate-600 dark:text-slate-300">
+                <p className="text-ink-600 dark:text-ink-300">
                   {romanize(details.example.word)} ·{' '}
                   {l(details.example.meaning)}
                 </p>
@@ -184,7 +184,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
                   medial: syllable.medial,
                   final: syllable.final || 'none',
                 }}
-                className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
+                className="self-start text-sm font-medium text-pine-700 hover:underline dark:text-pine-400"
               >
                 {t('hangul.detail.openInBuilder')} →
               </Link>
@@ -195,7 +195,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
 
       {hasStrokes && (
         <motion.section
-          className="flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-slate-100/60 p-4 dark:border-slate-700 dark:bg-slate-800/50"
+          className="flex flex-col items-center gap-3 rounded-lg border border-ink-200 bg-ink-100/60 p-4 dark:border-ink-700 dark:bg-ink-800/50"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -216,7 +216,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
           <Link
             to="/hangul/$entryId"
             params={{ entryId: previous.id }}
-            className="rounded-full border border-slate-300 px-4 py-2 text-sm hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+            className="rounded-lg border border-ink-300 px-4 py-2 text-sm hover:bg-ink-100 dark:border-ink-600 dark:hover:bg-ink-800"
           >
             ← {t('common.previous')} <span lang="ko">{previous.hangul}</span>
           </Link>
@@ -227,7 +227,7 @@ export function EntryDetail({ entry }: { entry: HangulEntry }) {
           <Link
             to="/hangul/$entryId"
             params={{ entryId: next.id }}
-            className="rounded-full border border-slate-300 px-4 py-2 text-sm hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+            className="rounded-lg border border-ink-300 px-4 py-2 text-sm hover:bg-ink-100 dark:border-ink-600 dark:hover:bg-ink-800"
           >
             {t('common.next')} <span lang="ko">{next.hangul}</span> →
           </Link>

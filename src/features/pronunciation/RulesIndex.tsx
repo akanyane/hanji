@@ -26,12 +26,12 @@ export function RulesIndex() {
             <Link
               to="/pronunciation/$ruleId"
               params={{ ruleId: rule }}
-              className="block h-full rounded-2xl"
+              className="block h-full rounded-lg"
             >
               <motion.div
                 whileHover={cardHover}
                 whileTap={cardTap}
-                className="flex h-full flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+                className="flex h-full flex-col gap-2 rounded-lg border border-ink-200 bg-white p-4 shadow-paper dark:border-ink-700 dark:bg-ink-900"
               >
                 <span className="flex items-baseline justify-between">
                   <span className="font-semibold">
@@ -39,17 +39,17 @@ export function RulesIndex() {
                   </span>
                   <span
                     lang="ko"
-                    className="text-sm text-slate-500 dark:text-slate-400"
+                    className="text-sm text-ink-500 dark:text-ink-400"
                   >
                     {info.korean}
                   </span>
                 </span>
-                <span className="text-sm text-slate-600 dark:text-slate-300">
+                <span className="text-sm text-ink-600 dark:text-ink-300">
                   {l(info.summary)}
                 </span>
                 <span
                   lang="ko"
-                  className="mt-auto text-lg font-semibold text-sky-700 dark:text-sky-300"
+                  className="mt-auto text-lg font-semibold text-pine-700 dark:text-pine-300"
                 >
                   {info.example[0]} → [{info.example[1]}]
                 </span>

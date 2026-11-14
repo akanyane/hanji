@@ -87,7 +87,7 @@ function Quiz({ rule }: { rule: PronunciationRuleId }) {
         {score === questions.length && <Confetti />}
         <p className="text-5xl font-extrabold">
           <AnimatedNumber value={score} />
-          <span className="text-2xl text-slate-400">/{questions.length}</span>
+          <span className="text-2xl text-ink-400">/{questions.length}</span>
         </p>
         <p className="font-semibold">
           {t('pronunciation.rule.score', { score, total: questions.length })}
@@ -128,13 +128,13 @@ export function RulePage({ rule }: { rule: PronunciationRuleId }) {
     >
       <Link
         to="/pronunciation"
-        className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
+        className="self-start text-sm font-medium text-pine-700 hover:underline dark:text-pine-400"
       >
         ← {t('pronunciation.rule.back')}
       </Link>
       <motion.header
         variants={fadeUp}
-        className="rounded-3xl bg-gradient-to-br from-sky-500 via-indigo-500 to-violet-600 p-6 text-white shadow-lg"
+        className="rounded-xl panel-ink p-6 text-white shadow-paper"
       >
         <p lang="ko" className="text-sm text-white/80">
           {info.korean}
@@ -145,7 +145,7 @@ export function RulePage({ rule }: { rule: PronunciationRuleId }) {
 
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+        className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
       >
         <h2 className="text-lg font-semibold">
           {t('pronunciation.rule.examples')}
@@ -156,7 +156,7 @@ export function RulePage({ rule }: { rule: PronunciationRuleId }) {
             return (
               <li
                 key={word}
-                className="flex flex-wrap items-center gap-3 border-b border-slate-100 pb-3 last:border-0 dark:border-slate-700"
+                className="flex flex-wrap items-center gap-3 border-b border-ink-100 pb-3 last:border-0 dark:border-ink-700"
               >
                 <AudioButton
                   text={word}
@@ -168,11 +168,11 @@ export function RulePage({ rule }: { rule: PronunciationRuleId }) {
                 >
                   {stages.map((stage, i) => (
                     <span key={stage} className="flex items-center gap-2">
-                      {i > 0 && <span className="text-slate-400">→</span>}
+                      {i > 0 && <span className="text-ink-400">→</span>}
                       <span
                         className={
                           i === stages.length - 1
-                            ? 'font-bold text-sky-700 dark:text-sky-300'
+                            ? 'font-bold text-pine-700 dark:text-pine-300'
                             : undefined
                         }
                       >
@@ -184,7 +184,7 @@ export function RulePage({ rule }: { rule: PronunciationRuleId }) {
                 <Link
                   to="/tools/pronunciation"
                   search={{ text: word }}
-                  className="ml-auto text-sm text-sky-700 hover:underline dark:text-sky-400"
+                  className="ml-auto text-sm text-pine-700 hover:underline dark:text-pine-400"
                 >
                   {t('pronunciation.rule.openInTool')}
                 </Link>
@@ -196,7 +196,7 @@ export function RulePage({ rule }: { rule: PronunciationRuleId }) {
 
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+        className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
       >
         <h2 className="text-lg font-semibold">
           {t('pronunciation.rule.quiz')}

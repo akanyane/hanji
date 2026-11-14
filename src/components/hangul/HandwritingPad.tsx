@@ -74,8 +74,8 @@ export function HandwritingPad({ jamo }: { jamo: string }) {
     ctx.lineJoin = 'round'
     ctx.lineWidth = PEN_WIDTH_PX * (window.devicePixelRatio || 1)
     ctx.strokeStyle = document.documentElement.classList.contains('dark')
-      ? '#f8fafc'
-      : '#0f172a'
+      ? '#fbf8f1'
+      : '#1d1915'
     for (const stroke of strokesRef.current) {
       ctx.beginPath()
       const [[x0, y0], ...rest] = stroke
@@ -161,7 +161,7 @@ export function HandwritingPad({ jamo }: { jamo: string }) {
 
   if (!canDraw) {
     return (
-      <p className="text-sm text-slate-500 dark:text-slate-400">
+      <p className="text-sm text-ink-500 dark:text-ink-400">
         {t('hangul.writing.unsupported')}
       </p>
     )
@@ -173,10 +173,10 @@ export function HandwritingPad({ jamo }: { jamo: string }) {
         <svg
           viewBox="0 0 100 100"
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full rounded-2xl border-2 border-dashed border-slate-300 bg-white dark:border-slate-600 dark:bg-slate-800"
+          className="absolute inset-0 h-full w-full rounded-lg border-2 border-dashed border-ink-300 bg-white dark:border-ink-600 dark:bg-ink-900"
         >
           <g
-            className="stroke-slate-200 dark:stroke-slate-700"
+            className="stroke-ink-200 dark:stroke-ink-700"
             strokeWidth="0.5"
             strokeDasharray="2 2"
           >
@@ -191,8 +191,8 @@ export function HandwritingPad({ jamo }: { jamo: string }) {
             strokeLinejoin="round"
             className={
               feedback?.kind === 'rated'
-                ? 'stroke-sky-300 dark:stroke-sky-700'
-                : 'stroke-slate-200 dark:stroke-slate-700'
+                ? 'stroke-pine-300 dark:stroke-pine-700'
+                : 'stroke-ink-200 dark:stroke-ink-700'
             }
             animate={{ opacity: showGuide ? 1 : 0 }}
           >
@@ -210,7 +210,7 @@ export function HandwritingPad({ jamo }: { jamo: string }) {
         <canvas
           ref={canvasRef}
           aria-label={t('hangul.writing.canvasLabel', { char: jamo })}
-          className="absolute inset-0 h-full w-full cursor-crosshair touch-none rounded-2xl"
+          className="absolute inset-0 h-full w-full cursor-crosshair touch-none rounded-lg"
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
@@ -260,7 +260,7 @@ export function HandwritingPad({ jamo }: { jamo: string }) {
                 'rounded-xl px-3 py-2 text-center text-sm',
                 feedback.kind === 'rated'
                   ? RATING_STYLE[feedback.rating]
-                  : 'bg-slate-100 dark:bg-slate-800',
+                  : 'bg-ink-100 dark:bg-ink-800',
               )}
             >
               {feedback.kind === 'empty' ? (

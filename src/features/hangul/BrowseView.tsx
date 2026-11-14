@@ -38,7 +38,7 @@ export function BrowseView({
         {t('hangul.results', { count: filtered.length })}
       </p>
       {filtered.length === 0 ? (
-        <p className="py-8 text-center text-slate-500 dark:text-slate-400">
+        <p className="py-8 text-center text-ink-500 dark:text-ink-400">
           {t('hangul.noResults')}
         </p>
       ) : (

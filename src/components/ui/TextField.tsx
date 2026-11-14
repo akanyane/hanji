@@ -38,13 +38,13 @@ export function TextField({
         spellCheck={false}
         aria-describedby={hint ? hintId : undefined}
         className={cn(
-          'w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-lg text-slate-900 placeholder:text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50 dark:placeholder:text-slate-400',
+          'w-full rounded-md border border-ink-300 bg-white px-3 py-2 text-lg text-ink-900 placeholder:text-ink-500 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-50 dark:placeholder:text-ink-400',
           className,
         )}
         {...props}
       />
       {hint && (
-        <p id={hintId} className="text-sm text-slate-500 dark:text-slate-400">
+        <p id={hintId} className="text-sm text-ink-500 dark:text-ink-400">
           {hint}
         </p>
       )}

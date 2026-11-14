@@ -36,21 +36,21 @@ export function DialoguesHome() {
           <Link
             to="/dialogues/$dialogueId"
             params={{ dialogueId: d.id }}
-            className="block h-full rounded-2xl"
+            className="block h-full rounded-lg"
           >
             <motion.div
               whileHover={cardHover}
               whileTap={cardTap}
-              className="flex h-full flex-col gap-1 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+              className="flex h-full flex-col gap-1 rounded-lg border border-ink-200 bg-white p-4 shadow-paper dark:border-ink-700 dark:bg-ink-900"
             >
-              <span className="font-semibold">💬 {l(d.title)}</span>
-              <span className="text-sm text-slate-500 dark:text-slate-400">
+              <span className="font-semibold">{l(d.title)}</span>
+              <span className="text-sm text-ink-500 dark:text-ink-400">
                 {t('vocabulary.deck.level', { level: d.level })} ·{' '}
                 {d.speakers.map((s) => l(s)).join(' & ')}
               </span>
               <span
                 lang="ko"
-                className="mt-1 line-clamp-1 text-sm text-slate-600 dark:text-slate-300"
+                className="mt-1 line-clamp-1 text-sm text-ink-600 dark:text-ink-300"
               >
                 {d.lines[0].ko}
               </span>
@@ -103,11 +103,11 @@ export function CompleteDialogue({ dialogue }: { dialogue: Dialogue }) {
   return (
     <motion.section
       variants={fadeUp}
-      className="flex flex-col gap-4 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+      className="flex flex-col gap-4 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
     >
       <div>
-        <h3 className="text-lg font-semibold">✍️ {t('dialogues.complete')}</h3>
-        <p className="text-sm text-slate-600 dark:text-slate-300">
+        <h3 className="text-lg font-semibold">{t('dialogues.complete')}</h3>
+        <p className="text-sm text-ink-600 dark:text-ink-300">
           {t('dialogues.completeDescription')}
         </p>
       </div>
@@ -120,13 +120,13 @@ export function CompleteDialogue({ dialogue }: { dialogue: Dialogue }) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             className={cn(
-              'max-w-[85%] rounded-2xl px-4 py-2',
+              'max-w-[85%] rounded-lg px-4 py-2',
               line.speaker === 1
-                ? 'self-end bg-indigo-100 dark:bg-indigo-950/60'
-                : 'bg-slate-100 dark:bg-slate-700',
+                ? 'self-end bg-pine-100 dark:bg-pine-950/60'
+                : 'bg-ink-100 dark:bg-ink-700',
             )}
           >
-            <span className="block text-xs text-slate-500 dark:text-slate-400">
+            <span className="block text-xs text-ink-500 dark:text-ink-400">
               {l(dialogue.speakers[line.speaker])}
             </span>
             <span lang="ko">{line.ko}</span>
@@ -158,12 +158,12 @@ export function CompleteDialogue({ dialogue }: { dialogue: Dialogue }) {
                   onClick={() => choose(choice)}
                   animate={picked && isPicked && !isAnswer ? shake : {}}
                   className={cn(
-                    'rounded-2xl border-2 px-4 py-3 text-left transition-colors',
+                    'rounded-lg border-2 px-4 py-3 text-left transition-colors',
                     picked && isAnswer
                       ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/50'
                       : picked && isPicked
                         ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/50'
-                        : 'border-slate-200 hover:border-sky-400 dark:border-slate-700',
+                        : 'border-ink-200 hover:border-pine-400 dark:border-ink-700',
                     picked && !isAnswer && !isPicked && 'opacity-50',
                   )}
                 >
@@ -189,7 +189,7 @@ export function CompleteDialogue({ dialogue }: { dialogue: Dialogue }) {
           {score === steps.length && <Confetti />}
           <p className="text-4xl font-extrabold">
             <AnimatedNumber value={score} />
-            <span className="text-xl text-slate-400">/{steps.length}</span>
+            <span className="text-xl text-ink-400">/{steps.length}</span>
           </p>
           <Button
             variant="secondary"

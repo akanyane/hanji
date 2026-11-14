@@ -25,8 +25,8 @@ interface SyllableBuilderProps extends SyllableParts {
 }
 
 const ROLE_STYLE = {
-  initial: 'bg-sky-500 text-white',
-  medial: 'bg-violet-500 text-white',
+  initial: 'bg-pine-500 text-white',
+  medial: 'bg-seal-500 text-white',
   final: 'bg-amber-500 text-white',
 } as const
 
@@ -64,7 +64,7 @@ function JamoPicker({
                 'relative min-w-10 rounded-lg px-2 py-1.5 text-lg font-medium',
                 selected
                   ? ''
-                  : 'bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700',
+                  : 'border border-ink-200 bg-white dark:border-ink-800 hover:bg-ink-100 dark:bg-ink-900 dark:hover:bg-ink-700',
               )}
             >
               {selected && (
@@ -132,7 +132,7 @@ function LayoutDiagram({ initial, medial, final }: SyllableParts) {
       <motion.div
         layout
         aria-hidden="true"
-        className="grid h-36 w-36 gap-1 rounded-xl border-2 border-dashed border-slate-300 p-1.5 dark:border-slate-600"
+        className="grid h-36 w-36 gap-1 rounded-xl border-2 border-dashed border-ink-300 p-1.5 dark:border-ink-600"
         style={{ gridTemplateAreas: template }}
         transition={spring}
       >
@@ -186,12 +186,12 @@ export function SyllableBuilder({
 
   return (
     <div className="flex flex-col gap-6">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('hangul.builder.description')}
       </p>
 
-      <div className="flex flex-col items-center gap-6 rounded-2xl bg-gradient-to-br from-sky-50 to-violet-50 p-6 sm:flex-row sm:justify-center dark:from-slate-800 dark:to-slate-800/50">
-        <div className="relative flex h-40 w-40 items-center justify-center rounded-2xl bg-white shadow-lg dark:bg-slate-900">
+      <div className="flex flex-col items-center gap-6 rounded-lg panel-paper p-6 sm:flex-row sm:justify-center dark:from-ink-800 dark:to-ink-800/50">
+        <div className="relative flex h-40 w-40 items-center justify-center rounded-lg bg-white shadow-paper dark:bg-ink-900">
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.span
               key={syllable}
@@ -211,7 +211,7 @@ export function SyllableBuilder({
         <div className="flex flex-col items-center gap-2 sm:items-start">
           <AudioButton text={syllable} className="h-12 w-12" />
           <p>
-            <span className="text-sm text-slate-500 dark:text-slate-400">
+            <span className="text-sm text-ink-500 dark:text-ink-400">
               {t('hangul.builder.pronunciation')}:{' '}
             </span>
             <span lang="ko" className="text-lg font-semibold">
@@ -219,7 +219,7 @@ export function SyllableBuilder({
             </span>
           </p>
           <p>
-            <span className="text-sm text-slate-500 dark:text-slate-400">
+            <span className="text-sm text-ink-500 dark:text-ink-400">
               {t('hangul.builder.romanization')}:{' '}
             </span>
             <span className="text-lg font-semibold">{romanize(syllable)}</span>
@@ -229,13 +229,13 @@ export function SyllableBuilder({
             className="px-3 py-1 text-sm"
             onClick={randomize}
           >
-            🎲 {t('hangul.builder.random')}
+            {t('hangul.builder.random')}
           </Button>
         </div>
       </div>
 
       {orientation && (
-        <ul className="flex flex-col gap-1 text-sm text-slate-600 dark:text-slate-300">
+        <ul className="flex flex-col gap-1 text-sm text-ink-600 dark:text-ink-300">
           <li>• {t(`hangul.builder.layout.${orientation}`)}</li>
           {final && <li>• {t('hangul.builder.layout.final')}</li>}
         </ul>

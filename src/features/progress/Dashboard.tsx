@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import type { TFunction } from 'i18next'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
+import { Seal } from '../../components/brand/Seal'
 import { AnimatedNumber } from '../../components/motion/AnimatedNumber'
 import { fadeUp, stagger } from '../../components/motion/presets'
 import { ProgressBar } from '../../components/ui/ProgressBar'
@@ -46,18 +47,23 @@ function StatTile({
   return (
     <motion.div
       variants={fadeUp}
-      className="flex flex-col gap-1 rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-800"
+      className="flex flex-col gap-1 rounded-lg border border-ink-200 bg-white p-4 shadow-paper dark:border-ink-800 dark:bg-ink-900"
     >
-      <span className="text-sm text-slate-500 dark:text-slate-400">
-        <span aria-hidden="true">{icon}</span> {label}
+      <span className="flex items-baseline justify-between gap-2 text-sm text-ink-500 dark:text-ink-400">
+        {label}
+        <span
+          aria-hidden="true"
+          lang="ko"
+          className="font-serif text-xs text-seal-600 dark:text-seal-400"
+        >
+          {icon}
+        </span>
       </span>
-      <span className="text-3xl font-extrabold tabular-nums">
+      <span className="font-serif text-3xl font-bold tabular-nums">
         {typeof value === 'number' ? <AnimatedNumber value={value} /> : value}
       </span>
       {detail && (
-        <span className="text-xs text-slate-500 dark:text-slate-400">
-          {detail}
-        </span>
+        <span className="text-xs text-ink-500 dark:text-ink-400">{detail}</span>
       )}
     </motion.div>
   )
@@ -65,12 +71,12 @@ function StatTile({
 
 /** Sequential single-hue scale (light → dark) for the activity heatmap. */
 function heatClass(xp: number, max: number): string {
-  if (xp === 0) return 'bg-slate-200 dark:bg-slate-700'
+  if (xp === 0) return 'bg-ink-200 dark:bg-ink-700'
   const ratio = xp / max
-  if (ratio > 0.75) return 'bg-sky-700 dark:bg-sky-300'
-  if (ratio > 0.5) return 'bg-sky-500 dark:bg-sky-400'
-  if (ratio > 0.25) return 'bg-sky-400 dark:bg-sky-600'
-  return 'bg-sky-200 dark:bg-sky-800'
+  if (ratio > 0.75) return 'bg-pine-700 dark:bg-pine-300'
+  if (ratio > 0.5) return 'bg-pine-500 dark:bg-pine-400'
+  if (ratio > 0.25) return 'bg-pine-400 dark:bg-pine-600'
+  return 'bg-pine-200 dark:bg-pine-800'
 }
 
 function ActivityHeatmap({ daily }: { daily: ProgressStats['daily'] }) {
@@ -93,12 +99,12 @@ function ActivityHeatmap({ daily }: { daily: ProgressStats['daily'] }) {
   return (
     <motion.section
       variants={fadeUp}
-      className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+      className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
     >
       <h2 className="text-lg font-semibold">
         {t('progress.dashboard.activity')}
       </h2>
-      <p className="text-sm text-slate-600 dark:text-slate-300">
+      <p className="text-sm text-ink-600 dark:text-ink-300">
         {t('progress.dashboard.activitySummary', { count: activeDays })}
       </p>
       <div className="overflow-x-auto pb-1">
@@ -116,7 +122,7 @@ function ActivityHeatmap({ daily }: { daily: ProgressStats['daily'] }) {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: (w * 7 + i) * 0.004 }}
                   className={cn(
-                    'h-3.5 w-3.5 rounded-[4px] hover:ring-2 hover:ring-slate-400',
+                    'h-3.5 w-3.5 rounded-[4px] hover:ring-2 hover:ring-ink-400',
                     heatClass(d.xp, max),
                   )}
                 />
@@ -126,7 +132,7 @@ function ActivityHeatmap({ daily }: { daily: ProgressStats['daily'] }) {
         </div>
       </div>
       <div
-        className="flex items-center gap-1 self-end text-xs text-slate-500 dark:text-slate-400"
+        className="flex items-center gap-1 self-end text-xs text-ink-500 dark:text-ink-400"
         aria-hidden="true"
       >
         {t('progress.dashboard.less')}
@@ -157,7 +163,7 @@ function SkillBars({ skills }: { skills: ProgressStats['skills'] }) {
   return (
     <motion.section
       variants={fadeUp}
-      className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+      className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
     >
       <h2 className="text-lg font-semibold">
         {t('progress.dashboard.skills')}
@@ -171,11 +177,11 @@ function SkillBars({ skills }: { skills: ProgressStats['skills'] }) {
               <div className="flex items-baseline justify-between gap-2 text-sm">
                 <Link
                   to={SKILL_ROUTES[skill]}
-                  className="font-medium hover:text-sky-700 hover:underline dark:hover:text-sky-300"
+                  className="font-medium hover:text-pine-700 hover:underline dark:hover:text-pine-300"
                 >
                   {t(`nav.${skill}`)}
                 </Link>
-                <span className="text-slate-500 tabular-nums dark:text-slate-400">
+                <span className="text-ink-500 tabular-nums dark:text-ink-400">
                   {s.accuracy === null
                     ? t('progress.dashboard.notPracticed')
                     : t('progress.dashboard.skillAccuracy', {
@@ -185,12 +191,12 @@ function SkillBars({ skills }: { skills: ProgressStats['skills'] }) {
                 </span>
               </div>
               <div
-                className="h-2.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700"
+                className="h-2.5 overflow-hidden rounded-full bg-ink-100 dark:bg-ink-700"
                 // Decorative: the percentage is already written above.
                 aria-hidden="true"
               >
                 <motion.div
-                  className="h-full rounded-full bg-sky-500 dark:bg-sky-400"
+                  className="h-full rounded-full bg-pine-500 dark:bg-pine-400"
                   initial={{ width: 0 }}
                   animate={{ width: `${percent}%` }}
                   transition={{
@@ -219,7 +225,7 @@ function NextAchievements({ view }: { view: ProgressView }) {
   return (
     <motion.section
       variants={fadeUp}
-      className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+      className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
     >
       <div className="flex items-baseline justify-between gap-2">
         <h2 className="text-lg font-semibold">
@@ -227,7 +233,7 @@ function NextAchievements({ view }: { view: ProgressView }) {
         </h2>
         <Link
           to="/progress/achievements"
-          className="text-sm font-medium text-sky-700 hover:underline dark:text-sky-300"
+          className="text-sm font-medium text-pine-700 hover:underline dark:text-pine-300"
         >
           {t('progress.dashboard.unlockedCount', {
             count: unlocked,
@@ -239,12 +245,7 @@ function NextAchievements({ view }: { view: ProgressView }) {
       <ul className="flex flex-col gap-3">
         {next.map(({ achievement, value, ratio }) => (
           <li key={achievement.id} className="flex items-center gap-3">
-            <span
-              aria-hidden="true"
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-xl grayscale dark:bg-slate-700"
-            >
-              {achievement.icon}
-            </span>
+            <Seal text={achievement.icon} size="md" muted />
             <div className="flex min-w-0 flex-1 flex-col gap-1">
               <span className="text-sm font-medium">
                 {t(
@@ -280,17 +281,20 @@ export function Dashboard() {
       {view.placement === null && (
         <motion.div
           variants={fadeUp}
-          className="flex flex-col gap-3 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 p-5 text-white shadow-lg sm:flex-row sm:items-center sm:justify-between"
+          className="flex flex-col gap-4 rounded-lg border border-dashed border-ink-300 p-5 sm:flex-row sm:items-center dark:border-ink-700"
         >
-          <div>
-            <p className="text-lg font-bold">
-              🧭 {t('progress.placement.ctaTitle')}
+          <Seal text="길" size="md" animate="stamp" delay={0.3} />
+          <div className="flex-1">
+            <p className="font-serif text-lg font-bold">
+              {t('progress.placement.ctaTitle')}
             </p>
-            <p className="text-white/90">{t('progress.placement.ctaText')}</p>
+            <p className="text-ink-600 dark:text-ink-300">
+              {t('progress.placement.ctaText')}
+            </p>
           </div>
           <Link
             to="/progress/placement"
-            className="self-start rounded-full bg-white px-4 py-2 font-semibold text-orange-700 shadow hover:bg-orange-50"
+            className="self-start rounded-lg bg-ink-900 px-4 py-2 font-medium text-ink-50 transition-all hover:-translate-x-px hover:-translate-y-px hover:shadow-[3px_3px_0_0_var(--color-seal-500)] sm:self-center dark:bg-ink-50 dark:text-ink-900"
           >
             {t('progress.placement.start')}
           </Link>
@@ -299,28 +303,26 @@ export function Dashboard() {
 
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-4 rounded-3xl bg-gradient-to-br from-sky-500 to-indigo-600 p-6 text-white shadow-xl sm:flex-row sm:items-center"
+        className="flex flex-col gap-4 rounded-xl panel-ink p-6 text-white shadow-lift sm:flex-row sm:items-center"
       >
-        <motion.div
-          className="flex h-24 w-24 shrink-0 flex-col items-center justify-center rounded-full bg-white/20 ring-4 ring-white/40"
-          initial={{ scale: 0.5, rotate: -20 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 12 }}
-        >
-          <span className="text-xs font-medium uppercase tracking-wide text-white/80">
+        <div className="flex shrink-0 flex-col items-center gap-2">
+          <Seal
+            text={String(stats.level.level)}
+            size="xl"
+            animate="stamp"
+            delay={0.3}
+          />
+          <span className="text-xs font-medium tracking-[0.2em] text-white/70 uppercase">
             {t('progress.dashboard.level')}
           </span>
-          <span className="text-4xl font-extrabold">
-            <AnimatedNumber value={stats.level.level} />
-          </span>
-        </motion.div>
+        </div>
         <div className="flex flex-1 flex-col gap-2">
-          <p className="text-3xl font-extrabold">
+          <p className="font-serif text-4xl font-bold">
             <AnimatedNumber value={stats.xp} /> XP
           </p>
-          <div className="h-3 overflow-hidden rounded-full bg-white/25">
+          <div className="h-2 overflow-hidden rounded-full bg-white/15">
             <motion.div
-              className="h-full rounded-full bg-white"
+              className="h-full rounded-full bg-seal-500"
               initial={{ width: 0 }}
               animate={{
                 width: `${(stats.level.current / stats.level.needed) * 100}%`,
@@ -340,7 +342,7 @@ export function Dashboard() {
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatTile
-          icon="🔥"
+          icon="연속"
           label={t('progress.dashboard.streak')}
           value={stats.streak.current}
           detail={
@@ -354,7 +356,7 @@ export function Dashboard() {
           }
         />
         <StatTile
-          icon="⏱️"
+          icon="시간"
           label={t('progress.dashboard.studyTime')}
           value={formatDuration(stats.studyMs, t)}
           detail={t('progress.dashboard.today', {
@@ -362,13 +364,13 @@ export function Dashboard() {
           })}
         />
         <StatTile
-          icon="🌱"
+          icon="단어"
           label={t('progress.dashboard.words')}
           value={stats.wordsLearned}
           detail={t('progress.dashboard.wordsSeen', { count: stats.wordsSeen })}
         />
         <StatTile
-          icon="✅"
+          icon="활동"
           label={t('progress.dashboard.activities')}
           value={stats.quizzes + stats.reviews}
           detail={t('progress.dashboard.activitiesDetail', {

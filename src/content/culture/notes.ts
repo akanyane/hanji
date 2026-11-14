@@ -3,6 +3,7 @@ import { example, L } from '../grammar/types'
 
 export interface CultureNote {
   id: string
+  /** Seal inscription (one, two or four Korean characters). */
   icon: string
   title: Localized
   paragraphs: Localized[]
@@ -15,7 +16,7 @@ export interface CultureNote {
 export const CULTURE_NOTES: CultureNote[] = [
   {
     id: 'formality',
-    icon: '🙇',
+    icon: '존대',
     title: L('Formal, educado e informal', 'Formal, polite and casual speech'),
     paragraphs: [
       L(
@@ -47,7 +48,7 @@ export const CULTURE_NOTES: CultureNote[] = [
   },
   {
     id: 'age-and-titles',
-    icon: '🎂',
+    icon: '나이',
     title: L('Idade e formas de tratamento', 'Age and forms of address'),
     paragraphs: [
       L(
@@ -71,7 +72,7 @@ export const CULTURE_NOTES: CultureNote[] = [
   },
   {
     id: 'everyday-expressions',
-    icon: '💬',
+    icon: '표현',
     title: L('Expressões do dia a dia', 'Everyday expressions'),
     paragraphs: [
       L(
@@ -100,7 +101,7 @@ export const CULTURE_NOTES: CultureNote[] = [
   },
   {
     id: 'slang',
-    icon: '😎',
+    icon: '은어',
     title: L('Gírias básicas', 'Basic slang'),
     paragraphs: [
       L(
@@ -122,7 +123,7 @@ export const CULTURE_NOTES: CultureNote[] = [
   },
   {
     id: 'table-manners',
-    icon: '🥢',
+    icon: '식사',
     title: L('Etiqueta à mesa', 'Table manners'),
     paragraphs: [
       L(
@@ -150,7 +151,7 @@ export const CULTURE_NOTES: CultureNote[] = [
   },
   {
     id: 'bowing',
-    icon: '🤝',
+    icon: '인사',
     title: L('Cumprimentos e as duas mãos', 'Bowing and using both hands'),
     paragraphs: [
       L(
@@ -173,7 +174,7 @@ export const CULTURE_NOTES: CultureNote[] = [
   },
   {
     id: 'shoes-off',
-    icon: '🏠',
+    icon: '신발',
     title: L('Sapatos fora de casa', 'Shoes off at home'),
     paragraphs: [
       L(
@@ -195,7 +196,7 @@ export const CULTURE_NOTES: CultureNote[] = [
   },
   {
     id: 'holidays',
-    icon: '🌕',
+    icon: '명절',
     title: L('Seollal e Chuseok', 'Seollal and Chuseok'),
     paragraphs: [
       L(

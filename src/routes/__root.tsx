@@ -6,9 +6,10 @@ import {
   Outlet,
   useLocation,
 } from '@tanstack/react-router'
-import { MotionConfig, motion } from 'motion/react'
+import { MotionConfig } from 'motion/react'
 import { lazy, Suspense, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Seal } from '../components/brand/Seal'
 import { AppHeader } from '../components/layout/AppHeader'
 import { Toaster } from '../components/layout/Toaster'
 import { PageTransition } from '../components/motion/PageTransition'
@@ -51,10 +52,10 @@ function RootLayout() {
     // reducedMotion="user": transform/layout animations are disabled when the
     // OS asks for reduced motion.
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
+      <div className="hanji min-h-screen bg-ink-50 text-ink-900 dark:bg-ink-950 dark:text-ink-50">
         <a
           href="#main-content"
-          className="sr-only rounded-md bg-sky-700 px-4 py-2 text-white focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50"
+          className="sr-only rounded-md bg-pine-700 px-4 py-2 text-white focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50"
         >
           {t('nav.skipToContent')}
         </a>
@@ -82,19 +83,12 @@ function NotFound() {
   const { t } = useTranslation()
   return (
     <div className="flex flex-col items-center gap-4 py-16 text-center">
-      <motion.p
-        lang="ko"
-        className="text-6xl font-bold"
-        initial={{ rotate: -10, scale: 0.5, opacity: 0 }}
-        animate={{ rotate: 0, scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 12 }}
-      >
-        404
-      </motion.p>
+      <Seal text="없음" size="xl" animate="stamp" />
+      <p className="font-serif text-6xl font-bold">404</p>
       <p>{t('errors.notFound')}</p>
       <Link
         to="/"
-        className="font-medium text-sky-700 underline dark:text-sky-400"
+        className="font-medium text-pine-700 underline dark:text-pine-400"
       >
         {t('errors.backHome')}
       </Link>
@@ -110,13 +104,13 @@ function RouteError({ error, reset }: ErrorComponentProps) {
       className="flex flex-col items-center gap-4 py-16 text-center"
     >
       <p className="text-xl font-semibold">{t('errors.generic')}</p>
-      <pre className="max-w-full overflow-x-auto text-sm text-slate-500">
+      <pre className="max-w-full overflow-x-auto text-sm text-ink-500">
         {error instanceof Error ? error.message : String(error)}
       </pre>
       <button
         type="button"
         onClick={reset}
-        className="font-medium text-sky-700 underline dark:text-sky-400"
+        className="font-medium text-pine-700 underline dark:text-pine-400"
       >
         {t('errors.tryAgain')}
       </button>

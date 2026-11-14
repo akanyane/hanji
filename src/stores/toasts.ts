@@ -7,6 +7,7 @@ import type { TFunction } from 'i18next'
 export interface Toast {
   /** Same id = same toast: pushing it again replaces the old one. */
   id: string
+  /** One to four Hangul/Hanja characters, shown as a red seal. */
   icon: string
   title: (t: TFunction) => string
   description?: (t: TFunction) => string

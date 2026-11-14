@@ -51,7 +51,7 @@ export function FilterBar({
         onChange={(e) => onQueryChange(e.target.value)}
         placeholder={t('hangul.searchPlaceholder')}
         aria-label={t('hangul.search')}
-        className="w-full rounded-full border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder:text-slate-500 sm:max-w-xs dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50 dark:placeholder:text-slate-400"
+        className="w-full rounded-lg border border-ink-300 bg-white px-4 py-2 text-ink-900 placeholder:text-ink-500 sm:max-w-xs dark:border-ink-700 dark:bg-ink-900 dark:text-ink-50 dark:placeholder:text-ink-400"
       />
       <CategoryChips category={category} onCategoryChange={onCategoryChange} />
     </div>

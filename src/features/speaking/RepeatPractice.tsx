@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { MicIcon } from '../../components/brand/InkMark'
 import { pop, spring } from '../../components/motion/presets'
 import { RecorderPanel } from '../../components/speech/RecorderPanel'
 import { SyllableDiff } from '../../components/speech/SyllableDiff'
@@ -72,7 +73,7 @@ export function RepeatPractice({
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('speaking.repeat.description')}
       </p>
       <SpeedControl />
@@ -84,12 +85,12 @@ export function RepeatPractice({
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
           transition={spring}
-          className="flex flex-col items-center gap-3 rounded-3xl bg-gradient-to-br from-sky-50 to-violet-50 p-6 text-center dark:from-slate-800 dark:to-slate-800/40"
+          className="flex flex-col items-center gap-3 rounded-xl panel-paper p-6 text-center dark:from-ink-800 dark:to-ink-800/40"
         >
           <p lang="ko" className="text-3xl font-bold">
             {current.ko}
           </p>
-          <p className="text-slate-600 dark:text-slate-300">
+          <p className="text-ink-600 dark:text-ink-300">
             {l(current.translation)}
           </p>
           <AudioButton
@@ -111,10 +112,8 @@ export function RepeatPractice({
             whileTap={{ scale: 0.92 }}
             aria-pressed={recognition.status === 'listening'}
             className={cn(
-              'relative flex h-20 w-20 items-center justify-center rounded-full text-3xl text-white shadow-xl',
-              recognition.status === 'listening'
-                ? 'bg-rose-500'
-                : 'bg-gradient-to-br from-rose-500 to-orange-500',
+              'relative flex h-20 w-20 items-center justify-center rounded-full text-3xl text-white shadow-lift',
+              recognition.status === 'listening' ? 'bg-rose-500' : 'panel-seal',
             )}
             aria-label={
               recognition.status === 'listening'
@@ -130,10 +129,10 @@ export function RepeatPractice({
                 transition={{ duration: 1.2, repeat: Number.POSITIVE_INFINITY }}
               />
             )}
-            🎤
+            <MicIcon className="h-8 w-8" />
           </motion.button>
           <p
-            className="text-sm text-slate-500 dark:text-slate-400"
+            className="text-sm text-ink-500 dark:text-ink-400"
             aria-live="polite"
           >
             {recognition.status === 'listening'
@@ -153,7 +152,7 @@ export function RepeatPractice({
               {t('speaking.repeat.error')}
             </p>
           )}
-          <p className="text-center text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-center text-xs text-ink-500 dark:text-ink-400">
             {t('speaking.repeat.privacy')}
           </p>
         </div>
@@ -170,7 +169,7 @@ export function RepeatPractice({
             initial="hidden"
             animate="visible"
             className={cn(
-              'flex flex-col gap-3 rounded-2xl p-4 text-center',
+              'flex flex-col gap-3 rounded-lg p-4 text-center',
               verdict === 'great'
                 ? 'bg-emerald-50 dark:bg-emerald-950/50'
                 : verdict === 'good'

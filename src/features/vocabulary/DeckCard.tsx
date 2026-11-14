@@ -7,7 +7,7 @@ import type { StudyMode } from '../../db/types'
 import { useDeckLabel } from './hooks'
 import type { DeckCounts, ResolvedDeck } from './logic'
 
-const KIND_ICON = { all: '📚', level: '🎯', custom: '⭐' } as const
+const KIND_ICON = { all: '전체', level: '급', custom: '나의' } as const
 
 export function DeckCard({
   deck,
@@ -29,14 +29,21 @@ export function DeckCard({
     <motion.div
       whileHover={cardHover}
       whileTap={cardTap}
-      className="flex h-full flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+      className="flex h-full flex-col gap-3 rounded-lg border border-ink-200 bg-white p-4 shadow-paper dark:border-ink-700 dark:bg-ink-900"
     >
       <div className="flex items-start justify-between gap-2">
         <div>
           <p className="font-semibold">
-            <span aria-hidden="true">{icon}</span> {label(deck)}
+            <span
+              aria-hidden="true"
+              lang="ko"
+              className="mr-1.5 font-serif text-sm font-normal text-seal-600 dark:text-seal-400"
+            >
+              {icon}
+            </span>
+            {label(deck)}
           </p>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-ink-500 dark:text-ink-400">
             {t('vocabulary.deck.words', { count: counts.total })}
           </p>
         </div>
@@ -44,7 +51,7 @@ export function DeckCard({
           <Link
             to="/vocabulary/decks/$deckId"
             params={{ deckId: deck.id }}
-            className="text-sm text-sky-700 hover:underline dark:text-sky-400"
+            className="text-sm text-pine-700 hover:underline dark:text-pine-400"
           >
             {t('vocabulary.deck.edit')}
           </Link>
@@ -54,7 +61,7 @@ export function DeckCard({
         <span className="rounded-full bg-rose-100 px-2 py-0.5 text-rose-800 dark:bg-rose-900/50 dark:text-rose-200">
           {t('vocabulary.deck.due', { count: counts.due })}
         </span>
-        <span className="rounded-full bg-sky-100 px-2 py-0.5 text-sky-800 dark:bg-sky-900/50 dark:text-sky-200">
+        <span className="rounded-full bg-pine-100 px-2 py-0.5 text-pine-800 dark:bg-pine-900/50 dark:text-pine-200">
           {t('vocabulary.deck.fresh', { count: counts.fresh })}
         </span>
       </div>
@@ -65,7 +72,7 @@ export function DeckCard({
           mode: mode === 'flashcards' ? undefined : mode,
         }}
         aria-label={`${t('vocabulary.deck.study')}: ${label(deck)}`}
-        className="mt-auto inline-flex items-center justify-center rounded-full bg-gradient-to-r from-sky-600 to-indigo-600 px-4 py-1.5 text-sm font-medium text-white shadow-md hover:brightness-110"
+        className="mt-auto inline-flex items-center justify-center rounded-full panel-ink px-4 py-1.5 text-sm font-medium text-white shadow-paper hover:brightness-110"
       >
         {t('vocabulary.deck.study')} →
       </Link>

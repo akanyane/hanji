@@ -24,7 +24,10 @@ export function TabNav({ items, label, layoutId, className }: TabNavProps) {
     <nav
       aria-label={label}
       className={cn(
-        'flex max-w-full gap-1 self-start overflow-x-auto rounded-full bg-slate-200 p-1 dark:bg-slate-800',
+        // overflow-y must stay hidden: with only overflow-x set, the underline
+        // would trigger a vertical scrollbar. The scrollbar itself is hidden;
+        // the tabs still scroll sideways on small screens.
+        'flex max-w-full gap-5 self-start overflow-x-auto overflow-y-hidden border-b border-ink-200 [scrollbar-width:none] dark:border-ink-800 [&::-webkit-scrollbar]:hidden',
         className,
       )}
     >
@@ -33,18 +36,19 @@ export function TabNav({ items, label, layoutId, className }: TabNavProps) {
           key={item.label}
           to={item.to}
           activeOptions={{ exact: item.exact, includeSearch: false }}
-          className="relative shrink-0 rounded-full px-4 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 data-[status=active]:text-slate-900 dark:text-slate-300 dark:hover:text-slate-50 dark:data-[status=active]:text-slate-50"
+          className="relative shrink-0 pt-1 pb-2.5 text-sm font-medium text-ink-500 transition-colors hover:text-ink-900 data-[status=active]:text-ink-900 dark:text-ink-400 dark:hover:text-ink-50 dark:data-[status=active]:text-ink-50"
         >
           {({ isActive }) => (
             <>
+              {item.label}
               {isActive && (
+                // Brush underline that glides to the active tab.
                 <motion.span
                   layoutId={layoutId}
                   transition={spring}
-                  className="absolute inset-0 rounded-full bg-white shadow dark:bg-slate-600"
+                  className="absolute inset-x-0 bottom-0 h-[3px] rounded-full bg-seal-500"
                 />
               )}
-              <span className="relative">{item.label}</span>
             </>
           )}
         </Link>

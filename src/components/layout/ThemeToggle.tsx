@@ -13,7 +13,7 @@ export function ThemeToggle() {
       onClick={settingsActions.toggleTheme}
       aria-label={dark ? t('theme.toLight') : t('theme.toDark')}
       whileTap={{ scale: 0.85 }}
-      className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full text-slate-600 transition-colors hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-slate-700"
+      className="relative h-9 w-9 shrink-0 overflow-hidden rounded-md text-ink-600 transition-colors hover:bg-ink-900/5 dark:text-ink-300 dark:hover:bg-ink-50/10"
     >
       <AnimatePresence initial={false} mode="wait">
         <motion.svg

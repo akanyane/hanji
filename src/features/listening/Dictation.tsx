@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { type FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { InkMark, SpeakerIcon } from '../../components/brand/InkMark'
 import { AnimatedNumber } from '../../components/motion/AnimatedNumber'
 import { Confetti } from '../../components/motion/Confetti'
 import { pop, shake, spring } from '../../components/motion/presets'
@@ -108,7 +109,7 @@ export function Dictation({ sentences }: { sentences?: PracticeSentence[] }) {
         {exact / items.length >= 0.75 && <Confetti />}
         <p className="text-5xl font-extrabold">
           <AnimatedNumber value={exact} />
-          <span className="text-2xl text-slate-400">/{items.length}</span>
+          <span className="text-2xl text-ink-400">/{items.length}</span>
         </p>
         <p className="font-semibold">
           {t('listening.dictation.finished', {
@@ -132,12 +133,12 @@ export function Dictation({ sentences }: { sentences?: PracticeSentence[] }) {
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('listening.dictation.description')}
       </p>
       <SpeedControl />
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-ink-500 dark:text-ink-400">
           {t('listening.dictation.progress', {
             current: index + 1,
             total: items.length,
@@ -169,9 +170,9 @@ export function Dictation({ sentences }: { sentences?: PracticeSentence[] }) {
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.92 }}
             aria-label={t('vocabulary.session.playAgain')}
-            className="flex h-24 w-24 items-center justify-center self-center rounded-full bg-gradient-to-br from-sky-500 to-indigo-600 text-4xl text-white shadow-xl"
+            className="flex h-24 w-24 items-center justify-center self-center rounded-full panel-ink text-4xl text-white shadow-lift"
           >
-            🔊
+            <SpeakerIcon className="h-8 w-8" />
           </motion.button>
           <label htmlFor="dictation-input" className="text-sm font-semibold">
             {t('listening.dictation.label')}
@@ -189,12 +190,12 @@ export function Dictation({ sentences }: { sentences?: PracticeSentence[] }) {
               spellCheck={false}
               animate={checked && !isExact ? shake : {}}
               className={cn(
-                'min-w-0 flex-1 rounded-full border-2 bg-white px-5 py-3 text-xl dark:bg-slate-800',
+                'min-w-0 flex-1 rounded-lg border-2 bg-white px-5 py-3 text-xl dark:bg-ink-900',
                 checked
                   ? isExact
                     ? 'border-emerald-500'
                     : 'border-amber-500'
-                  : 'border-slate-300 dark:border-slate-600',
+                  : 'border-ink-300 dark:border-ink-600',
               )}
             />
             {!checked && (
@@ -210,16 +211,21 @@ export function Dictation({ sentences }: { sentences?: PracticeSentence[] }) {
                 initial="hidden"
                 animate="visible"
                 className={cn(
-                  'flex flex-col gap-3 rounded-2xl p-4',
+                  'flex flex-col gap-3 rounded-lg p-4',
                   isExact
                     ? 'bg-emerald-50 dark:bg-emerald-950/50'
                     : 'bg-amber-50 dark:bg-amber-950/40',
                 )}
               >
                 <p className="font-semibold">
-                  {isExact
-                    ? `🎉 ${t('listening.dictation.correct')}`
-                    : t('listening.dictation.incorrect')}{' '}
+                  {isExact ? (
+                    <>
+                      <InkMark kind="correct" />{' '}
+                      {t('listening.dictation.correct')}
+                    </>
+                  ) : (
+                    t('listening.dictation.incorrect')
+                  )}{' '}
                   <span className="text-sm font-normal">
                     (
                     {t('listening.dictation.similarity', {
@@ -229,7 +235,7 @@ export function Dictation({ sentences }: { sentences?: PracticeSentence[] }) {
                   </span>
                 </p>
                 <SyllableDiff result={result} />
-                <p className="text-center text-sm text-slate-600 dark:text-slate-300">
+                <p className="text-center text-sm text-ink-600 dark:text-ink-300">
                   {l(current.translation)}
                 </p>
                 <Button type="submit" className="self-end">

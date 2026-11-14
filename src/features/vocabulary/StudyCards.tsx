@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'motion/react'
 import { type FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { InkMark } from '../../components/brand/InkMark'
 import { pop, shake, spring } from '../../components/motion/presets'
 import { AudioButton } from '../../components/ui/AudioButton'
 import { Button } from '../../components/ui/Button'
@@ -28,11 +29,11 @@ const GRADE_STYLE: Record<SrsGrade, string> = {
   again: 'bg-rose-500 hover:bg-rose-600',
   hard: 'bg-amber-500 hover:bg-amber-600',
   good: 'bg-emerald-500 hover:bg-emerald-600',
-  easy: 'bg-sky-500 hover:bg-sky-600',
+  easy: 'bg-pine-500 hover:bg-pine-600',
 }
 
 const cardShell =
-  'relative w-full rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/60 dark:border-slate-700 dark:bg-slate-800 dark:shadow-none'
+  'relative w-full rounded-xl border border-ink-200 bg-white p-6 shadow-lift shadow-ink-200/60 dark:border-ink-700 dark:bg-ink-900 dark:shadow-none'
 
 function BigWord({ word }: { word: VocabWord }) {
   return (
@@ -65,16 +66,20 @@ function Verdict({
       transition={spring}
       aria-live="assertive"
       className={cn(
-        'flex flex-col gap-3 rounded-2xl p-4',
+        'flex flex-col gap-3 rounded-lg p-4',
         correct
           ? 'bg-emerald-50 dark:bg-emerald-950/50'
           : 'bg-rose-50 dark:bg-rose-950/50',
       )}
     >
       <p className="font-semibold">
-        {correct
-          ? `🎉 ${t('vocabulary.session.correct')}`
-          : t('vocabulary.session.incorrect')}{' '}
+        {correct ? (
+          <>
+            <InkMark kind="correct" /> {t('vocabulary.session.correct')}
+          </>
+        ) : (
+          t('vocabulary.session.incorrect')
+        )}{' '}
         {!correct && (
           <span lang="ko" className="text-lg">
             {word.word}
@@ -140,7 +145,7 @@ export function FlashcardView({ word, onGrade }: StudyCardProps) {
             <span lang="ko" className="text-6xl font-bold">
               {word.word}
             </span>
-            <span className="text-sm text-slate-500 dark:text-slate-400">
+            <span className="text-sm text-ink-500 dark:text-ink-400">
               {t('vocabulary.session.flipHint')}
             </span>
           </button>
@@ -189,7 +194,7 @@ export function FlashcardView({ word, onGrade }: StudyCardProps) {
                 whileTap={{ scale: 0.92 }}
                 onClick={() => onGrade(grade)}
                 className={cn(
-                  'flex flex-col items-center rounded-2xl px-2 py-3 font-semibold text-white shadow-md',
+                  'flex flex-col items-center rounded-lg px-2 py-3 font-semibold text-white shadow-paper',
                   GRADE_STYLE[grade],
                 )}
               >
@@ -233,7 +238,7 @@ export function ChoiceView({ word, onGrade }: StudyCardProps) {
     <div className="flex flex-col gap-4">
       <div className={cn(cardShell, 'flex flex-col items-center gap-2')}>
         <BigWord word={word} />
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-ink-500 dark:text-ink-400">
           {t('vocabulary.session.choicePrompt')}
         </p>
       </div>
@@ -257,16 +262,16 @@ export function ChoiceView({ word, onGrade }: StudyCardProps) {
                     : {}
               }
               className={cn(
-                'flex items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left transition-colors',
+                'flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left transition-colors',
                 picked && isAnswer
                   ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/50'
                   : picked && isPicked
                     ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/50'
-                    : 'border-slate-200 bg-white hover:border-sky-400 dark:border-slate-700 dark:bg-slate-800',
+                    : 'border-ink-200 bg-white hover:border-pine-400 dark:border-ink-700 dark:bg-ink-900',
                 picked && !isAnswer && !isPicked && 'opacity-50',
               )}
             >
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs dark:bg-slate-700">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink-100 text-xs dark:bg-ink-700">
                 {i + 1}
               </span>
               {l(choice.meaning)}
@@ -331,7 +336,7 @@ export function AnswerInputView({
         ) : (
           <p className="text-3xl font-semibold">{l(word.meaning)}</p>
         )}
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-ink-500 dark:text-ink-400">
           {listening
             ? t('vocabulary.session.listenPrompt')
             : t('vocabulary.session.typePrompt')}
@@ -355,12 +360,12 @@ export function AnswerInputView({
           spellCheck={false}
           animate={result && !result.correct ? shake : {}}
           className={cn(
-            'min-w-0 flex-1 rounded-full border-2 bg-white px-5 py-3 text-xl dark:bg-slate-800',
+            'min-w-0 flex-1 rounded-lg border-2 bg-white px-5 py-3 text-xl dark:bg-ink-900',
             result
               ? result.correct
                 ? 'border-emerald-500'
                 : 'border-rose-500'
-              : 'border-slate-300 dark:border-slate-600',
+              : 'border-ink-300 dark:border-ink-600',
           )}
         />
         {!result && (

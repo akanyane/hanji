@@ -1,54 +1,63 @@
 import type { Localized } from '../../i18n/locales'
 import type { PartOfSpeech, ThemeId } from './types'
 
-export const THEMES: Record<ThemeId, { label: Localized; icon: string }> = {
+export const THEMES: Record<
+  ThemeId,
+  {
+    label: Localized /** Korean word for the theme, shown as a small label. */
+    icon: string
+  }
+> = {
   greetings: {
     label: { 'pt-BR': 'Cumprimentos', en: 'Greetings' },
-    icon: '👋',
+    icon: '인사',
   },
   people: {
     label: { 'pt-BR': 'Pessoas e família', en: 'People and family' },
-    icon: '👨‍👩‍👧',
+    icon: '사람',
   },
   food: {
     label: { 'pt-BR': 'Comida e bebida', en: 'Food and drink' },
-    icon: '🍜',
+    icon: '음식',
   },
-  places: { label: { 'pt-BR': 'Lugares', en: 'Places' }, icon: '🏙️' },
-  transport: { label: { 'pt-BR': 'Transporte', en: 'Transport' }, icon: '🚇' },
+  places: { label: { 'pt-BR': 'Lugares', en: 'Places' }, icon: '장소' },
+  transport: {
+    label: { 'pt-BR': 'Transporte', en: 'Transport' },
+    icon: '교통',
+  },
   time: {
     label: { 'pt-BR': 'Tempo e datas', en: 'Time and dates' },
-    icon: '⏰',
+    icon: '시간',
   },
   home: {
     label: { 'pt-BR': 'Casa e objetos', en: 'Home and objects' },
-    icon: '🏠',
+    icon: '집',
   },
-  school: { label: { 'pt-BR': 'Escola', en: 'School' }, icon: '🎒' },
-  work: { label: { 'pt-BR': 'Trabalho', en: 'Work' }, icon: '💼' },
+  school: { label: { 'pt-BR': 'Escola', en: 'School' }, icon: '학교' },
+  work: { label: { 'pt-BR': 'Trabalho', en: 'Work' }, icon: '일' },
   body: {
     label: { 'pt-BR': 'Corpo e saúde', en: 'Body and health' },
-    icon: '🩺',
+    icon: '몸',
   },
   nature: {
     label: { 'pt-BR': 'Natureza e clima', en: 'Nature and weather' },
-    icon: '🌸',
+    icon: '자연',
   },
   shopping: {
     label: { 'pt-BR': 'Compras e dinheiro', en: 'Shopping and money' },
-    icon: '🛍️',
+    icon: '쇼핑',
   },
   actions: {
     label: { 'pt-BR': 'Ações do dia a dia', en: 'Everyday actions' },
-    icon: '🏃',
+    icon: '동작',
   },
   descriptions: {
     label: { 'pt-BR': 'Descrições', en: 'Descriptions' },
-    icon: '🎨',
+    icon: '묘사',
   },
   questions: {
     label: { 'pt-BR': 'Perguntas e advérbios', en: 'Questions and adverbs' },
-    icon: '❓',
+    icon: '질문',
   },
 }
 

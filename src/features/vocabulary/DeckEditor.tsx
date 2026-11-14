@@ -58,11 +58,11 @@ function WordPicker({
         onChange={(e) => setQuery(e.target.value)}
         placeholder={t('vocabulary.editor.searchWords')}
         aria-label={t('vocabulary.editor.searchWords')}
-        className="rounded-full border border-slate-300 bg-white px-4 py-2 dark:border-slate-600 dark:bg-slate-800"
+        className="rounded-lg border border-ink-300 bg-white px-4 py-2 dark:border-ink-600 dark:bg-ink-900"
       />
       <div
         ref={scrollRef}
-        className="h-80 overflow-y-auto rounded-2xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800"
+        className="h-80 overflow-y-auto rounded-lg border border-ink-200 bg-white dark:border-ink-700 dark:bg-ink-900"
       >
         <ul
           className="relative w-full"
@@ -82,10 +82,10 @@ function WordPicker({
               >
                 <label
                   className={cn(
-                    'flex h-full cursor-pointer items-center gap-3 border-b border-slate-100 px-4 transition-colors dark:border-slate-700',
+                    'flex h-full cursor-pointer items-center gap-3 border-b border-ink-100 px-4 transition-colors dark:border-ink-700',
                     checked
-                      ? 'bg-sky-50 dark:bg-sky-950/40'
-                      : 'hover:bg-slate-50 dark:hover:bg-slate-700/50',
+                      ? 'bg-pine-50 dark:bg-pine-950/40'
+                      : 'hover:bg-ink-50 dark:hover:bg-ink-700/50',
                   )}
                 >
                   <input
@@ -97,7 +97,7 @@ function WordPicker({
                   <span lang="ko" className="w-28 shrink-0 font-semibold">
                     {word.word}
                   </span>
-                  <span className="truncate text-sm text-slate-600 dark:text-slate-300">
+                  <span className="truncate text-sm text-ink-600 dark:text-ink-300">
                     {l(word.meaning)}
                   </span>
                 </label>
@@ -170,7 +170,7 @@ export function DeckEditor({ deck }: { deck?: DeckRecord }) {
               placeholder={t('vocabulary.editor.namePlaceholder')}
               aria-invalid={!field.state.meta.isValid}
               aria-describedby={`${field.name}-error`}
-              className="rounded-full border border-slate-300 bg-white px-4 py-2 text-lg aria-[invalid=true]:border-rose-500 dark:border-slate-600 dark:bg-slate-800"
+              className="rounded-lg border border-ink-300 bg-white px-4 py-2 text-lg aria-[invalid=true]:border-rose-500 dark:border-ink-600 dark:bg-ink-900"
             />
             <p
               id={`${field.name}-error`}
@@ -197,7 +197,7 @@ export function DeckEditor({ deck }: { deck?: DeckRecord }) {
             <legend className="mb-1 flex w-full items-baseline justify-between text-sm font-semibold">
               {t('vocabulary.editor.words')}
               <span
-                className="font-normal text-slate-500 dark:text-slate-400"
+                className="font-normal text-ink-500 dark:text-ink-400"
                 aria-live="polite"
               >
                 {t('vocabulary.editor.selected', {

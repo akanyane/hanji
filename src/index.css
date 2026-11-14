@@ -2,29 +2,204 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * "Hanji & ink" design system.
+ *
+ * - ink:   warm neutrals, from hanji paper (50) to sumi ink (950)
+ * - pine:  primary interactive color, the blue-green (청록) of dancheong
+ * - seal:  vermilion of the red seal paste (인주): brand marks and stamps only
+ * - amber: re-tuned to ochre (황): achievements, streaks, highlights
+ * - emerald / rose: re-tuned to jade (correct) and persimmon (wrong)
+ *
+ * Components use these names only (no sky/indigo/violet gradients).
+ */
+@theme {
+  --font-sans:
+    "IBM Plex Sans", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic",
+    "Noto Sans KR", system-ui, sans-serif;
+  --font-serif:
+    "Gowun Batang", "Nanum Myeongjo", "AppleMyungjo", "Noto Serif KR", serif;
+
+  --color-white: #fffdf8;
+
+  --color-ink-50: #fbf8f1;
+  --color-ink-100: #f4eee2;
+  --color-ink-200: #e7decc;
+  --color-ink-300: #d3c6ae;
+  --color-ink-400: #a99a80;
+  --color-ink-500: #7e705c;
+  --color-ink-600: #5d5345;
+  --color-ink-700: #433b31;
+  --color-ink-800: #2c2721;
+  --color-ink-900: #1d1915;
+  --color-ink-950: #13110e;
+
+  --color-pine-50: #eef6f4;
+  --color-pine-100: #d5eae5;
+  --color-pine-200: #add5cc;
+  --color-pine-300: #7db9ad;
+  --color-pine-400: #4f9a8d;
+  --color-pine-500: #317d71;
+  --color-pine-600: #24665c;
+  --color-pine-700: #1f524b;
+  --color-pine-800: #1c433e;
+  --color-pine-900: #193834;
+  --color-pine-950: #0c201d;
+
+  --color-seal-50: #fdf3f1;
+  --color-seal-100: #fae2dd;
+  --color-seal-200: #f4c2b9;
+  --color-seal-300: #ea9689;
+  --color-seal-400: #dc6352;
+  --color-seal-500: #c9402e;
+  --color-seal-600: #b03021;
+  --color-seal-700: #8f271c;
+  --color-seal-800: #76231b;
+  --color-seal-900: #621f19;
+  --color-seal-950: #3a0f0b;
+
+  --color-amber-50: #fbf6e9;
+  --color-amber-100: #f5e9c8;
+  --color-amber-200: #ebd391;
+  --color-amber-300: #dfb95c;
+  --color-amber-400: #d3a23a;
+  --color-amber-500: #b8862a;
+  --color-amber-600: #966a21;
+  --color-amber-700: #77521e;
+  --color-amber-800: #5f421d;
+  --color-amber-900: #4f381c;
+  --color-amber-950: #2c1e0d;
+
+  --color-emerald-50: #eff6ef;
+  --color-emerald-100: #d9ebda;
+  --color-emerald-200: #b4d7b7;
+  --color-emerald-300: #86bc8c;
+  --color-emerald-400: #5c9f64;
+  --color-emerald-500: #43834b;
+  --color-emerald-600: #33683b;
+  --color-emerald-700: #2a5331;
+  --color-emerald-800: #24432a;
+  --color-emerald-900: #1f3824;
+  --color-emerald-950: #0f1f13;
+
+  --color-rose-50: #fdf1ee;
+  --color-rose-100: #fbe0d9;
+  --color-rose-200: #f6bfb1;
+  --color-rose-300: #ee927d;
+  --color-rose-400: #e36a4f;
+  --color-rose-500: #d24d30;
+  --color-rose-600: #b33c23;
+  --color-rose-700: #91311f;
+  --color-rose-800: #772b1e;
+  --color-rose-900: #63271d;
+  --color-rose-950: #36110b;
+
+  --shadow-paper:
+    0 1px 0 rgb(29 25 21 / 0.04), 0 2px 6px -2px rgb(29 25 21 / 0.12);
+  --shadow-lift:
+    0 2px 0 rgb(29 25 21 / 0.05), 0 14px 28px -12px rgb(29 25 21 / 0.28);
+
+  --animate-ink-spin: ink-spin 1.2s linear infinite;
+  @keyframes ink-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* Hanji fibers: soft noise, tiled. Kept faint so text contrast is unaffected. */
 :root {
   color-scheme: light;
+  --hanji-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .18 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 :root.dark {
   color-scheme: dark;
+  --hanji-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .95 0 0 0 0 .85 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 body {
   margin: 0;
-  /* Common Korean system fonts come before the generic fallback. */
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR",
-    sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Paper surface: the page background and textured panels. */
+@utility hanji {
+  background-image: var(--hanji-texture);
+}
+
+/* Themed panels that replace the old gradients. Each keeps the paper grain. */
+@utility panel-ink {
+  background-color: var(--color-ink-900);
+  background-image: var(--hanji-texture);
+  color: var(--color-ink-50);
+  &:where(.dark, .dark *) {
+    background-color: var(--color-ink-800);
+    box-shadow: inset 0 0 0 1px var(--color-ink-700);
+  }
+}
+@utility panel-pine {
+  background-color: var(--color-pine-700);
+  background-image: var(--hanji-texture);
+  color: var(--color-white);
+  &:where(.dark, .dark *) {
+    background-color: var(--color-pine-800);
+  }
+}
+@utility panel-seal {
+  background-color: var(--color-seal-600);
+  background-image: var(--hanji-texture);
+  color: var(--color-white);
+  &:where(.dark, .dark *) {
+    background-color: var(--color-seal-700);
+  }
+}
+@utility panel-gold {
+  background-color: var(--color-amber-300);
+  background-image: var(--hanji-texture);
+  color: var(--color-ink-900);
+  &:where(.dark, .dark *) {
+    background-color: var(--color-amber-700);
+    color: var(--color-ink-50);
+  }
+}
+/* Light "prompt" area inside a card (was a pale sky→violet gradient). */
+@utility panel-paper {
+  background-color: var(--color-ink-100);
+  background-image: var(--hanji-texture);
+  box-shadow: inset 0 0 0 1px var(--color-ink-200);
+  &:where(.dark, .dark *) {
+    background-color: var(--color-ink-900);
+    box-shadow: inset 0 0 0 1px var(--color-ink-700);
+  }
+}
+
+/* Vertical writing, used for decorative Korean titles. */
+@utility vertical {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
 /* Visible, consistent focus outline for keyboard navigation. */
 :focus-visible {
-  outline: 2px solid var(--color-sky-600);
+  outline: 2px solid var(--color-pine-500);
   outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-seal-200);
+  color: var(--color-ink-950);
 }
 
 /* !important is required here to override the transition utility classes. */

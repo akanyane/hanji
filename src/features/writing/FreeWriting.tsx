@@ -45,15 +45,13 @@ function Check({ ok, children }: { ok: boolean; children: string }) {
         animate={{ scale: 1 }}
         className={cn(
           'flex h-6 w-6 items-center justify-center rounded-full text-sm text-white',
-          ok ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-600',
+          ok ? 'bg-emerald-500' : 'bg-ink-300 dark:bg-ink-600',
         )}
         aria-hidden="true"
       >
         {ok ? '✓' : ''}
       </motion.span>
-      <span
-        className={ok ? 'font-medium' : 'text-slate-500 dark:text-slate-400'}
-      >
+      <span className={ok ? 'font-medium' : 'text-ink-500 dark:text-ink-400'}>
         {children}
       </span>
       <span className="sr-only">{ok ? '✓' : '✗'}</span>
@@ -78,7 +76,7 @@ function PromptEditor({ prompt }: { prompt: WritingPrompt }) {
       animate="visible"
       className="flex flex-col gap-4"
     >
-      <p className="rounded-2xl bg-gradient-to-br from-rose-500 to-orange-500 p-5 text-lg font-semibold text-white shadow-lg">
+      <p className="rounded-lg panel-seal p-5 text-lg font-semibold text-white shadow-paper">
         {l(prompt.task)}
       </p>
       <div className="flex flex-wrap gap-2">
@@ -89,7 +87,7 @@ function PromptEditor({ prompt }: { prompt: WritingPrompt }) {
           <code
             key={hint}
             lang="ko"
-            className="rounded-lg bg-slate-100 px-2 py-0.5 text-sm dark:bg-slate-800"
+            className="rounded-lg bg-ink-100 px-2 py-0.5 text-sm dark:bg-ink-800"
           >
             {hint}
           </code>
@@ -105,9 +103,9 @@ function PromptEditor({ prompt }: { prompt: WritingPrompt }) {
         value={text}
         onChange={(e) => setText(e.target.value)}
         spellCheck={false}
-        className="rounded-2xl border-2 border-slate-300 bg-white p-4 text-lg leading-relaxed dark:border-slate-600 dark:bg-slate-800"
+        className="rounded-lg border-2 border-ink-300 bg-white p-4 text-lg leading-relaxed dark:border-ink-600 dark:bg-ink-900"
       />
-      <p className="text-xs text-slate-500 dark:text-slate-400">
+      <p className="text-xs text-ink-500 dark:text-ink-400">
         {t('writing.produce.sentences', { count: sentences })} ·{' '}
         {t('writing.produce.saved')}
       </p>
@@ -144,7 +142,7 @@ function PromptEditor({ prompt }: { prompt: WritingPrompt }) {
             initial="hidden"
             animate="visible"
             exit={{ opacity: 0 }}
-            className="flex flex-col gap-2 rounded-2xl bg-emerald-50 p-4 dark:bg-emerald-950/40"
+            className="flex flex-col gap-2 rounded-lg bg-emerald-50 p-4 dark:bg-emerald-950/40"
           >
             <div className="flex items-start gap-2">
               <p lang="ko" className="flex-1 text-lg">
@@ -155,7 +153,7 @@ function PromptEditor({ prompt }: { prompt: WritingPrompt }) {
                 className="h-8 w-8 [&_svg]:h-4 [&_svg]:w-4"
               />
             </div>
-            <p className="text-sm text-slate-600 dark:text-slate-300">
+            <p className="text-sm text-ink-600 dark:text-ink-300">
               {l(prompt.modelTranslation)}
             </p>
           </motion.div>
@@ -174,7 +172,7 @@ export function FreeWriting() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('writing.produce.description')}
       </p>
       <fieldset className="flex flex-wrap gap-2">

@@ -13,7 +13,7 @@ export function WordFacts({ word }: { word: VocabWord }) {
     <div className="flex flex-col gap-3 text-left">
       <div>
         <p className="text-2xl font-semibold">{l(word.meaning)}</p>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-ink-500 dark:text-ink-400">
           {romanize(word.word)} · {l(PARTS_OF_SPEECH[word.pos])}
           {word.hanja && (
             <>
@@ -24,8 +24,8 @@ export function WordFacts({ word }: { word: VocabWord }) {
           )}
         </p>
       </div>
-      <div className="rounded-xl bg-slate-100 p-3 dark:bg-slate-700/60">
-        <p className="mb-1 text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+      <div className="rounded-xl bg-ink-100 p-3 dark:bg-ink-700/60">
+        <p className="mb-1 text-xs font-semibold tracking-wide text-ink-500 uppercase dark:text-ink-400">
           {t('vocabulary.session.example')}
         </p>
         <div className="flex items-start gap-2">
@@ -37,7 +37,7 @@ export function WordFacts({ word }: { word: VocabWord }) {
             className="h-8 w-8 [&_svg]:h-4 [&_svg]:w-4"
           />
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-300">
+        <p className="text-sm text-ink-600 dark:text-ink-300">
           {l(word.example.translation)}
         </p>
       </div>

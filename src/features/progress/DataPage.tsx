@@ -47,7 +47,7 @@ function Card({
   return (
     <motion.section
       variants={fadeUp}
-      className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+      className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
     >
       <h2 className="text-lg font-semibold">{title}</h2>
       {children}
@@ -117,13 +117,13 @@ export function DataPage() {
       animate="visible"
     >
       <Card title={t('progress.data.backupTitle')}>
-        <p className="text-sm text-slate-600 dark:text-slate-300">
+        <p className="text-sm text-ink-600 dark:text-ink-300">
           {t('progress.data.backupText')}
         </p>
         <div className="flex flex-wrap gap-2">
-          <Button onClick={exportData}>⬇️ {t('progress.data.export')}</Button>
+          <Button onClick={exportData}>{t('progress.data.export')}</Button>
           <Button variant="secondary" onClick={() => fileRef.current?.click()}>
-            ⬆️ {t('progress.data.import')}
+            {t('progress.data.import')}
           </Button>
           <label htmlFor={fileId} className="sr-only">
             {t('progress.data.importFile')}
@@ -201,7 +201,7 @@ export function DataPage() {
       </Card>
 
       <Card title={t('progress.data.installTitle')}>
-        <p className="text-sm text-slate-600 dark:text-slate-300">
+        <p className="text-sm text-ink-600 dark:text-ink-300">
           {t('progress.data.installText')}
         </p>
         {install.installed ? (
@@ -210,23 +210,23 @@ export function DataPage() {
           </p>
         ) : install.canInstall ? (
           <Button className="self-start" onClick={() => promptInstall()}>
-            📲 {t('progress.data.install')}
+            {t('progress.data.install')}
           </Button>
         ) : (
-          <p className="rounded-xl bg-slate-100 p-3 text-sm dark:bg-slate-900/60">
+          <p className="rounded-xl bg-ink-100 p-3 text-sm dark:bg-ink-900/60">
             {t('progress.data.installManual')}
           </p>
         )}
       </Card>
 
       <Card title={t('progress.data.storageTitle')}>
-        <p className="text-sm text-slate-600 dark:text-slate-300">
+        <p className="text-sm text-ink-600 dark:text-ink-300">
           {t('progress.data.storageText')}
         </p>
       </Card>
 
       <Card title={t('progress.data.resetTitle')}>
-        <p className="text-sm text-slate-600 dark:text-slate-300">
+        <p className="text-sm text-ink-600 dark:text-ink-300">
           {t('progress.data.resetText')}
         </p>
         <Button
@@ -234,7 +234,7 @@ export function DataPage() {
           className="self-start text-rose-700 dark:text-rose-300"
           onClick={reset}
         >
-          🗑️ {t('progress.data.reset')}
+          {t('progress.data.reset')}
         </Button>
       </Card>
     </motion.div>

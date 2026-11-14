@@ -15,10 +15,10 @@ export function Chip({ selected, onClick, children }: ChipProps) {
       onClick={onClick}
       aria-pressed={selected}
       className={cn(
-        'rounded-full px-3 py-1 text-sm font-medium transition',
+        'rounded-md border px-3 py-1 text-sm font-medium transition-colors',
         selected
-          ? 'bg-sky-700 text-white'
-          : 'bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600',
+          ? 'border-ink-900 bg-ink-900 text-ink-50 dark:border-ink-50 dark:bg-ink-50 dark:text-ink-900'
+          : 'border-ink-300 text-ink-700 hover:border-ink-900 hover:text-ink-900 dark:border-ink-600 dark:text-ink-200 dark:hover:border-ink-200 dark:hover:text-ink-50',
       )}
     >
       {children}

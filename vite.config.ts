@@ -30,8 +30,8 @@ export default defineConfig(({ mode }) => ({
         description:
           'Free platform to learn Korean, from Hangul to TOPIK. Works offline.',
         lang: 'en',
-        theme_color: '#0284c7',
-        background_color: '#0f172a',
+        theme_color: '#1d1915',
+        background_color: '#fbf8f1',
         display: 'standalone',
         start_url: '/',
         scope: '/',
@@ -50,7 +50,22 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         // Every route is code-split: precache all chunks so any page opens offline.
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+        // Fonts are split into hundreds of Korean subsets: cache the ones a
+        // learner actually uses (runtime) instead of precaching all of them.
+        globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) => request.destination === 'font',
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'fonts',
+              expiration: {
+                maxEntries: 400,
+                maxAgeSeconds: 60 * 60 * 24 * 365,
+              },
+            },
+          },
+        ],
         navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,
       },

@@ -37,7 +37,7 @@ export function DialogueList() {
   const { data: summaries = {} } = useQuizSummaries('listening:dialogue:')
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('listening.dialogues.description')}
       </p>
       <motion.ul
@@ -53,20 +53,20 @@ export function DialogueList() {
               <Link
                 to="/listening/dialogues/$dialogueId"
                 params={{ dialogueId: d.id }}
-                className="block h-full rounded-2xl"
+                className="block h-full rounded-lg"
               >
                 <motion.div
                   whileHover={cardHover}
                   whileTap={cardTap}
-                  className="flex h-full flex-col gap-1 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+                  className="flex h-full flex-col gap-1 rounded-lg border border-ink-200 bg-white p-4 shadow-paper dark:border-ink-700 dark:bg-ink-900"
                 >
-                  <span className="font-semibold">💬 {l(d.title)}</span>
-                  <span className="text-sm text-slate-500 dark:text-slate-400">
+                  <span className="font-semibold">{l(d.title)}</span>
+                  <span className="text-sm text-ink-500 dark:text-ink-400">
                     {t('vocabulary.deck.level', { level: d.level })} ·{' '}
                     {d.speakers.map((s) => l(s)).join(' & ')}
                   </span>
                   {summary && (
-                    <span className="mt-auto self-start rounded-full bg-sky-100 px-2 py-0.5 text-xs text-sky-800 dark:bg-sky-900/50 dark:text-sky-200">
+                    <span className="mt-auto self-start rounded-full bg-pine-100 px-2 py-0.5 text-xs text-pine-800 dark:bg-pine-900/50 dark:text-pine-200">
                       {t('grammar.home.bestScore', {
                         score: summary.bestScore,
                         total: d.questions.length,
@@ -143,12 +143,12 @@ export function DialoguePage({
     >
       <Link
         to={backTo}
-        className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
+        className="self-start text-sm font-medium text-pine-700 hover:underline dark:text-pine-400"
       >
         ← {t('listening.dialogues.back')}
       </Link>
       <motion.h2 variants={fadeUp} className="text-2xl font-bold">
-        💬 {l(dialogue.title)}
+        {l(dialogue.title)}
       </motion.h2>
       <motion.div
         variants={fadeUp}
@@ -204,18 +204,18 @@ export function DialoguePage({
               )}
               animate={playing === i ? { scale: 1.03 } : { scale: 1 }}
             >
-              <span className="text-xs text-slate-500 dark:text-slate-400">
+              <span className="text-xs text-ink-500 dark:text-ink-400">
                 {l(dialogue.speakers[line.speaker])}
               </span>
               <div
                 className={cn(
-                  'flex items-center gap-2 rounded-2xl px-4 py-3 shadow-sm transition-colors',
+                  'flex items-center gap-2 rounded-lg px-4 py-3 shadow-paper transition-colors',
                   right ? 'flex-row-reverse rounded-br-sm' : 'rounded-bl-sm',
                   playing === i
-                    ? 'bg-sky-500 text-white'
+                    ? 'bg-pine-500 text-white'
                     : right
-                      ? 'bg-indigo-100 dark:bg-indigo-950/60'
-                      : 'bg-white dark:bg-slate-800',
+                      ? 'bg-pine-100 dark:bg-pine-950/60'
+                      : 'border border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-900',
                 )}
               >
                 <AudioButton
@@ -236,7 +236,7 @@ export function DialoguePage({
                 </AnimatePresence>
               </div>
               {showText && showTranslation && (
-                <span className="text-sm text-slate-600 dark:text-slate-300">
+                <span className="text-sm text-ink-600 dark:text-ink-300">
                   {l(line.translation)}
                 </span>
               )}
@@ -247,7 +247,7 @@ export function DialoguePage({
 
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+        className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
       >
         <h3 className="text-lg font-semibold">
           {t('listening.dialogues.questions')}
@@ -286,9 +286,7 @@ export function DialoguePage({
             {score === questions.length && <Confetti />}
             <p className="text-4xl font-extrabold">
               <AnimatedNumber value={score} />
-              <span className="text-xl text-slate-400">
-                /{questions.length}
-              </span>
+              <span className="text-xl text-ink-400">/{questions.length}</span>
             </p>
             <p className="font-semibold">
               {t('listening.dialogues.score', {

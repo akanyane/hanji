@@ -7,6 +7,7 @@ import {
   toastActions,
   useToasts,
 } from '../../stores/toasts'
+import { Seal } from '../brand/Seal'
 import { spring } from '../motion/presets'
 
 function ToastItem({ toast }: { toast: Toast }) {
@@ -25,25 +26,22 @@ function ToastItem({ toast }: { toast: Toast }) {
   return (
     <motion.li
       layout
-      initial={{ opacity: 0, y: 40, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, x: 80, transition: { duration: 0.2 } }}
+      initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        transitionEnd: { filter: 'none' },
+      }}
+      exit={{ opacity: 0, x: 60, transition: { duration: 0.2 } }}
       transition={spring}
-      className="pointer-events-auto flex w-full items-start gap-3 rounded-2xl bg-white p-4 shadow-xl ring-1 ring-slate-200 dark:bg-slate-800 dark:ring-slate-700"
+      className="hanji pointer-events-auto flex w-full items-start gap-3 rounded-lg border border-ink-300 bg-ink-50 p-4 shadow-lift dark:border-ink-700 dark:bg-ink-900"
     >
-      <motion.span
-        aria-hidden="true"
-        className="text-2xl"
-        initial={{ rotate: -30, scale: 0.4 }}
-        animate={{ rotate: 0, scale: 1 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-      >
-        {toast.icon}
-      </motion.span>
+      <Seal text={toast.icon} size="md" animate="stamp" delay={0.15} />
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <p className="font-semibold">{toast.title(t)}</p>
+        <p className="font-serif font-bold">{toast.title(t)}</p>
         {toast.description && (
-          <p className="text-sm text-slate-600 dark:text-slate-300">
+          <p className="text-sm text-ink-600 dark:text-ink-300">
             {toast.description(t)}
           </p>
         )}
@@ -54,7 +52,7 @@ function ToastItem({ toast }: { toast: Toast }) {
               toast.action?.run()
               toastActions.dismiss(toast.id)
             }}
-            className="self-start rounded-full bg-sky-600 px-3 py-1 text-sm font-medium text-white hover:bg-sky-700"
+            className="mt-1 self-start rounded-md bg-ink-900 px-3 py-1 text-sm font-medium text-ink-50 hover:bg-ink-700 dark:bg-ink-50 dark:text-ink-900"
           >
             {toast.action.label(t)}
           </button>
@@ -64,7 +62,7 @@ function ToastItem({ toast }: { toast: Toast }) {
         type="button"
         onClick={() => toastActions.dismiss(toast.id)}
         aria-label={t('common.close')}
-        className="rounded-full px-2 text-slate-400 hover:text-slate-700 dark:hover:text-slate-100"
+        className="rounded-full px-2 text-ink-400 hover:text-ink-700 dark:hover:text-ink-100"
       >
         ×
       </button>

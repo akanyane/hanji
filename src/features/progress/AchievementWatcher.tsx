@@ -24,7 +24,7 @@ export function AchievementWatcher() {
         id: `achievement-${id}`,
         icon:
           progress.achievements.find((a) => a.achievement.id === id)
-            ?.achievement.icon ?? '🏅',
+            ?.achievement.icon ?? '상',
         title: (t) => t('progress.achievements.unlocked'),
         description: (t) =>
           t(`progress.achievements.items.${id}.title` as never),
@@ -32,7 +32,7 @@ export function AchievementWatcher() {
     if (fresh.length > MAX_TOASTS)
       toastActions.push({
         id: 'achievement-more',
-        icon: '🏅',
+        icon: '상',
         title: (t) =>
           t('progress.achievements.moreUnlocked', {
             count: fresh.length - MAX_TOASTS,

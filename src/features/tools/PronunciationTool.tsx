@@ -43,7 +43,7 @@ export function PronunciationTool({
           lang="ko"
         />
         <fieldset className="flex flex-wrap gap-2">
-          <legend className="mb-2 text-sm text-slate-500 dark:text-slate-400">
+          <legend className="mb-2 text-sm text-ink-500 dark:text-ink-400">
             {t('common.examples')}
           </legend>
           {PRONUNCIATION_EXAMPLES.map((example) => (
@@ -60,14 +60,14 @@ export function PronunciationTool({
 
       <section aria-live="polite" className="flex flex-col gap-4">
         {!hasHangul ? (
-          <p className="text-slate-500 dark:text-slate-400">
+          <p className="text-ink-500 dark:text-ink-400">
             {t('tools.pronunciation.empty')}
           </p>
         ) : (
           <>
-            <div className="flex flex-wrap items-center gap-4 rounded-2xl bg-gradient-to-br from-sky-50 to-violet-50 p-5 dark:from-slate-800 dark:to-slate-800/50">
+            <div className="flex flex-wrap items-center gap-4 rounded-lg panel-paper p-5 dark:from-ink-800 dark:to-ink-800/50">
               <div className="flex min-w-0 flex-1 flex-col gap-1">
-                <p className="text-sm text-slate-500 dark:text-slate-400">
+                <p className="text-sm text-ink-500 dark:text-ink-400">
                   {t('tools.pronunciation.result')}
                 </p>
                 <AnimatePresence mode="popLayout" initial={false}>
@@ -83,7 +83,7 @@ export function PronunciationTool({
                     [{result.pronunciation}]
                   </motion.p>
                 </AnimatePresence>
-                <p className="text-slate-600 dark:text-slate-300">
+                <p className="text-ink-600 dark:text-ink-300">
                   {romanize(text)}
                 </p>
               </div>
@@ -110,15 +110,15 @@ export function PronunciationTool({
                       <motion.li
                         key={`${step.index}:${step.before}:${step.after}`}
                         variants={fadeUp}
-                        className="flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-xl bg-white px-3 py-2 dark:bg-slate-800"
+                        className="flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-xl border border-ink-200 bg-white dark:border-ink-800 px-3 py-2 dark:bg-ink-900"
                       >
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sky-100 text-xs font-semibold text-sky-800 dark:bg-sky-900 dark:text-sky-200">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-pine-100 text-xs font-semibold text-pine-800 dark:bg-pine-900 dark:text-pine-200">
                           {i + 1}
                         </span>
                         <span lang="ko" className="text-lg">
                           {step.before} → <strong>{step.after}</strong>
                         </span>
-                        <span className="text-sm font-medium text-sky-800 dark:text-sky-300">
+                        <span className="text-sm font-medium text-pine-800 dark:text-pine-300">
                           {l(info.name)} (<span lang="ko">{info.korean}</span>)
                         </span>
                       </motion.li>
@@ -142,12 +142,12 @@ export function PronunciationTool({
                         variants={fadeUp}
                         initial="hidden"
                         animate="visible"
-                        className="rounded-xl border border-slate-200 bg-slate-100/60 p-3 dark:border-slate-700 dark:bg-slate-800/60"
+                        className="rounded-xl border border-ink-200 bg-ink-100/60 p-3 dark:border-ink-700 dark:bg-ink-800/60"
                       >
                         <dt className="font-semibold">
                           {l(info.name)} <span lang="ko">({info.korean})</span>
                         </dt>
-                        <dd className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                        <dd className="mt-1 text-sm text-ink-600 dark:text-ink-300">
                           {l(info.summary)}{' '}
                           <span lang="ko" className="whitespace-nowrap">
                             {t('tools.pronunciation.example')} {info.example[0]}{' '}
@@ -164,14 +164,14 @@ export function PronunciationTool({
         )}
       </section>
 
-      <details className="rounded-xl border border-slate-200 p-3 text-sm dark:border-slate-700">
+      <details className="rounded-xl border border-ink-200 p-3 text-sm dark:border-ink-700">
         <summary className="cursor-pointer font-medium">
           {t('tools.pronunciation.limitationsTitle')}
         </summary>
-        <p className="mt-2 text-slate-600 dark:text-slate-300">
+        <p className="mt-2 text-ink-600 dark:text-ink-300">
           {t('tools.pronunciation.limitationsIntro')}
         </p>
-        <ul className="mt-2 list-disc pl-5 text-slate-600 dark:text-slate-300">
+        <ul className="mt-2 list-disc pl-5 text-ink-600 dark:text-ink-300">
           {PRONUNCIATION_LIMITATIONS.map(({ description, example }) => (
             <li key={description.en}>
               {l(description)}: <span lang="ko">{l(example)}</span>

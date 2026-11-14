@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
+import { Seal } from '../../components/brand/Seal'
 import {
   cardHover,
   cardTap,
@@ -27,18 +28,16 @@ export function CultureList() {
           <Link
             to="/culture/$noteId"
             params={{ noteId: note.id }}
-            className="block h-full rounded-2xl"
+            className="block h-full rounded-lg"
           >
             <motion.div
               whileHover={cardHover}
               whileTap={cardTap}
-              className="flex h-full flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+              className="flex h-full flex-col gap-2 rounded-lg border border-ink-200 bg-white p-4 shadow-paper dark:border-ink-700 dark:bg-ink-900"
             >
-              <span className="text-4xl" aria-hidden="true">
-                {note.icon}
-              </span>
+              <Seal text={note.icon} size="lg" />
               <span className="font-semibold">{l(note.title)}</span>
-              <span className="line-clamp-3 text-sm text-slate-600 dark:text-slate-300">
+              <span className="line-clamp-3 text-sm text-ink-600 dark:text-ink-300">
                 {l(note.paragraphs[0])}
               </span>
             </motion.div>
@@ -68,22 +67,20 @@ export function CultureNotePage({ note }: { note: CultureNote }) {
     >
       <Link
         to="/culture"
-        className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
+        className="self-start text-sm font-medium text-pine-700 hover:underline dark:text-pine-400"
       >
         ← {t('culture.back')}
       </Link>
       <motion.header
         variants={fadeUp}
-        className="flex items-center gap-4 rounded-3xl bg-gradient-to-br from-rose-500 to-amber-500 p-6 text-white shadow-lg"
+        className="flex items-center gap-5 rounded-xl panel-ink p-6 shadow-paper"
       >
-        <span className="text-6xl" aria-hidden="true">
-          {note.icon}
-        </span>
+        <Seal text={note.icon} size="xl" animate="stamp" delay={0.2} />
         <h2 className="text-2xl font-bold sm:text-3xl">{l(note.title)}</h2>
       </motion.header>
       <motion.div
         variants={fadeUp}
-        className="flex flex-col gap-3 rounded-2xl bg-white p-5 leading-relaxed shadow-sm dark:bg-slate-800"
+        className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 leading-relaxed shadow-paper dark:bg-ink-900"
       >
         {note.paragraphs.map((p) => (
           <p key={p.en}>{l(p)}</p>
@@ -91,7 +88,7 @@ export function CultureNotePage({ note }: { note: CultureNote }) {
       </motion.div>
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+        className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
       >
         <h3 className="text-lg font-semibold">{t('culture.phrases')}</h3>
         <ul className="flex flex-col gap-3">
@@ -105,7 +102,7 @@ export function CultureNotePage({ note }: { note: CultureNote }) {
                 <p lang="ko" className="text-lg font-semibold">
                   {phrase.ko}
                 </p>
-                <p className="text-sm text-slate-600 dark:text-slate-300">
+                <p className="text-sm text-ink-600 dark:text-ink-300">
                   {l(phrase.translation)}
                 </p>
               </div>
@@ -122,9 +119,9 @@ export function CultureNotePage({ note }: { note: CultureNote }) {
                 key={lesson.id}
                 to="/grammar/$lessonId"
                 params={{ lessonId: lesson.id }}
-                className="rounded-full bg-sky-100 px-3 py-1 text-sm font-medium text-sky-800 hover:bg-sky-200 dark:bg-sky-900/50 dark:text-sky-200"
+                className="rounded-full bg-pine-100 px-3 py-1 text-sm font-medium text-pine-800 hover:bg-pine-200 dark:bg-pine-900/50 dark:text-pine-200"
               >
-                🧩 {l(lesson.title)}
+                {l(lesson.title)}
               </Link>
             ))}
             {dialogues.map((d) => (
@@ -132,9 +129,9 @@ export function CultureNotePage({ note }: { note: CultureNote }) {
                 key={d.id}
                 to="/dialogues/$dialogueId"
                 params={{ dialogueId: d.id }}
-                className="rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-800 hover:bg-indigo-200 dark:bg-indigo-900/50 dark:text-indigo-200"
+                className="rounded-full bg-pine-100 px-3 py-1 text-sm font-medium text-pine-800 hover:bg-pine-200 dark:bg-pine-900/50 dark:text-pine-200"
               >
-                💬 {l(d.title)}
+                {l(d.title)}
               </Link>
             ))}
           </div>

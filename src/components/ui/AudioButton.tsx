@@ -51,7 +51,7 @@ export function AudioButton({ text, label, className }: AudioButtonProps) {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       className={cn(
-        'relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-indigo-500 text-white shadow-md disabled:cursor-not-allowed disabled:opacity-40',
+        'relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full panel-ink text-white shadow-paper disabled:cursor-not-allowed disabled:opacity-40',
         className,
       )}
     >
@@ -59,7 +59,7 @@ export function AudioButton({ text, label, className }: AudioButtonProps) {
       {speaking && (
         <motion.span
           aria-hidden="true"
-          className="absolute inset-0 rounded-full border-2 border-sky-400"
+          className="absolute inset-0 rounded-full border-2 border-seal-400"
           initial={{ scale: 1, opacity: 0.8 }}
           animate={{ scale: 1.6, opacity: 0 }}
           transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}

@@ -98,7 +98,7 @@ export function StudySession({
         <p className="text-lg">{t('vocabulary.session.nothingToStudy')}</p>
         <Link
           to="/vocabulary/decks"
-          className="font-medium text-sky-700 hover:underline dark:text-sky-400"
+          className="font-medium text-pine-700 hover:underline dark:text-pine-400"
         >
           {t('vocabulary.session.backToDecks')}
         </Link>
@@ -127,9 +127,9 @@ export function StudySession({
           {(Object.keys(grades) as SrsGrade[]).map((g) => (
             <div
               key={g}
-              className="rounded-2xl bg-white px-4 py-3 shadow-sm dark:bg-slate-800"
+              className="rounded-lg border border-ink-200 bg-white dark:border-ink-800 px-4 py-3 shadow-paper dark:bg-ink-900"
             >
-              <dt className="text-xs text-slate-500 dark:text-slate-400">
+              <dt className="text-xs text-ink-500 dark:text-ink-400">
                 {t(`vocabulary.session.grades.${g}`)}
               </dt>
               <dd className="text-2xl font-bold">
@@ -144,7 +144,7 @@ export function StudySession({
           </Button>
           <Link
             to="/vocabulary"
-            className="inline-flex items-center rounded-full bg-gradient-to-r from-sky-600 to-indigo-600 px-5 py-2 font-medium text-white shadow-md"
+            className="inline-flex items-center rounded-full panel-ink px-5 py-2 font-medium text-white shadow-paper"
           >
             {t('vocabulary.session.done')}
           </Link>
@@ -159,7 +159,7 @@ export function StudySession({
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
       <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+        <div className="flex items-center justify-between text-sm text-ink-500 dark:text-ink-400">
           <span>{deckLabel}</span>
           <span>
             {t('vocabulary.session.remaining', { count: queue.length })}
@@ -194,7 +194,7 @@ export function StudySession({
       </AnimatePresence>
       <Link
         to="/vocabulary"
-        className="self-center text-sm text-slate-500 hover:underline dark:text-slate-400"
+        className="self-center text-sm text-ink-500 hover:underline dark:text-ink-400"
       >
         {t('vocabulary.session.exit')}
       </Link>

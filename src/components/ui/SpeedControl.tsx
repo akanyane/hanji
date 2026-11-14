@@ -13,9 +13,9 @@ export function SpeedControl() {
   const rate = useSettings((s) => s.speechRate)
   const id = useId()
   return (
-    <div className="flex items-center gap-3 rounded-full bg-white px-4 py-2 shadow-sm dark:bg-slate-800">
+    <div className="flex items-center gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 px-4 py-2 shadow-paper dark:bg-ink-900">
       <label htmlFor={id} className="text-sm font-medium">
-        🐢 {t('common.speed')}
+        {t('common.speed')}
       </label>
       <input
         id={id}
@@ -25,7 +25,7 @@ export function SpeedControl() {
         step={0.1}
         value={rate}
         onChange={(e) => settingsActions.setSpeechRate(Number(e.target.value))}
-        className="w-32 accent-sky-600"
+        className="w-32 accent-pine-600"
       />
       <output htmlFor={id} className="w-10 text-sm tabular-nums">
         {rate.toFixed(1)}×

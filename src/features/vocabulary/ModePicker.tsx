@@ -11,10 +11,10 @@ export const STUDY_MODES: StudyMode[] = [
   'listening',
 ]
 const ICON: Record<StudyMode, string> = {
-  flashcards: '🃏',
-  choice: '✅',
-  typing: '⌨️',
-  listening: '🎧',
+  flashcards: '카드',
+  choice: '선택',
+  typing: '입력',
+  listening: '듣기',
 }
 
 export function ModePicker({
@@ -38,17 +38,17 @@ export function ModePicker({
           onClick={() => onChange(m)}
           title={t(`vocabulary.modes.${m}.description`)}
           className={cn(
-            'relative flex flex-col items-center gap-1 rounded-2xl border-2 px-3 py-3 text-sm font-medium transition-colors',
+            'relative flex flex-col items-center gap-1 rounded-lg border-2 px-3 py-3 text-sm font-medium transition-colors',
             mode === m
               ? 'border-transparent text-white'
-              : 'border-slate-200 bg-white hover:border-sky-300 dark:border-slate-700 dark:bg-slate-800',
+              : 'border-ink-200 bg-white hover:border-pine-300 dark:border-ink-700 dark:bg-ink-900',
           )}
         >
           {mode === m && (
             <motion.span
               layoutId="study-mode-pill"
               transition={spring}
-              className="absolute inset-0 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600"
+              className="absolute inset-0 rounded-lg panel-ink"
             />
           )}
           <span className="relative text-2xl" aria-hidden="true">

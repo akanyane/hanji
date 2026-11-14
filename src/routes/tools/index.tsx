@@ -14,8 +14,8 @@ const CARDS: Array<
   Omit<ToolInfo, 'id'> & { id: ToolInfo['id'] | 'dictionary' | 'conjugator' }
 > = [
   ...TOOLS,
-  { id: 'dictionary', to: '/vocabulary/dictionary', icon: '📖' },
-  { id: 'conjugator', to: '/grammar/conjugator', icon: '🔁' },
+  { id: 'dictionary', to: '/vocabulary/dictionary', icon: '사전' },
+  { id: 'conjugator', to: '/grammar/conjugator', icon: '활용' },
 ]
 
 export const Route = createFileRoute('/tools/')({
@@ -39,13 +39,17 @@ function ToolsIndex() {
             to={tool.to}
             whileHover={cardHover}
             whileTap={cardTap}
-            className="flex h-full flex-col gap-2 rounded-2xl border border-slate-300 bg-white p-5 shadow-sm hover:border-sky-500 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 dark:hover:border-sky-400"
+            className="flex h-full flex-col gap-2 rounded-lg border border-ink-300 bg-white p-5 shadow-paper hover:border-ink-900 hover:shadow-lift dark:border-ink-700 dark:bg-ink-900 dark:hover:border-ink-200"
           >
-            <span className="text-3xl" aria-hidden="true">
+            <span
+              aria-hidden="true"
+              lang="ko"
+              className="font-serif text-2xl font-bold text-seal-600 dark:text-seal-400"
+            >
               {tool.icon}
             </span>
             <span className="font-semibold">{t(`tools.${tool.id}.title`)}</span>
-            <span className="text-sm text-slate-600 dark:text-slate-300">
+            <span className="text-sm text-ink-600 dark:text-ink-300">
               {t(`tools.${tool.id}.description`)}
             </span>
           </MotionLink>

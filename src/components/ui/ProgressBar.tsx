@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { softSpring } from '../motion/presets'
+import { inkEase } from '../motion/presets'
 
 interface ProgressBarProps {
   value: number
@@ -7,6 +7,7 @@ interface ProgressBarProps {
   label: string
 }
 
+/** An ink line filling a faint ruled track, with a brush-tip highlight. */
 export function ProgressBar({ value, max, label }: ProgressBarProps) {
   const safeMax = Math.max(max, 1)
   const clamped = Math.min(Math.max(value, 0), safeMax)
@@ -19,14 +20,16 @@ export function ProgressBar({ value, max, label }: ProgressBarProps) {
       aria-valuemin={0}
       aria-valuemax={safeMax}
       aria-valuenow={clamped}
-      className="h-2.5 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
+      className="relative h-2 w-full overflow-hidden rounded-full bg-ink-200/80 dark:bg-ink-800"
     >
       <motion.div
-        className="h-full rounded-full bg-gradient-to-r from-sky-500 to-violet-500"
+        className="relative h-full rounded-full bg-pine-600 dark:bg-pine-400"
         initial={false}
         animate={{ width: `${percent}%` }}
-        transition={softSpring}
-      />
+        transition={{ duration: 0.7, ease: inkEase }}
+      >
+        <span className="absolute inset-y-0 right-0 w-3 rounded-full bg-seal-500" />
+      </motion.div>
     </div>
   )
 }

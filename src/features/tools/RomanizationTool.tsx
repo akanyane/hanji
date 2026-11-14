@@ -82,7 +82,7 @@ export function RomanizationTool({
           <span>{t('tools.romanization.keepH')}</span>
         </label>
       ) : (
-        <p className="text-sm text-slate-600 dark:text-slate-300">
+        <p className="text-sm text-ink-600 dark:text-ink-300">
           {t('tools.romanization.approximate')}
         </p>
       )}
@@ -90,10 +90,10 @@ export function RomanizationTool({
       <section
         aria-live="polite"
         aria-label={t('common.result')}
-        className="flex flex-col gap-3 rounded-2xl bg-gradient-to-br from-sky-50 to-violet-50 p-5 dark:from-slate-800 dark:to-slate-800/50"
+        className="flex flex-col gap-3 rounded-lg panel-paper p-5 dark:from-ink-800 dark:to-ink-800/50"
       >
         <div className="flex items-center justify-between gap-2">
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-ink-500 dark:text-ink-400">
             {t('common.result')}
           </p>
           <div className="flex items-center gap-2">
@@ -111,7 +111,7 @@ export function RomanizationTool({
             exit={{ opacity: 0 }}
           >
             {result.output || (
-              <span className="text-base text-slate-400">
+              <span className="text-base text-ink-400">
                 {t('common.resultPlaceholder')}
               </span>
             )}

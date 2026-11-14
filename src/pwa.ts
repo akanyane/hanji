@@ -12,7 +12,7 @@ export function setupPwa() {
       // without asking.
       toastActions.push({
         id: 'pwa-update',
-        icon: '✨',
+        icon: '새',
         title: (t) => t('pwa.updateTitle'),
         description: (t) => t('pwa.updateDescription'),
         action: {
@@ -25,7 +25,7 @@ export function setupPwa() {
     onOfflineReady() {
       toastActions.push({
         id: 'pwa-offline',
-        icon: '📴',
+        icon: '저장',
         title: (t) => t('pwa.offlineTitle'),
         description: (t) => t('pwa.offlineDescription'),
       })

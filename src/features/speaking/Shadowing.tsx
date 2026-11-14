@@ -77,7 +77,7 @@ export function Shadowing({
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('speaking.shadowing.description')}
       </p>
       <SpeedControl />
@@ -94,7 +94,7 @@ export function Shadowing({
           animate={{ opacity: 1, scale: speaking ? 1.02 : 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={spring}
-          className="flex min-h-40 flex-col items-center justify-center gap-2 rounded-3xl bg-gradient-to-br from-violet-500 to-fuchsia-500 p-6 text-center text-white shadow-xl"
+          className="flex min-h-40 flex-col items-center justify-center gap-2 rounded-xl panel-seal p-6 text-center text-white shadow-lift"
         >
           <p lang={showText ? 'ko' : undefined} className="text-3xl font-bold">
             {showText ? current.ko : '♪ ♪ ♪'}
@@ -121,7 +121,7 @@ export function Shadowing({
           aria-pressed={looping}
           disabled={voice === 'unsupported'}
         >
-          🔁 {t('speaking.shadowing.loop')}
+          {t('speaking.shadowing.loop')}
         </Button>
         <Button
           variant="secondary"
@@ -136,7 +136,7 @@ export function Shadowing({
           {t('speaking.shadowing.next')} →
         </Button>
       </div>
-      <p className="text-center text-sm text-slate-500 dark:text-slate-400">
+      <p className="text-center text-sm text-ink-500 dark:text-ink-400">
         {t('speaking.shadowing.position', {
           current: index + 1,
           total: sentences.length,

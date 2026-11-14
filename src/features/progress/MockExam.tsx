@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { SpeakerIcon } from '../../components/brand/InkMark'
 import { AnimatedNumber } from '../../components/motion/AnimatedNumber'
 import { Confetti } from '../../components/motion/Confetti'
 import {
@@ -46,11 +47,11 @@ export function ExamList() {
   const { data: summaries } = useQuizSummaries('topik:')
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('progress.exam.description')}
       </p>
       <p className="rounded-xl bg-amber-50 p-3 text-sm dark:bg-amber-950/40">
-        ⚠️ {t('progress.exam.disclaimer')}
+        {t('progress.exam.disclaimer')}
       </p>
       <motion.ul
         className="grid gap-3 sm:grid-cols-2"
@@ -65,7 +66,7 @@ export function ExamList() {
               <Link
                 to="/progress/exam/$examId"
                 params={{ examId: exam.id }}
-                className="flex flex-col gap-1 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 p-5 text-white shadow-lg"
+                className="flex flex-col gap-1 rounded-lg panel-seal p-5 text-white shadow-paper"
               >
                 <span className="text-lg font-bold">{l(exam.title)}</span>
                 <span className="text-sm text-white/90">
@@ -121,12 +122,12 @@ function ListeningPlayer({ question }: { question: ExamQuestion }) {
         transition={
           playing ? { repeat: Number.POSITIVE_INFINITY, duration: 1 } : spring
         }
-        className="flex h-20 w-20 items-center justify-center rounded-full bg-sky-600 text-3xl text-white shadow-lg disabled:opacity-50"
+        className="flex h-20 w-20 items-center justify-center rounded-full bg-pine-600 text-3xl text-white shadow-paper disabled:opacity-50"
         aria-label={t('progress.exam.play')}
       >
-        {playing ? '🔊' : '▶'}
+        {playing ? <SpeakerIcon className="h-8 w-8" /> : '▶'}
       </motion.button>
-      <span className="text-sm text-slate-500 dark:text-slate-400">
+      <span className="text-sm text-ink-500 dark:text-ink-400">
         {t('progress.exam.playsLeft', { count: MAX_PLAYS - plays })}
       </span>
     </div>
@@ -155,7 +156,7 @@ function ExamResults({
         initial="hidden"
         animate="visible"
         role="status"
-        className="relative flex flex-col items-center gap-2 rounded-3xl bg-gradient-to-br from-rose-500 to-pink-600 p-8 text-center text-white shadow-xl"
+        className="relative flex flex-col items-center gap-2 rounded-xl panel-seal p-8 text-center text-white shadow-lift"
       >
         {result.level > 0 && <Confetti />}
         <p className="text-6xl font-extrabold">
@@ -182,7 +183,7 @@ function ExamResults({
         <Button onClick={onRetry}>{t('progress.exam.retry')}</Button>
         <Link
           to="/progress"
-          className="rounded-full px-4 py-2 font-medium text-sky-700 hover:underline dark:text-sky-300"
+          className="rounded-full px-4 py-2 font-medium text-pine-700 hover:underline dark:text-pine-300"
         >
           {t('progress.exam.toDashboard')}
         </Link>
@@ -202,7 +203,7 @@ function ExamResults({
               key={q.id}
               variants={fadeUp}
               className={cn(
-                'flex flex-col gap-2 rounded-2xl border-l-4 bg-white p-4 shadow-sm dark:bg-slate-800',
+                'flex flex-col gap-2 rounded-lg border-l-4 bg-white p-4 shadow-paper dark:bg-ink-900',
                 right ? 'border-emerald-500' : 'border-rose-500',
               )}
             >
@@ -220,7 +221,7 @@ function ExamResults({
                   {q.passage}
                 </p>
               )}
-              <p className="text-sm text-slate-600 italic dark:text-slate-300">
+              <p className="text-sm text-ink-600 italic dark:text-ink-300">
                 {l(q.translation)}
               </p>
               <p className="text-sm">
@@ -348,7 +349,7 @@ export function ExamRunner({
         className="mx-auto flex w-full max-w-xl flex-col gap-4"
       >
         <h2 className="text-2xl font-bold">{l(exam.title)}</h2>
-        <ul className="list-inside list-disc text-slate-600 dark:text-slate-300">
+        <ul className="list-inside list-disc text-ink-600 dark:text-ink-300">
           <li>
             {t('progress.exam.meta', {
               count: exam.questions.length,
@@ -360,7 +361,7 @@ export function ExamRunner({
           <li>{t('progress.exam.ruleLevels')}</li>
         </ul>
         <p className="rounded-xl bg-amber-50 p-3 text-sm dark:bg-amber-950/40">
-          ⚠️ {t('progress.exam.disclaimer')}
+          {t('progress.exam.disclaimer')}
         </p>
         <Button onClick={start} className="self-start">
           {t('progress.exam.start')}
@@ -387,12 +388,12 @@ export function ExamRunner({
             'rounded-full px-3 py-1 font-mono tabular-nums',
             remaining < 60_000
               ? 'bg-rose-100 text-rose-800 dark:bg-rose-900/50 dark:text-rose-200'
-              : 'bg-slate-200 dark:bg-slate-700',
+              : 'bg-ink-200 dark:bg-ink-700',
           )}
           role="timer"
           aria-label={t('progress.exam.timeLeft')}
         >
-          ⏱ {formatClock(remaining)}
+          {formatClock(remaining)}
         </span>
       </div>
       <ProgressBar
@@ -411,13 +412,13 @@ export function ExamRunner({
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
           transition={spring}
-          className="flex flex-col gap-4 rounded-3xl bg-white p-6 shadow-sm dark:bg-slate-800"
+          className="flex flex-col gap-4 rounded-xl border border-ink-200 bg-white dark:border-ink-800 p-6 shadow-paper dark:bg-ink-900"
         >
           <div>
             <p lang="ko" className="font-semibold">
               {index + 1}. {question.instruction.ko}
             </p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-ink-500 dark:text-ink-400">
               {l(question.instruction.help)}
             </p>
           </div>
@@ -430,7 +431,7 @@ export function ExamRunner({
           {question.passage && (
             <p
               lang="ko"
-              className="rounded-2xl border border-slate-200 p-4 text-lg leading-relaxed whitespace-pre-line dark:border-slate-600"
+              className="rounded-lg border border-ink-200 p-4 text-lg leading-relaxed whitespace-pre-line dark:border-ink-600"
             >
               {question.passage}
             </p>
@@ -450,10 +451,10 @@ export function ExamRunner({
                   }
                   whileTap={{ scale: 0.97 }}
                   className={cn(
-                    'flex items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left text-lg transition-colors',
+                    'flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-lg transition-colors',
                     selected
-                      ? 'border-sky-500 bg-sky-50 dark:bg-sky-950/50'
-                      : 'border-slate-200 hover:border-sky-300 dark:border-slate-700',
+                      ? 'border-pine-500 bg-pine-50 dark:bg-pine-950/50'
+                      : 'border-ink-200 hover:border-pine-300 dark:border-ink-700',
                   )}
                 >
                   <span aria-hidden="true">{CIRCLED[position]}</span>
@@ -478,10 +479,10 @@ export function ExamRunner({
             aria-label={t('progress.exam.goToQuestion', { number: i + 1 })}
             className={cn(
               'h-8 w-8 rounded-lg text-sm font-medium tabular-nums transition-colors',
-              i === index && 'ring-2 ring-sky-500',
+              i === index && 'ring-2 ring-pine-500',
               answers[q.id] !== undefined
-                ? 'bg-sky-600 text-white'
-                : 'bg-slate-200 dark:bg-slate-700',
+                ? 'bg-pine-600 text-white'
+                : 'bg-ink-200 dark:bg-ink-700',
             )}
           >
             {i + 1}

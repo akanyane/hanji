@@ -56,25 +56,25 @@ export function ReadingList() {
             <Link
               to="/reading/$textId"
               params={{ textId: text.id }}
-              className="block h-full rounded-2xl"
+              className="block h-full rounded-lg"
             >
               <motion.div
                 whileHover={cardHover}
                 whileTap={cardTap}
-                className="flex h-full flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+                className="flex h-full flex-col gap-2 rounded-lg border border-ink-200 bg-white p-4 shadow-paper dark:border-ink-700 dark:bg-ink-900"
               >
-                <span className="text-xs font-semibold tracking-wide text-sky-700 uppercase dark:text-sky-300">
+                <span className="text-xs font-semibold tracking-wide text-pine-700 uppercase dark:text-pine-300">
                   {t('vocabulary.deck.level', { level: text.level })}
                 </span>
-                <span className="font-semibold">📖 {l(text.title)}</span>
+                <span className="font-semibold">{l(text.title)}</span>
                 <span
                   lang="ko"
-                  className="line-clamp-2 text-sm text-slate-600 dark:text-slate-300"
+                  className="line-clamp-2 text-sm text-ink-600 dark:text-ink-300"
                 >
                   {plainText(text.paragraphs[0].ko)}
                 </span>
                 {summary && (
-                  <span className="mt-auto self-start rounded-full bg-sky-100 px-2 py-0.5 text-xs text-sky-800 dark:bg-sky-900/50 dark:text-sky-200">
+                  <span className="mt-auto self-start rounded-full bg-pine-100 px-2 py-0.5 text-xs text-pine-800 dark:bg-pine-900/50 dark:text-pine-200">
                     {t('grammar.home.bestScore', {
                       score: summary.bestScore,
                       total: text.questions.length,
@@ -122,14 +122,14 @@ function GlossaryCard({
       initial={{ opacity: 0, y: 12, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 12, scale: 0.95 }}
-      className="fixed inset-x-4 bottom-4 z-40 mx-auto flex max-w-md flex-col gap-3 rounded-3xl border border-slate-200 bg-white p-5 shadow-2xl dark:border-slate-700 dark:bg-slate-800"
+      className="fixed inset-x-4 bottom-4 z-40 mx-auto flex max-w-md flex-col gap-3 rounded-xl border border-ink-200 bg-white p-5 shadow-lift dark:border-ink-700 dark:bg-ink-900"
     >
       <div className="flex items-start gap-3">
         <div className="flex-1">
           <p lang="ko" className="text-3xl font-bold">
             {base}
           </p>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-ink-500 dark:text-ink-400">
             {romanize(base)}
           </p>
         </div>
@@ -139,7 +139,7 @@ function GlossaryCard({
           type="button"
           onClick={onClose}
           aria-label={t('reading.glossary.close')}
-          className="rounded-full px-2 text-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+          className="rounded-full px-2 text-xl text-ink-400 hover:text-ink-700 dark:hover:text-ink-200"
         >
           ✕
         </button>
@@ -170,7 +170,7 @@ function GlossaryCard({
           <Link
             to="/vocabulary/word/$wordId"
             params={{ wordId: vocab.id }}
-            className="text-sm text-sky-700 hover:underline dark:text-sky-400"
+            className="text-sm text-pine-700 hover:underline dark:text-pine-400"
           >
             {t('reading.glossary.openWord')} →
           </Link>
@@ -236,13 +236,13 @@ export function ReadingPage({ text }: { text: ReadingText }) {
     >
       <Link
         to="/reading"
-        className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
+        className="self-start text-sm font-medium text-pine-700 hover:underline dark:text-pine-400"
       >
         ← {t('reading.back')}
       </Link>
       <motion.h2 variants={fadeUp} className="text-2xl font-bold">
         {l(text.title)}{' '}
-        <span className="text-sm font-normal text-slate-500 dark:text-slate-400">
+        <span className="text-sm font-normal text-ink-500 dark:text-ink-400">
           · {t('vocabulary.deck.level', { level: text.level })}
         </span>
       </motion.h2>
@@ -269,7 +269,7 @@ export function ReadingPage({ text }: { text: ReadingText }) {
 
       <motion.article
         variants={fadeUp}
-        className="flex flex-col gap-4 rounded-3xl bg-white p-6 shadow-sm dark:bg-slate-800"
+        className="flex flex-col gap-4 rounded-xl border border-ink-200 bg-white dark:border-ink-800 p-6 shadow-paper dark:bg-ink-900"
       >
         {text.paragraphs.map((paragraph, i) => (
           <div
@@ -277,7 +277,7 @@ export function ReadingPage({ text }: { text: ReadingText }) {
             key={i}
             className={cn(
               'flex flex-col gap-1 rounded-xl p-2 transition-colors',
-              playing === i && 'bg-sky-50 dark:bg-sky-950/40',
+              playing === i && 'bg-pine-50 dark:bg-pine-950/40',
             )}
           >
             <p lang="ko" className="text-xl leading-loose">
@@ -290,7 +290,7 @@ export function ReadingPage({ text }: { text: ReadingText }) {
                     onClick={() =>
                       setSelected({ key: token.key, surface: token.text })
                     }
-                    className="rounded decoration-sky-400 decoration-dotted decoration-2 underline-offset-4 hover:bg-sky-100 hover:underline focus-visible:bg-sky-100 underline dark:hover:bg-sky-900"
+                    className="rounded decoration-pine-400 decoration-dotted decoration-2 underline-offset-4 hover:bg-pine-100 hover:underline focus-visible:bg-pine-100 underline dark:hover:bg-pine-900"
                   >
                     {token.text}
                   </button>
@@ -306,7 +306,7 @@ export function ReadingPage({ text }: { text: ReadingText }) {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="text-slate-600 dark:text-slate-300"
+                  className="text-ink-600 dark:text-ink-300"
                 >
                   {l(paragraph.translation)}
                 </motion.p>
@@ -318,7 +318,7 @@ export function ReadingPage({ text }: { text: ReadingText }) {
 
       <motion.section
         variants={fadeUp}
-        className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-800"
+        className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-5 shadow-paper dark:bg-ink-900"
       >
         <h3 className="text-lg font-semibold">{t('reading.questions')}</h3>
         {quiz === 'idle' && (
@@ -355,9 +355,7 @@ export function ReadingPage({ text }: { text: ReadingText }) {
             {score === questions.length && <Confetti />}
             <p className="text-4xl font-extrabold">
               <AnimatedNumber value={score} />
-              <span className="text-xl text-slate-400">
-                /{questions.length}
-              </span>
+              <span className="text-xl text-ink-400">/{questions.length}</span>
             </p>
             <p className="font-semibold">
               {t('reading.score', { score, total: questions.length })}

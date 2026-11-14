@@ -10,7 +10,7 @@ export interface ToolInfo {
 }
 
 export const TOOLS: ToolInfo[] = [
-  { id: 'pronunciation', to: '/tools/pronunciation', icon: '🗣️' },
-  { id: 'romanization', to: '/tools/romanization', icon: '🔤' },
-  { id: 'decomposer', to: '/tools/decomposer', icon: '🧩' },
+  { id: 'pronunciation', to: '/tools/pronunciation', icon: '발음' },
+  { id: 'romanization', to: '/tools/romanization', icon: '로마자' },
+  { id: 'decomposer', to: '/tools/decomposer', icon: '분해' },
 ]

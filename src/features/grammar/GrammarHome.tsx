@@ -31,7 +31,7 @@ export function GrammarHome() {
           <section key={level} className="flex flex-col gap-3">
             <h2 className="text-lg font-semibold">
               {t('vocabulary.deck.level', { level })}{' '}
-              <span className="text-sm font-normal text-slate-500 dark:text-slate-400">
+              <span className="text-sm font-normal text-ink-500 dark:text-ink-400">
                 · {t('grammar.home.lessonCount', { count: lessons.length })}
               </span>
             </h2>
@@ -51,21 +51,21 @@ export function GrammarHome() {
                     <Link
                       to="/grammar/$lessonId"
                       params={{ lessonId: lesson.id }}
-                      className="block h-full rounded-2xl"
+                      className="block h-full rounded-lg"
                     >
                       <motion.div
                         whileHover={cardHover}
                         whileTap={cardTap}
-                        className="flex h-full flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+                        className="group flex h-full flex-col gap-2 rounded-lg border border-ink-200 bg-white p-4 shadow-paper dark:border-ink-700 dark:bg-ink-900"
                       >
                         <span
                           lang="ko"
-                          className="text-2xl font-bold text-sky-700 dark:text-sky-300"
+                          className="font-serif text-2xl font-bold transition-colors group-hover:text-seal-600 dark:group-hover:text-seal-400"
                         >
                           {lesson.pattern}
                         </span>
                         <span className="font-semibold">{l(lesson.title)}</span>
-                        <span className="text-sm text-slate-600 dark:text-slate-300">
+                        <span className="text-sm text-ink-600 dark:text-ink-300">
                           {l(lesson.summary)}
                         </span>
                         <span
@@ -73,8 +73,8 @@ export function GrammarHome() {
                             perfect
                               ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200'
                               : done
-                                ? 'bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-200'
-                                : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300'
+                                ? 'bg-pine-100 text-pine-800 dark:bg-pine-900/50 dark:text-pine-200'
+                                : 'bg-ink-100 text-ink-600 dark:bg-ink-700 dark:text-ink-300'
                           }`}
                         >
                           {done

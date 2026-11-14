@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { InkMark, SpeakerIcon } from '../../components/brand/InkMark'
 import { pop, shake, spring } from '../../components/motion/presets'
 import { Button } from '../../components/ui/Button'
 import { Chip } from '../../components/ui/Chip'
@@ -71,7 +72,7 @@ export function MinimalPairs() {
 
   return (
     <div className="flex flex-col gap-5">
-      <p className="text-slate-600 dark:text-slate-300">
+      <p className="text-ink-600 dark:text-ink-300">
         {t('pronunciation.pairs.description')}
       </p>
       <fieldset className="flex flex-wrap gap-2">
@@ -93,7 +94,7 @@ export function MinimalPairs() {
         </p>
       ) : (
         <div className="mx-auto flex w-full max-w-lg flex-col items-center gap-5">
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-ink-500 dark:text-ink-400">
             {l(group.description)} · {score.right}/{score.total}
           </p>
           <motion.button
@@ -102,9 +103,9 @@ export function MinimalPairs() {
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.9 }}
             aria-label={t('pronunciation.pairs.play')}
-            className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-indigo-600 text-4xl text-white shadow-xl"
+            className="flex h-24 w-24 items-center justify-center rounded-full panel-ink text-4xl text-white shadow-lift"
           >
-            🔊
+            <SpeakerIcon className="h-8 w-8" />
           </motion.button>
           <AnimatePresence mode="wait">
             <motion.div
@@ -135,18 +136,18 @@ export function MinimalPairs() {
                           : {}
                     }
                     className={cn(
-                      'flex flex-col items-center gap-1 rounded-2xl border-2 p-4 transition-colors',
+                      'flex flex-col items-center gap-1 rounded-lg border-2 p-4 transition-colors',
                       picked !== null && isTarget
                         ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/50'
                         : picked !== null && isPicked
                           ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/50'
-                          : 'border-slate-200 bg-white hover:border-sky-400 dark:border-slate-700 dark:bg-slate-800',
+                          : 'border-ink-200 bg-white hover:border-pine-400 dark:border-ink-700 dark:bg-ink-900',
                     )}
                   >
                     <span lang="ko" className="text-3xl font-bold">
                       {w.word}
                     </span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">
+                    <span className="text-xs text-ink-500 dark:text-ink-400">
                       {l(w.meaning)}
                     </span>
                   </motion.button>
@@ -163,11 +164,16 @@ export function MinimalPairs() {
                 className="flex items-center gap-4"
               >
                 <p className="font-semibold">
-                  {picked === target
-                    ? `🎉 ${t('pronunciation.pairs.correct')}`
-                    : t('pronunciation.pairs.incorrect', {
-                        word: group.words[target].word,
-                      })}
+                  {picked === target ? (
+                    <>
+                      <InkMark kind="correct" />{' '}
+                      {t('pronunciation.pairs.correct')}
+                    </>
+                  ) : (
+                    t('pronunciation.pairs.incorrect', {
+                      word: group.words[target].word,
+                    })
+                  )}
                 </p>
                 <Button onClick={next}>
                   {t('pronunciation.pairs.next')} →
@@ -175,7 +181,7 @@ export function MinimalPairs() {
               </motion.div>
             )}
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-ink-500 dark:text-ink-400">
             {t('pronunciation.pairs.ttsNote')}
           </p>
         </div>

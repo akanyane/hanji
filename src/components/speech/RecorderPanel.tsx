@@ -10,7 +10,7 @@ export function RecorderPanel() {
 
   if (!supported)
     return (
-      <p className="text-sm text-slate-500 dark:text-slate-400">
+      <p className="text-sm text-ink-500 dark:text-ink-400">
         {t('speaking.recorder.unsupported')}
       </p>
     )
@@ -33,7 +33,7 @@ export function RecorderPanel() {
             {t('speaking.recorder.stop')}
           </>
         ) : (
-          <>🎙️ {t('speaking.recorder.record')}</>
+          <>● {t('speaking.recorder.record')}</>
         )}
       </Button>
       {url && !recording && (

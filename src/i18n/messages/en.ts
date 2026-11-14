@@ -59,6 +59,13 @@ export const en = {
   },
   home: {
     title: 'Learn Korean from scratch',
+    startHangul: 'Start with Hangul',
+    findLevel: 'Find my level',
+    groups: {
+      learn: 'Learn',
+      practice: 'Practice',
+      more: 'Culture & progress',
+    },
     description:
       'A free platform, from Hangul to TOPIK II. It runs in your browser and keeps your progress only on your device.',
     modules: {
@@ -809,6 +816,7 @@ export const en = {
       streak: 'Day streak',
       streakToday: 'Studied today ✓',
       streakPending: 'Study today to keep it going',
+      streakBest_zero: 'Best: 0 days',
       streakBest_one: 'Best: {{count}} day',
       streakBest_other: 'Best: {{count}} days',
       studyTime: 'Study time',
@@ -817,11 +825,13 @@ export const en = {
       minutes_other: '{{count}} min',
       hoursMinutes: '{{hours}} h {{minutes}}',
       words: 'Words learned',
+      wordsSeen_zero: 'No words in your reviews yet',
       wordsSeen_one: '{{count}} word in your reviews',
       wordsSeen_other: '{{count}} words in your reviews',
       activities: 'Activities',
       activitiesDetail: '{{quizzes}} exercises · {{reviews}} reviews',
       activity: 'Activity (last 12 weeks)',
+      activitySummary_zero: 'No active days in the last 12 weeks yet.',
       activitySummary_one: '{{count}} active day in the last 12 weeks.',
       activitySummary_other: '{{count}} active days in the last 12 weeks.',
       activityCell: '{{day}}: {{count}} XP',

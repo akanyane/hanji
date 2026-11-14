@@ -20,8 +20,8 @@ interface DecomposerToolProps {
 }
 
 const ROLE_COLOR = {
-  initial: 'text-sky-600 dark:text-sky-400',
-  medial: 'text-violet-600 dark:text-violet-400',
+  initial: 'text-pine-600 dark:text-pine-400',
+  medial: 'text-seal-600 dark:text-seal-400',
   final: 'text-amber-600 dark:text-amber-400',
 } as const
 
@@ -39,7 +39,7 @@ function JamoLine({
   const name = jamo ? jamoName(jamo) : undefined
   return (
     <div className="flex items-baseline justify-between gap-2">
-      <dt className="text-xs tracking-wide text-slate-500 uppercase dark:text-slate-400">
+      <dt className="text-xs tracking-wide text-ink-500 uppercase dark:text-ink-400">
         {label}
       </dt>
       <dd lang="ko" className="text-right">
@@ -49,20 +49,20 @@ function JamoLine({
               {jamo}
             </span>
             {parts.length > 1 && (
-              <span className="text-sm text-slate-500 dark:text-slate-400">
+              <span className="text-sm text-ink-500 dark:text-ink-400">
                 {' '}
                 ({parts.join(' + ')})
               </span>
             )}
             {name && (
-              <span className="block text-xs text-slate-500 dark:text-slate-400">
+              <span className="block text-xs text-ink-500 dark:text-ink-400">
                 {name}
               </span>
             )}
           </>
         ) : (
           <>
-            <span className="text-slate-400" aria-hidden="true">
+            <span className="text-ink-400" aria-hidden="true">
               —
             </span>
             <span className="sr-only">{t('common.none')}</span>
@@ -111,13 +111,13 @@ export function DecomposerTool({ text, onTextChange }: DecomposerToolProps) {
                   animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={spring}
-                  className="flex flex-col gap-2 rounded-2xl border border-slate-300 bg-white p-3 dark:border-slate-700 dark:bg-slate-800"
+                  className="flex flex-col gap-2 rounded-lg border border-ink-300 bg-white p-3 dark:border-ink-700 dark:bg-ink-900"
                 >
                   <div className="flex items-baseline justify-between">
                     <span lang="ko" className="text-4xl font-semibold">
                       {char}
                     </span>
-                    <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
+                    <span className="font-mono text-xs text-ink-500 dark:text-ink-400">
                       {code}
                     </span>
                   </div>
@@ -152,7 +152,7 @@ export function DecomposerTool({ text, onTextChange }: DecomposerToolProps) {
                       />
                     </dl>
                   ) : (
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                    <p className="text-sm text-ink-500 dark:text-ink-400">
                       {t('tools.decomposer.notHangul')}
                     </p>
                   )}
@@ -163,7 +163,7 @@ export function DecomposerTool({ text, onTextChange }: DecomposerToolProps) {
         </ul>
       )}
       {chars.length > MAX_CHARS && (
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-ink-500 dark:text-ink-400">
           {t('tools.decomposer.truncated', {
             shown: MAX_CHARS,
             total: chars.length,

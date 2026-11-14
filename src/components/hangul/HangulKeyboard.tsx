@@ -36,7 +36,7 @@ export function HangulKeyboard({
   }
 
   return (
-    <fieldset className="flex flex-col items-center gap-1.5 rounded-2xl bg-slate-200 p-2 select-none dark:bg-slate-800">
+    <fieldset className="flex flex-col items-center gap-1.5 rounded-lg bg-ink-200 p-2 select-none dark:bg-ink-800">
       <legend className="sr-only">두벌식</legend>
       {ROWS.map((row, r) => (
         <div key={row} className="flex gap-1.5" style={{ paddingLeft: r * 14 }}>
@@ -46,12 +46,12 @@ export function HangulKeyboard({
               aria-pressed={shift}
               onClick={() => setShift((s) => !s)}
               className={cn(
-                'h-11 rounded-lg px-2 text-xs font-semibold shadow-sm sm:h-12',
+                'h-11 rounded-lg px-2 text-xs font-semibold shadow-paper sm:h-12',
                 shift
-                  ? 'bg-sky-600 text-white'
+                  ? 'bg-pine-600 text-white'
                   : highlightShift
                     ? 'bg-amber-300 dark:bg-amber-600'
-                    : 'bg-white dark:bg-slate-700',
+                    : 'bg-white dark:bg-ink-700',
               )}
             >
               ⇧ {t('writing.keyboard.shift')}
@@ -78,17 +78,17 @@ export function HangulKeyboard({
                 }
                 aria-label={shown}
                 className={cn(
-                  'flex h-11 w-8 flex-col items-center justify-center rounded-lg text-lg font-semibold shadow-sm sm:h-12 sm:w-11',
+                  'flex h-11 w-8 flex-col items-center justify-center rounded-lg text-lg font-semibold shadow-paper sm:h-12 sm:w-11',
                   isNext
-                    ? 'bg-amber-300 text-slate-900 ring-2 ring-amber-500 dark:bg-amber-500'
+                    ? 'bg-amber-300 text-ink-900 ring-2 ring-amber-500 dark:bg-amber-500'
                     : VOWEL_KEYS.has(key)
-                      ? 'bg-violet-50 dark:bg-violet-950/70'
-                      : 'bg-white dark:bg-slate-700',
+                      ? 'bg-seal-50 dark:bg-seal-950/70'
+                      : 'bg-white dark:bg-ink-700',
                 )}
               >
                 {shown}
                 <span
-                  className="text-[9px] font-normal text-slate-400 uppercase"
+                  className="text-[9px] font-normal text-ink-400 uppercase"
                   aria-hidden="true"
                 >
                   {key}
@@ -100,7 +100,7 @@ export function HangulKeyboard({
             <button
               type="button"
               onClick={onBackspace}
-              className="h-11 rounded-lg bg-white px-2 text-xs font-semibold shadow-sm sm:h-12 dark:bg-slate-700"
+              className="h-11 rounded-lg bg-white px-2 text-xs font-semibold shadow-paper sm:h-12 dark:bg-ink-700"
             >
               ⌫ {t('writing.keyboard.backspace')}
             </button>
@@ -111,7 +111,7 @@ export function HangulKeyboard({
         <button
           type="button"
           onClick={onSpace}
-          className="h-10 w-1/2 rounded-lg bg-white text-xs font-semibold shadow-sm dark:bg-slate-700"
+          className="h-10 w-1/2 rounded-lg bg-white text-xs font-semibold shadow-paper dark:bg-ink-700"
         >
           {t('writing.keyboard.space')}
         </button>

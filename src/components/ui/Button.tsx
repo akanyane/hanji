@@ -4,12 +4,13 @@ import { cn } from '../../lib/cn'
 type Variant = 'primary' | 'secondary' | 'ghost'
 
 const VARIANTS: Record<Variant, string> = {
+  // Sumi-ink button; on hover a vermilion "seal" shadow slides out under it.
   primary:
-    'bg-gradient-to-r from-sky-600 to-indigo-600 text-white shadow-md shadow-sky-600/20 hover:shadow-lg hover:shadow-sky-600/30 hover:brightness-110',
+    'bg-ink-900 text-ink-50 shadow-[0_0_0_0_var(--color-seal-500)] hover:-translate-x-px hover:-translate-y-px hover:shadow-[3px_3px_0_0_var(--color-seal-500)] dark:bg-ink-50 dark:text-ink-900',
   secondary:
-    'border border-slate-300 bg-white text-slate-900 hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-700',
+    'border border-ink-900/80 bg-transparent text-ink-900 hover:bg-ink-900 hover:text-ink-50 dark:border-ink-200/70 dark:text-ink-50 dark:hover:bg-ink-50 dark:hover:text-ink-900',
   ghost:
-    'text-slate-700 hover:bg-slate-200 dark:text-slate-200 dark:hover:bg-slate-700',
+    'text-ink-700 hover:bg-ink-900/5 dark:text-ink-200 dark:hover:bg-ink-50/10',
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -27,7 +28,7 @@ export function Button({
     <button
       type={type}
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-full px-5 py-2 font-medium transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100',
+        'inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2 font-medium transition-all duration-200 active:translate-x-0 active:translate-y-0 active:shadow-none disabled:pointer-events-none disabled:opacity-40',
         VARIANTS[variant],
         className,
       )}

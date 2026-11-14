@@ -42,13 +42,13 @@ interface ConjugatorProps {
 /** A conjugated form; clicking it reads it aloud. */
 function FormCell({ value }: { value?: string }) {
   const rate = useSettings((s) => s.speechRate)
-  if (!value) return <span className="text-slate-400">—</span>
+  if (!value) return <span className="text-ink-400">—</span>
   return (
     <button
       type="button"
       lang="ko"
       onClick={() => speakKorean(value, { rate })}
-      className="rounded-lg px-1 text-left text-lg font-semibold transition-colors hover:bg-sky-50 hover:text-sky-700 dark:hover:bg-sky-950 dark:hover:text-sky-300"
+      className="rounded-lg px-1 text-left text-lg font-semibold transition-colors hover:bg-pine-50 hover:text-pine-700 dark:hover:bg-pine-950 dark:hover:text-pine-300"
     >
       {value}
     </button>
@@ -59,7 +59,7 @@ function Card({ title, children }: { title: string; children: ReactNode }) {
   return (
     <motion.section
       variants={fadeUp}
-      className="flex flex-col gap-3 rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-800"
+      className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-4 shadow-paper dark:bg-ink-900"
     >
       <h3 className="font-semibold">{title}</h3>
       {children}
@@ -93,7 +93,7 @@ export function Conjugator({
     <dl className="grid gap-2 sm:grid-cols-2">
       {ids.map((id) => (
         <div key={id} className="flex flex-col">
-          <dt className="text-xs text-slate-500 dark:text-slate-400">
+          <dt className="text-xs text-ink-500 dark:text-ink-400">
             {formLabel(id)}
           </dt>
           <dd>
@@ -114,7 +114,7 @@ export function Conjugator({
         lang="ko"
       />
       <fieldset className="flex flex-wrap items-center gap-2">
-        <legend className="mb-2 text-sm text-slate-500 dark:text-slate-400">
+        <legend className="mb-2 text-sm text-ink-500 dark:text-ink-400">
           {t('grammar.conjugator.tryThese')}
         </legend>
         {EXAMPLES.map((ex) => (
@@ -128,7 +128,7 @@ export function Conjugator({
         ))}
       </fieldset>
       <fieldset className="flex flex-wrap items-center gap-2">
-        <legend className="mb-2 text-sm text-slate-500 dark:text-slate-400">
+        <legend className="mb-2 text-sm text-ink-500 dark:text-ink-400">
           {t('grammar.conjugator.kind')}
         </legend>
         {(['auto', 'verb', 'adjective'] as const).map((k) => (
@@ -159,7 +159,7 @@ export function Conjugator({
           >
             <motion.div
               variants={pop}
-              className="flex flex-wrap items-center gap-3 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 p-5 text-white shadow-lg"
+              className="flex flex-wrap items-center gap-3 rounded-lg panel-ink p-5 text-white shadow-paper"
             >
               <span lang="ko" className="text-4xl font-bold">
                 {result.info.dictionary}
@@ -180,7 +180,13 @@ export function Conjugator({
                     key={note}
                     className="flex flex-wrap items-center gap-2 rounded-xl bg-amber-50 p-3 text-sm dark:bg-amber-950/40"
                   >
-                    <span aria-hidden="true">💡</span>
+                    <span
+                      aria-hidden="true"
+                      lang="ko"
+                      className="font-serif text-seal-600 dark:text-seal-400"
+                    >
+                      참고
+                    </span>
                     {t(`grammar.conjugator.notes.${note}`, {
                       verb:
                         note === 'specialHonorific'
@@ -205,7 +211,7 @@ export function Conjugator({
             <Card title={t('grammar.conjugator.groups.tenses')}>
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                  <thead className="text-xs text-slate-500 dark:text-slate-400">
+                  <thead className="text-xs text-ink-500 dark:text-ink-400">
                     <tr>
                       <td />
                       {FORMALITIES.map((fm) => (
@@ -223,11 +229,11 @@ export function Conjugator({
                     {TENSES.map((tense) => (
                       <tr
                         key={tense}
-                        className="border-t border-slate-100 dark:border-slate-700"
+                        className="border-t border-ink-100 dark:border-ink-700"
                       >
                         <th
                           scope="row"
-                          className="py-2 pr-4 text-sm font-medium text-slate-500 dark:text-slate-400"
+                          className="py-2 pr-4 text-sm font-medium text-ink-500 dark:text-ink-400"
                         >
                           {t(`grammar.conjugator.tense.${tense}`)}
                         </th>
@@ -239,10 +245,10 @@ export function Conjugator({
                       </tr>
                     ))}
                     {result.info.kind === 'verb' && (
-                      <tr className="border-t border-slate-100 dark:border-slate-700">
+                      <tr className="border-t border-ink-100 dark:border-ink-700">
                         <th
                           scope="row"
-                          className="py-2 pr-4 text-sm font-medium text-slate-500 dark:text-slate-400"
+                          className="py-2 pr-4 text-sm font-medium text-ink-500 dark:text-ink-400"
                         >
                           {t('grammar.conjugator.groups.progressive')}
                         </th>

@@ -58,6 +58,13 @@ export const ptBR: Messages = {
   },
   home: {
     title: 'Aprenda coreano do zero',
+    startHangul: 'Começar pelo Hangul',
+    findLevel: 'Descobrir meu nível',
+    groups: {
+      learn: 'Aprender',
+      practice: 'Praticar',
+      more: 'Cultura e progresso',
+    },
     description:
       'Uma plataforma gratuita, do Hangul ao TOPIK II. Funciona no navegador e guarda seu progresso só no seu aparelho.',
     modules: {
@@ -807,6 +814,7 @@ export const ptBR: Messages = {
       streak: 'Dias seguidos',
       streakToday: 'Estudou hoje ✓',
       streakPending: 'Estude hoje para manter a sequência',
+      streakBest_zero: 'Recorde: 0 dias',
       streakBest_one: 'Recorde: {{count}} dia',
       streakBest_other: 'Recorde: {{count}} dias',
       studyTime: 'Tempo de estudo',
@@ -815,11 +823,13 @@ export const ptBR: Messages = {
       minutes_other: '{{count}} min',
       hoursMinutes: '{{hours}} h {{minutes}}',
       words: 'Palavras aprendidas',
+      wordsSeen_zero: 'Nenhuma palavra nas suas revisões ainda',
       wordsSeen_one: '{{count}} palavra nas suas revisões',
       wordsSeen_other: '{{count}} palavras nas suas revisões',
       activities: 'Atividades',
       activitiesDetail: '{{quizzes}} exercícios · {{reviews}} revisões',
       activity: 'Atividade (últimas 12 semanas)',
+      activitySummary_zero: 'Nenhum dia ativo nas últimas 12 semanas ainda.',
       activitySummary_one: '{{count}} dia ativo nas últimas 12 semanas.',
       activitySummary_other: '{{count}} dias ativos nas últimas 12 semanas.',
       activityCell: '{{day}}: {{count}} XP',

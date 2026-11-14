@@ -29,7 +29,7 @@ function BarChart({
 }) {
   const max = Math.max(1, ...values)
   return (
-    <figure className="flex flex-col gap-3 rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-800">
+    <figure className="flex flex-col gap-3 rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-4 shadow-paper dark:bg-ink-900">
       <figcaption className="font-semibold">{title}</figcaption>
       <div className="flex h-40 items-end gap-1" aria-hidden="true">
         {values.map((v, i) => (
@@ -38,7 +38,7 @@ function BarChart({
             className="flex h-full flex-1 flex-col items-center justify-end gap-1"
           >
             {v > 0 && (
-              <span className="text-[10px] text-slate-500 dark:text-slate-400">
+              <span className="text-[10px] text-ink-500 dark:text-ink-400">
                 {v}
               </span>
             )}
@@ -58,7 +58,7 @@ function BarChart({
         ))}
       </div>
       <div
-        className="flex gap-1 text-[10px] text-slate-500 dark:text-slate-400"
+        className="flex gap-1 text-[10px] text-ink-500 dark:text-ink-400"
         aria-hidden="true"
       >
         {labels.map((label, i) => (
@@ -110,7 +110,7 @@ export function StatsPage() {
 
   if (cards.length === 0) {
     return (
-      <p className="py-12 text-center text-slate-500 dark:text-slate-400">
+      <p className="py-12 text-center text-ink-500 dark:text-ink-400">
         {t('vocabulary.stats.noData')}
       </p>
     )
@@ -138,9 +138,9 @@ export function StatsPage() {
           <motion.div
             key={tile.label}
             variants={fadeUp}
-            className="rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-800"
+            className="rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-4 shadow-paper dark:bg-ink-900"
           >
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-sm text-ink-500 dark:text-ink-400">
               {tile.label}
             </p>
             <p className="text-3xl font-bold">
@@ -150,9 +150,9 @@ export function StatsPage() {
         ))}
         <motion.div
           variants={fadeUp}
-          className="rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-800"
+          className="rounded-lg border border-ink-200 bg-white dark:border-ink-800 p-4 shadow-paper dark:bg-ink-900"
         >
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-ink-500 dark:text-ink-400">
             {t('vocabulary.stats.retention')}
           </p>
           <p className="text-3xl font-bold">
@@ -177,7 +177,7 @@ export function StatsPage() {
               ? t('vocabulary.stats.today')
               : dayLabel(i - (CHART_DAYS - 1)),
           )}
-          color="bg-gradient-to-t from-sky-500 to-indigo-400"
+          color="panel-ink"
         />
         <BarChart
           title={t('vocabulary.stats.forecastChart')}
@@ -185,7 +185,7 @@ export function StatsPage() {
           labels={future.map((_, i) =>
             i === 0 ? t('vocabulary.stats.today') : dayLabel(i),
           )}
-          color="bg-gradient-to-t from-violet-500 to-fuchsia-400"
+          color="panel-seal"
         />
       </motion.div>
     </motion.div>

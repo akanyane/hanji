@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
+import { Seal } from '../../components/brand/Seal'
 import { AnimatedNumber } from '../../components/motion/AnimatedNumber'
 import { useProgress } from './useProgress'
 
@@ -16,17 +17,20 @@ export function ProgressStrip() {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col gap-3 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 p-5 text-white shadow-lg sm:flex-row sm:items-center sm:justify-between"
+        className="flex flex-col gap-4 rounded-lg border border-dashed border-ink-300 p-5 sm:flex-row sm:items-center dark:border-ink-700"
       >
-        <div>
-          <p className="text-lg font-bold">
-            🧭 {t('progress.placement.ctaTitle')}
+        <Seal text="길" size="md" animate="stamp" delay={0.4} />
+        <div className="flex-1">
+          <p className="font-serif text-lg font-bold">
+            {t('progress.placement.ctaTitle')}
           </p>
-          <p className="text-white/90">{t('progress.placement.ctaText')}</p>
+          <p className="text-ink-600 dark:text-ink-300">
+            {t('progress.placement.ctaText')}
+          </p>
         </div>
         <Link
           to="/progress/placement"
-          className="self-start rounded-full bg-white px-4 py-2 font-semibold text-orange-700 shadow hover:bg-orange-50 sm:self-center"
+          className="self-start rounded-lg bg-ink-900 px-4 py-2 font-medium text-ink-50 transition-all hover:-translate-x-px hover:-translate-y-px hover:shadow-[3px_3px_0_0_var(--color-seal-500)] sm:self-center dark:bg-ink-50 dark:text-ink-900"
         >
           {t('progress.placement.start')}
         </Link>
@@ -37,19 +41,29 @@ export function ProgressStrip() {
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
       <Link
         to="/progress"
-        className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200 transition-shadow hover:shadow-md dark:bg-slate-800 dark:ring-slate-700"
+        className="group flex flex-wrap items-center gap-x-8 gap-y-3 rounded-lg border border-ink-200 bg-white p-4 shadow-paper transition-shadow hover:shadow-lift dark:border-ink-800 dark:bg-ink-900"
       >
-        <span className="font-semibold">
-          {t('progress.dashboard.level')}{' '}
-          <AnimatedNumber value={stats.level.level} />
+        <span className="flex items-center gap-3">
+          <Seal text={String(stats.level.level)} size="sm" />
+          <span className="text-sm text-ink-500 dark:text-ink-400">
+            {t('progress.dashboard.level')}
+          </span>
         </span>
-        <span className="tabular-nums">
-          ⭐ <AnimatedNumber value={stats.xp} /> XP
+        <span className="flex items-baseline gap-1.5">
+          <span className="font-serif text-2xl font-bold tabular-nums">
+            <AnimatedNumber value={stats.xp} />
+          </span>
+          <span className="text-sm text-ink-500 dark:text-ink-400">XP</span>
         </span>
-        <span>
-          🔥 {stats.streak.current} · {t('progress.dashboard.streak')}
+        <span className="flex items-baseline gap-1.5">
+          <span className="font-serif text-2xl font-bold tabular-nums text-seal-600 dark:text-seal-400">
+            {stats.streak.current}
+          </span>
+          <span className="text-sm text-ink-500 dark:text-ink-400">
+            {t('progress.dashboard.streak')}
+          </span>
         </span>
-        <span className="ml-auto text-sm font-medium text-sky-700 dark:text-sky-300">
+        <span className="ml-auto text-sm font-medium text-ink-700 transition-transform group-hover:translate-x-1 dark:text-ink-200">
           {t('nav.progress')} →
         </span>
       </Link>
