@@ -22,3 +22,6 @@ dist-ssr
 *.sw?
 .vercel
 .env*
+
+# Content review exports (bun run export:review)
+review/

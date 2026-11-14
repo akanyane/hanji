@@ -10,16 +10,16 @@ Modules:
 
 - **Hangul**: every consonant and vowel with audio, pronunciation tips and the origin of its shape; animated stroke order; handwriting practice with feedback; syllable builder; quizzes (recognize letters, listen and choose, read real words).
 - **Vocabulary**: 243 words by approximate TOPIK level and topic, with examples, Hanja and audio; spaced repetition with [FSRS](https://github.com/open-spaced-repetition/ts-fsrs); four study modes (flashcards, multiple choice, typing, listen and write); custom decks; searchable dictionary; statistics and review forecast.
-- **Grammar**: 22 lessons from 이다 and particles to connectives and reported speech, each with explanation, formation table, examples with audio, common mistakes written for speakers of each language, and exercises; a conjugator for any verb or adjective (tenses, formality levels, honorifics, negation, connectives and all irregular classes); endless particle practice.
+- **Grammar**: 34 lessons from 이다 and particles up to TOPIK 3 (connectives, -는데, ability, obligation, permission, intention, experience, reported speech, passive and causative), each with explanation, formation table, examples with audio, common mistakes written for speakers of each language, and exercises; a conjugator for any verb or adjective (tenses, formality levels, honorifics, negation, connectives, TOPIK 2 expressions and all irregular classes); endless particle practice.
 - **Pronunciation**: lessons for all 11 sound-change rules with engine-verified examples, step-by-step transformations and quizzes whose wrong answers are the intermediate stages; minimal-pair ear training.
 - **Listening**: dictation with a jamo-level diff, and dialogues read with a different voice pitch per speaker, with optional transcript, translation and comprehension questions; adjustable speech speed.
 - **Speaking**: repeat-after-me with speech recognition and jamo-level scoring (with a recording fallback where recognition isn't available, e.g. Firefox), shadowing with loop and hidden text, and local voice recording.
-- **Reading**: graded texts with a clickable glossary (any vocabulary word can be added to spaced repetition), read-aloud and comprehension questions.
-- **Dialogues**: 10 everyday situations with a voice per character, translation, culture notes and a "complete the dialogue" exercise.
+- **Reading**: 10 graded texts (TOPIK 1–3) with a clickable glossary (any vocabulary word can be added to spaced repetition), read-aloud and comprehension questions.
+- **Dialogues**: 14 everyday situations with a voice per character, translation, culture notes and a "complete the dialogue" exercise.
 - **Numbers**: Sino-Korean and native systems, counters, time, dates, money and age, with a live converter and endless practice.
 - **Writing**: a 2-set (두벌식) keyboard trainer (physical or on-screen), tolerant translation practice and guided free writing.
 - **Culture**: notes on formality, forms of address, etiquette, expressions, slang and holidays, linked from related lessons and dialogues.
-- **Progress**: XP, levels, day streak, study time, an activity heatmap, accuracy per skill and 22 achievements; a placement test that suggests where to start; an original TOPIK I-style mock exam (timed listening and reading, audio played at most twice, level estimate with the official ratios); export/import of all progress as a JSON backup.
+- **Progress**: XP, levels, day streak, study time, an activity heatmap, accuracy per skill and 22 achievements; a placement test that suggests where to start; three original mock exams, two in the TOPIK I format and one in the TOPIK II format (timed listening and reading, audio played at most twice, level estimate with the official cut-offs); export/import of all progress as a JSON backup.
 - **Tools**: "how is it pronounced?" (applies the standard sound-change rules and explains each step), Hangul ↔ Revised Romanization converter, and syllable decomposer.
 
 It is an installable PWA that works offline after the first visit (every page is precached): open [hanji.akanyane.dev](https://hanji.akanyane.dev) and use your browser's "Install" option, or "Add to Home Screen" on iPhone/iPad. Speech synthesis uses the voices installed on the device; speech recognition, where supported (Chrome), may need a connection.
@@ -35,17 +35,18 @@ bun run dev
 
 ## Scripts
 
-| Command                       | Description                                     |
-| ----------------------------- | ----------------------------------------------- |
-| `bun run dev`                 | Start the Vite dev server                       |
-| `bun run build`               | Type-check and build for production             |
-| `bun run preview`             | Preview the production build                    |
-| `bun run test`                | Run the test suite once (Vitest)                |
-| `bun run test:watch`          | Run tests in watch mode                         |
-| `bun run typecheck`           | Type-check only                                 |
-| `bun run lint`                | Check formatting and lint rules                 |
-| `bun run lint:fix`            | Apply safe lint/format fixes                    |
-| `bun run generate-pwa-assets` | Regenerate the app icons from `public/logo.svg` |
+| Command                       | Description                                                                          |
+| ----------------------------- | ------------------------------------------------------------------------------------ |
+| `bun run dev`                 | Start the Vite dev server                                                            |
+| `bun run build`               | Type-check and build for production                                                  |
+| `bun run preview`             | Preview the production build                                                         |
+| `bun run test`                | Run the test suite once (Vitest)                                                     |
+| `bun run test:watch`          | Run tests in watch mode                                                              |
+| `bun run typecheck`           | Type-check only                                                                      |
+| `bun run lint`                | Check formatting and lint rules                                                      |
+| `bun run lint:fix`            | Apply safe lint/format fixes                                                         |
+| `bun run export:review`       | Export all Korean content to `review/korean-content.csv` for a native-speaker review |
+| `bun run generate-pwa-assets` | Regenerate the app icons from `public/logo.svg`                                      |
 
 > Use `bun run test`, not `bun test`: the latter starts Bun's own test runner, while this project uses Vitest.
 
@@ -82,6 +83,10 @@ src/
 - Every database record has an `id` (UUID), `updatedAt` and `deletedAt`, so a backend sync can be added later without depending on one now.
 - Mark uncertain Korean content with `needsReview: true` instead of guessing.
 - Animations use [Motion](https://motion.dev/) and respect the OS "reduce motion" setting.
+
+## Content review
+
+The Korean content is checked by tests where possible (every grammar exercise is verified by the conjugation engine, pronunciation examples by the rules engine), but wording and naturalness need a native speaker. `bun run export:review` writes every word, example, lesson exercise, text, dialogue line and exam question to one spreadsheet, with empty "ok?" and "reviewer_notes" columns to fill in.
 
 ## Adding a language
 

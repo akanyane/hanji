@@ -62,6 +62,15 @@ describe('TOPIK mock content', () => {
     expect(estimateTopikLevel(140, 200)).toBe(2)
   })
 
+  it('uses the TOPIK II cut-offs (120/150/190/230 of 300)', () => {
+    expect(estimateTopikLevel(119, 300, 'topik2')).toBe(0)
+    expect(estimateTopikLevel(120, 300, 'topik2')).toBe(3)
+    expect(estimateTopikLevel(150, 300, 'topik2')).toBe(4)
+    expect(estimateTopikLevel(190, 300, 'topik2')).toBe(5)
+    expect(estimateTopikLevel(230, 300, 'topik2')).toBe(6)
+    expect(estimateTopikLevel(55, 100, 'topik2')).toBe(4)
+  })
+
   it('scores answers by points and section', () => {
     const exam = MOCK_EXAMS[0]
     const allRight = Object.fromEntries(exam.questions.map((q) => [q.id, 0]))

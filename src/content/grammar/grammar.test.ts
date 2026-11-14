@@ -3,7 +3,8 @@ import { LOCALES } from '../../i18n/locales'
 import { conjugate } from '../../lib/conjugation/conjugate'
 import { hasFinalConsonant } from '../../lib/hangul'
 import { particleFor } from '../../lib/particles/particles'
-import { type ExerciseCheck, GRAMMAR_LESSONS } from './index'
+import { type ExerciseCheck, GRAMMAR_LESSONS, getLesson } from './index'
+import { LEXICAL_VOICE } from './lessons/intermediate'
 
 /** What the engines say the right answer is. */
 function expectedAnswer(check: ExerciseCheck): string | undefined {
@@ -91,6 +92,28 @@ describe('grammar curriculum', () => {
               `${lesson.id}: ${verb} ${form}`,
             ).toBeTruthy()
         }
+      }
+    }
+  })
+
+  it('ties passive and causative exercises to the lexical voice table', () => {
+    const voices = new Set(
+      Object.values(LEXICAL_VOICE).flatMap((v) =>
+        [v.passive, v.causative].filter(Boolean),
+      ),
+    )
+    for (const id of ['passive-voice', 'causative-voice']) {
+      const lesson = getLesson(id)
+      expect(lesson, id).toBeDefined()
+      for (const ex of lesson?.exercises ?? []) {
+        expect(ex.check?.kind, ex.prompt).toBe('form')
+        if (ex.check?.kind !== 'form') continue
+        expect(voices.has(ex.check.verb), ex.check.verb).toBe(true)
+        // The base verb named in the hint maps to the checked verb.
+        const base = /\(([가-힣]+다) →/.exec(ex.prompt)?.[1] ?? ''
+        const entry = LEXICAL_VOICE[base]
+        const kind = id === 'passive-voice' ? 'passive' : 'causative'
+        expect(entry?.[kind], `${base} ${kind}`).toBe(ex.check.verb)
       }
     }
   })

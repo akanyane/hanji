@@ -16,6 +16,7 @@ import { Button } from '../../components/ui/Button'
 import { ProgressBar } from '../../components/ui/ProgressBar'
 import {
   type ExamQuestion,
+  LOWEST_LEVEL,
   MOCK_EXAMS,
   type MockExam,
 } from '../../content/topik/mock'
@@ -66,9 +67,19 @@ export function ExamList() {
               <Link
                 to="/progress/exam/$examId"
                 params={{ examId: exam.id }}
-                className="flex flex-col gap-1 rounded-lg panel-seal p-5 text-white shadow-paper"
+                className={cn(
+                  'flex flex-col gap-1 rounded-lg p-5 shadow-paper',
+                  exam.kind === 'topik1' ? 'panel-seal' : 'panel-ink',
+                )}
               >
-                <span className="text-lg font-bold">{l(exam.title)}</span>
+                <span className="text-xs font-medium tracking-wide uppercase opacity-80">
+                  {exam.kind === 'topik1'
+                    ? t('progress.exam.kindTopik1')
+                    : t('progress.exam.kindTopik2')}
+                </span>
+                <span className="font-serif text-lg font-bold">
+                  {l(exam.title)}
+                </span>
                 <span className="text-sm text-white/90">
                   {t('progress.exam.meta', {
                     count: exam.questions.length,
@@ -167,7 +178,11 @@ function ExamResults({
           </span>
         </p>
         <p className="text-xl font-bold">
-          {t(`progress.exam.levels.${result.level}` as never)}
+          {result.level > 0
+            ? t('progress.exam.levelEstimate', { level: result.level })
+            : t('progress.exam.belowEstimate', {
+                level: LOWEST_LEVEL[exam.kind],
+              })}
         </p>
         <p className="text-sm text-white/90">
           {t('progress.exam.sections', {
@@ -358,7 +373,11 @@ export function ExamRunner({
           </li>
           <li>{t('progress.exam.ruleListening', { count: MAX_PLAYS })}</li>
           <li>{t('progress.exam.ruleNavigate')}</li>
-          <li>{t('progress.exam.ruleLevels')}</li>
+          <li>
+            {exam.kind === 'topik1'
+              ? t('progress.exam.ruleLevels')
+              : t('progress.exam.ruleLevels2')}
+          </li>
         </ul>
         <p className="rounded-xl bg-amber-50 p-3 text-sm dark:bg-amber-950/40">
           {t('progress.exam.disclaimer')}

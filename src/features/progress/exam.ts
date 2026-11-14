@@ -15,7 +15,8 @@ export type ExamAnswers = Record<string, number>
 export interface ExamResult {
   score: number
   max: number
-  level: 0 | 1 | 2
+  /** Estimated TOPIK level; 0 = below the exam's lowest level. */
+  level: number
   sections: Record<ExamSection, { correct: number; total: number }>
 }
 
@@ -34,7 +35,12 @@ export function scoreExam(exam: MockExam, answers: ExamAnswers): ExamResult {
       sections[q.section].correct++
     }
   }
-  return { score, max, level: estimateTopikLevel(score, max), sections }
+  return {
+    score,
+    max,
+    level: estimateTopikLevel(score, max, exam.kind),
+    sections,
+  }
 }
 
 export function formatClock(ms: number): string {
