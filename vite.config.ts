@@ -16,5 +16,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
+    // Integration tests drive whole study sessions through the real UI.
+    testTimeout: 20_000,
   },
 })

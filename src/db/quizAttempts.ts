@@ -55,3 +55,28 @@ export async function getQuizSummary(quizId: string): Promise<QuizSummary> {
     { bestScore: 0, attempts: 0, lastPlayed: null },
   )
 }
+
+/** Summaries of every quiz whose id starts with `prefix` (e.g. all grammar lessons). */
+export async function getQuizSummaries(
+  prefix: string,
+): Promise<Record<string, QuizSummary>> {
+  const attempts = await db.quizAttempts
+    .where('quizId')
+    .startsWith(prefix)
+    .filter((a) => a.deletedAt === null)
+    .toArray()
+  const result: Record<string, QuizSummary> = {}
+  for (const a of attempts) {
+    const s = result[a.quizId] ?? {
+      bestScore: 0,
+      attempts: 0,
+      lastPlayed: null,
+    }
+    result[a.quizId] = {
+      bestScore: Math.max(s.bestScore, a.score),
+      attempts: s.attempts + (a.countsAs ?? 1),
+      lastPlayed: Math.max(s.lastPlayed ?? 0, a.completedAt),
+    }
+  }
+  return result
+}

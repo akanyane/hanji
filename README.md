@@ -8,6 +8,7 @@ The interface **and** the learning content are multilingual: English and Brazili
 >
 > - **Hangul**: every consonant and vowel with audio, pronunciation tips and the origin of its shape; animated stroke order; handwriting practice with feedback; syllable builder; quizzes (recognize letters, listen and choose, read real words).
 > - **Vocabulary**: 243 words by approximate TOPIK level and topic, with examples, Hanja and audio; spaced repetition with [FSRS](https://github.com/open-spaced-repetition/ts-fsrs); four study modes (flashcards, multiple choice, typing, listen and write); custom decks; searchable dictionary; statistics and review forecast.
+> - **Grammar**: 22 lessons from 이다 and particles to connectives and reported speech, each with explanation, formation table, examples with audio, common mistakes written for speakers of each language, and exercises; a conjugator for any verb or adjective (tenses, formality levels, honorifics, negation, connectives and all irregular classes); endless particle practice.
 > - **Tools**: "how is it pronounced?" (applies the standard sound-change rules and explains each step), Hangul ↔ Revised Romanization converter, and syllable decomposer.
 >
 > The remaining modules show up on the home page as "Em breve" (coming soon).
@@ -48,6 +49,8 @@ src/
                  romanization/   Revised Romanization, both directions
                  ime/            2-set (두벌식) keyboard composition automaton
                  similarity/     Jamo-level text comparison (for speaking practice)
+                 conjugation/    Verb/adjective conjugation engine (all irregular classes)
+                 particles/      Particle forms chosen by the final consonant
                  srs/            Spaced repetition on top of ts-fsrs (FSRS)
                  handwriting/    Handwriting similarity check
                  quiz/           Generic multiple-choice generator

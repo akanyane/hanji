@@ -14,6 +14,7 @@ import {
   updateDeck,
 } from './decks'
 import {
+  getQuizSummaries,
   getQuizSummary,
   type NewQuizAttempt,
   recordQuizAttempt,
@@ -29,8 +30,11 @@ import {
 // Keys are centralized here so cache invalidation stays consistent.
 
 export const queryKeys = {
+  quizAttempts: ['quiz-attempts'] as const,
   quizSummary: (quizId: string) =>
     ['quiz-attempts', 'summary', quizId] as const,
+  quizSummaries: (prefix: string) =>
+    ['quiz-attempts', 'summaries', prefix] as const,
   srsCards: ['srs', 'cards'] as const,
   reviewLogs: (days: number) => ['srs', 'logs', days] as const,
   srs: ['srs'] as const,
@@ -54,11 +58,20 @@ export function useRecordQuizAttempt() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (input: NewQuizAttempt) => recordQuizAttempt(input),
-    onSuccess: (_attempt, input) =>
-      queryClient.invalidateQueries({
-        queryKey: queryKeys.quizSummary(input.quizId),
-      }),
+    // Invalidates single and grouped summaries alike.
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.quizAttempts }),
   })
+}
+
+export const quizSummariesQuery = (prefix: string) =>
+  queryOptions({
+    queryKey: queryKeys.quizSummaries(prefix),
+    queryFn: () => getQuizSummaries(prefix),
+  })
+
+export function useQuizSummaries(prefix: string) {
+  return useQuery(quizSummariesQuery(prefix))
 }
 
 // --- Spaced repetition -----------------------------------------------------

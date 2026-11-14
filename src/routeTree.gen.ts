@@ -10,9 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GrammarRouteRouteImport } from './routes/grammar/route'
 import { Route as HangulRouteRouteImport } from './routes/hangul/route'
 import { Route as ToolsRouteRouteImport } from './routes/tools/route'
 import { Route as VocabularyRouteRouteImport } from './routes/vocabulary/route'
+import { Route as GrammarIndexRouteImport } from './routes/grammar/index'
+import { Route as GrammarLessonIdRouteImport } from './routes/grammar/$lessonId'
+import { Route as GrammarConjugatorRouteImport } from './routes/grammar/conjugator'
+import { Route as GrammarParticlesRouteImport } from './routes/grammar/particles'
 import { Route as HangulIndexRouteImport } from './routes/hangul/index'
 import { Route as HangulEntryIdRouteImport } from './routes/hangul/$entryId'
 import { Route as HangulBuilderRouteImport } from './routes/hangul/builder'
@@ -35,6 +40,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GrammarRouteRoute = GrammarRouteRouteImport.update({
+  id: '/grammar',
+  path: '/grammar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HangulRouteRoute = HangulRouteRouteImport.update({
   id: '/hangul',
   path: '/hangul',
@@ -49,6 +59,26 @@ const VocabularyRouteRoute = VocabularyRouteRouteImport.update({
   id: '/vocabulary',
   path: '/vocabulary',
   getParentRoute: () => rootRouteImport,
+} as any)
+const GrammarIndexRoute = GrammarIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GrammarRouteRoute,
+} as any)
+const GrammarLessonIdRoute = GrammarLessonIdRouteImport.update({
+  id: '/$lessonId',
+  path: '/$lessonId',
+  getParentRoute: () => GrammarRouteRoute,
+} as any)
+const GrammarConjugatorRoute = GrammarConjugatorRouteImport.update({
+  id: '/conjugator',
+  path: '/conjugator',
+  getParentRoute: () => GrammarRouteRoute,
+} as any)
+const GrammarParticlesRoute = GrammarParticlesRouteImport.update({
+  id: '/particles',
+  path: '/particles',
+  getParentRoute: () => GrammarRouteRoute,
 } as any)
 const HangulIndexRoute = HangulIndexRouteImport.update({
   id: '/',
@@ -133,9 +163,13 @@ const VocabularyWordWordIdRoute = VocabularyWordWordIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/grammar': typeof GrammarRouteRouteWithChildren
   '/hangul': typeof HangulRouteRouteWithChildren
   '/tools': typeof ToolsRouteRouteWithChildren
   '/vocabulary': typeof VocabularyRouteRouteWithChildren
+  '/grammar/$lessonId': typeof GrammarLessonIdRoute
+  '/grammar/conjugator': typeof GrammarConjugatorRoute
+  '/grammar/particles': typeof GrammarParticlesRoute
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
@@ -145,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/vocabulary/dictionary': typeof VocabularyDictionaryRoute
   '/vocabulary/stats': typeof VocabularyStatsRoute
   '/vocabulary/study': typeof VocabularyStudyRoute
+  '/grammar/': typeof GrammarIndexRoute
   '/hangul/': typeof HangulIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vocabulary/': typeof VocabularyIndexRoute
@@ -155,6 +190,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/grammar/$lessonId': typeof GrammarLessonIdRoute
+  '/grammar/conjugator': typeof GrammarConjugatorRoute
+  '/grammar/particles': typeof GrammarParticlesRoute
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
@@ -164,6 +202,7 @@ export interface FileRoutesByTo {
   '/vocabulary/dictionary': typeof VocabularyDictionaryRoute
   '/vocabulary/stats': typeof VocabularyStatsRoute
   '/vocabulary/study': typeof VocabularyStudyRoute
+  '/grammar': typeof GrammarIndexRoute
   '/hangul': typeof HangulIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/vocabulary': typeof VocabularyIndexRoute
@@ -175,9 +214,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/grammar': typeof GrammarRouteRouteWithChildren
   '/hangul': typeof HangulRouteRouteWithChildren
   '/tools': typeof ToolsRouteRouteWithChildren
   '/vocabulary': typeof VocabularyRouteRouteWithChildren
+  '/grammar/$lessonId': typeof GrammarLessonIdRoute
+  '/grammar/conjugator': typeof GrammarConjugatorRoute
+  '/grammar/particles': typeof GrammarParticlesRoute
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
@@ -187,6 +230,7 @@ export interface FileRoutesById {
   '/vocabulary/dictionary': typeof VocabularyDictionaryRoute
   '/vocabulary/stats': typeof VocabularyStatsRoute
   '/vocabulary/study': typeof VocabularyStudyRoute
+  '/grammar/': typeof GrammarIndexRoute
   '/hangul/': typeof HangulIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vocabulary/': typeof VocabularyIndexRoute
@@ -199,9 +243,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/grammar'
     | '/hangul'
     | '/tools'
     | '/vocabulary'
+    | '/grammar/$lessonId'
+    | '/grammar/conjugator'
+    | '/grammar/particles'
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
@@ -211,6 +259,7 @@ export interface FileRouteTypes {
     | '/vocabulary/dictionary'
     | '/vocabulary/stats'
     | '/vocabulary/study'
+    | '/grammar/'
     | '/hangul/'
     | '/tools/'
     | '/vocabulary/'
@@ -221,6 +270,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/grammar/$lessonId'
+    | '/grammar/conjugator'
+    | '/grammar/particles'
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
@@ -230,6 +282,7 @@ export interface FileRouteTypes {
     | '/vocabulary/dictionary'
     | '/vocabulary/stats'
     | '/vocabulary/study'
+    | '/grammar'
     | '/hangul'
     | '/tools'
     | '/vocabulary'
@@ -240,9 +293,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/grammar'
     | '/hangul'
     | '/tools'
     | '/vocabulary'
+    | '/grammar/$lessonId'
+    | '/grammar/conjugator'
+    | '/grammar/particles'
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
@@ -252,6 +309,7 @@ export interface FileRouteTypes {
     | '/vocabulary/dictionary'
     | '/vocabulary/stats'
     | '/vocabulary/study'
+    | '/grammar/'
     | '/hangul/'
     | '/tools/'
     | '/vocabulary/'
@@ -263,6 +321,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GrammarRouteRoute: typeof GrammarRouteRouteWithChildren
   HangulRouteRoute: typeof HangulRouteRouteWithChildren
   ToolsRouteRoute: typeof ToolsRouteRouteWithChildren
   VocabularyRouteRoute: typeof VocabularyRouteRouteWithChildren
@@ -275,6 +334,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/grammar': {
+      id: '/grammar'
+      path: '/grammar'
+      fullPath: '/grammar'
+      preLoaderRoute: typeof GrammarRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hangul': {
@@ -297,6 +363,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/vocabulary'
       preLoaderRoute: typeof VocabularyRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/grammar/': {
+      id: '/grammar/'
+      path: '/'
+      fullPath: '/grammar/'
+      preLoaderRoute: typeof GrammarIndexRouteImport
+      parentRoute: typeof GrammarRouteRoute
+    }
+    '/grammar/$lessonId': {
+      id: '/grammar/$lessonId'
+      path: '/$lessonId'
+      fullPath: '/grammar/$lessonId'
+      preLoaderRoute: typeof GrammarLessonIdRouteImport
+      parentRoute: typeof GrammarRouteRoute
+    }
+    '/grammar/conjugator': {
+      id: '/grammar/conjugator'
+      path: '/conjugator'
+      fullPath: '/grammar/conjugator'
+      preLoaderRoute: typeof GrammarConjugatorRouteImport
+      parentRoute: typeof GrammarRouteRoute
+    }
+    '/grammar/particles': {
+      id: '/grammar/particles'
+      path: '/particles'
+      fullPath: '/grammar/particles'
+      preLoaderRoute: typeof GrammarParticlesRouteImport
+      parentRoute: typeof GrammarRouteRoute
     }
     '/hangul/': {
       id: '/hangul/'
@@ -413,6 +507,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface GrammarRouteRouteChildren {
+  GrammarLessonIdRoute: typeof GrammarLessonIdRoute
+  GrammarConjugatorRoute: typeof GrammarConjugatorRoute
+  GrammarParticlesRoute: typeof GrammarParticlesRoute
+  GrammarIndexRoute: typeof GrammarIndexRoute
+}
+
+const GrammarRouteRouteChildren: GrammarRouteRouteChildren = {
+  GrammarLessonIdRoute: GrammarLessonIdRoute,
+  GrammarConjugatorRoute: GrammarConjugatorRoute,
+  GrammarParticlesRoute: GrammarParticlesRoute,
+  GrammarIndexRoute: GrammarIndexRoute,
+}
+
+const GrammarRouteRouteWithChildren = GrammarRouteRoute._addFileChildren(
+  GrammarRouteRouteChildren,
+)
+
 interface HangulRouteRouteChildren {
   HangulEntryIdRoute: typeof HangulEntryIdRoute
   HangulBuilderRoute: typeof HangulBuilderRoute
@@ -477,6 +589,7 @@ const VocabularyRouteRouteWithChildren = VocabularyRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GrammarRouteRoute: GrammarRouteRouteWithChildren,
   HangulRouteRoute: HangulRouteRouteWithChildren,
   ToolsRouteRoute: ToolsRouteRouteWithChildren,
   VocabularyRouteRoute: VocabularyRouteRouteWithChildren,

@@ -1,6 +1,6 @@
 import 'fake-indexeddb/auto'
 import '@testing-library/jest-dom/vitest'
-import { cleanup } from '@testing-library/react'
+import { cleanup, configure } from '@testing-library/react'
 import { afterEach, beforeEach, vi } from 'vitest'
 import '../i18n/i18n'
 import { settingsActions } from '../stores/settings'
@@ -28,6 +28,10 @@ class FakeIntersectionObserver {
 }
 globalThis.IntersectionObserver ??=
   FakeIntersectionObserver as unknown as typeof IntersectionObserver
+
+// Page/card transitions (AnimatePresence) delay what tests wait for; with the
+// whole suite running in parallel, the default 1 s is too tight.
+configure({ asyncUtilTimeout: 4000 })
 
 afterEach(() => {
   cleanup()

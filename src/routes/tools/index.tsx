@@ -9,10 +9,14 @@ import {
 } from '../../components/motion/presets'
 import { TOOLS, type ToolInfo } from '../../features/tools/tools'
 
-// The dictionary lives in the vocabulary module, but is also listed here.
+// The dictionary and the conjugator live in their own modules, but are listed here too.
 const CARDS: Array<
-  Omit<ToolInfo, 'id'> & { id: ToolInfo['id'] | 'dictionary' }
-> = [...TOOLS, { id: 'dictionary', to: '/vocabulary/dictionary', icon: '📖' }]
+  Omit<ToolInfo, 'id'> & { id: ToolInfo['id'] | 'dictionary' | 'conjugator' }
+> = [
+  ...TOOLS,
+  { id: 'dictionary', to: '/vocabulary/dictionary', icon: '📖' },
+  { id: 'conjugator', to: '/grammar/conjugator', icon: '🔁' },
+]
 
 export const Route = createFileRoute('/tools/')({
   component: ToolsIndex,
