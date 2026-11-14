@@ -20,6 +20,7 @@ import { Route as ProgressRouteRouteImport } from './routes/progress/route'
 import { Route as PronunciationRouteRouteImport } from './routes/pronunciation/route'
 import { Route as ReadingRouteRouteImport } from './routes/reading/route'
 import { Route as SpeakingRouteRouteImport } from './routes/speaking/route'
+import { Route as TodayRouteImport } from './routes/today'
 import { Route as ToolsRouteRouteImport } from './routes/tools/route'
 import { Route as VocabularyRouteRouteImport } from './routes/vocabulary/route'
 import { Route as WritingRouteRouteImport } from './routes/writing/route'
@@ -122,6 +123,11 @@ const ReadingRouteRoute = ReadingRouteRouteImport.update({
 const SpeakingRouteRoute = SpeakingRouteRouteImport.update({
   id: '/speaking',
   path: '/speaking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TodayRoute = TodayRouteImport.update({
+  id: '/today',
+  path: '/today',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsRouteRoute = ToolsRouteRouteImport.update({
@@ -382,6 +388,7 @@ export interface FileRoutesByFullPath {
   '/tools': typeof ToolsRouteRouteWithChildren
   '/vocabulary': typeof VocabularyRouteRouteWithChildren
   '/writing': typeof WritingRouteRouteWithChildren
+  '/today': typeof TodayRoute
   '/culture/$noteId': typeof CultureNoteIdRoute
   '/dialogues/$dialogueId': typeof DialoguesDialogueIdRoute
   '/grammar/$lessonId': typeof GrammarLessonIdRoute
@@ -430,6 +437,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/today': typeof TodayRoute
   '/culture/$noteId': typeof CultureNoteIdRoute
   '/dialogues/$dialogueId': typeof DialoguesDialogueIdRoute
   '/grammar/$lessonId': typeof GrammarLessonIdRoute
@@ -492,6 +500,7 @@ export interface FileRoutesById {
   '/tools': typeof ToolsRouteRouteWithChildren
   '/vocabulary': typeof VocabularyRouteRouteWithChildren
   '/writing': typeof WritingRouteRouteWithChildren
+  '/today': typeof TodayRoute
   '/culture/$noteId': typeof CultureNoteIdRoute
   '/dialogues/$dialogueId': typeof DialoguesDialogueIdRoute
   '/grammar/$lessonId': typeof GrammarLessonIdRoute
@@ -555,6 +564,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/vocabulary'
     | '/writing'
+    | '/today'
     | '/culture/$noteId'
     | '/dialogues/$dialogueId'
     | '/grammar/$lessonId'
@@ -603,6 +613,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/today'
     | '/culture/$noteId'
     | '/dialogues/$dialogueId'
     | '/grammar/$lessonId'
@@ -664,6 +675,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/vocabulary'
     | '/writing'
+    | '/today'
     | '/culture/$noteId'
     | '/dialogues/$dialogueId'
     | '/grammar/$lessonId'
@@ -726,6 +738,7 @@ export interface RootRouteChildren {
   ToolsRouteRoute: typeof ToolsRouteRouteWithChildren
   VocabularyRouteRoute: typeof VocabularyRouteRouteWithChildren
   WritingRouteRoute: typeof WritingRouteRouteWithChildren
+  TodayRoute: typeof TodayRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -805,6 +818,13 @@ declare module '@tanstack/react-router' {
       path: '/speaking'
       fullPath: '/speaking'
       preLoaderRoute: typeof SpeakingRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/today': {
+      id: '/today'
+      path: '/today'
+      fullPath: '/today'
+      preLoaderRoute: typeof TodayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools': {
@@ -1380,6 +1400,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsRouteRoute: ToolsRouteRouteWithChildren,
   VocabularyRouteRoute: VocabularyRouteRouteWithChildren,
   WritingRouteRoute: WritingRouteRouteWithChildren,
+  TodayRoute: TodayRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

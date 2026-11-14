@@ -2,10 +2,10 @@ import { Link } from '@tanstack/react-router'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { Seal } from '../../components/brand/Seal'
-import { AnimatedNumber } from '../../components/motion/AnimatedNumber'
+import { TodaySummary } from '../today/TodaySummary'
 import { useProgress } from './useProgress'
 
-/** Home page summary: level, XP, streak, and the placement test invitation. */
+/** Home page: the placement test invitation for newcomers, else today's session. */
 export function ProgressStrip() {
   const { t } = useTranslation()
   const view = useProgress()
@@ -37,36 +37,5 @@ export function ProgressStrip() {
       </motion.div>
     )
 
-  return (
-    <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-      <Link
-        to="/progress"
-        className="group flex flex-wrap items-center gap-x-8 gap-y-3 rounded-lg border border-ink-200 bg-white p-4 shadow-paper transition-shadow hover:shadow-lift dark:border-ink-800 dark:bg-ink-900"
-      >
-        <span className="flex items-center gap-3">
-          <Seal text={String(stats.level.level)} size="sm" />
-          <span className="text-sm text-ink-500 dark:text-ink-400">
-            {t('progress.dashboard.level')}
-          </span>
-        </span>
-        <span className="flex items-baseline gap-1.5">
-          <span className="font-serif text-2xl font-bold tabular-nums">
-            <AnimatedNumber value={stats.xp} />
-          </span>
-          <span className="text-sm text-ink-500 dark:text-ink-400">XP</span>
-        </span>
-        <span className="flex items-baseline gap-1.5">
-          <span className="font-serif text-2xl font-bold tabular-nums text-seal-600 dark:text-seal-400">
-            {stats.streak.current}
-          </span>
-          <span className="text-sm text-ink-500 dark:text-ink-400">
-            {t('progress.dashboard.streak')}
-          </span>
-        </span>
-        <span className="ml-auto text-sm font-medium text-ink-700 transition-transform group-hover:translate-x-1 dark:text-ink-200">
-          {t('nav.progress')} →
-        </span>
-      </Link>
-    </motion.div>
-  )
+  return <TodaySummary />
 }

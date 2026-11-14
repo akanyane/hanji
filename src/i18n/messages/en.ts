@@ -3,6 +3,51 @@
 // Plurals use i18next suffixes: key_one / key_other.
 
 export const en = {
+  today: {
+    title: 'Today',
+    goal: 'Daily goal',
+    goalReached: 'Goal reached!',
+    goalOf: '{{xp}} of {{goal}} XP today',
+    goalLabel: 'Goal',
+    goals: {
+      light: 'Light · {{xp}} XP',
+      regular: 'Regular · {{xp}} XP',
+      intense: 'Intense · {{xp}} XP',
+    },
+    streak_one: '{{count}} day in a row. Keep it going!',
+    streak_other: '{{count}} days in a row. Keep it going!',
+    streakStart: 'Study today to start a streak.',
+    progress: '{{done}} of {{total}} done',
+    start: 'Start',
+    again: 'Do more',
+    done: 'Done',
+    continue: 'Continue today’s session',
+    tasks: {
+      hangul: {
+        title: 'Learn to read Hangul',
+        detail: 'Explore the letters, then take the recognition quiz.',
+      },
+      vocabulary: {
+        title: 'Words',
+        detail: '{{due}} reviews · {{fresh}} new words',
+        detailDue_one: '{{count}} review due',
+        detailDue_other: '{{count}} reviews due',
+        detailNew_one: '{{count}} new word',
+        detailNew_other: '{{count}} new words',
+        reviewed_one: '{{count}} word reviewed today',
+        reviewed_other: '{{count}} words reviewed today',
+      },
+      grammar: { title: 'Grammar lesson' },
+      reading: { title: 'Reading' },
+      dialogue: { title: 'Dialogue' },
+    },
+    allDone: 'All done for today!',
+    allDoneText:
+      'Come back tomorrow to keep your streak. Want to keep going in the meantime?',
+    more: { exam: 'Take a mock exam', dictionary: 'Browse the dictionary' },
+    empty:
+      'You have finished every lesson and text. Impressive! Try the mock exams.',
+  },
   common: {
     appName: 'Hanji · Learn Korean',
     comingSoon: 'Coming soon',
@@ -22,6 +67,7 @@ export const en = {
   nav: {
     main: 'Main navigation',
     home: 'Home',
+    today: 'Today',
     hangul: 'Hangul',
     vocabulary: 'Vocabulary',
     grammar: 'Grammar',

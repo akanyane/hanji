@@ -22,6 +22,7 @@ describe('loadSettings', () => {
       theme: 'dark',
       speechRate: 1,
       newPerSession: 10,
+      dailyGoal: 50,
     })
     expect(loadSettings(null, false).theme).toBe('light')
   })
@@ -35,6 +36,7 @@ describe('loadSettings', () => {
       theme: 'dark',
       speechRate: 0.75,
       newPerSession: 10,
+      dailyGoal: 50,
     })
   })
 
@@ -52,10 +54,18 @@ describe('loadSettings', () => {
       theme: 'light',
       speechRate: 1,
       newPerSession: 10,
+      dailyGoal: 50,
     })
     expect(loadSettings(storage({ [SETTINGS_KEY]: '{oops' }), true).theme).toBe(
       'dark',
     )
+  })
+
+  it('keeps only the allowed daily goals', () => {
+    const ok = storage({ [SETTINGS_KEY]: JSON.stringify({ dailyGoal: 100 }) })
+    expect(loadSettings(ok, false).dailyGoal).toBe(100)
+    const bad = storage({ [SETTINGS_KEY]: JSON.stringify({ dailyGoal: 37 }) })
+    expect(loadSettings(bad, false).dailyGoal).toBe(50)
   })
 
   it('clamps the speech rate', () => {

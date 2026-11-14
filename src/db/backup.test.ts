@@ -20,6 +20,7 @@ const SETTINGS = {
   theme: 'dark',
   speechRate: 0.8,
   newPerSession: 15,
+  dailyGoal: 100,
 } as const
 
 beforeEach(async () => {

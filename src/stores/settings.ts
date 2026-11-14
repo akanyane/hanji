@@ -15,7 +15,16 @@ export interface Settings {
   speechRate: number
   /** How many never-seen vocabulary words a study session introduces. */
   newPerSession: number
+  /** Daily XP goal shown on the Today page. */
+  dailyGoal: DailyGoal
 }
+
+/** Daily XP goals: light, regular, intense. */
+export const DAILY_GOALS = [20, 50, 100] as const
+export type DailyGoal = (typeof DAILY_GOALS)[number]
+const DEFAULT_DAILY_GOAL: DailyGoal = 50
+const isDailyGoal = (value: unknown): value is DailyGoal =>
+  DAILY_GOALS.includes(value as DailyGoal)
 
 // Storage keys keep the pre-Hanji prefix so saved settings survive.
 export const SETTINGS_KEY = 'learn-korean:settings'
@@ -77,7 +86,11 @@ export function loadSettings(
       ? clampNew(saved.newPerSession)
       : DEFAULT_NEW_PER_SESSION
 
-  return { locale, theme, speechRate, newPerSession }
+  const dailyGoal = isDailyGoal(saved?.dailyGoal)
+    ? saved.dailyGoal
+    : DEFAULT_DAILY_GOAL
+
+  return { locale, theme, speechRate, newPerSession, dailyGoal }
 }
 
 function getStorage(): StorageLike | null {
@@ -128,6 +141,9 @@ export const settingsActions = {
   },
   setSpeechRate(rate: number) {
     settingsStore.setState((s) => ({ ...s, speechRate: clampRate(rate) }))
+  },
+  setDailyGoal(goal: DailyGoal) {
+    settingsStore.setState((s) => ({ ...s, dailyGoal: goal }))
   },
 }
 
