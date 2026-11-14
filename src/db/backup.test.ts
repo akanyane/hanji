@@ -139,7 +139,7 @@ describe('backup', () => {
 
   it('names files by date', () => {
     expect(backupFileName(new Date('2026-11-14T10:00:00Z'))).toBe(
-      'learn-korean-backup-2026-11-14.json',
+      'hanji-backup-2026-11-14.json',
     )
   })
 })

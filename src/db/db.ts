@@ -10,6 +10,8 @@ import type {
   SyncFields,
 } from './types'
 
+// Internal name from before the app was called Hanji. Never rename it:
+// browsers would open a new, empty database and progress would be lost.
 export const DB_NAME = 'learn-korean'
 
 export type AppDB = Dexie & {

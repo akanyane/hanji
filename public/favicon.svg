@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <title>Learn Korean</title>
+  <title>Hanji</title>
   <!-- Red seal (도장): vermilion square, carved inner border, 한 in strokes. -->
   <rect width="512" height="512" rx="96" fill="#b03021" />
   <rect x="40" y="40" width="432" height="432" rx="64" fill="none" stroke="#fffdf8" stroke-width="16" />

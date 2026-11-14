@@ -257,7 +257,7 @@ describe('data page', () => {
       target: { files: [new File(['{"app":"x"}'], 'x.json')] },
     })
     expect(await screen.findByRole('alert')).toHaveTextContent(
-      'Este arquivo não é um backup do Aprenda Coreano.',
+      'Este arquivo não é um backup do Hanji.',
     )
   })
 

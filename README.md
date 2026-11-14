@@ -1,6 +1,6 @@
-# Learn Korean
+# Hanji (한지)
 
-A free platform to learn Korean, from Hangul up to TOPIK II. It runs entirely in the browser, needs no account, and keeps progress only on the user's device (IndexedDB).
+Named after _hanji_, the traditional Korean paper that calligraphy is written on. Hanji is a free platform to learn Korean, from Hangul up to TOPIK II. It runs entirely in the browser, needs no account, and keeps progress only on the user's device (IndexedDB).
 
 The interface **and** the learning content are multilingual: English and Brazilian Portuguese today, with more languages easy to add (see [Adding a language](#adding-a-language)). Code and documentation are in English.
 
