@@ -1,0 +1,25 @@
+import type { HangulEntry } from './types'
+
+export const vowels: HangulEntry[] = [
+  { id: 'vowel-a', hangul: 'ㅏ', romanization: 'a', category: 'vowel' },
+  { id: 'vowel-eo', hangul: 'ㅓ', romanization: 'eo', category: 'vowel' },
+  { id: 'vowel-o', hangul: 'ㅗ', romanization: 'o', category: 'vowel' },
+  { id: 'vowel-u', hangul: 'ㅜ', romanization: 'u', category: 'vowel' },
+  { id: 'vowel-eu', hangul: 'ㅡ', romanization: 'eu', category: 'vowel' },
+  { id: 'vowel-i', hangul: 'ㅣ', romanization: 'i', category: 'vowel' },
+  { id: 'vowel-ae', hangul: 'ㅐ', romanization: 'ae', category: 'vowel' },
+  { id: 'vowel-e', hangul: 'ㅔ', romanization: 'e', category: 'vowel' },
+  { id: 'vowel-ya', hangul: 'ㅑ', romanization: 'ya', category: 'vowel' },
+  { id: 'vowel-yeo', hangul: 'ㅕ', romanization: 'yeo', category: 'vowel' },
+  { id: 'vowel-yo', hangul: 'ㅛ', romanization: 'yo', category: 'vowel' },
+  { id: 'vowel-yu', hangul: 'ㅠ', romanization: 'yu', category: 'vowel' },
+  { id: 'vowel-yae', hangul: 'ㅒ', romanization: 'yae', category: 'vowel' },
+  { id: 'vowel-ye', hangul: 'ㅖ', romanization: 'ye', category: 'vowel' },
+  { id: 'vowel-wa', hangul: 'ㅘ', romanization: 'wa', category: 'vowel' },
+  { id: 'vowel-oe', hangul: 'ㅚ', romanization: 'oe', category: 'vowel' },
+  { id: 'vowel-wae', hangul: 'ㅙ', romanization: 'wae', category: 'vowel' },
+  { id: 'vowel-wo', hangul: 'ㅝ', romanization: 'wo', category: 'vowel' },
+  { id: 'vowel-wi', hangul: 'ㅟ', romanization: 'wi', category: 'vowel' },
+  { id: 'vowel-we', hangul: 'ㅞ', romanization: 'we', category: 'vowel' },
+  { id: 'vowel-ui', hangul: 'ㅢ', romanization: 'ui', category: 'vowel' },
+]

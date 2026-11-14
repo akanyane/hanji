@@ -2,9 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <meta name="theme-color" content="#fbf8f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#13110e" media="(prefers-color-scheme: dark)" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hangul</title>
+    <meta
+      name="description"
+      content="Free platform to learn Korean, from Hangul to TOPIK II. Available in English and Brazilian Portuguese."
+    />
+    <title>Learn Korean</title>
+    <script>
+      // Apply the saved theme before React loads to avoid a light-theme flash.
+      // Must mirror the logic of loadSettings() in src/stores/settings.ts.
+      ;(() => {
+        try {
+          const saved = JSON.parse(localStorage.getItem('learn-korean:settings') || 'null')
+          const legacy = JSON.parse(localStorage.getItem('hangul:theme') || 'null')
+          let theme = saved?.theme ?? legacy
+          if (theme !== 'light' && theme !== 'dark') {
+            theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          }
+          if (theme === 'dark') document.documentElement.classList.add('dark')
+        } catch {}
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

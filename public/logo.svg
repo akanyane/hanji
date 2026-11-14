@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Learn Korean</title>
+  <!-- Red seal (도장): vermilion square, carved inner border, 한 in strokes. -->
+  <rect width="512" height="512" rx="96" fill="#b03021" />
+  <rect x="40" y="40" width="432" height="432" rx="64" fill="none" stroke="#fffdf8" stroke-width="16" />
+  <g fill="none" stroke="#fffdf8" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M168 120h56" />
+    <path d="M128 162h136" />
+    <circle cx="196" cy="226" r="40" />
+    <path d="M330 114v176" />
+    <path d="M330 200h46" />
+    <path d="M160 322v76h208" />
+  </g>
+</svg>
