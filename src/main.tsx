@@ -5,11 +5,14 @@ import { createRoot } from 'react-dom/client'
 import { migrateLegacyProgress } from './db/migrateLegacy'
 import './i18n/i18n'
 import { createQueryClient } from './lib/queryClient'
+import { setupPwa } from './pwa'
 import { createAppRouter } from './router'
 import './index.css'
 
 const queryClient = createQueryClient()
 const router = createAppRouter(queryClient)
+
+setupPwa()
 
 const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('Root element #root not found')

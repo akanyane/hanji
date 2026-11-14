@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { type KeyboardEvent, useMemo, useState } from 'react'
+import { type KeyboardEvent, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { HangulKeyboard } from '../../components/hangul/HangulKeyboard'
 import { AnimatedNumber } from '../../components/motion/AnimatedNumber'
@@ -8,6 +8,7 @@ import { pop, shake, spring } from '../../components/motion/presets'
 import { Button } from '../../components/ui/Button'
 import { ProgressBar } from '../../components/ui/ProgressBar'
 import { VOCABULARY } from '../../content/vocabulary'
+import { useRecordPractice } from '../../db/queries'
 import { useLocalized } from '../../i18n/useLocalized'
 import { cn } from '../../lib/cn'
 import {
@@ -60,6 +61,19 @@ export function KeyboardTrainer({ words: initialWords }: { words?: string[] }) {
   const accuracy =
     hits + misses === 0 ? 100 : Math.round((hits / (hits + misses)) * 100)
   const meaning = VOCABULARY.find((w) => w.word === word)
+  const { mutate: record } = useRecordPractice()
+
+  // A finished session counts each word, weighted by keystroke accuracy.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: once per session
+  useEffect(() => {
+    if (finished)
+      record({
+        skill: 'writing',
+        source: 'writing:keyboard',
+        correct: Math.round((accuracy / 100) * words.length),
+        total: words.length,
+      })
+  }, [finished])
 
   const input = (jamo: string) => {
     if (wordDone || !expected) return

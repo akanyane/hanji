@@ -2,9 +2,11 @@ import { Dexie, type EntityTable } from 'dexie'
 import type {
   DeckRecord,
   MetaEntry,
+  PracticeEvent,
   QuizAttempt,
   ReviewLogRecord,
   SrsCardRecord,
+  StudyDay,
   SyncFields,
 } from './types'
 
@@ -16,6 +18,8 @@ export type AppDB = Dexie & {
   srsCards: EntityTable<SrsCardRecord, 'id'>
   reviewLogs: EntityTable<ReviewLogRecord, 'id'>
   decks: EntityTable<DeckRecord, 'id'>
+  practiceEvents: EntityTable<PracticeEvent, 'id'>
+  studyDays: EntityTable<StudyDay, 'id'>
 }
 
 export const db = new Dexie(DB_NAME) as AppDB
@@ -33,6 +37,12 @@ db.version(2).stores({
   srsCards: 'id, itemType, itemId, dueAt, updatedAt',
   reviewLogs: 'id, cardId, itemId, reviewedAt, updatedAt',
   decks: 'id, updatedAt',
+})
+
+// v3: progress tracking (open-ended practice results and study time).
+db.version(3).stores({
+  practiceEvents: 'id, skill, at, updatedAt',
+  studyDays: 'id, updatedAt',
 })
 
 /** Creates the sync fields for a new record. */

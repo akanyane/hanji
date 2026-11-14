@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "preview": "vite preview",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
     "@tanstack/react-form": "^1.33.5",
@@ -45,12 +46,14 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@vite-pwa/assets-generator": "^2.0.0",
     "@vitejs/plugin-react": "^6.3.0",
     "fake-indexeddb": "^6.2.8",
     "jsdom": "^29.1.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "vite": "^8.1.5",
+    "vite-plugin-pwa": "^2.0.0",
     "vitest": "^4.1.10"
   },
   "packageManager": "bun@1.4.4",

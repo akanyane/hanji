@@ -11,6 +11,7 @@ import {
 import { AudioButton } from '../../components/ui/AudioButton'
 import { Button } from '../../components/ui/Button'
 import { Chip } from '../../components/ui/Chip'
+import { useRecordPractice } from '../../db/queries'
 import { cn } from '../../lib/cn'
 import {
   COUNTERS,
@@ -182,6 +183,7 @@ export function NumbersLearn() {
 
 export function NumberPractice({ initial }: { initial?: NumberExercise }) {
   const { t } = useTranslation()
+  const { mutate: record } = useRecordPractice()
   const [kind, setKind] = useState<NumberExerciseKind | 'all'>('all')
   const [exercise, setExercise] = useState<NumberExercise>(
     () => initial ?? makeNumberExercise(),
@@ -206,8 +208,14 @@ export function NumberPractice({ initial }: { initial?: NumberExercise }) {
       if (picked) return
       setPicked(choice)
       setStreak(choice === exercise.answer ? streak + 1 : 0)
+      record({
+        skill: 'numbers',
+        source: 'numbers:practice',
+        correct: Number(choice === exercise.answer),
+        total: 1,
+      })
     },
-    [picked, exercise.answer, streak],
+    [picked, exercise.answer, streak, record],
   )
 
   useEffect(() => {

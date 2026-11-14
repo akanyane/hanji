@@ -6,6 +6,7 @@ import { Button } from '../../components/ui/Button'
 import { Chip } from '../../components/ui/Chip'
 import { SpeedControl } from '../../components/ui/SpeedControl'
 import { MINIMAL_PAIRS } from '../../content/pronunciation/practice'
+import { useRecordPractice } from '../../db/queries'
 import { useKoreanVoice } from '../../hooks/useKoreanVoice'
 import { useLocalized } from '../../i18n/useLocalized'
 import { cn } from '../../lib/cn'
@@ -19,6 +20,7 @@ export function MinimalPairs() {
   const l = useLocalized()
   const rate = useSettings((s) => s.speechRate)
   const voice = useKoreanVoice()
+  const { mutate: record } = useRecordPractice()
   const [groupId, setGroupId] = useState(MINIMAL_PAIRS[0].id)
   const group = MINIMAL_PAIRS.find((g) => g.id === groupId) ?? MINIMAL_PAIRS[0]
   const [target, setTarget] = useState(() => randomIndex(group.words.length))
@@ -40,6 +42,12 @@ export function MinimalPairs() {
   const choose = (index: number) => {
     if (picked !== null) return
     setPicked(index)
+    record({
+      skill: 'pronunciation',
+      source: 'pronunciation:minimal-pairs',
+      correct: Number(index === target),
+      total: 1,
+    })
     setScore((s) => ({
       right: s.right + (index === target ? 1 : 0),
       total: s.total + 1,

@@ -26,13 +26,22 @@ export interface SessionQuestion {
 interface QuizSessionProps {
   questions: SessionQuestion[]
   onComplete: (score: number) => void
+  /** Called on every answer (e.g. to score questions by level). */
+  onAnswer?: (questionId: string, correct: boolean) => void
+  /** "list" stacks the choices, for long sentence choices. */
+  layout?: 'grid' | 'list'
 }
 
 /**
  * Runs a multiple-choice session: one question at a time, keys 1–N to answer,
  * Enter to continue, animated feedback. Reusable by any module.
  */
-export function QuizSession({ questions, onComplete }: QuizSessionProps) {
+export function QuizSession({
+  questions,
+  onComplete,
+  onAnswer,
+  layout = 'grid',
+}: QuizSessionProps) {
   const { t } = useTranslation()
   const [index, setIndex] = useState(0)
   const [score, setScore] = useState(0)
@@ -56,8 +65,9 @@ export function QuizSession({ questions, onComplete }: QuizSessionProps) {
       if (answered) return
       setSelectedId(choiceId)
       if (choiceId === question.answerId) setScore((s) => s + 1)
+      onAnswer?.(question.id, choiceId === question.answerId)
     },
-    [answered, question],
+    [answered, question, onAnswer],
   )
 
   const advance = useCallback(() => {
@@ -124,7 +134,12 @@ export function QuizSession({ questions, onComplete }: QuizSessionProps) {
           <p className="sr-only">
             {t('hangul.quiz.instructions', { count: question.choices.length })}
           </p>
-          <div className="grid grid-cols-2 gap-3">
+          <div
+            className={cn(
+              'grid gap-3',
+              layout === 'grid' ? 'grid-cols-2' : 'grid-cols-1',
+            )}
+          >
             {question.choices.map((choice, i) => {
               const isAnswer = choice.id === question.answerId
               const isSelected = choice.id === selectedId

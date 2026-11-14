@@ -3,11 +3,13 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pop, shake, spring } from '../../components/motion/presets'
 import { Button } from '../../components/ui/Button'
+import { useRecordPractice } from '../../db/queries'
 import { cn } from '../../lib/cn'
 import { makeParticleQuestion, type ParticleQuestion } from './particleQuiz'
 
 export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
   const { t } = useTranslation()
+  const { mutate: record } = useRecordPractice()
   const [question, setQuestion] = useState<ParticleQuestion>(
     () => initial ?? makeParticleQuestion(),
   )
@@ -22,6 +24,12 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
     (choice: string) => {
       if (picked) return
       setPicked(choice)
+      record({
+        skill: 'grammar',
+        source: 'grammar:particles',
+        correct: Number(choice === question.answer),
+        total: 1,
+      })
       if (choice === question.answer) {
         setStreak(streak + 1)
         setBest(Math.max(best, streak + 1))
@@ -29,7 +37,7 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
         setStreak(0)
       }
     },
-    [picked, question.answer, streak, best],
+    [picked, question.answer, streak, best, record],
   )
 
   const next = useCallback(() => {

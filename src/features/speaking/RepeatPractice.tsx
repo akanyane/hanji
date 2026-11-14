@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pop, spring } from '../../components/motion/presets'
 import { RecorderPanel } from '../../components/speech/RecorderPanel'
@@ -11,6 +11,7 @@ import {
   PRACTICE_SENTENCES,
   type PracticeSentence,
 } from '../../content/pronunciation/practice'
+import { useRecordPractice } from '../../db/queries'
 import { useSpeechRecognition } from '../../hooks/useSpeechRecognition'
 import { useLocalized } from '../../i18n/useLocalized'
 import { cn } from '../../lib/cn'
@@ -34,6 +35,7 @@ export function RepeatPractice({
   )
   const [index, setIndex] = useState(0)
   const recognition = useSpeechRecognition()
+  const { mutate: record } = useRecordPractice()
   const current = items[index % items.length]
 
   const result = useMemo(
@@ -43,6 +45,17 @@ export function RepeatPractice({
         : null,
     [recognition.status, recognition.transcript, current],
   )
+
+  // One practice result per recognized attempt; "good" or better counts as right.
+  useEffect(() => {
+    if (result)
+      record({
+        skill: 'speaking',
+        source: 'speaking:repeat',
+        correct: Number(result.score >= GOOD),
+        total: 1,
+      })
+  }, [result, record])
 
   const next = () => {
     recognition.reset()

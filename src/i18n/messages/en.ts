@@ -17,6 +17,7 @@ export const en = {
     next: 'Next',
     continue: 'Continue',
     speed: 'Speech speed',
+    close: 'Close',
   },
   nav: {
     main: 'Main navigation',
@@ -35,6 +36,7 @@ export const en = {
     learn: 'Learn',
     practice: 'Practice',
     tools: 'Tools',
+    progress: 'Progress',
     skipToContent: 'Skip to content',
     homeLabel: 'Learn Korean: home page',
     language: 'Language',
@@ -780,6 +782,280 @@ export const en = {
     phrases: 'Useful phrases',
     related: 'See it in practice',
   },
+  pwa: {
+    updateTitle: 'New version available',
+    updateDescription: 'Reload to get the latest lessons and fixes.',
+    reload: 'Reload',
+    offlineTitle: 'Ready to work offline',
+    offlineDescription:
+      'The app is saved on this device: you can study without internet.',
+  },
+  progress: {
+    title: 'Your progress',
+    description:
+      'Streak, XP, achievements, placement test, TOPIK-style mock exams and your data.',
+    sections: 'Progress sections',
+    loading: 'Loading your progress…',
+    tabs: {
+      dashboard: 'Overview',
+      achievements: 'Achievements',
+      placement: 'Placement test',
+      exam: 'TOPIK mock',
+      data: 'Data & app',
+    },
+    dashboard: {
+      level: 'Level',
+      xpToNext: '{{current}} / {{needed}} XP to level {{next}}',
+      streak: 'Day streak',
+      streakToday: 'Studied today ✓',
+      streakPending: 'Study today to keep it going',
+      streakBest_one: 'Best: {{count}} day',
+      streakBest_other: 'Best: {{count}} days',
+      studyTime: 'Study time',
+      today: 'Today: {{value}}',
+      minutes_one: '{{count}} min',
+      minutes_other: '{{count}} min',
+      hoursMinutes: '{{hours}} h {{minutes}}',
+      words: 'Words learned',
+      wordsSeen_one: '{{count}} word in your reviews',
+      wordsSeen_other: '{{count}} words in your reviews',
+      activities: 'Activities',
+      activitiesDetail: '{{quizzes}} exercises · {{reviews}} reviews',
+      activity: 'Activity (last 12 weeks)',
+      activitySummary_one: '{{count}} active day in the last 12 weeks.',
+      activitySummary_other: '{{count}} active days in the last 12 weeks.',
+      activityCell: '{{day}}: {{count}} XP',
+      less: 'Less',
+      more: 'More',
+      skills: 'Accuracy by skill',
+      notPracticed: 'Not practiced yet',
+      skillAccuracy_one: '{{value}}% · {{count}} answer',
+      skillAccuracy_other: '{{value}}% · {{count}} answers',
+      nextAchievements: 'Next achievements',
+      unlockedCount: '{{count}} of {{total}} unlocked',
+    },
+    achievements: {
+      unlocked: 'Achievement unlocked!',
+      moreUnlocked_one: '+{{count}} more achievement unlocked',
+      moreUnlocked_other: '+{{count}} more achievements unlocked',
+      unlockedLabel: 'Unlocked',
+      lockedLabel: 'Locked',
+      items: {
+        firstSteps: {
+          title: 'First steps',
+          description: 'Earn your first XP.',
+        },
+        placement: {
+          title: 'Know where you stand',
+          description: 'Take the placement test.',
+        },
+        streak3: {
+          title: 'Warming up',
+          description: 'Study 3 days in a row.',
+        },
+        streak7: {
+          title: 'One full week',
+          description: 'Study 7 days in a row.',
+        },
+        streak30: {
+          title: 'Unstoppable',
+          description: 'Study 30 days in a row.',
+        },
+        xp100: { title: '100 XP', description: 'Earn 100 XP.' },
+        xp1000: { title: '1,000 XP', description: 'Earn 1,000 XP.' },
+        xp5000: { title: '5,000 XP', description: 'Earn 5,000 XP.' },
+        hangulMaster: {
+          title: 'Hangul unlocked',
+          description: 'Score at least 70% in a Hangul quiz.',
+        },
+        words10: {
+          title: 'First words',
+          description: 'Get 10 words into long-term review.',
+        },
+        words50: {
+          title: 'Growing vocabulary',
+          description: 'Get 50 words into long-term review.',
+        },
+        words200: {
+          title: 'Word forest',
+          description: 'Get 200 words into long-term review.',
+        },
+        reviews100: {
+          title: 'Hundred reviews',
+          description: 'Do 100 spaced-repetition reviews.',
+        },
+        perfect: {
+          title: 'Flawless',
+          description: 'Get every answer right in an exercise of 5+ questions.',
+        },
+        grammar5: {
+          title: 'Grammar apprentice',
+          description: 'Pass 5 grammar lessons.',
+        },
+        grammar15: {
+          title: 'Grammar expert',
+          description: 'Pass 15 grammar lessons.',
+        },
+        reader: {
+          title: 'Reader',
+          description: 'Pass the questions of 3 reading texts.',
+        },
+        conversation: {
+          title: 'Good listener',
+          description: 'Complete 5 dialogue exercises.',
+        },
+        allRounder: {
+          title: 'All-rounder',
+          description: 'Practice 6 different skills.',
+        },
+        studyHour: {
+          title: 'One hour of Korean',
+          description: 'Study for 60 minutes in total.',
+        },
+        topik1: {
+          title: 'TOPIK level 1 (estimate)',
+          description: 'Score 40% or more in a TOPIK mock exam.',
+        },
+        topik2: {
+          title: 'TOPIK level 2 (estimate)',
+          description: 'Score 70% or more in a TOPIK mock exam.',
+        },
+      },
+    },
+    placement: {
+      ctaTitle: 'Find your level',
+      ctaText:
+        'A quick test tells you where to start, from Hangul to TOPIK practice.',
+      intro:
+        '{{count}} questions, from reading Hangul to reported speech. Answer what you know; when in doubt, pick your best guess. At the end you get a suggested starting point.',
+      start: 'Start the test',
+      retake: 'Take the test again',
+      previous: 'Your last result: {{level}}.',
+      score: '{{correct}} of {{total}} correct',
+      goTo: 'Go to {{module}}',
+      modules: {
+        hangul: 'Hangul',
+        vocabulary: 'Vocabulary',
+        grammar: 'Grammar',
+        reading: 'Reading',
+        exam: 'the TOPIK mock',
+      },
+      levels: {
+        '0': {
+          title: 'Starting from zero',
+          description:
+            'Start with the Korean alphabet: in a few days you will read any word.',
+        },
+        '1': {
+          title: 'You can read Hangul',
+          description:
+            'Great base! Now build your first vocabulary and basic sentences.',
+        },
+        '2': {
+          title: 'Beginner',
+          description:
+            'You know the basics. Move on to tenses, connectives and irregular verbs.',
+        },
+        '3': {
+          title: 'Upper beginner',
+          description:
+            'You handle everyday sentences. Read texts and practice dialogues to gain fluency.',
+        },
+        '4': {
+          title: 'Ready for TOPIK practice',
+          description:
+            'Impressive! Test yourself with the TOPIK-style mock and keep reading.',
+        },
+      },
+    },
+    exam: {
+      description:
+        'Practice in the TOPIK I format: listening and reading, with a timer, and an estimated level at the end.',
+      disclaimer:
+        'Original questions in the TOPIK I format, written for practice. Not official material; the level is only an estimate.',
+      meta: '{{count}} questions · {{minutes}} minutes',
+      best: 'Best score: {{score}}',
+      start: 'Start the exam',
+      ruleListening_one:
+        'Listening: each audio can be played {{count}} time, as in the real test.',
+      ruleListening_other:
+        'Listening: each audio can be played {{count}} times, as in the real test.',
+      ruleNavigate:
+        'You can go back and change answers until you submit or the time runs out.',
+      ruleLevels:
+        'Estimate: level 1 from 40%, level 2 from 70% (same ratios as TOPIK I: 80 and 140 of 200).',
+      listening: 'Listening',
+      reading: 'Reading',
+      question: 'Question {{current}} of {{total}}',
+      timeLeft: 'Time left',
+      answered: '{{count}} of {{total}} answered',
+      questions: 'Questions',
+      goToQuestion: 'Go to question {{number}}',
+      play: 'Play audio',
+      playsLeft_zero: 'No plays left',
+      playsLeft_one: '{{count}} play left',
+      playsLeft_other: '{{count}} plays left',
+      submit: 'Submit',
+      confirmSubmit_one: '{{count}} question is unanswered. Submit anyway?',
+      confirmSubmit_other: '{{count}} questions are unanswered. Submit anyway?',
+      levels: {
+        '0': 'Below TOPIK level 1 (estimate)',
+        '1': 'TOPIK level 1 (estimate)',
+        '2': 'TOPIK level 2 (estimate)',
+      },
+      sections: 'Listening {{listening}} · Reading {{reading}}',
+      estimateNote:
+        'Estimated with the TOPIK I ratios. A short practice exam cannot replace the real test.',
+      retry: 'Try again',
+      toDashboard: 'Back to progress',
+      review: 'Review your answers',
+      correctAnswer: 'Correct answer:',
+      yourAnswer: 'Your answer:',
+      unanswered: 'not answered',
+    },
+    data: {
+      backupTitle: 'Backup',
+      backupText:
+        'Your progress lives only in this browser. Export a file to keep a copy or move to another device, then import it there.',
+      export: 'Export progress',
+      import: 'Import a backup',
+      importFile: 'Backup file',
+      confirmTitle: 'Replace your current progress?',
+      confirmText:
+        'Backup from {{date}}: {{quizzes}} exercises, {{words}} words and {{reviews}} reviews. Your current progress on this device will be replaced.',
+      confirmRestore: 'Replace and restore',
+      cancel: 'Cancel',
+      done: {
+        exported: 'Backup file downloaded.',
+        restored: 'Progress restored!',
+        reset: 'All progress deleted.',
+      },
+      errors: {
+        notJson: 'This file is not a valid backup (it is not JSON).',
+        notBackup: 'This file is not a Learn Korean backup.',
+        newerVersion:
+          'This backup comes from a newer version of the app. Reload the app and try again.',
+        invalid: 'This backup is damaged or incomplete.',
+      },
+      installTitle: 'Install the app',
+      installText:
+        'Install it to open from your home screen or desktop and study offline.',
+      install: 'Install',
+      installed: 'The app is installed on this device.',
+      installManual:
+        'On iPhone/iPad: Share → Add to Home Screen. On other browsers, look for “Install” in the menu or address bar.',
+      storageTitle: 'Privacy',
+      storageText:
+        'No account, no server: everything stays on this device. Clearing the browser data deletes your progress, so export a backup from time to time.',
+      resetTitle: 'Start over',
+      resetText:
+        'Delete all progress on this device (settings are kept). Export a backup first if you might want it back.',
+      reset: 'Delete all progress',
+      resetConfirm:
+        'Delete ALL your progress on this device? This cannot be undone.',
+    },
+  },
+
   tools: {
     title: 'Tools',
     description:

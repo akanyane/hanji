@@ -21,6 +21,7 @@ type NavKey =
   | 'dialogues'
   | 'culture'
   | 'tools'
+  | 'progress'
 
 interface NavItem {
   key: NavKey
@@ -45,6 +46,7 @@ const PRACTICE: NavItem[] = [
 const SINGLE: NavItem[] = [
   { key: 'culture', to: '/culture', icon: '🏮' },
   { key: 'tools', to: '/tools', icon: '🛠️' },
+  { key: 'progress', to: '/progress', icon: '📈' },
 ]
 
 const pillClass =

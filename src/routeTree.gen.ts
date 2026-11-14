@@ -16,6 +16,7 @@ import { Route as GrammarRouteRouteImport } from './routes/grammar/route'
 import { Route as HangulRouteRouteImport } from './routes/hangul/route'
 import { Route as ListeningRouteRouteImport } from './routes/listening/route'
 import { Route as NumbersRouteRouteImport } from './routes/numbers/route'
+import { Route as ProgressRouteRouteImport } from './routes/progress/route'
 import { Route as PronunciationRouteRouteImport } from './routes/pronunciation/route'
 import { Route as ReadingRouteRouteImport } from './routes/reading/route'
 import { Route as SpeakingRouteRouteImport } from './routes/speaking/route'
@@ -37,6 +38,10 @@ import { Route as HangulQuizRouteImport } from './routes/hangul/quiz'
 import { Route as ListeningIndexRouteImport } from './routes/listening/index'
 import { Route as NumbersIndexRouteImport } from './routes/numbers/index'
 import { Route as NumbersPracticeRouteImport } from './routes/numbers/practice'
+import { Route as ProgressIndexRouteImport } from './routes/progress/index'
+import { Route as ProgressAchievementsRouteImport } from './routes/progress/achievements'
+import { Route as ProgressDataRouteImport } from './routes/progress/data'
+import { Route as ProgressPlacementRouteImport } from './routes/progress/placement'
 import { Route as PronunciationIndexRouteImport } from './routes/pronunciation/index'
 import { Route as PronunciationRuleIdRouteImport } from './routes/pronunciation/$ruleId'
 import { Route as PronunciationMinimalPairsRouteImport } from './routes/pronunciation/minimal-pairs'
@@ -57,6 +62,8 @@ import { Route as WritingProduceRouteImport } from './routes/writing/produce'
 import { Route as WritingTranslateRouteImport } from './routes/writing/translate'
 import { Route as ListeningDialoguesIndexRouteImport } from './routes/listening/dialogues/index'
 import { Route as ListeningDialoguesDialogueIdRouteImport } from './routes/listening/dialogues/$dialogueId'
+import { Route as ProgressExamIndexRouteImport } from './routes/progress/exam/index'
+import { Route as ProgressExamExamIdRouteImport } from './routes/progress/exam/$examId'
 import { Route as VocabularyDecksIndexRouteImport } from './routes/vocabulary/decks/index'
 import { Route as VocabularyDecksDeckIdRouteImport } from './routes/vocabulary/decks/$deckId'
 import { Route as VocabularyDecksNewRouteImport } from './routes/vocabulary/decks/new'
@@ -95,6 +102,11 @@ const ListeningRouteRoute = ListeningRouteRouteImport.update({
 const NumbersRouteRoute = NumbersRouteRouteImport.update({
   id: '/numbers',
   path: '/numbers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressRouteRoute = ProgressRouteRouteImport.update({
+  id: '/progress',
+  path: '/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PronunciationRouteRoute = PronunciationRouteRouteImport.update({
@@ -202,6 +214,26 @@ const NumbersPracticeRoute = NumbersPracticeRouteImport.update({
   path: '/practice',
   getParentRoute: () => NumbersRouteRoute,
 } as any)
+const ProgressIndexRoute = ProgressIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProgressRouteRoute,
+} as any)
+const ProgressAchievementsRoute = ProgressAchievementsRouteImport.update({
+  id: '/achievements',
+  path: '/achievements',
+  getParentRoute: () => ProgressRouteRoute,
+} as any)
+const ProgressDataRoute = ProgressDataRouteImport.update({
+  id: '/data',
+  path: '/data',
+  getParentRoute: () => ProgressRouteRoute,
+} as any)
+const ProgressPlacementRoute = ProgressPlacementRouteImport.update({
+  id: '/placement',
+  path: '/placement',
+  getParentRoute: () => ProgressRouteRoute,
+} as any)
 const PronunciationIndexRoute = PronunciationIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -304,6 +336,16 @@ const ListeningDialoguesDialogueIdRoute =
     path: '/dialogues/$dialogueId',
     getParentRoute: () => ListeningRouteRoute,
   } as any)
+const ProgressExamIndexRoute = ProgressExamIndexRouteImport.update({
+  id: '/exam/',
+  path: '/exam/',
+  getParentRoute: () => ProgressRouteRoute,
+} as any)
+const ProgressExamExamIdRoute = ProgressExamExamIdRouteImport.update({
+  id: '/exam/$examId',
+  path: '/exam/$examId',
+  getParentRoute: () => ProgressRouteRoute,
+} as any)
 const VocabularyDecksIndexRoute = VocabularyDecksIndexRouteImport.update({
   id: '/decks/',
   path: '/decks/',
@@ -333,6 +375,7 @@ export interface FileRoutesByFullPath {
   '/hangul': typeof HangulRouteRouteWithChildren
   '/listening': typeof ListeningRouteRouteWithChildren
   '/numbers': typeof NumbersRouteRouteWithChildren
+  '/progress': typeof ProgressRouteRouteWithChildren
   '/pronunciation': typeof PronunciationRouteRouteWithChildren
   '/reading': typeof ReadingRouteRouteWithChildren
   '/speaking': typeof SpeakingRouteRouteWithChildren
@@ -348,6 +391,9 @@ export interface FileRoutesByFullPath {
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
   '/numbers/practice': typeof NumbersPracticeRoute
+  '/progress/achievements': typeof ProgressAchievementsRoute
+  '/progress/data': typeof ProgressDataRoute
+  '/progress/placement': typeof ProgressPlacementRoute
   '/pronunciation/$ruleId': typeof PronunciationRuleIdRoute
   '/pronunciation/minimal-pairs': typeof PronunciationMinimalPairsRoute
   '/reading/$textId': typeof ReadingTextIdRoute
@@ -366,6 +412,7 @@ export interface FileRoutesByFullPath {
   '/hangul/': typeof HangulIndexRoute
   '/listening/': typeof ListeningIndexRoute
   '/numbers/': typeof NumbersIndexRoute
+  '/progress/': typeof ProgressIndexRoute
   '/pronunciation/': typeof PronunciationIndexRoute
   '/reading/': typeof ReadingIndexRoute
   '/speaking/': typeof SpeakingIndexRoute
@@ -373,10 +420,12 @@ export interface FileRoutesByFullPath {
   '/vocabulary/': typeof VocabularyIndexRoute
   '/writing/': typeof WritingIndexRoute
   '/listening/dialogues/$dialogueId': typeof ListeningDialoguesDialogueIdRoute
+  '/progress/exam/$examId': typeof ProgressExamExamIdRoute
   '/vocabulary/decks/$deckId': typeof VocabularyDecksDeckIdRoute
   '/vocabulary/decks/new': typeof VocabularyDecksNewRoute
   '/vocabulary/word/$wordId': typeof VocabularyWordWordIdRoute
   '/listening/dialogues/': typeof ListeningDialoguesIndexRoute
+  '/progress/exam/': typeof ProgressExamIndexRoute
   '/vocabulary/decks/': typeof VocabularyDecksIndexRoute
 }
 export interface FileRoutesByTo {
@@ -390,6 +439,9 @@ export interface FileRoutesByTo {
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
   '/numbers/practice': typeof NumbersPracticeRoute
+  '/progress/achievements': typeof ProgressAchievementsRoute
+  '/progress/data': typeof ProgressDataRoute
+  '/progress/placement': typeof ProgressPlacementRoute
   '/pronunciation/$ruleId': typeof PronunciationRuleIdRoute
   '/pronunciation/minimal-pairs': typeof PronunciationMinimalPairsRoute
   '/reading/$textId': typeof ReadingTextIdRoute
@@ -408,6 +460,7 @@ export interface FileRoutesByTo {
   '/hangul': typeof HangulIndexRoute
   '/listening': typeof ListeningIndexRoute
   '/numbers': typeof NumbersIndexRoute
+  '/progress': typeof ProgressIndexRoute
   '/pronunciation': typeof PronunciationIndexRoute
   '/reading': typeof ReadingIndexRoute
   '/speaking': typeof SpeakingIndexRoute
@@ -415,10 +468,12 @@ export interface FileRoutesByTo {
   '/vocabulary': typeof VocabularyIndexRoute
   '/writing': typeof WritingIndexRoute
   '/listening/dialogues/$dialogueId': typeof ListeningDialoguesDialogueIdRoute
+  '/progress/exam/$examId': typeof ProgressExamExamIdRoute
   '/vocabulary/decks/$deckId': typeof VocabularyDecksDeckIdRoute
   '/vocabulary/decks/new': typeof VocabularyDecksNewRoute
   '/vocabulary/word/$wordId': typeof VocabularyWordWordIdRoute
   '/listening/dialogues': typeof ListeningDialoguesIndexRoute
+  '/progress/exam': typeof ProgressExamIndexRoute
   '/vocabulary/decks': typeof VocabularyDecksIndexRoute
 }
 export interface FileRoutesById {
@@ -430,6 +485,7 @@ export interface FileRoutesById {
   '/hangul': typeof HangulRouteRouteWithChildren
   '/listening': typeof ListeningRouteRouteWithChildren
   '/numbers': typeof NumbersRouteRouteWithChildren
+  '/progress': typeof ProgressRouteRouteWithChildren
   '/pronunciation': typeof PronunciationRouteRouteWithChildren
   '/reading': typeof ReadingRouteRouteWithChildren
   '/speaking': typeof SpeakingRouteRouteWithChildren
@@ -445,6 +501,9 @@ export interface FileRoutesById {
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
   '/numbers/practice': typeof NumbersPracticeRoute
+  '/progress/achievements': typeof ProgressAchievementsRoute
+  '/progress/data': typeof ProgressDataRoute
+  '/progress/placement': typeof ProgressPlacementRoute
   '/pronunciation/$ruleId': typeof PronunciationRuleIdRoute
   '/pronunciation/minimal-pairs': typeof PronunciationMinimalPairsRoute
   '/reading/$textId': typeof ReadingTextIdRoute
@@ -463,6 +522,7 @@ export interface FileRoutesById {
   '/hangul/': typeof HangulIndexRoute
   '/listening/': typeof ListeningIndexRoute
   '/numbers/': typeof NumbersIndexRoute
+  '/progress/': typeof ProgressIndexRoute
   '/pronunciation/': typeof PronunciationIndexRoute
   '/reading/': typeof ReadingIndexRoute
   '/speaking/': typeof SpeakingIndexRoute
@@ -470,10 +530,12 @@ export interface FileRoutesById {
   '/vocabulary/': typeof VocabularyIndexRoute
   '/writing/': typeof WritingIndexRoute
   '/listening/dialogues/$dialogueId': typeof ListeningDialoguesDialogueIdRoute
+  '/progress/exam/$examId': typeof ProgressExamExamIdRoute
   '/vocabulary/decks/$deckId': typeof VocabularyDecksDeckIdRoute
   '/vocabulary/decks/new': typeof VocabularyDecksNewRoute
   '/vocabulary/word/$wordId': typeof VocabularyWordWordIdRoute
   '/listening/dialogues/': typeof ListeningDialoguesIndexRoute
+  '/progress/exam/': typeof ProgressExamIndexRoute
   '/vocabulary/decks/': typeof VocabularyDecksIndexRoute
 }
 export interface FileRouteTypes {
@@ -486,6 +548,7 @@ export interface FileRouteTypes {
     | '/hangul'
     | '/listening'
     | '/numbers'
+    | '/progress'
     | '/pronunciation'
     | '/reading'
     | '/speaking'
@@ -501,6 +564,9 @@ export interface FileRouteTypes {
     | '/hangul/builder'
     | '/hangul/quiz'
     | '/numbers/practice'
+    | '/progress/achievements'
+    | '/progress/data'
+    | '/progress/placement'
     | '/pronunciation/$ruleId'
     | '/pronunciation/minimal-pairs'
     | '/reading/$textId'
@@ -519,6 +585,7 @@ export interface FileRouteTypes {
     | '/hangul/'
     | '/listening/'
     | '/numbers/'
+    | '/progress/'
     | '/pronunciation/'
     | '/reading/'
     | '/speaking/'
@@ -526,10 +593,12 @@ export interface FileRouteTypes {
     | '/vocabulary/'
     | '/writing/'
     | '/listening/dialogues/$dialogueId'
+    | '/progress/exam/$examId'
     | '/vocabulary/decks/$deckId'
     | '/vocabulary/decks/new'
     | '/vocabulary/word/$wordId'
     | '/listening/dialogues/'
+    | '/progress/exam/'
     | '/vocabulary/decks/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -543,6 +612,9 @@ export interface FileRouteTypes {
     | '/hangul/builder'
     | '/hangul/quiz'
     | '/numbers/practice'
+    | '/progress/achievements'
+    | '/progress/data'
+    | '/progress/placement'
     | '/pronunciation/$ruleId'
     | '/pronunciation/minimal-pairs'
     | '/reading/$textId'
@@ -561,6 +633,7 @@ export interface FileRouteTypes {
     | '/hangul'
     | '/listening'
     | '/numbers'
+    | '/progress'
     | '/pronunciation'
     | '/reading'
     | '/speaking'
@@ -568,10 +641,12 @@ export interface FileRouteTypes {
     | '/vocabulary'
     | '/writing'
     | '/listening/dialogues/$dialogueId'
+    | '/progress/exam/$examId'
     | '/vocabulary/decks/$deckId'
     | '/vocabulary/decks/new'
     | '/vocabulary/word/$wordId'
     | '/listening/dialogues'
+    | '/progress/exam'
     | '/vocabulary/decks'
   id:
     | '__root__'
@@ -582,6 +657,7 @@ export interface FileRouteTypes {
     | '/hangul'
     | '/listening'
     | '/numbers'
+    | '/progress'
     | '/pronunciation'
     | '/reading'
     | '/speaking'
@@ -597,6 +673,9 @@ export interface FileRouteTypes {
     | '/hangul/builder'
     | '/hangul/quiz'
     | '/numbers/practice'
+    | '/progress/achievements'
+    | '/progress/data'
+    | '/progress/placement'
     | '/pronunciation/$ruleId'
     | '/pronunciation/minimal-pairs'
     | '/reading/$textId'
@@ -615,6 +694,7 @@ export interface FileRouteTypes {
     | '/hangul/'
     | '/listening/'
     | '/numbers/'
+    | '/progress/'
     | '/pronunciation/'
     | '/reading/'
     | '/speaking/'
@@ -622,10 +702,12 @@ export interface FileRouteTypes {
     | '/vocabulary/'
     | '/writing/'
     | '/listening/dialogues/$dialogueId'
+    | '/progress/exam/$examId'
     | '/vocabulary/decks/$deckId'
     | '/vocabulary/decks/new'
     | '/vocabulary/word/$wordId'
     | '/listening/dialogues/'
+    | '/progress/exam/'
     | '/vocabulary/decks/'
   fileRoutesById: FileRoutesById
 }
@@ -637,6 +719,7 @@ export interface RootRouteChildren {
   HangulRouteRoute: typeof HangulRouteRouteWithChildren
   ListeningRouteRoute: typeof ListeningRouteRouteWithChildren
   NumbersRouteRoute: typeof NumbersRouteRouteWithChildren
+  ProgressRouteRoute: typeof ProgressRouteRouteWithChildren
   PronunciationRouteRoute: typeof PronunciationRouteRouteWithChildren
   ReadingRouteRoute: typeof ReadingRouteRouteWithChildren
   SpeakingRouteRoute: typeof SpeakingRouteRouteWithChildren
@@ -694,6 +777,13 @@ declare module '@tanstack/react-router' {
       path: '/numbers'
       fullPath: '/numbers'
       preLoaderRoute: typeof NumbersRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pronunciation': {
@@ -843,6 +933,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NumbersPracticeRouteImport
       parentRoute: typeof NumbersRouteRoute
     }
+    '/progress/': {
+      id: '/progress/'
+      path: '/'
+      fullPath: '/progress/'
+      preLoaderRoute: typeof ProgressIndexRouteImport
+      parentRoute: typeof ProgressRouteRoute
+    }
+    '/progress/achievements': {
+      id: '/progress/achievements'
+      path: '/achievements'
+      fullPath: '/progress/achievements'
+      preLoaderRoute: typeof ProgressAchievementsRouteImport
+      parentRoute: typeof ProgressRouteRoute
+    }
+    '/progress/data': {
+      id: '/progress/data'
+      path: '/data'
+      fullPath: '/progress/data'
+      preLoaderRoute: typeof ProgressDataRouteImport
+      parentRoute: typeof ProgressRouteRoute
+    }
+    '/progress/placement': {
+      id: '/progress/placement'
+      path: '/placement'
+      fullPath: '/progress/placement'
+      preLoaderRoute: typeof ProgressPlacementRouteImport
+      parentRoute: typeof ProgressRouteRoute
+    }
     '/pronunciation/': {
       id: '/pronunciation/'
       path: '/'
@@ -983,6 +1101,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListeningDialoguesDialogueIdRouteImport
       parentRoute: typeof ListeningRouteRoute
     }
+    '/progress/exam/': {
+      id: '/progress/exam/'
+      path: '/exam'
+      fullPath: '/progress/exam/'
+      preLoaderRoute: typeof ProgressExamIndexRouteImport
+      parentRoute: typeof ProgressRouteRoute
+    }
+    '/progress/exam/$examId': {
+      id: '/progress/exam/$examId'
+      path: '/exam/$examId'
+      fullPath: '/progress/exam/$examId'
+      preLoaderRoute: typeof ProgressExamExamIdRouteImport
+      parentRoute: typeof ProgressRouteRoute
+    }
     '/vocabulary/decks/': {
       id: '/vocabulary/decks/'
       path: '/decks'
@@ -1108,6 +1240,28 @@ const NumbersRouteRouteWithChildren = NumbersRouteRoute._addFileChildren(
   NumbersRouteRouteChildren,
 )
 
+interface ProgressRouteRouteChildren {
+  ProgressAchievementsRoute: typeof ProgressAchievementsRoute
+  ProgressDataRoute: typeof ProgressDataRoute
+  ProgressPlacementRoute: typeof ProgressPlacementRoute
+  ProgressIndexRoute: typeof ProgressIndexRoute
+  ProgressExamExamIdRoute: typeof ProgressExamExamIdRoute
+  ProgressExamIndexRoute: typeof ProgressExamIndexRoute
+}
+
+const ProgressRouteRouteChildren: ProgressRouteRouteChildren = {
+  ProgressAchievementsRoute: ProgressAchievementsRoute,
+  ProgressDataRoute: ProgressDataRoute,
+  ProgressPlacementRoute: ProgressPlacementRoute,
+  ProgressIndexRoute: ProgressIndexRoute,
+  ProgressExamExamIdRoute: ProgressExamExamIdRoute,
+  ProgressExamIndexRoute: ProgressExamIndexRoute,
+}
+
+const ProgressRouteRouteWithChildren = ProgressRouteRoute._addFileChildren(
+  ProgressRouteRouteChildren,
+)
+
 interface PronunciationRouteRouteChildren {
   PronunciationRuleIdRoute: typeof PronunciationRuleIdRoute
   PronunciationMinimalPairsRoute: typeof PronunciationMinimalPairsRoute
@@ -1219,6 +1373,7 @@ const rootRouteChildren: RootRouteChildren = {
   HangulRouteRoute: HangulRouteRouteWithChildren,
   ListeningRouteRoute: ListeningRouteRouteWithChildren,
   NumbersRouteRoute: NumbersRouteRouteWithChildren,
+  ProgressRouteRoute: ProgressRouteRouteWithChildren,
   PronunciationRouteRoute: PronunciationRouteRouteWithChildren,
   ReadingRouteRoute: ReadingRouteRouteWithChildren,
   SpeakingRouteRoute: SpeakingRouteRouteWithChildren,

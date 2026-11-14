@@ -10,7 +10,10 @@ import { MotionConfig, motion } from 'motion/react'
 import { lazy, Suspense, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AppHeader } from '../components/layout/AppHeader'
+import { Toaster } from '../components/layout/Toaster'
 import { PageTransition } from '../components/motion/PageTransition'
+import { AchievementWatcher } from '../features/progress/AchievementWatcher'
+import { useStudyTimer } from '../hooks/useStudyTimer'
 import { useSettings } from '../stores/settings'
 
 export interface RouterContext {
@@ -24,6 +27,9 @@ const Devtools = showDevtools
   ? lazy(() => import('../components/layout/Devtools'))
   : () => null
 
+// Tests drive time themselves; a background timer would only add noise.
+const countStudyTime = import.meta.env.MODE !== 'test'
+
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootLayout,
   notFoundComponent: NotFound,
@@ -35,6 +41,7 @@ function RootLayout() {
   const theme = useSettings((s) => s.theme)
   // Animate between top-level sections only; nested layouts animate their own content.
   const section = useLocation({ select: (l) => l.pathname.split('/')[1] ?? '' })
+  useStudyTimer(countStudyTime)
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
@@ -61,6 +68,8 @@ function RootLayout() {
             <Outlet />
           </PageTransition>
         </main>
+        <Toaster />
+        <AchievementWatcher />
         <Suspense>
           <Devtools />
         </Suspense>

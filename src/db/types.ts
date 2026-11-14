@@ -71,3 +71,41 @@ export interface DeckRecord extends SyncFields {
   itemIds: string[]
   createdAt: number
 }
+
+/** Skills tracked on the progress dashboard. */
+export type Skill =
+  | 'hangul'
+  | 'vocabulary'
+  | 'grammar'
+  | 'pronunciation'
+  | 'listening'
+  | 'speaking'
+  | 'reading'
+  | 'writing'
+  | 'numbers'
+
+/**
+ * Result of an open-ended practice that is not a finished quiz (e.g. one
+ * answer in the endless number drill, or a keyboard trainer session).
+ */
+export interface PracticeEvent extends SyncFields {
+  skill: Skill
+  /** Which exercise produced it, e.g. "numbers:practice". */
+  source: string
+  correct: number
+  total: number
+  at: number
+}
+
+/**
+ * Active study time of one local calendar day.
+ *
+ * The id is the day itself (`YYYY-MM-DD`), so each device keeps one record
+ * per day and a future sync can merge by id.
+ */
+export interface StudyDay {
+  id: string
+  ms: number
+  updatedAt: number
+  deletedAt: number | null
+}

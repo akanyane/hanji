@@ -7,6 +7,7 @@ import {
   fadeUp,
   stagger,
 } from '../../components/motion/presets'
+import { ProgressStrip } from '../progress/ProgressStrip'
 import { PLATFORM_MODULES, type PlatformModule } from './modules'
 
 const MotionLink = motion.create(Link)
@@ -123,6 +124,7 @@ export function HomePage() {
   return (
     <div className="flex flex-col gap-8">
       <Hero />
+      <ProgressStrip />
       <motion.ul
         className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         variants={stagger(0.3, 0.05)}

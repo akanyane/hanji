@@ -16,6 +16,7 @@ export const ptBR: Messages = {
     next: 'Próximo',
     continue: 'Continuar',
     speed: 'Velocidade da voz',
+    close: 'Fechar',
   },
   nav: {
     main: 'Navegação principal',
@@ -34,6 +35,7 @@ export const ptBR: Messages = {
     learn: 'Aprender',
     practice: 'Praticar',
     tools: 'Ferramentas',
+    progress: 'Progresso',
     skipToContent: 'Pular para o conteúdo',
     homeLabel: 'Aprenda Coreano: página inicial',
     language: 'Idioma',
@@ -777,6 +779,283 @@ export const ptBR: Messages = {
     phrases: 'Frases úteis',
     related: 'Veja na prática',
   },
+  pwa: {
+    updateTitle: 'Nova versão disponível',
+    updateDescription:
+      'Recarregue para receber as lições e correções mais recentes.',
+    reload: 'Recarregar',
+    offlineTitle: 'Pronto para funcionar offline',
+    offlineDescription:
+      'O app foi salvo neste aparelho: você pode estudar sem internet.',
+  },
+  progress: {
+    title: 'Seu progresso',
+    description:
+      'Sequência, XP, conquistas, teste de nivelamento, simulados no formato TOPIK e seus dados.',
+    sections: 'Seções do progresso',
+    loading: 'Carregando seu progresso…',
+    tabs: {
+      dashboard: 'Visão geral',
+      achievements: 'Conquistas',
+      placement: 'Nivelamento',
+      exam: 'Simulado TOPIK',
+      data: 'Dados e app',
+    },
+    dashboard: {
+      level: 'Nível',
+      xpToNext: '{{current}} / {{needed}} XP para o nível {{next}}',
+      streak: 'Dias seguidos',
+      streakToday: 'Estudou hoje ✓',
+      streakPending: 'Estude hoje para manter a sequência',
+      streakBest_one: 'Recorde: {{count}} dia',
+      streakBest_other: 'Recorde: {{count}} dias',
+      studyTime: 'Tempo de estudo',
+      today: 'Hoje: {{value}}',
+      minutes_one: '{{count}} min',
+      minutes_other: '{{count}} min',
+      hoursMinutes: '{{hours}} h {{minutes}}',
+      words: 'Palavras aprendidas',
+      wordsSeen_one: '{{count}} palavra nas suas revisões',
+      wordsSeen_other: '{{count}} palavras nas suas revisões',
+      activities: 'Atividades',
+      activitiesDetail: '{{quizzes}} exercícios · {{reviews}} revisões',
+      activity: 'Atividade (últimas 12 semanas)',
+      activitySummary_one: '{{count}} dia ativo nas últimas 12 semanas.',
+      activitySummary_other: '{{count}} dias ativos nas últimas 12 semanas.',
+      activityCell: '{{day}}: {{count}} XP',
+      less: 'Menos',
+      more: 'Mais',
+      skills: 'Acertos por habilidade',
+      notPracticed: 'Ainda não praticada',
+      skillAccuracy_one: '{{value}}% · {{count}} resposta',
+      skillAccuracy_other: '{{value}}% · {{count}} respostas',
+      nextAchievements: 'Próximas conquistas',
+      unlockedCount: '{{count}} de {{total}} desbloqueadas',
+    },
+    achievements: {
+      unlocked: 'Conquista desbloqueada!',
+      moreUnlocked_one: '+{{count}} conquista desbloqueada',
+      moreUnlocked_other: '+{{count}} conquistas desbloqueadas',
+      unlockedLabel: 'Desbloqueada',
+      lockedLabel: 'Bloqueada',
+      items: {
+        firstSteps: {
+          title: 'Primeiros passos',
+          description: 'Ganhe seus primeiros XP.',
+        },
+        placement: {
+          title: 'Sei onde estou',
+          description: 'Faça o teste de nivelamento.',
+        },
+        streak3: {
+          title: 'Esquentando',
+          description: 'Estude 3 dias seguidos.',
+        },
+        streak7: {
+          title: 'Uma semana inteira',
+          description: 'Estude 7 dias seguidos.',
+        },
+        streak30: {
+          title: 'Imparável',
+          description: 'Estude 30 dias seguidos.',
+        },
+        xp100: { title: '100 XP', description: 'Ganhe 100 XP.' },
+        xp1000: { title: '1.000 XP', description: 'Ganhe 1.000 XP.' },
+        xp5000: { title: '5.000 XP', description: 'Ganhe 5.000 XP.' },
+        hangulMaster: {
+          title: 'Hangul desbloqueado',
+          description: 'Acerte pelo menos 70% em um quiz de Hangul.',
+        },
+        words10: {
+          title: 'Primeiras palavras',
+          description: 'Leve 10 palavras para a revisão de longo prazo.',
+        },
+        words50: {
+          title: 'Vocabulário crescendo',
+          description: 'Leve 50 palavras para a revisão de longo prazo.',
+        },
+        words200: {
+          title: 'Floresta de palavras',
+          description: 'Leve 200 palavras para a revisão de longo prazo.',
+        },
+        reviews100: {
+          title: 'Cem revisões',
+          description: 'Faça 100 revisões de repetição espaçada.',
+        },
+        perfect: {
+          title: 'Sem erros',
+          description: 'Acerte tudo em um exercício de 5 ou mais perguntas.',
+        },
+        grammar5: {
+          title: 'Aprendiz de gramática',
+          description: 'Passe em 5 lições de gramática.',
+        },
+        grammar15: {
+          title: 'Especialista em gramática',
+          description: 'Passe em 15 lições de gramática.',
+        },
+        reader: {
+          title: 'Leitor',
+          description: 'Passe nas perguntas de 3 textos de leitura.',
+        },
+        conversation: {
+          title: 'Bom ouvinte',
+          description: 'Complete 5 exercícios de diálogo.',
+        },
+        allRounder: {
+          title: 'Completo',
+          description: 'Pratique 6 habilidades diferentes.',
+        },
+        studyHour: {
+          title: 'Uma hora de coreano',
+          description: 'Estude 60 minutos no total.',
+        },
+        topik1: {
+          title: 'TOPIK nível 1 (estimativa)',
+          description: 'Faça 40% ou mais em um simulado TOPIK.',
+        },
+        topik2: {
+          title: 'TOPIK nível 2 (estimativa)',
+          description: 'Faça 70% ou mais em um simulado TOPIK.',
+        },
+      },
+    },
+    placement: {
+      ctaTitle: 'Descubra seu nível',
+      ctaText:
+        'Um teste rápido mostra por onde começar, do Hangul ao simulado TOPIK.',
+      intro:
+        '{{count}} perguntas, da leitura do Hangul ao discurso indireto. Responda o que souber; na dúvida, escolha seu melhor palpite. No fim você recebe uma sugestão de por onde começar.',
+      start: 'Começar o teste',
+      retake: 'Fazer o teste de novo',
+      previous: 'Seu último resultado: {{level}}.',
+      score: '{{correct}} de {{total}} corretas',
+      goTo: 'Ir para {{module}}',
+      modules: {
+        hangul: 'Hangul',
+        vocabulary: 'Vocabulário',
+        grammar: 'Gramática',
+        reading: 'Leitura',
+        exam: 'o simulado TOPIK',
+      },
+      levels: {
+        '0': {
+          title: 'Começando do zero',
+          description:
+            'Comece pelo alfabeto coreano: em poucos dias você vai ler qualquer palavra.',
+        },
+        '1': {
+          title: 'Você já lê Hangul',
+          description:
+            'Ótima base! Agora monte seu primeiro vocabulário e frases básicas.',
+        },
+        '2': {
+          title: 'Iniciante',
+          description:
+            'Você conhece o básico. Siga para tempos verbais, conectivos e verbos irregulares.',
+        },
+        '3': {
+          title: 'Iniciante avançado',
+          description:
+            'Você entende frases do dia a dia. Leia textos e pratique diálogos para ganhar fluência.',
+        },
+        '4': {
+          title: 'Pronto para o simulado TOPIK',
+          description:
+            'Impressionante! Teste-se com o simulado no formato TOPIK e continue lendo.',
+        },
+      },
+    },
+    exam: {
+      description:
+        'Pratique no formato do TOPIK I: compreensão auditiva e leitura, com cronômetro e uma estimativa de nível no final.',
+      disclaimer:
+        'Questões originais no formato do TOPIK I, criadas para praticar. Não é material oficial; o nível é só uma estimativa.',
+      meta: '{{count}} questões · {{minutes}} minutos',
+      best: 'Melhor pontuação: {{score}}',
+      start: 'Começar o simulado',
+      ruleListening_one:
+        'Áudio: cada áudio pode ser tocado {{count}} vez, como na prova real.',
+      ruleListening_other:
+        'Áudio: cada áudio pode ser tocado {{count}} vezes, como na prova real.',
+      ruleNavigate:
+        'Você pode voltar e mudar respostas até enviar ou o tempo acabar.',
+      ruleLevels:
+        'Estimativa: nível 1 a partir de 40%, nível 2 a partir de 70% (as mesmas proporções do TOPIK I: 80 e 140 de 200).',
+      listening: 'Compreensão auditiva',
+      reading: 'Leitura',
+      question: 'Questão {{current}} de {{total}}',
+      timeLeft: 'Tempo restante',
+      answered: '{{count}} de {{total}} respondidas',
+      questions: 'Questões',
+      goToQuestion: 'Ir para a questão {{number}}',
+      play: 'Tocar o áudio',
+      playsLeft_zero: 'Nenhuma reprodução restante',
+      playsLeft_one: 'Resta {{count}} reprodução',
+      playsLeft_other: 'Restam {{count}} reproduções',
+      submit: 'Enviar',
+      confirmSubmit_one:
+        '{{count}} questão está sem resposta. Enviar mesmo assim?',
+      confirmSubmit_other:
+        '{{count}} questões estão sem resposta. Enviar mesmo assim?',
+      levels: {
+        '0': 'Abaixo do TOPIK nível 1 (estimativa)',
+        '1': 'TOPIK nível 1 (estimativa)',
+        '2': 'TOPIK nível 2 (estimativa)',
+      },
+      sections: 'Áudio {{listening}} · Leitura {{reading}}',
+      estimateNote:
+        'Estimado com as proporções do TOPIK I. Um simulado curto não substitui a prova real.',
+      retry: 'Tentar de novo',
+      toDashboard: 'Voltar ao progresso',
+      review: 'Revise suas respostas',
+      correctAnswer: 'Resposta correta:',
+      yourAnswer: 'Sua resposta:',
+      unanswered: 'sem resposta',
+    },
+    data: {
+      backupTitle: 'Backup',
+      backupText:
+        'Seu progresso fica só neste navegador. Exporte um arquivo para guardar uma cópia ou levar para outro aparelho e importe-o lá.',
+      export: 'Exportar progresso',
+      import: 'Importar um backup',
+      importFile: 'Arquivo de backup',
+      confirmTitle: 'Substituir seu progresso atual?',
+      confirmText:
+        'Backup de {{date}}: {{quizzes}} exercícios, {{words}} palavras e {{reviews}} revisões. O progresso atual deste aparelho será substituído.',
+      confirmRestore: 'Substituir e restaurar',
+      cancel: 'Cancelar',
+      done: {
+        exported: 'Arquivo de backup baixado.',
+        restored: 'Progresso restaurado!',
+        reset: 'Todo o progresso foi apagado.',
+      },
+      errors: {
+        notJson: 'Este arquivo não é um backup válido (não é JSON).',
+        notBackup: 'Este arquivo não é um backup do Aprenda Coreano.',
+        newerVersion:
+          'Este backup vem de uma versão mais nova do app. Recarregue o app e tente de novo.',
+        invalid: 'Este backup está danificado ou incompleto.',
+      },
+      installTitle: 'Instalar o app',
+      installText:
+        'Instale para abrir pela tela inicial ou área de trabalho e estudar offline.',
+      install: 'Instalar',
+      installed: 'O app está instalado neste aparelho.',
+      installManual:
+        'No iPhone/iPad: Compartilhar → Adicionar à Tela de Início. Em outros navegadores, procure “Instalar” no menu ou na barra de endereço.',
+      storageTitle: 'Privacidade',
+      storageText:
+        'Sem conta e sem servidor: tudo fica neste aparelho. Limpar os dados do navegador apaga seu progresso, então exporte um backup de vez em quando.',
+      resetTitle: 'Recomeçar',
+      resetText:
+        'Apague todo o progresso deste aparelho (as configurações são mantidas). Exporte um backup antes se quiser recuperá-lo depois.',
+      reset: 'Apagar todo o progresso',
+      resetConfirm:
+        'Apagar TODO o seu progresso neste aparelho? Isso não pode ser desfeito.',
+    },
+  },
+
   tools: {
     title: 'Ferramentas',
     description:

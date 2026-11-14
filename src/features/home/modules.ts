@@ -36,6 +36,6 @@ export const PLATFORM_MODULES: PlatformModule[] = [
   { id: 'numbers', korean: '숫자', to: '/numbers' },
   { id: 'dialogues', korean: '대화', to: '/dialogues' },
   { id: 'culture', korean: '문화', to: '/culture' },
-  { id: 'progress', korean: '진도' },
+  { id: 'progress', korean: '진도', to: '/progress' },
   { id: 'tools', korean: '도구', to: '/tools' },
 ]

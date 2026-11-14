@@ -14,6 +14,14 @@ import {
   updateDeck,
 } from './decks'
 import {
+  getMeta,
+  loadProgressData,
+  META_KEYS,
+  type NewPracticeEvent,
+  recordPractice,
+  setMeta,
+} from './progress'
+import {
   getQuizSummaries,
   getQuizSummary,
   type NewQuizAttempt,
@@ -41,7 +49,13 @@ export const queryKeys = {
   srs: ['srs'] as const,
   decks: ['decks'] as const,
   deck: (id: string) => ['decks', id] as const,
+  progress: ['progress'] as const,
+  meta: (key: string) => ['meta', key] as const,
 }
+
+/** Everything that changes progress also refreshes the progress stats. */
+const refreshProgress = (queryClient: ReturnType<typeof useQueryClient>) =>
+  queryClient.invalidateQueries({ queryKey: queryKeys.progress })
 
 // --- Quizzes ---------------------------------------------------------------
 
@@ -60,8 +74,10 @@ export function useRecordQuizAttempt() {
   return useMutation({
     mutationFn: (input: NewQuizAttempt) => recordQuizAttempt(input),
     // Invalidates single and grouped summaries alike.
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: queryKeys.quizAttempts }),
+    onSuccess: () => {
+      refreshProgress(queryClient)
+      return queryClient.invalidateQueries({ queryKey: queryKeys.quizAttempts })
+    },
   })
 }
 
@@ -100,7 +116,10 @@ export function useRecordReview() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (input: ReviewInput) => recordReview(input),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.srs }),
+    onSuccess: () => {
+      refreshProgress(queryClient)
+      return queryClient.invalidateQueries({ queryKey: queryKeys.srs })
+    },
   })
 }
 
@@ -108,7 +127,10 @@ export function useAddToSrs() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (itemId: string) => addToSrs(itemId),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.srs }),
+    onSuccess: () => {
+      refreshProgress(queryClient)
+      return queryClient.invalidateQueries({ queryKey: queryKeys.srs })
+    },
   })
 }
 
@@ -149,3 +171,44 @@ export function useDeleteDeck() {
       queryClient.invalidateQueries({ queryKey: queryKeys.decks }),
   })
 }
+
+// --- Progress --------------------------------------------------------------
+
+export const progressDataQuery = queryOptions({
+  queryKey: queryKeys.progress,
+  queryFn: loadProgressData,
+})
+
+export function useProgressData() {
+  return useQuery(progressDataQuery)
+}
+
+export function useRecordPractice() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (input: NewPracticeEvent) => recordPractice(input),
+    onSuccess: () => refreshProgress(queryClient),
+  })
+}
+
+export const metaQuery = <T>(key: string) =>
+  queryOptions({
+    queryKey: queryKeys.meta(key),
+    // Query data cannot be undefined.
+    queryFn: async () => (await getMeta<T>(key)) ?? null,
+  })
+
+export function useMeta<T>(key: string) {
+  return useQuery(metaQuery<T>(key))
+}
+
+export function useSetMeta(key: string) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (value: unknown) => setMeta(key, value),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.meta(key) }),
+  })
+}
+
+export { META_KEYS }

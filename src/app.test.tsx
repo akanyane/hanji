@@ -14,7 +14,11 @@ describe('app navigation', () => {
     expect(
       await screen.findByRole('heading', { name: 'Aprenda coreano do zero' }),
     ).toBeInTheDocument()
-    expect(screen.getAllByText('Em breve').length).toBeGreaterThan(0)
+    // Every module is available: no "coming soon" cards are left.
+    expect(screen.queryByText('Em breve')).not.toBeInTheDocument()
+    expect(
+      screen.getAllByRole('link', { name: /Progresso/ }).length,
+    ).toBeGreaterThan(0)
   })
 
   it('navigates from the home page to the Hangul browser and filters via the URL', async () => {
