@@ -17,11 +17,13 @@ import {
   combineFinals,
   combineMedials,
   compose,
+  decompose,
   type Final,
   isFinal,
   isInitial,
   isMedial,
   type Medial,
+  splitCompound,
 } from '../hangul'
 
 /** QWERTY key → jamo on the 2-set layout. Shift only changes the 7 keys listed in uppercase. */
@@ -169,4 +171,33 @@ export function keysToHangul(keys: string): string {
   let state = EMPTY_IME_STATE
   for (const key of keys) state = imeInput(state, keyToJamo(key) ?? key)
   return imeText(state)
+}
+
+/** Jamo → the key that types it (shifted keys are uppercase). */
+const KEY_FOR_JAMO: Record<string, string> = Object.fromEntries(
+  Object.entries(DUBEOLSIK_LAYOUT).map(([key, jamo]) => [jamo, key]),
+)
+
+/**
+ * The sequence of jamo a 2-set typist presses for a text: compound vowels
+ * and finals are typed as their parts (왔 → ㅇ ㅗ ㅏ ㅆ), tense consonants
+ * are a single shifted key.
+ */
+export function typedJamo(text: string): string[] {
+  const result: string[] = []
+  for (const char of text) {
+    const syllable = decompose(char)
+    const jamo = syllable
+      ? [syllable.initial, syllable.medial, syllable.final].filter(Boolean)
+      : [char]
+    for (const j of jamo) result.push(...splitCompound(j))
+  }
+  return result
+}
+
+/** QWERTY keys to type a text on a 2-set layout ("한글" → "gksrmf"). Other characters stay as-is. */
+export function keysFor(text: string): string {
+  return typedJamo(text)
+    .map((j) => KEY_FOR_JAMO[j] ?? j)
+    .join('')
 }

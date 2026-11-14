@@ -412,6 +412,259 @@ export const DIALOGUES: Dialogue[] = [
       },
     ],
   },
+  {
+    id: 'taxi',
+    level: 2,
+    title: L('No táxi', 'In a taxi'),
+    speakers: [L('Passageiro(a)', 'Passenger'), L('Motorista', 'Driver')],
+    lines: [
+      line(
+        0,
+        '기사님, 인천공항으로 가 주세요.',
+        'Motorista, para o aeroporto de Incheon, por favor.',
+        'To Incheon Airport, please.',
+      ),
+      line(
+        1,
+        '네. 몇 터미널이세요?',
+        'Certo. Qual terminal?',
+        'Sure. Which terminal?',
+      ),
+      line(
+        0,
+        '1터미널이요. 얼마나 걸려요?',
+        'Terminal 1. Quanto tempo leva?',
+        'Terminal 1. How long does it take?',
+      ),
+      line(1, '한 시간쯤 걸려요.', 'Cerca de uma hora.', 'About an hour.'),
+      line(0, '네, 감사합니다.', 'Certo, obrigado(a).', 'Okay, thank you.'),
+    ],
+    questions: [
+      {
+        question: L(
+          'Para onde vai o passageiro?',
+          'Where is the passenger going?',
+        ),
+        choices: [
+          L('Para o aeroporto', 'To the airport'),
+          L('Para a estação', 'To the station'),
+          L('Para o hotel', 'To the hotel'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L(
+          'Quanto tempo leva a viagem?',
+          'How long does the ride take?',
+        ),
+        choices: [
+          L('Cerca de uma hora', 'About an hour'),
+          L('Dez minutos', 'Ten minutes'),
+          L('Duas horas', 'Two hours'),
+        ],
+        answer: 0,
+      },
+    ],
+  },
+  {
+    id: 'pharmacy',
+    level: 2,
+    title: L('Na farmácia', 'At the pharmacy'),
+    speakers: [L('Farmacêutico(a)', 'Pharmacist'), L('Cliente', 'Customer')],
+    lines: [
+      line(
+        0,
+        '어디가 아프세요?',
+        'O que o(a) senhor(a) está sentindo?',
+        'What seems to be the problem?',
+      ),
+      line(
+        1,
+        '머리가 아프고 열이 있어요.',
+        'Estou com dor de cabeça e febre.',
+        'I have a headache and a fever.',
+      ),
+      line(
+        0,
+        '감기 같아요. 이 약을 하루에 세 번 드세요.',
+        'Parece resfriado. Tome este remédio três vezes ao dia.',
+        'It looks like a cold. Take this medicine three times a day.',
+      ),
+      line(
+        1,
+        '식사 후에 먹어요?',
+        'Tomo depois das refeições?',
+        'Do I take it after meals?',
+      ),
+      line(
+        0,
+        '네, 식사 후에 드세요.',
+        'Sim, tome depois das refeições.',
+        'Yes, take it after meals.',
+      ),
+    ],
+    questions: [
+      {
+        question: L(
+          'O que o cliente está sentindo?',
+          'What symptoms does the customer have?',
+        ),
+        choices: [
+          L('Dor de cabeça e febre', 'A headache and a fever'),
+          L('Dor de barriga', 'A stomachache'),
+          L('Dor nas costas', 'Back pain'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L(
+          'Quantas vezes por dia deve tomar o remédio?',
+          'How many times a day should they take the medicine?',
+        ),
+        choices: [
+          L('Três vezes', 'Three times'),
+          L('Uma vez', 'Once'),
+          L('Duas vezes', 'Twice'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L('Quando deve tomar?', 'When should they take it?'),
+        choices: [
+          L('Depois das refeições', 'After meals'),
+          L('Antes de dormir', 'Before bed'),
+          L('Em jejum', 'On an empty stomach'),
+        ],
+        answer: 0,
+      },
+    ],
+  },
+  {
+    id: 'hotel',
+    level: 2,
+    title: L('No hotel', 'At the hotel'),
+    speakers: [L('Recepcionista', 'Receptionist'), L('Hóspede', 'Guest')],
+    lines: [
+      line(
+        0,
+        '어서 오세요. 예약하셨어요?',
+        'Bem-vindo(a). O(a) senhor(a) tem reserva?',
+        'Welcome. Do you have a reservation?',
+      ),
+      line(
+        1,
+        '네, 김지수로 예약했어요.',
+        'Sim, reservei no nome de Kim Jisu.',
+        'Yes, I booked under Kim Jisu.',
+      ),
+      line(
+        0,
+        '네, 2박 맞으세요?',
+        'Certo, são duas noites, correto?',
+        'Okay, two nights, is that right?',
+      ),
+      line(
+        1,
+        '네, 맞아요. 아침 식사는 몇 시예요?',
+        'Isso. A que horas é o café da manhã?',
+        "That's right. What time is breakfast?",
+      ),
+      line(
+        0,
+        '일곱 시부터 열 시까지예요. 방은 501호입니다.',
+        'Das sete às dez. O quarto é o 501.',
+        "It's from seven to ten. Your room is 501.",
+      ),
+    ],
+    questions: [
+      {
+        question: L(
+          'Quantas noites o hóspede vai ficar?',
+          'How many nights is the guest staying?',
+        ),
+        choices: [L('Duas', 'Two'), L('Uma', 'One'), L('Cinco', 'Five')],
+        answer: 0,
+      },
+      {
+        question: L(
+          'A que horas é o café da manhã?',
+          'What time is breakfast?',
+        ),
+        choices: [
+          L('Das 7 às 10', 'From 7 to 10'),
+          L('Das 6 às 9', 'From 6 to 9'),
+          L('Das 8 às 11', 'From 8 to 11'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L('Qual é o número do quarto?', 'What is the room number?'),
+        choices: [L('501', '501'), L('105', '105'), L('510', '510')],
+        answer: 0,
+      },
+    ],
+  },
+  {
+    id: 'office',
+    level: 2,
+    title: L('No escritório', 'At the office'),
+    speakers: [L('Chefe de equipe', 'Team leader'), L('Jimin', 'Jimin')],
+    lines: [
+      line(
+        0,
+        '지민 씨, 회의 자료 준비했어요?',
+        'Jimin, você preparou o material da reunião?',
+        'Jimin, did you prepare the materials for the meeting?',
+      ),
+      line(
+        1,
+        '네, 거의 다 했어요. 오후 두 시까지 드릴게요.',
+        'Sim, está quase pronto. Entrego até as duas da tarde.',
+        "Yes, it's almost done. I'll give it to you by two in the afternoon.",
+      ),
+      line(
+        0,
+        '좋아요. 회의는 세 시에 시작해요.',
+        'Ótimo. A reunião começa às três.',
+        'Great. The meeting starts at three.',
+      ),
+      line(
+        1,
+        '알겠습니다. 회의실은 어디예요?',
+        'Entendido. Onde é a sala de reunião?',
+        'Understood. Where is the meeting room?',
+      ),
+      line(
+        0,
+        '5층 회의실이에요.',
+        'É a sala de reunião do quinto andar.',
+        "It's the meeting room on the fifth floor.",
+      ),
+    ],
+    questions: [
+      {
+        question: L(
+          'Até que horas Jimin vai entregar o material?',
+          'By what time will Jimin hand in the materials?',
+        ),
+        choices: [
+          L('Até as duas da tarde', 'By two in the afternoon'),
+          L('Até as três', 'By three'),
+          L('Amanhã', 'Tomorrow'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L('Onde é a reunião?', 'Where is the meeting?'),
+        choices: [
+          L('No quinto andar', 'On the fifth floor'),
+          L('No segundo andar', 'On the second floor'),
+          L('Fora do escritório', 'Outside the office'),
+        ],
+        answer: 0,
+      },
+    ],
+  },
 ]
 
 export function getDialogue(id: string): Dialogue | undefined {

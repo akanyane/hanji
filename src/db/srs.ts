@@ -91,3 +91,25 @@ export async function getReviewLogs(since: Date): Promise<ReviewLogRecord[]> {
     await db.reviewLogs.where('reviewedAt').aboveOrEqual(since).toArray()
   ).filter(alive)
 }
+
+/**
+ * Adds a word to spaced repetition without reviewing it: it shows up as a
+ * new card in the next session. Does nothing if the word is already there.
+ */
+export async function addToSrs(
+  itemId: string,
+  now = new Date(),
+): Promise<boolean> {
+  if (await getCard(itemId)) return false
+  const card = await createCard(now)
+  await db.srsCards.put({
+    id: vocabCardId(itemId),
+    updatedAt: now.getTime(),
+    deletedAt: null,
+    itemType: 'vocab',
+    itemId,
+    dueAt: card.dueAt,
+    card,
+  })
+  return true
+}

@@ -12,6 +12,11 @@ The interface **and** the learning content are multilingual: English and Brazili
 > - **Pronunciation**: lessons for all 11 sound-change rules with engine-verified examples, step-by-step transformations and quizzes whose wrong answers are the intermediate stages; minimal-pair ear training.
 > - **Listening**: dictation with a jamo-level diff, and dialogues read with a different voice pitch per speaker, with optional transcript, translation and comprehension questions; adjustable speech speed.
 > - **Speaking**: repeat-after-me with speech recognition and jamo-level scoring (with a recording fallback where recognition isn't available, e.g. Firefox), shadowing with loop and hidden text, and local voice recording.
+> - **Reading**: graded texts with a clickable glossary (any vocabulary word can be added to spaced repetition), read-aloud and comprehension questions.
+> - **Dialogues**: 10 everyday situations with a voice per character, translation, culture notes and a "complete the dialogue" exercise.
+> - **Numbers**: Sino-Korean and native systems, counters, time, dates, money and age, with a live converter and endless practice.
+> - **Writing**: a 2-set (두벌식) keyboard trainer (physical or on-screen), tolerant translation practice and guided free writing.
+> - **Culture**: notes on formality, forms of address, etiquette, expressions, slang and holidays, linked from related lessons and dialogues.
 > - **Tools**: "how is it pronounced?" (applies the standard sound-change rules and explains each step), Hangul ↔ Revised Romanization converter, and syllable decomposer.
 >
 > The remaining modules show up on the home page as "Em breve" (coming soon).
@@ -53,6 +58,7 @@ src/
                  ime/            2-set (두벌식) keyboard composition automaton
                  similarity/     Jamo-level text comparison (for speaking practice)
                  conjugation/    Verb/adjective conjugation engine (all irregular classes)
+                 numbers/        Sino-Korean and native numbers, counters, time, dates, money
                  particles/      Particle forms chosen by the final consonant
                  srs/            Spaced repetition on top of ts-fsrs (FSRS)
                  handwriting/    Handwriting similarity check

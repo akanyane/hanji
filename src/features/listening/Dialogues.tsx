@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { AnimatePresence, motion } from 'motion/react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   QuizSession,
@@ -18,6 +18,7 @@ import {
 import { AudioButton } from '../../components/ui/AudioButton'
 import { Button } from '../../components/ui/Button'
 import { SpeedControl } from '../../components/ui/SpeedControl'
+import { notesForDialogue } from '../../content/culture/notes'
 import { DIALOGUES, type Dialogue } from '../../content/listening/dialogues'
 import { useQuizSummaries, useRecordQuizAttempt } from '../../db/queries'
 import { useKoreanVoice } from '../../hooks/useKoreanVoice'
@@ -25,6 +26,7 @@ import { useLocalized } from '../../i18n/useLocalized'
 import { cn } from '../../lib/cn'
 import { speakSequence } from '../../services/speech'
 import { useSettings } from '../../stores/settings'
+import { CultureCallout } from '../culture/CultureCallout'
 
 /** Each speaker gets a slightly different pitch so voices are easy to tell apart. */
 const PITCHES = [1, 1.35, 0.8]
@@ -81,7 +83,17 @@ export function DialogueList() {
   )
 }
 
-export function DialoguePage({ dialogue }: { dialogue: Dialogue }) {
+export function DialoguePage({
+  dialogue,
+  backTo = '/listening/dialogues',
+  children,
+}: {
+  dialogue: Dialogue
+  /** Where the "back" link goes (the dialogue is shared by two modules). */
+  backTo?: '/listening/dialogues' | '/dialogues'
+  /** Extra sections rendered after the questions. */
+  children?: ReactNode
+}) {
   const { t } = useTranslation()
   const l = useLocalized()
   const rate = useSettings((s) => s.speechRate)
@@ -130,7 +142,7 @@ export function DialoguePage({ dialogue }: { dialogue: Dialogue }) {
       animate="visible"
     >
       <Link
-        to="/listening/dialogues"
+        to={backTo}
         className="self-start text-sm font-medium text-sky-700 hover:underline dark:text-sky-400"
       >
         ← {t('listening.dialogues.back')}
@@ -287,6 +299,8 @@ export function DialoguePage({ dialogue }: { dialogue: Dialogue }) {
           </motion.div>
         )}
       </motion.section>
+      <CultureCallout notes={notesForDialogue(dialogue.id)} />
+      {children}
     </motion.div>
   )
 }

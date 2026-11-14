@@ -1,12 +1,15 @@
 import { describe, expect, it } from 'vitest'
+import { VOCABULARY } from '../../content/vocabulary'
 import {
   EMPTY_IME_STATE,
   type ImeState,
   imeBackspace,
   imeInput,
   imeText,
+  keysFor,
   keysToHangul,
   keyToJamo,
+  typedJamo,
 } from './dubeolsik'
 
 function typeJamo(jamo: string, state: ImeState = EMPTY_IME_STATE) {
@@ -92,5 +95,24 @@ describe('imeBackspace', () => {
     expect(imeText(s)).toBe('가')
     expect(imeText(imeBackspace(s))).toBe('')
     expect(imeText(imeBackspace(EMPTY_IME_STATE))).toBe('')
+  })
+})
+
+describe('keysFor', () => {
+  it('gives the keys for a text', () => {
+    expect(keysFor('한글')).toBe('gksrmf')
+    expect(keysFor('왔어')).toBe('dhkTdj')
+    expect(keysFor('닭')).toBe('ekfr')
+    expect(keysFor('안녕 하세요')).toBe('dkssud gktpdy')
+  })
+
+  it('splits compound vowels and finals into the jamo actually typed', () => {
+    expect(typedJamo('왔')).toEqual(['ㅇ', 'ㅗ', 'ㅏ', 'ㅆ'])
+    expect(typedJamo('없')).toEqual(['ㅇ', 'ㅓ', 'ㅂ', 'ㅅ'])
+  })
+
+  it('round-trips through the automaton for every vocabulary word', () => {
+    for (const { word } of VOCABULARY)
+      expect(keysToHangul(keysFor(word)), word).toBe(word)
   })
 })

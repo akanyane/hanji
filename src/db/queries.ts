@@ -20,6 +20,7 @@ import {
   recordQuizAttempt,
 } from './quizAttempts'
 import {
+  addToSrs,
   getAllCards,
   getReviewLogs,
   type ReviewInput,
@@ -99,6 +100,14 @@ export function useRecordReview() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (input: ReviewInput) => recordReview(input),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.srs }),
+  })
+}
+
+export function useAddToSrs() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (itemId: string) => addToSrs(itemId),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.srs }),
   })
 }

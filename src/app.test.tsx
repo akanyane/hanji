@@ -24,7 +24,9 @@ describe('app navigation', () => {
     const nav = await screen.findByRole('navigation', {
       name: 'Navegação principal',
     })
-    await user.click(within(nav).getByRole('link', { name: 'Hangul' }))
+    // Hangul lives in the "Aprender" (Learn) menu.
+    await user.click(within(nav).getByRole('button', { name: /Aprender/ }))
+    await user.click(await within(nav).findByRole('link', { name: /Hangul/ }))
     expect(
       await screen.findByRole('heading', { name: 'Hangul' }),
     ).toBeInTheDocument()

@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { db } from './db'
 import { createDeck, deleteDeck, getDeck, listDecks, updateDeck } from './decks'
 import {
+  addToSrs,
   getAllCards,
   getCard,
   getReviewLogs,
@@ -79,6 +80,17 @@ describe('srs repository', () => {
     expect(
       (await getReviewLogs(new Date('2026-03-01'))).map((l) => l.itemId),
     ).toEqual(['b'])
+  })
+})
+
+describe('addToSrs', () => {
+  it('adds a new, due card once', async () => {
+    expect(await addToSrs('water', NOW)).toBe(true)
+    expect(await addToSrs('water', NOW)).toBe(false)
+    const card = await getCard('water')
+    expect(card?.card.reps).toBe(0)
+    expect(card?.dueAt.getTime()).toBe(NOW.getTime())
+    expect(await getReviewLogs(new Date(0))).toEqual([])
   })
 })
 

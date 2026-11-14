@@ -11,10 +11,12 @@ import { Confetti } from '../../components/motion/Confetti'
 import { fadeUp, pop, stagger } from '../../components/motion/presets'
 import { AudioButton } from '../../components/ui/AudioButton'
 import { Button } from '../../components/ui/Button'
+import { notesForLesson } from '../../content/culture/notes'
 import { GRAMMAR_LESSONS, type GrammarLesson } from '../../content/grammar'
 import { useRecordQuizAttempt } from '../../db/queries'
 import { useLocalized } from '../../i18n/useLocalized'
 import { conjugate } from '../../lib/conjugation/conjugate'
+import { CultureCallout } from '../culture/CultureCallout'
 import { lessonQuizId } from './GrammarHome'
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -329,6 +331,8 @@ export function LessonPage({ lesson }: { lesson: GrammarLesson }) {
           ))}
         </ul>
       </Section>
+
+      <CultureCallout notes={notesForLesson(lesson.id)} />
 
       <Section title={t('grammar.lesson.practice')}>
         <Exercises key={lesson.id} lesson={lesson} />
