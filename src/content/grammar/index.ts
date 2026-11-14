@@ -1,5 +1,6 @@
 import { basics } from './lessons/basics'
 import { connectives } from './lessons/connectives'
+import { intermediate } from './lessons/intermediate'
 import { verbs } from './lessons/verbs'
 import type { GrammarLesson } from './types'
 
@@ -8,6 +9,7 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   ...basics,
   ...verbs,
   ...connectives,
+  ...intermediate,
 ]
 
 const BY_ID = new Map(GRAMMAR_LESSONS.map((l) => [l.id, l]))

@@ -461,6 +461,7 @@ export const en = {
         honorific: 'Honorific (-(으)시-)',
         connectives: 'Connectives',
         modifiers: 'Before a noun (modifiers)',
+        expressions: 'Useful expressions (TOPIK 2)',
       },
       formality: {
         formal: 'Formal (합쇼체)',
@@ -487,10 +488,23 @@ export const en = {
         modifier_past: 'Past (-(으)ㄴ)',
         modifier_future: 'Future (-(으)ㄹ)',
         want: 'want to (-고 싶다)',
+        ability_can: 'can (-(으)ㄹ 수 있다)',
+        ability_cannot: 'cannot (-(으)ㄹ 수 없다)',
+        obligation: 'have to (-아/어야 하다)',
+        permission: 'may (-아/어도 되다)',
+        prohibition: 'must not (-(으)면 안 되다)',
+        background: 'background / contrast (-는데, -(으)ㄴ데)',
+        background_past: 'background, past (-았/었는데)',
+        reason_ttaemun: 'because (-기 때문에)',
+        when: 'when (-(으)ㄹ 때)',
+        intention: 'intend to (-(으)려고 하다)',
+        experience: 'have done before (-(으)ㄴ 적이 있다)',
+        try: 'try doing (-아/어 보다)',
+        become: 'end up / come to (-게 되다)',
       },
       notes: {
         verbOnlyForms:
-          'Adjectives have no progressive, -고 싶다 or past modifier.',
+          'Adjectives have no progressive, past modifier, -고 싶다, -(으)려고 하다, -(으)ㄴ 적이 있다, -아/어 보다 or -게 되다.',
         specialHonorific: 'The honorific uses a different verb: {{verb}}.',
         negativeCounterpart:
           'The short negative uses a different word: {{verb}}.',
@@ -980,9 +994,11 @@ export const en = {
     },
     exam: {
       description:
-        'Practice in the TOPIK I format: listening and reading, with a timer, and an estimated level at the end.',
+        'Practice in the TOPIK I (levels 1–2) and TOPIK II (levels 3–6) formats: listening and reading, with a timer, and an estimated level at the end.',
       disclaimer:
-        'Original questions in the TOPIK I format, written for practice. Not official material; the level is only an estimate.',
+        'Original questions in the TOPIK format, written for practice. Not official material; the level is only an estimate.',
+      kindTopik1: 'TOPIK I · levels 1–2',
+      kindTopik2: 'TOPIK II · levels 3–6',
       meta: '{{count}} questions · {{minutes}} minutes',
       best: 'Best score: {{score}}',
       start: 'Start the exam',
@@ -994,6 +1010,8 @@ export const en = {
         'You can go back and change answers until you submit or the time runs out.',
       ruleLevels:
         'Estimate: level 1 from 40%, level 2 from 70% (same ratios as TOPIK I: 80 and 140 of 200).',
+      ruleLevels2:
+        'TOPIK II format (levels 3–6), listening and reading only. Estimate: level 3 from 40%, 4 from 50%, 5 from 63%, 6 from 77% (the official 120, 150, 190 and 230 of 300).',
       listening: 'Listening',
       reading: 'Reading',
       question: 'Question {{current}} of {{total}}',
@@ -1008,11 +1026,8 @@ export const en = {
       submit: 'Submit',
       confirmSubmit_one: '{{count}} question is unanswered. Submit anyway?',
       confirmSubmit_other: '{{count}} questions are unanswered. Submit anyway?',
-      levels: {
-        '0': 'Below TOPIK level 1 (estimate)',
-        '1': 'TOPIK level 1 (estimate)',
-        '2': 'TOPIK level 2 (estimate)',
-      },
+      levelEstimate: 'TOPIK level {{level}} (estimate)',
+      belowEstimate: 'Below TOPIK level {{level}} (estimate)',
       sections: 'Listening {{listening}} · Reading {{reading}}',
       estimateNote:
         'Estimated with the TOPIK I ratios. A short practice exam cannot replace the real test.',

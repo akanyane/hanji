@@ -665,6 +665,366 @@ export const DIALOGUES: Dialogue[] = [
       },
     ],
   },
+  {
+    id: 'doctor-appointment',
+    level: 2,
+    title: L(
+      'Marcando consulta por telefone',
+      'Booking a doctor’s appointment',
+    ),
+    speakers: [L('Recepcionista', 'Receptionist'), L('Paciente', 'Patient')],
+    lines: [
+      line(
+        0,
+        '네, 서울병원입니다.',
+        'Alô, Hospital Seul.',
+        'Hello, Seoul Hospital.',
+      ),
+      line(
+        1,
+        '진료 예약을 하고 싶은데요.',
+        'Eu queria marcar uma consulta.',
+        "I'd like to book an appointment.",
+      ),
+      line(
+        0,
+        '어디가 불편하세요?',
+        'O que o(a) senhor(a) está sentindo?',
+        'What seems to be the problem?',
+      ),
+      line(
+        1,
+        '일주일 전부터 목이 아프고 기침이 나요.',
+        'Estou com dor de garganta e tosse há uma semana.',
+        'I have had a sore throat and a cough for a week.',
+      ),
+      line(
+        0,
+        '내일 오전 열 시에 오실 수 있으세요?',
+        'O(A) senhor(a) pode vir amanhã às dez da manhã?',
+        'Can you come tomorrow at ten a.m.?',
+      ),
+      line(
+        1,
+        '오전에는 일해야 해서요. 오후는 안 될까요?',
+        'De manhã eu tenho que trabalhar. À tarde não daria?',
+        'I have to work in the morning. Would the afternoon be possible?',
+      ),
+      line(
+        0,
+        '그럼 오후 세 시 반은 괜찮으세요?',
+        'Então, três e meia da tarde está bom?',
+        'Then would three thirty p.m. work for you?',
+      ),
+      line(
+        1,
+        '네, 좋아요. 그때 갈게요.',
+        'Sim, ótimo. Vou nesse horário.',
+        "Yes, great. I'll come then.",
+      ),
+    ],
+    questions: [
+      {
+        question: L(
+          'Qual é o problema do paciente?',
+          "What is the patient's problem?",
+        ),
+        choices: [
+          L('Dor de garganta e tosse', 'A sore throat and a cough'),
+          L('Dor de cabeça', 'A headache'),
+          L('Dor nas costas', 'Back pain'),
+          L('Febre alta', 'A high fever'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L(
+          'Por que ele não pode ir de manhã?',
+          "Why can't he come in the morning?",
+        ),
+        choices: [
+          L('Porque tem que trabalhar', 'He has to work'),
+          L('Porque vai viajar', "He's traveling"),
+          L('Porque o hospital está fechado', 'The hospital is closed'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L(
+          'A que horas é a consulta?',
+          'What time is the appointment?',
+        ),
+        choices: [
+          L('15h30', '3:30 p.m.'),
+          L('10h', '10 a.m.'),
+          L('13h', '1 p.m.'),
+          L('16h30', '4:30 p.m.'),
+        ],
+        answer: 0,
+      },
+    ],
+  },
+  {
+    id: 'lost-and-found',
+    level: 2,
+    title: L('Achados e perdidos', 'Lost and found'),
+    speakers: [L('Funcionário', 'Staff'), L('Passageira', 'Passenger')],
+    lines: [
+      line(
+        1,
+        '저기요, 지하철에서 지갑을 잃어버렸는데요.',
+        'Com licença, perdi minha carteira no metrô.',
+        'Excuse me, I lost my wallet on the subway.',
+      ),
+      line(
+        0,
+        '언제, 어디에서 잃어버리셨어요?',
+        'Quando e onde a senhora perdeu?',
+        'When and where did you lose it?',
+      ),
+      line(
+        1,
+        '한 시간 전쯤 2호선에서요. 강남역에서 내렸어요.',
+        'Há mais ou menos uma hora, na linha 2. Desci na estação Gangnam.',
+        'About an hour ago, on line 2. I got off at Gangnam Station.',
+      ),
+      line(
+        0,
+        '지갑이 어떻게 생겼어요?',
+        'Como é a carteira?',
+        'What does the wallet look like?',
+      ),
+      line(
+        1,
+        '작고 빨간 지갑이에요. 안에 카드하고 학생증이 있어요.',
+        'É uma carteira pequena e vermelha. Dentro tem cartões e a carteirinha de estudante.',
+        "It's a small red wallet. There are cards and a student ID inside.",
+      ),
+      line(
+        0,
+        '잠깐만 기다리세요… 이 지갑 맞아요?',
+        'Espere um momento… É esta carteira?',
+        'Wait a moment… Is this the wallet?',
+      ),
+      line(
+        1,
+        '네, 맞아요! 정말 감사합니다.',
+        'Sim, é essa! Muito obrigada.',
+        'Yes, that’s it! Thank you so much.',
+      ),
+      line(
+        0,
+        '신분증을 보여 주시겠어요?',
+        'Pode me mostrar um documento de identidade?',
+        'Could you show me your ID?',
+      ),
+    ],
+    questions: [
+      {
+        question: L('O que ela perdeu?', 'What did she lose?'),
+        choices: [
+          L('A carteira', 'Her wallet'),
+          L('O celular', 'Her phone'),
+          L('A bolsa', 'Her bag'),
+          L('O guarda-chuva', 'Her umbrella'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L('Como é a carteira?', 'What does the wallet look like?'),
+        choices: [
+          L('Pequena e vermelha', 'Small and red'),
+          L('Grande e preta', 'Big and black'),
+          L('Pequena e azul', 'Small and blue'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L(
+          'O que o funcionário pede no final?',
+          'What does the staff member ask for at the end?',
+        ),
+        choices: [
+          L('Um documento de identidade', 'An ID'),
+          L('Dinheiro', 'Money'),
+          L('O número de telefone', 'A phone number'),
+        ],
+        answer: 0,
+      },
+    ],
+  },
+  {
+    id: 'bank',
+    level: 2,
+    title: L('No banco', 'At the bank'),
+    speakers: [L('Bancária', 'Bank teller'), L('Cliente', 'Customer')],
+    lines: [
+      line(
+        0,
+        '어서 오세요. 무엇을 도와드릴까요?',
+        'Bem-vindo. Em que posso ajudar?',
+        'Welcome. How can I help you?',
+      ),
+      line(
+        1,
+        '통장을 만들고 싶어요. 외국인도 만들 수 있어요?',
+        'Quero abrir uma conta. Estrangeiro também pode abrir?',
+        "I'd like to open an account. Can foreigners open one too?",
+      ),
+      line(
+        0,
+        '네, 외국인등록증이 있으면 만들 수 있어요.',
+        'Sim, se tiver o cartão de registro de estrangeiro, pode.',
+        'Yes, if you have an alien registration card, you can.',
+      ),
+      line(
+        1,
+        '여기 있어요. 체크카드도 같이 만들 수 있어요?',
+        'Aqui está. Dá para fazer um cartão de débito junto?',
+        'Here it is. Can I get a debit card at the same time?',
+      ),
+      line(
+        0,
+        '물론이죠. 이 서류에 이름하고 주소를 써 주세요.',
+        'Claro. Escreva seu nome e endereço neste formulário, por favor.',
+        'Of course. Please write your name and address on this form.',
+      ),
+      line(
+        1,
+        '주소를 한국어로 써야 해요?',
+        'Tenho que escrever o endereço em coreano?',
+        'Do I have to write the address in Korean?',
+      ),
+      line(
+        0,
+        '영어로 써도 돼요. 그리고 여기에 사인해 주세요.',
+        'Pode escrever em inglês. E assine aqui, por favor.',
+        'You can write it in English. And please sign here.',
+      ),
+    ],
+    questions: [
+      {
+        question: L(
+          'O que o cliente quer fazer?',
+          'What does the customer want to do?',
+        ),
+        choices: [
+          L('Abrir uma conta', 'Open an account'),
+          L('Trocar dinheiro', 'Exchange money'),
+          L('Pagar uma conta', 'Pay a bill'),
+          L('Pedir um empréstimo', 'Ask for a loan'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L('Que documento é necessário?', 'Which document is needed?'),
+        choices: [
+          L(
+            'O cartão de registro de estrangeiro',
+            'The alien registration card',
+          ),
+          L('O passaporte', 'The passport'),
+          L('A carteira de motorista', "The driver's license"),
+        ],
+        answer: 0,
+      },
+      {
+        question: L(
+          'Em que língua ele pode escrever o endereço?',
+          'In which language can he write the address?',
+        ),
+        choices: [
+          L('Em inglês', 'In English'),
+          L('Só em coreano', 'Only in Korean'),
+          L('Em japonês', 'In Japanese'),
+        ],
+        answer: 0,
+      },
+    ],
+  },
+  {
+    id: 'apartment',
+    level: 3,
+    title: L('Procurando um apartamento', 'Looking for an apartment'),
+    speakers: [L('Corretor', 'Real estate agent'), L('Cliente', 'Client')],
+    lines: [
+      line(
+        1,
+        '학교 근처에 원룸을 구하고 있는데요.',
+        'Estou procurando uma quitinete perto da faculdade.',
+        "I'm looking for a studio near the university.",
+      ),
+      line(
+        0,
+        '월세는 어느 정도 생각하세요?',
+        'Quanto o senhor pensa em pagar de aluguel?',
+        'How much are you thinking of paying in monthly rent?',
+      ),
+      line(
+        1,
+        '오십만 원 정도요. 너무 비싸면 안 돼요.',
+        'Uns 500 mil wons. Não pode ser caro demais.',
+        "Around 500,000 won. It can't be too expensive.",
+      ),
+      line(
+        0,
+        '이 방은 어떠세요? 지하철역에서 걸어서 오 분이에요.',
+        'Que tal este? Fica a cinco minutos a pé da estação de metrô.',
+        "How about this one? It's a five-minute walk from the subway station.",
+      ),
+      line(
+        1,
+        '밝고 깨끗한데 좀 좁네요. 보증금은 얼마예요?',
+        'É claro e limpo, mas é meio pequeno. Quanto é o depósito?',
+        "It's bright and clean, but a bit small. How much is the deposit?",
+      ),
+      line(
+        0,
+        '천만 원이에요. 대신 관리비가 포함돼 있어요.',
+        'Dez milhões de wons. Em compensação, o condomínio está incluído.',
+        'Ten million won. But the maintenance fee is included.',
+      ),
+      line(
+        1,
+        '그럼 다른 방도 한번 보고 결정할게요.',
+        'Então vou ver outros também antes de decidir.',
+        "Then I'll take a look at other places before deciding.",
+      ),
+    ],
+    questions: [
+      {
+        question: L('Onde ele quer morar?', 'Where does he want to live?'),
+        choices: [
+          L('Perto da faculdade', 'Near the university'),
+          L('Perto do trabalho', 'Near work'),
+          L('No centro', 'Downtown'),
+          L('Perto do aeroporto', 'Near the airport'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L(
+          'O que ele achou do apartamento?',
+          'What did he think of the apartment?',
+        ),
+        choices: [
+          L('Claro e limpo, mas pequeno', 'Bright and clean, but small'),
+          L('Grande, mas escuro', 'Big, but dark'),
+          L('Barato e espaçoso', 'Cheap and spacious'),
+        ],
+        answer: 0,
+      },
+      {
+        question: L('O que ele decide fazer?', 'What does he decide to do?'),
+        choices: [
+          L('Ver outros apartamentos', 'Look at other places'),
+          L('Alugar na hora', 'Rent it right away'),
+          L('Desistir de se mudar', 'Give up on moving'),
+        ],
+        answer: 0,
+      },
+    ],
+  },
 ]
 
 export function getDialogue(id: string): Dialogue | undefined {

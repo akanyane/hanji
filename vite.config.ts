@@ -10,7 +10,10 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     // Must come before the React plugin. Generates src/routeTree.gen.ts from
     // src/routes and splits every route into its own chunk.
-    tanstackRouter({ target: 'react', autoCodeSplitting: true }),
+    // Code splitting is off in tests: a lazily loaded route compiles in the
+    // middle of a test and, with parallel workers, can outlast the
+    // findBy* timeout. Loading everything up front keeps tests deterministic.
+    tanstackRouter({ target: 'react', autoCodeSplitting: mode !== 'test' }),
     react(),
     tailwindcss(),
     // Installable, offline-first PWA. Registration happens in src/pwa.ts
@@ -76,5 +79,9 @@ export default defineConfig(({ mode }) => ({
     setupFiles: ['./src/test/setup.ts'],
     // Integration tests drive whole study sessions through the real UI.
     testTimeout: 20_000,
+    // Every integration test renders the whole app in jsdom, which is
+    // CPU-heavy: one worker per core starves them on a busy machine (the
+    // first test of each file then times out). Half the cores is plenty.
+    maxWorkers: '50%',
   },
 }))

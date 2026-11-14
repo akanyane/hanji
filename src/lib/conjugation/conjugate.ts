@@ -389,12 +389,26 @@ export const FORM_IDS = [
   'modifier.past',
   'modifier.future',
   'want',
+  // TOPIK 2 expressions
+  'ability.can',
+  'ability.cannot',
+  'obligation',
+  'permission',
+  'prohibition',
+  'background',
+  'background.past',
+  'reason.ttaemun',
+  'when',
+  'intention',
+  'experience',
+  'try',
+  'become',
 ] as const
 
 export type FormId = (typeof FORM_IDS)[number]
 
 export type ConjugationNote =
-  /** Adjectives have no progressive, -고 싶다 or past modifier. */
+  /** Adjectives have no progressive, -고 싶다, past modifier, intention, experience, -아/어 보다 or -게 되다. */
   | 'verbOnlyForms'
   /** The honorific is a different verb (먹다 → 드시다). */
   | 'specialHonorific'
@@ -468,6 +482,19 @@ export function conjugate(
       ? attachConsonant(info, '는')
       : attachEu(info, 'ㄴ'),
     'modifier.future': attachEu(info, 'ㄹ'),
+    // Expressions built on the same stems (TOPIK 2).
+    'ability.can': attachEu(info, 'ㄹ 수 있어요'),
+    'ability.cannot': attachEu(info, 'ㄹ 수 없어요'),
+    obligation: `${aeo}야 해요`,
+    permission: `${aeo}도 돼요`,
+    prohibition: attachEu(info, '면 안 돼요'),
+    // -는데 after verbs and 있다/없다, -(으)ㄴ데 after adjectives.
+    background: takesNeun
+      ? attachConsonant(info, '는데')
+      : attachEu(info, 'ㄴ데'),
+    'background.past': `${past}는데`,
+    'reason.ttaemun': `${stem}기 때문에`,
+    when: attachEu(info, 'ㄹ 때'),
   }
 
   if (isVerb) {
@@ -476,6 +503,10 @@ export function conjugate(
     forms['progressive.casual'] = `${stem}고 있어`
     forms['modifier.past'] = attachEu(info, 'ㄴ')
     forms.want = `${stem}고 싶어요`
+    forms.intention = attachEu(info, '려고 해요')
+    forms.experience = attachEu(info, 'ㄴ 적이 있어요')
+    forms.try = `${aeo} 봐요`
+    forms.become = `${stem}게 돼요`
   } else {
     notes.push('verbOnlyForms')
   }

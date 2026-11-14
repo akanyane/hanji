@@ -303,6 +303,22 @@ export function Conjugator({
                     : ['modifier.present', 'modifier.future'],
                 )}
               </Card>
+              <Card title={t('grammar.conjugator.groups.expressions')}>
+                {list([
+                  'ability.can',
+                  'ability.cannot',
+                  'obligation',
+                  'permission',
+                  'prohibition',
+                  'background',
+                  'background.past',
+                  'reason.ttaemun',
+                  'when',
+                  ...(result.info.kind === 'verb'
+                    ? (['intention', 'experience', 'try', 'become'] as const)
+                    : []),
+                ])}
+              </Card>
             </div>
           </motion.div>
         </AnimatePresence>

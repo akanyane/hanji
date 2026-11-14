@@ -460,6 +460,7 @@ export const ptBR: Messages = {
         honorific: 'Honorífico (-(으)시-)',
         connectives: 'Conectivos',
         modifiers: 'Antes de substantivo (modificadores)',
+        expressions: 'Expressões úteis (TOPIK 2)',
       },
       formality: {
         formal: 'Formal (합쇼체)',
@@ -486,10 +487,23 @@ export const ptBR: Messages = {
         modifier_past: 'Passado (-(으)ㄴ)',
         modifier_future: 'Futuro (-(으)ㄹ)',
         want: 'querer (-고 싶다)',
+        ability_can: 'conseguir / poder (-(으)ㄹ 수 있다)',
+        ability_cannot: 'não conseguir (-(으)ㄹ 수 없다)',
+        obligation: 'ter que (-아/어야 하다)',
+        permission: 'poder, ter permissão (-아/어도 되다)',
+        prohibition: 'não poder, proibido (-(으)면 안 되다)',
+        background: 'contexto / contraste (-는데, -(으)ㄴ데)',
+        background_past: 'contexto, passado (-았/었는데)',
+        reason_ttaemun: 'porque (-기 때문에)',
+        when: 'quando (-(으)ㄹ 때)',
+        intention: 'pretender (-(으)려고 하다)',
+        experience: 'já ter feito (-(으)ㄴ 적이 있다)',
+        try: 'experimentar fazer (-아/어 보다)',
+        become: 'acabar / passar a (-게 되다)',
       },
       notes: {
         verbOnlyForms:
-          'Adjetivos não têm progressivo, -고 싶다 nem modificador de passado.',
+          'Adjetivos não têm progressivo, modificador de passado, -고 싶다, -(으)려고 하다, -(으)ㄴ 적이 있다, -아/어 보다 nem -게 되다.',
         specialHonorific: 'O honorífico usa outro verbo: {{verb}}.',
         negativeCounterpart: 'A negação curta usa outra palavra: {{verb}}.',
         ambiguousIrregular:
@@ -978,9 +992,11 @@ export const ptBR: Messages = {
     },
     exam: {
       description:
-        'Pratique no formato do TOPIK I: compreensão auditiva e leitura, com cronômetro e uma estimativa de nível no final.',
+        'Pratique nos formatos do TOPIK I (níveis 1–2) e do TOPIK II (níveis 3–6): compreensão auditiva e leitura, com cronômetro e uma estimativa de nível no final.',
       disclaimer:
-        'Questões originais no formato do TOPIK I, criadas para praticar. Não é material oficial; o nível é só uma estimativa.',
+        'Questões originais no formato do TOPIK, criadas para praticar. Não é material oficial; o nível é só uma estimativa.',
+      kindTopik1: 'TOPIK I · níveis 1–2',
+      kindTopik2: 'TOPIK II · níveis 3–6',
       meta: '{{count}} questões · {{minutes}} minutos',
       best: 'Melhor pontuação: {{score}}',
       start: 'Começar o simulado',
@@ -992,6 +1008,8 @@ export const ptBR: Messages = {
         'Você pode voltar e mudar respostas até enviar ou o tempo acabar.',
       ruleLevels:
         'Estimativa: nível 1 a partir de 40%, nível 2 a partir de 70% (as mesmas proporções do TOPIK I: 80 e 140 de 200).',
+      ruleLevels2:
+        'Formato do TOPIK II (níveis 3–6), só áudio e leitura. Estimativa: nível 3 a partir de 40%, 4 a partir de 50%, 5 a partir de 63%, 6 a partir de 77% (os oficiais 120, 150, 190 e 230 de 300).',
       listening: 'Compreensão auditiva',
       reading: 'Leitura',
       question: 'Questão {{current}} de {{total}}',
@@ -1008,11 +1026,8 @@ export const ptBR: Messages = {
         '{{count}} questão está sem resposta. Enviar mesmo assim?',
       confirmSubmit_other:
         '{{count}} questões estão sem resposta. Enviar mesmo assim?',
-      levels: {
-        '0': 'Abaixo do TOPIK nível 1 (estimativa)',
-        '1': 'TOPIK nível 1 (estimativa)',
-        '2': 'TOPIK nível 2 (estimativa)',
-      },
+      levelEstimate: 'TOPIK nível {{level}} (estimativa)',
+      belowEstimate: 'Abaixo do TOPIK nível {{level}} (estimativa)',
       sections: 'Áudio {{listening}} · Leitura {{reading}}',
       estimateNote:
         'Estimado com as proporções do TOPIK I. Um simulado curto não substitui a prova real.',
