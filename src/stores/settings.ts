@@ -13,17 +13,24 @@ export interface Settings {
   theme: Theme
   /** Speech synthesis rate (1 = normal). */
   speechRate: number
+  /** How many never-seen vocabulary words a study session introduces. */
+  newPerSession: number
 }
 
 export const SETTINGS_KEY = 'learn-korean:settings'
 const LEGACY_THEME_KEY = 'hangul:theme'
 export const SPEECH_RATE_MIN = 0.5
 export const SPEECH_RATE_MAX = 1.5
+export const NEW_PER_SESSION_MAX = 50
+const DEFAULT_NEW_PER_SESSION = 10
 
 type StorageLike = Pick<Storage, 'getItem' | 'setItem'>
 
 const clampRate = (rate: number) =>
   Math.min(SPEECH_RATE_MAX, Math.max(SPEECH_RATE_MIN, rate))
+
+const clampNew = (n: number) =>
+  Math.min(NEW_PER_SESSION_MAX, Math.max(0, Math.round(n)))
 
 const isTheme = (value: unknown): value is Theme =>
   value === 'light' || value === 'dark'
@@ -63,7 +70,13 @@ export function loadSettings(
     ? saved.locale
     : detectLocale(languages)
 
-  return { locale, theme, speechRate }
+  const newPerSession =
+    typeof saved?.newPerSession === 'number' &&
+    Number.isFinite(saved.newPerSession)
+      ? clampNew(saved.newPerSession)
+      : DEFAULT_NEW_PER_SESSION
+
+  return { locale, theme, speechRate, newPerSession }
 }
 
 function getStorage(): StorageLike | null {
@@ -108,6 +121,9 @@ export const settingsActions = {
   },
   setLocale(locale: Locale) {
     settingsStore.setState((s) => ({ ...s, locale }))
+  },
+  setNewPerSession(count: number) {
+    settingsStore.setState((s) => ({ ...s, newPerSession: clampNew(count) }))
   },
   setSpeechRate(rate: number) {
     settingsStore.setState((s) => ({ ...s, speechRate: clampRate(rate) }))

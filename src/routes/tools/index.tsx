@@ -7,7 +7,12 @@ import {
   fadeUp,
   stagger,
 } from '../../components/motion/presets'
-import { TOOLS } from '../../features/tools/tools'
+import { TOOLS, type ToolInfo } from '../../features/tools/tools'
+
+// The dictionary lives in the vocabulary module, but is also listed here.
+const CARDS: Array<
+  Omit<ToolInfo, 'id'> & { id: ToolInfo['id'] | 'dictionary' }
+> = [...TOOLS, { id: 'dictionary', to: '/vocabulary/dictionary', icon: '📖' }]
 
 export const Route = createFileRoute('/tools/')({
   component: ToolsIndex,
@@ -24,7 +29,7 @@ function ToolsIndex() {
       initial="hidden"
       animate="visible"
     >
-      {TOOLS.map((tool) => (
+      {CARDS.map((tool) => (
         <motion.li key={tool.id} variants={fadeUp}>
           <MotionLink
             to={tool.to}

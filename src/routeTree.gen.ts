@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HangulRouteRouteImport } from './routes/hangul/route'
 import { Route as ToolsRouteRouteImport } from './routes/tools/route'
+import { Route as VocabularyRouteRouteImport } from './routes/vocabulary/route'
 import { Route as HangulIndexRouteImport } from './routes/hangul/index'
 import { Route as HangulEntryIdRouteImport } from './routes/hangul/$entryId'
 import { Route as HangulBuilderRouteImport } from './routes/hangul/builder'
@@ -20,6 +21,14 @@ import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as ToolsDecomposerRouteImport } from './routes/tools/decomposer'
 import { Route as ToolsPronunciationRouteImport } from './routes/tools/pronunciation'
 import { Route as ToolsRomanizationRouteImport } from './routes/tools/romanization'
+import { Route as VocabularyIndexRouteImport } from './routes/vocabulary/index'
+import { Route as VocabularyDictionaryRouteImport } from './routes/vocabulary/dictionary'
+import { Route as VocabularyStatsRouteImport } from './routes/vocabulary/stats'
+import { Route as VocabularyStudyRouteImport } from './routes/vocabulary/study'
+import { Route as VocabularyDecksIndexRouteImport } from './routes/vocabulary/decks/index'
+import { Route as VocabularyDecksDeckIdRouteImport } from './routes/vocabulary/decks/$deckId'
+import { Route as VocabularyDecksNewRouteImport } from './routes/vocabulary/decks/new'
+import { Route as VocabularyWordWordIdRouteImport } from './routes/vocabulary/word/$wordId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,6 +43,11 @@ const HangulRouteRoute = HangulRouteRouteImport.update({
 const ToolsRouteRoute = ToolsRouteRouteImport.update({
   id: '/tools',
   path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VocabularyRouteRoute = VocabularyRouteRouteImport.update({
+  id: '/vocabulary',
+  path: '/vocabulary',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HangulIndexRoute = HangulIndexRouteImport.update({
@@ -76,19 +90,68 @@ const ToolsRomanizationRoute = ToolsRomanizationRouteImport.update({
   path: '/romanization',
   getParentRoute: () => ToolsRouteRoute,
 } as any)
+const VocabularyIndexRoute = VocabularyIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => VocabularyRouteRoute,
+} as any)
+const VocabularyDictionaryRoute = VocabularyDictionaryRouteImport.update({
+  id: '/dictionary',
+  path: '/dictionary',
+  getParentRoute: () => VocabularyRouteRoute,
+} as any)
+const VocabularyStatsRoute = VocabularyStatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
+  getParentRoute: () => VocabularyRouteRoute,
+} as any)
+const VocabularyStudyRoute = VocabularyStudyRouteImport.update({
+  id: '/study',
+  path: '/study',
+  getParentRoute: () => VocabularyRouteRoute,
+} as any)
+const VocabularyDecksIndexRoute = VocabularyDecksIndexRouteImport.update({
+  id: '/decks/',
+  path: '/decks/',
+  getParentRoute: () => VocabularyRouteRoute,
+} as any)
+const VocabularyDecksDeckIdRoute = VocabularyDecksDeckIdRouteImport.update({
+  id: '/decks/$deckId',
+  path: '/decks/$deckId',
+  getParentRoute: () => VocabularyRouteRoute,
+} as any)
+const VocabularyDecksNewRoute = VocabularyDecksNewRouteImport.update({
+  id: '/decks/new',
+  path: '/decks/new',
+  getParentRoute: () => VocabularyRouteRoute,
+} as any)
+const VocabularyWordWordIdRoute = VocabularyWordWordIdRouteImport.update({
+  id: '/word/$wordId',
+  path: '/word/$wordId',
+  getParentRoute: () => VocabularyRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/hangul': typeof HangulRouteRouteWithChildren
   '/tools': typeof ToolsRouteRouteWithChildren
+  '/vocabulary': typeof VocabularyRouteRouteWithChildren
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
   '/tools/decomposer': typeof ToolsDecomposerRoute
   '/tools/pronunciation': typeof ToolsPronunciationRoute
   '/tools/romanization': typeof ToolsRomanizationRoute
+  '/vocabulary/dictionary': typeof VocabularyDictionaryRoute
+  '/vocabulary/stats': typeof VocabularyStatsRoute
+  '/vocabulary/study': typeof VocabularyStudyRoute
   '/hangul/': typeof HangulIndexRoute
   '/tools/': typeof ToolsIndexRoute
+  '/vocabulary/': typeof VocabularyIndexRoute
+  '/vocabulary/decks/$deckId': typeof VocabularyDecksDeckIdRoute
+  '/vocabulary/decks/new': typeof VocabularyDecksNewRoute
+  '/vocabulary/word/$wordId': typeof VocabularyWordWordIdRoute
+  '/vocabulary/decks/': typeof VocabularyDecksIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -98,22 +161,39 @@ export interface FileRoutesByTo {
   '/tools/decomposer': typeof ToolsDecomposerRoute
   '/tools/pronunciation': typeof ToolsPronunciationRoute
   '/tools/romanization': typeof ToolsRomanizationRoute
+  '/vocabulary/dictionary': typeof VocabularyDictionaryRoute
+  '/vocabulary/stats': typeof VocabularyStatsRoute
+  '/vocabulary/study': typeof VocabularyStudyRoute
   '/hangul': typeof HangulIndexRoute
   '/tools': typeof ToolsIndexRoute
+  '/vocabulary': typeof VocabularyIndexRoute
+  '/vocabulary/decks/$deckId': typeof VocabularyDecksDeckIdRoute
+  '/vocabulary/decks/new': typeof VocabularyDecksNewRoute
+  '/vocabulary/word/$wordId': typeof VocabularyWordWordIdRoute
+  '/vocabulary/decks': typeof VocabularyDecksIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/hangul': typeof HangulRouteRouteWithChildren
   '/tools': typeof ToolsRouteRouteWithChildren
+  '/vocabulary': typeof VocabularyRouteRouteWithChildren
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
   '/tools/decomposer': typeof ToolsDecomposerRoute
   '/tools/pronunciation': typeof ToolsPronunciationRoute
   '/tools/romanization': typeof ToolsRomanizationRoute
+  '/vocabulary/dictionary': typeof VocabularyDictionaryRoute
+  '/vocabulary/stats': typeof VocabularyStatsRoute
+  '/vocabulary/study': typeof VocabularyStudyRoute
   '/hangul/': typeof HangulIndexRoute
   '/tools/': typeof ToolsIndexRoute
+  '/vocabulary/': typeof VocabularyIndexRoute
+  '/vocabulary/decks/$deckId': typeof VocabularyDecksDeckIdRoute
+  '/vocabulary/decks/new': typeof VocabularyDecksNewRoute
+  '/vocabulary/word/$wordId': typeof VocabularyWordWordIdRoute
+  '/vocabulary/decks/': typeof VocabularyDecksIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,14 +201,23 @@ export interface FileRouteTypes {
     | '/'
     | '/hangul'
     | '/tools'
+    | '/vocabulary'
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
     | '/tools/decomposer'
     | '/tools/pronunciation'
     | '/tools/romanization'
+    | '/vocabulary/dictionary'
+    | '/vocabulary/stats'
+    | '/vocabulary/study'
     | '/hangul/'
     | '/tools/'
+    | '/vocabulary/'
+    | '/vocabulary/decks/$deckId'
+    | '/vocabulary/decks/new'
+    | '/vocabulary/word/$wordId'
+    | '/vocabulary/decks/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -138,27 +227,45 @@ export interface FileRouteTypes {
     | '/tools/decomposer'
     | '/tools/pronunciation'
     | '/tools/romanization'
+    | '/vocabulary/dictionary'
+    | '/vocabulary/stats'
+    | '/vocabulary/study'
     | '/hangul'
     | '/tools'
+    | '/vocabulary'
+    | '/vocabulary/decks/$deckId'
+    | '/vocabulary/decks/new'
+    | '/vocabulary/word/$wordId'
+    | '/vocabulary/decks'
   id:
     | '__root__'
     | '/'
     | '/hangul'
     | '/tools'
+    | '/vocabulary'
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
     | '/tools/decomposer'
     | '/tools/pronunciation'
     | '/tools/romanization'
+    | '/vocabulary/dictionary'
+    | '/vocabulary/stats'
+    | '/vocabulary/study'
     | '/hangul/'
     | '/tools/'
+    | '/vocabulary/'
+    | '/vocabulary/decks/$deckId'
+    | '/vocabulary/decks/new'
+    | '/vocabulary/word/$wordId'
+    | '/vocabulary/decks/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HangulRouteRoute: typeof HangulRouteRouteWithChildren
   ToolsRouteRoute: typeof ToolsRouteRouteWithChildren
+  VocabularyRouteRoute: typeof VocabularyRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -182,6 +289,13 @@ declare module '@tanstack/react-router' {
       path: '/tools'
       fullPath: '/tools'
       preLoaderRoute: typeof ToolsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vocabulary': {
+      id: '/vocabulary'
+      path: '/vocabulary'
+      fullPath: '/vocabulary'
+      preLoaderRoute: typeof VocabularyRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hangul/': {
@@ -240,6 +354,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsRomanizationRouteImport
       parentRoute: typeof ToolsRouteRoute
     }
+    '/vocabulary/': {
+      id: '/vocabulary/'
+      path: '/'
+      fullPath: '/vocabulary/'
+      preLoaderRoute: typeof VocabularyIndexRouteImport
+      parentRoute: typeof VocabularyRouteRoute
+    }
+    '/vocabulary/dictionary': {
+      id: '/vocabulary/dictionary'
+      path: '/dictionary'
+      fullPath: '/vocabulary/dictionary'
+      preLoaderRoute: typeof VocabularyDictionaryRouteImport
+      parentRoute: typeof VocabularyRouteRoute
+    }
+    '/vocabulary/stats': {
+      id: '/vocabulary/stats'
+      path: '/stats'
+      fullPath: '/vocabulary/stats'
+      preLoaderRoute: typeof VocabularyStatsRouteImport
+      parentRoute: typeof VocabularyRouteRoute
+    }
+    '/vocabulary/study': {
+      id: '/vocabulary/study'
+      path: '/study'
+      fullPath: '/vocabulary/study'
+      preLoaderRoute: typeof VocabularyStudyRouteImport
+      parentRoute: typeof VocabularyRouteRoute
+    }
+    '/vocabulary/decks/': {
+      id: '/vocabulary/decks/'
+      path: '/decks'
+      fullPath: '/vocabulary/decks/'
+      preLoaderRoute: typeof VocabularyDecksIndexRouteImport
+      parentRoute: typeof VocabularyRouteRoute
+    }
+    '/vocabulary/decks/$deckId': {
+      id: '/vocabulary/decks/$deckId'
+      path: '/decks/$deckId'
+      fullPath: '/vocabulary/decks/$deckId'
+      preLoaderRoute: typeof VocabularyDecksDeckIdRouteImport
+      parentRoute: typeof VocabularyRouteRoute
+    }
+    '/vocabulary/decks/new': {
+      id: '/vocabulary/decks/new'
+      path: '/decks/new'
+      fullPath: '/vocabulary/decks/new'
+      preLoaderRoute: typeof VocabularyDecksNewRouteImport
+      parentRoute: typeof VocabularyRouteRoute
+    }
+    '/vocabulary/word/$wordId': {
+      id: '/vocabulary/word/$wordId'
+      path: '/word/$wordId'
+      fullPath: '/vocabulary/word/$wordId'
+      preLoaderRoute: typeof VocabularyWordWordIdRouteImport
+      parentRoute: typeof VocabularyRouteRoute
+    }
   }
 }
 
@@ -279,10 +449,37 @@ const ToolsRouteRouteWithChildren = ToolsRouteRoute._addFileChildren(
   ToolsRouteRouteChildren,
 )
 
+interface VocabularyRouteRouteChildren {
+  VocabularyDictionaryRoute: typeof VocabularyDictionaryRoute
+  VocabularyStatsRoute: typeof VocabularyStatsRoute
+  VocabularyStudyRoute: typeof VocabularyStudyRoute
+  VocabularyIndexRoute: typeof VocabularyIndexRoute
+  VocabularyDecksDeckIdRoute: typeof VocabularyDecksDeckIdRoute
+  VocabularyDecksNewRoute: typeof VocabularyDecksNewRoute
+  VocabularyWordWordIdRoute: typeof VocabularyWordWordIdRoute
+  VocabularyDecksIndexRoute: typeof VocabularyDecksIndexRoute
+}
+
+const VocabularyRouteRouteChildren: VocabularyRouteRouteChildren = {
+  VocabularyDictionaryRoute: VocabularyDictionaryRoute,
+  VocabularyStatsRoute: VocabularyStatsRoute,
+  VocabularyStudyRoute: VocabularyStudyRoute,
+  VocabularyIndexRoute: VocabularyIndexRoute,
+  VocabularyDecksDeckIdRoute: VocabularyDecksDeckIdRoute,
+  VocabularyDecksNewRoute: VocabularyDecksNewRoute,
+  VocabularyWordWordIdRoute: VocabularyWordWordIdRoute,
+  VocabularyDecksIndexRoute: VocabularyDecksIndexRoute,
+}
+
+const VocabularyRouteRouteWithChildren = VocabularyRouteRoute._addFileChildren(
+  VocabularyRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HangulRouteRoute: HangulRouteRouteWithChildren,
   ToolsRouteRoute: ToolsRouteRouteWithChildren,
+  VocabularyRouteRoute: VocabularyRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

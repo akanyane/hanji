@@ -1,11 +1,21 @@
 import { Dexie, type EntityTable } from 'dexie'
-import type { MetaEntry, QuizAttempt, SyncFields } from './types'
+import type {
+  DeckRecord,
+  MetaEntry,
+  QuizAttempt,
+  ReviewLogRecord,
+  SrsCardRecord,
+  SyncFields,
+} from './types'
 
 export const DB_NAME = 'learn-korean'
 
 export type AppDB = Dexie & {
   quizAttempts: EntityTable<QuizAttempt, 'id'>
   meta: EntityTable<MetaEntry, 'key'>
+  srsCards: EntityTable<SrsCardRecord, 'id'>
+  reviewLogs: EntityTable<ReviewLogRecord, 'id'>
+  decks: EntityTable<DeckRecord, 'id'>
 }
 
 export const db = new Dexie(DB_NAME) as AppDB
@@ -16,6 +26,13 @@ export const db = new Dexie(DB_NAME) as AppDB
 db.version(1).stores({
   quizAttempts: 'id, quizId, completedAt, updatedAt',
   meta: 'key',
+})
+
+// v2: spaced repetition (vocabulary) and custom decks.
+db.version(2).stores({
+  srsCards: 'id, itemType, itemId, dueAt, updatedAt',
+  reviewLogs: 'id, cardId, itemId, reviewedAt, updatedAt',
+  decks: 'id, updatedAt',
 })
 
 /** Creates the sync fields for a new record. */

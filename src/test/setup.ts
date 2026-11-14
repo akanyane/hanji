@@ -32,3 +32,23 @@ globalThis.IntersectionObserver ??=
 afterEach(() => {
   cleanup()
 })
+
+// jsdom has no ResizeObserver (used by TanStack Virtual to measure lists).
+class FakeResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+globalThis.ResizeObserver ??=
+  FakeResizeObserver as unknown as typeof ResizeObserver
+
+// jsdom does no layout, so every element measures 0×0. TanStack Virtual reads
+// clientWidth/clientHeight to decide how many rows fit; give it a viewport.
+Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
+  configurable: true,
+  get: () => 800,
+})
+Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+  configurable: true,
+  get: () => 1024,
+})

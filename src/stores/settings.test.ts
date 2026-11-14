@@ -21,6 +21,7 @@ describe('loadSettings', () => {
       locale: 'en',
       theme: 'dark',
       speechRate: 1,
+      newPerSession: 10,
     })
     expect(loadSettings(null, false).theme).toBe('light')
   })
@@ -33,6 +34,7 @@ describe('loadSettings', () => {
       locale: 'en',
       theme: 'dark',
       speechRate: 0.75,
+      newPerSession: 10,
     })
   })
 
@@ -49,6 +51,7 @@ describe('loadSettings', () => {
       locale: 'en',
       theme: 'light',
       speechRate: 1,
+      newPerSession: 10,
     })
     expect(loadSettings(storage({ [SETTINGS_KEY]: '{oops' }), true).theme).toBe(
       'dark',
@@ -86,6 +89,13 @@ describe('settingsActions', () => {
     expect(JSON.parse(localStorage.getItem(SETTINGS_KEY) ?? '{}').theme).toBe(
       settingsStore.state.theme,
     )
+  })
+
+  it('clamps the new-words-per-session setting', () => {
+    settingsActions.setNewPerSession(500)
+    expect(settingsStore.state.newPerSession).toBe(50)
+    settingsActions.setNewPerSession(-3)
+    expect(settingsStore.state.newPerSession).toBe(0)
   })
 
   it('clamps the speech rate when setting it', () => {

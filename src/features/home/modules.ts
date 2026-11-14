@@ -27,7 +27,7 @@ export interface PlatformModule {
 export const PLATFORM_MODULES: PlatformModule[] = [
   { id: 'hangul', korean: '한글', to: '/hangul' },
   { id: 'pronunciation', korean: '발음' },
-  { id: 'vocabulary', korean: '어휘' },
+  { id: 'vocabulary', korean: '어휘', to: '/vocabulary' },
   { id: 'grammar', korean: '문법' },
   { id: 'listening', korean: '듣기' },
   { id: 'speaking', korean: '말하기' },

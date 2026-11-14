@@ -7,6 +7,7 @@ The interface **and** the learning content are multilingual: English and Brazili
 > Work in progress, built in phases. Available today:
 >
 > - **Hangul**: every consonant and vowel with audio, pronunciation tips and the origin of its shape; animated stroke order; handwriting practice with feedback; syllable builder; quizzes (recognize letters, listen and choose, read real words).
+> - **Vocabulary**: 243 words by approximate TOPIK level and topic, with examples, Hanja and audio; spaced repetition with [FSRS](https://github.com/open-spaced-repetition/ts-fsrs); four study modes (flashcards, multiple choice, typing, listen and write); custom decks; searchable dictionary; statistics and review forecast.
 > - **Tools**: "how is it pronounced?" (applies the standard sound-change rules and explains each step), Hangul ↔ Revised Romanization converter, and syllable decomposer.
 >
 > The remaining modules show up on the home page as "Em breve" (coming soon).
@@ -47,6 +48,8 @@ src/
                  romanization/   Revised Romanization, both directions
                  ime/            2-set (두벌식) keyboard composition automaton
                  similarity/     Jamo-level text comparison (for speaking practice)
+                 srs/            Spaced repetition on top of ts-fsrs (FSRS)
+                 handwriting/    Handwriting similarity check
                  quiz/           Generic multiple-choice generator
   content/     Typed learning content, kept separate from the code
   db/          Local database (Dexie/IndexedDB), repositories and TanStack Query hooks
@@ -73,7 +76,8 @@ Write pronunciation tips for speakers of that language (comparing with its own s
 ## Stack
 
 - [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vite.dev/)
-- [TanStack Router](https://tanstack.com/router), [Query](https://tanstack.com/query), [Store](https://tanstack.com/store) and [Pacer](https://tanstack.com/pacer)
+- [TanStack Router](https://tanstack.com/router), [Query](https://tanstack.com/query), [Store](https://tanstack.com/store), [Form](https://tanstack.com/form), [Table](https://tanstack.com/table), [Virtual](https://tanstack.com/virtual) and [Pacer](https://tanstack.com/pacer)
+- [ts-fsrs](https://github.com/open-spaced-repetition/ts-fsrs) for spaced repetition
 - [Dexie](https://dexie.org/) (IndexedDB)
 - [i18next](https://www.i18next.com/) + [react-i18next](https://react.i18next.com/)
 - [Motion](https://motion.dev/) for animations

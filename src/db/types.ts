@@ -35,3 +35,39 @@ export interface MetaEntry {
   key: string
   value: unknown
 }
+
+/** How an item was practiced (the SRS grade comes from the mode's result). */
+export type StudyMode = 'flashcards' | 'choice' | 'typing' | 'listening'
+
+/**
+ * Spaced-repetition state of one study item.
+ *
+ * The id is deterministic (`vocab:<wordId>`), not a random UUID: the same
+ * word gets the same id on every device, so a future sync merges progress
+ * instead of creating duplicates.
+ */
+export interface SrsCardRecord extends SyncFields {
+  itemType: 'vocab'
+  itemId: string
+  /** Copy of card.dueAt, indexed for "what is due" queries. */
+  dueAt: Date
+  card: import('../lib/srs/scheduler').SrsCard
+}
+
+export interface ReviewLogRecord extends SyncFields {
+  cardId: string
+  itemId: string
+  grade: import('../lib/srs/scheduler').SrsGrade
+  mode: StudyMode
+  reviewedAt: Date
+  /** True when this was the first time the item was seen. */
+  wasNew: boolean
+  revlog: import('../lib/srs/scheduler').SrsRevlog
+}
+
+/** A deck the learner built themselves. */
+export interface DeckRecord extends SyncFields {
+  name: string
+  itemIds: string[]
+  createdAt: number
+}
