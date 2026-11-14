@@ -1,10 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hangul</title>
+    <meta
+      name="description"
+      content="Plataforma gratuita para aprender coreano em português, do Hangul ao TOPIK II."
+    />
+    <title>Aprenda Coreano</title>
+    <script>
+      // Apply the saved theme before React loads to avoid a light-theme flash.
+      // Must mirror the logic of loadSettings() in src/stores/settings.ts.
+      ;(() => {
+        try {
+          const saved = JSON.parse(localStorage.getItem('learn-korean:settings') || 'null')
+          const legacy = JSON.parse(localStorage.getItem('hangul:theme') || 'null')
+          let theme = saved?.theme ?? legacy
+          if (theme !== 'light' && theme !== 'dark') {
+            theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          }
+          if (theme === 'dark') document.documentElement.classList.add('dark')
+        } catch {}
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

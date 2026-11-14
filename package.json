@@ -14,27 +14,36 @@
     "format": "biome format --write .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.107.1",
+    "@tanstack/react-router": "^1.170.46",
+    "@tanstack/react-store": "^0.11.2",
+    "dexie": "^4.4.7",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.4",
     "@tailwindcss/vite": "^4.3.3",
+    "@tanstack/react-query-devtools": "^5.107.1",
+    "@tanstack/react-router-devtools": "^1.167.3",
+    "@tanstack/router-plugin": "^1.169.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react-swc": "^4.3.1",
+    "@vitejs/plugin-react": "^6.3.0",
+    "fake-indexeddb": "^6.2.8",
     "jsdom": "^29.1.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "vite": "^8.1.5",
     "vitest": "^4.1.10"
   },
-  "packageManager": "yarn@4.17.1+sha512.ccbfabf7d7b6b32075088be9386fb9a2e00bb6887ef07fa56effabc890a56d53da1ccc4128d62db245fcbd3961b236d75335bdf7d5320ed6eafb7588b7ad4697"
+  "packageManager": "bun@1.4.4"
 }
