@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GrammarRouteRouteImport } from './routes/grammar/route'
 import { Route as HangulRouteRouteImport } from './routes/hangul/route'
+import { Route as ListeningRouteRouteImport } from './routes/listening/route'
+import { Route as PronunciationRouteRouteImport } from './routes/pronunciation/route'
+import { Route as SpeakingRouteRouteImport } from './routes/speaking/route'
 import { Route as ToolsRouteRouteImport } from './routes/tools/route'
 import { Route as VocabularyRouteRouteImport } from './routes/vocabulary/route'
 import { Route as GrammarIndexRouteImport } from './routes/grammar/index'
@@ -22,6 +25,12 @@ import { Route as HangulIndexRouteImport } from './routes/hangul/index'
 import { Route as HangulEntryIdRouteImport } from './routes/hangul/$entryId'
 import { Route as HangulBuilderRouteImport } from './routes/hangul/builder'
 import { Route as HangulQuizRouteImport } from './routes/hangul/quiz'
+import { Route as ListeningIndexRouteImport } from './routes/listening/index'
+import { Route as PronunciationIndexRouteImport } from './routes/pronunciation/index'
+import { Route as PronunciationRuleIdRouteImport } from './routes/pronunciation/$ruleId'
+import { Route as PronunciationMinimalPairsRouteImport } from './routes/pronunciation/minimal-pairs'
+import { Route as SpeakingIndexRouteImport } from './routes/speaking/index'
+import { Route as SpeakingShadowingRouteImport } from './routes/speaking/shadowing'
 import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as ToolsDecomposerRouteImport } from './routes/tools/decomposer'
 import { Route as ToolsPronunciationRouteImport } from './routes/tools/pronunciation'
@@ -30,6 +39,8 @@ import { Route as VocabularyIndexRouteImport } from './routes/vocabulary/index'
 import { Route as VocabularyDictionaryRouteImport } from './routes/vocabulary/dictionary'
 import { Route as VocabularyStatsRouteImport } from './routes/vocabulary/stats'
 import { Route as VocabularyStudyRouteImport } from './routes/vocabulary/study'
+import { Route as ListeningDialoguesIndexRouteImport } from './routes/listening/dialogues/index'
+import { Route as ListeningDialoguesDialogueIdRouteImport } from './routes/listening/dialogues/$dialogueId'
 import { Route as VocabularyDecksIndexRouteImport } from './routes/vocabulary/decks/index'
 import { Route as VocabularyDecksDeckIdRouteImport } from './routes/vocabulary/decks/$deckId'
 import { Route as VocabularyDecksNewRouteImport } from './routes/vocabulary/decks/new'
@@ -48,6 +59,21 @@ const GrammarRouteRoute = GrammarRouteRouteImport.update({
 const HangulRouteRoute = HangulRouteRouteImport.update({
   id: '/hangul',
   path: '/hangul',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ListeningRouteRoute = ListeningRouteRouteImport.update({
+  id: '/listening',
+  path: '/listening',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PronunciationRouteRoute = PronunciationRouteRouteImport.update({
+  id: '/pronunciation',
+  path: '/pronunciation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpeakingRouteRoute = SpeakingRouteRouteImport.update({
+  id: '/speaking',
+  path: '/speaking',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsRouteRoute = ToolsRouteRouteImport.update({
@@ -100,6 +126,37 @@ const HangulQuizRoute = HangulQuizRouteImport.update({
   path: '/quiz',
   getParentRoute: () => HangulRouteRoute,
 } as any)
+const ListeningIndexRoute = ListeningIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ListeningRouteRoute,
+} as any)
+const PronunciationIndexRoute = PronunciationIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PronunciationRouteRoute,
+} as any)
+const PronunciationRuleIdRoute = PronunciationRuleIdRouteImport.update({
+  id: '/$ruleId',
+  path: '/$ruleId',
+  getParentRoute: () => PronunciationRouteRoute,
+} as any)
+const PronunciationMinimalPairsRoute =
+  PronunciationMinimalPairsRouteImport.update({
+    id: '/minimal-pairs',
+    path: '/minimal-pairs',
+    getParentRoute: () => PronunciationRouteRoute,
+  } as any)
+const SpeakingIndexRoute = SpeakingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SpeakingRouteRoute,
+} as any)
+const SpeakingShadowingRoute = SpeakingShadowingRouteImport.update({
+  id: '/shadowing',
+  path: '/shadowing',
+  getParentRoute: () => SpeakingRouteRoute,
+} as any)
 const ToolsIndexRoute = ToolsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -140,6 +197,17 @@ const VocabularyStudyRoute = VocabularyStudyRouteImport.update({
   path: '/study',
   getParentRoute: () => VocabularyRouteRoute,
 } as any)
+const ListeningDialoguesIndexRoute = ListeningDialoguesIndexRouteImport.update({
+  id: '/dialogues/',
+  path: '/dialogues/',
+  getParentRoute: () => ListeningRouteRoute,
+} as any)
+const ListeningDialoguesDialogueIdRoute =
+  ListeningDialoguesDialogueIdRouteImport.update({
+    id: '/dialogues/$dialogueId',
+    path: '/dialogues/$dialogueId',
+    getParentRoute: () => ListeningRouteRoute,
+  } as any)
 const VocabularyDecksIndexRoute = VocabularyDecksIndexRouteImport.update({
   id: '/decks/',
   path: '/decks/',
@@ -165,6 +233,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/grammar': typeof GrammarRouteRouteWithChildren
   '/hangul': typeof HangulRouteRouteWithChildren
+  '/listening': typeof ListeningRouteRouteWithChildren
+  '/pronunciation': typeof PronunciationRouteRouteWithChildren
+  '/speaking': typeof SpeakingRouteRouteWithChildren
   '/tools': typeof ToolsRouteRouteWithChildren
   '/vocabulary': typeof VocabularyRouteRouteWithChildren
   '/grammar/$lessonId': typeof GrammarLessonIdRoute
@@ -173,6 +244,9 @@ export interface FileRoutesByFullPath {
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
+  '/pronunciation/$ruleId': typeof PronunciationRuleIdRoute
+  '/pronunciation/minimal-pairs': typeof PronunciationMinimalPairsRoute
+  '/speaking/shadowing': typeof SpeakingShadowingRoute
   '/tools/decomposer': typeof ToolsDecomposerRoute
   '/tools/pronunciation': typeof ToolsPronunciationRoute
   '/tools/romanization': typeof ToolsRomanizationRoute
@@ -181,11 +255,16 @@ export interface FileRoutesByFullPath {
   '/vocabulary/study': typeof VocabularyStudyRoute
   '/grammar/': typeof GrammarIndexRoute
   '/hangul/': typeof HangulIndexRoute
+  '/listening/': typeof ListeningIndexRoute
+  '/pronunciation/': typeof PronunciationIndexRoute
+  '/speaking/': typeof SpeakingIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vocabulary/': typeof VocabularyIndexRoute
+  '/listening/dialogues/$dialogueId': typeof ListeningDialoguesDialogueIdRoute
   '/vocabulary/decks/$deckId': typeof VocabularyDecksDeckIdRoute
   '/vocabulary/decks/new': typeof VocabularyDecksNewRoute
   '/vocabulary/word/$wordId': typeof VocabularyWordWordIdRoute
+  '/listening/dialogues/': typeof ListeningDialoguesIndexRoute
   '/vocabulary/decks/': typeof VocabularyDecksIndexRoute
 }
 export interface FileRoutesByTo {
@@ -196,6 +275,9 @@ export interface FileRoutesByTo {
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
+  '/pronunciation/$ruleId': typeof PronunciationRuleIdRoute
+  '/pronunciation/minimal-pairs': typeof PronunciationMinimalPairsRoute
+  '/speaking/shadowing': typeof SpeakingShadowingRoute
   '/tools/decomposer': typeof ToolsDecomposerRoute
   '/tools/pronunciation': typeof ToolsPronunciationRoute
   '/tools/romanization': typeof ToolsRomanizationRoute
@@ -204,11 +286,16 @@ export interface FileRoutesByTo {
   '/vocabulary/study': typeof VocabularyStudyRoute
   '/grammar': typeof GrammarIndexRoute
   '/hangul': typeof HangulIndexRoute
+  '/listening': typeof ListeningIndexRoute
+  '/pronunciation': typeof PronunciationIndexRoute
+  '/speaking': typeof SpeakingIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/vocabulary': typeof VocabularyIndexRoute
+  '/listening/dialogues/$dialogueId': typeof ListeningDialoguesDialogueIdRoute
   '/vocabulary/decks/$deckId': typeof VocabularyDecksDeckIdRoute
   '/vocabulary/decks/new': typeof VocabularyDecksNewRoute
   '/vocabulary/word/$wordId': typeof VocabularyWordWordIdRoute
+  '/listening/dialogues': typeof ListeningDialoguesIndexRoute
   '/vocabulary/decks': typeof VocabularyDecksIndexRoute
 }
 export interface FileRoutesById {
@@ -216,6 +303,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/grammar': typeof GrammarRouteRouteWithChildren
   '/hangul': typeof HangulRouteRouteWithChildren
+  '/listening': typeof ListeningRouteRouteWithChildren
+  '/pronunciation': typeof PronunciationRouteRouteWithChildren
+  '/speaking': typeof SpeakingRouteRouteWithChildren
   '/tools': typeof ToolsRouteRouteWithChildren
   '/vocabulary': typeof VocabularyRouteRouteWithChildren
   '/grammar/$lessonId': typeof GrammarLessonIdRoute
@@ -224,6 +314,9 @@ export interface FileRoutesById {
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
+  '/pronunciation/$ruleId': typeof PronunciationRuleIdRoute
+  '/pronunciation/minimal-pairs': typeof PronunciationMinimalPairsRoute
+  '/speaking/shadowing': typeof SpeakingShadowingRoute
   '/tools/decomposer': typeof ToolsDecomposerRoute
   '/tools/pronunciation': typeof ToolsPronunciationRoute
   '/tools/romanization': typeof ToolsRomanizationRoute
@@ -232,11 +325,16 @@ export interface FileRoutesById {
   '/vocabulary/study': typeof VocabularyStudyRoute
   '/grammar/': typeof GrammarIndexRoute
   '/hangul/': typeof HangulIndexRoute
+  '/listening/': typeof ListeningIndexRoute
+  '/pronunciation/': typeof PronunciationIndexRoute
+  '/speaking/': typeof SpeakingIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vocabulary/': typeof VocabularyIndexRoute
+  '/listening/dialogues/$dialogueId': typeof ListeningDialoguesDialogueIdRoute
   '/vocabulary/decks/$deckId': typeof VocabularyDecksDeckIdRoute
   '/vocabulary/decks/new': typeof VocabularyDecksNewRoute
   '/vocabulary/word/$wordId': typeof VocabularyWordWordIdRoute
+  '/listening/dialogues/': typeof ListeningDialoguesIndexRoute
   '/vocabulary/decks/': typeof VocabularyDecksIndexRoute
 }
 export interface FileRouteTypes {
@@ -245,6 +343,9 @@ export interface FileRouteTypes {
     | '/'
     | '/grammar'
     | '/hangul'
+    | '/listening'
+    | '/pronunciation'
+    | '/speaking'
     | '/tools'
     | '/vocabulary'
     | '/grammar/$lessonId'
@@ -253,6 +354,9 @@ export interface FileRouteTypes {
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
+    | '/pronunciation/$ruleId'
+    | '/pronunciation/minimal-pairs'
+    | '/speaking/shadowing'
     | '/tools/decomposer'
     | '/tools/pronunciation'
     | '/tools/romanization'
@@ -261,11 +365,16 @@ export interface FileRouteTypes {
     | '/vocabulary/study'
     | '/grammar/'
     | '/hangul/'
+    | '/listening/'
+    | '/pronunciation/'
+    | '/speaking/'
     | '/tools/'
     | '/vocabulary/'
+    | '/listening/dialogues/$dialogueId'
     | '/vocabulary/decks/$deckId'
     | '/vocabulary/decks/new'
     | '/vocabulary/word/$wordId'
+    | '/listening/dialogues/'
     | '/vocabulary/decks/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -276,6 +385,9 @@ export interface FileRouteTypes {
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
+    | '/pronunciation/$ruleId'
+    | '/pronunciation/minimal-pairs'
+    | '/speaking/shadowing'
     | '/tools/decomposer'
     | '/tools/pronunciation'
     | '/tools/romanization'
@@ -284,17 +396,25 @@ export interface FileRouteTypes {
     | '/vocabulary/study'
     | '/grammar'
     | '/hangul'
+    | '/listening'
+    | '/pronunciation'
+    | '/speaking'
     | '/tools'
     | '/vocabulary'
+    | '/listening/dialogues/$dialogueId'
     | '/vocabulary/decks/$deckId'
     | '/vocabulary/decks/new'
     | '/vocabulary/word/$wordId'
+    | '/listening/dialogues'
     | '/vocabulary/decks'
   id:
     | '__root__'
     | '/'
     | '/grammar'
     | '/hangul'
+    | '/listening'
+    | '/pronunciation'
+    | '/speaking'
     | '/tools'
     | '/vocabulary'
     | '/grammar/$lessonId'
@@ -303,6 +423,9 @@ export interface FileRouteTypes {
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
+    | '/pronunciation/$ruleId'
+    | '/pronunciation/minimal-pairs'
+    | '/speaking/shadowing'
     | '/tools/decomposer'
     | '/tools/pronunciation'
     | '/tools/romanization'
@@ -311,11 +434,16 @@ export interface FileRouteTypes {
     | '/vocabulary/study'
     | '/grammar/'
     | '/hangul/'
+    | '/listening/'
+    | '/pronunciation/'
+    | '/speaking/'
     | '/tools/'
     | '/vocabulary/'
+    | '/listening/dialogues/$dialogueId'
     | '/vocabulary/decks/$deckId'
     | '/vocabulary/decks/new'
     | '/vocabulary/word/$wordId'
+    | '/listening/dialogues/'
     | '/vocabulary/decks/'
   fileRoutesById: FileRoutesById
 }
@@ -323,6 +451,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GrammarRouteRoute: typeof GrammarRouteRouteWithChildren
   HangulRouteRoute: typeof HangulRouteRouteWithChildren
+  ListeningRouteRoute: typeof ListeningRouteRouteWithChildren
+  PronunciationRouteRoute: typeof PronunciationRouteRouteWithChildren
+  SpeakingRouteRoute: typeof SpeakingRouteRouteWithChildren
   ToolsRouteRoute: typeof ToolsRouteRouteWithChildren
   VocabularyRouteRoute: typeof VocabularyRouteRouteWithChildren
 }
@@ -348,6 +479,27 @@ declare module '@tanstack/react-router' {
       path: '/hangul'
       fullPath: '/hangul'
       preLoaderRoute: typeof HangulRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/listening': {
+      id: '/listening'
+      path: '/listening'
+      fullPath: '/listening'
+      preLoaderRoute: typeof ListeningRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pronunciation': {
+      id: '/pronunciation'
+      path: '/pronunciation'
+      fullPath: '/pronunciation'
+      preLoaderRoute: typeof PronunciationRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/speaking': {
+      id: '/speaking'
+      path: '/speaking'
+      fullPath: '/speaking'
+      preLoaderRoute: typeof SpeakingRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools': {
@@ -420,6 +572,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HangulQuizRouteImport
       parentRoute: typeof HangulRouteRoute
     }
+    '/listening/': {
+      id: '/listening/'
+      path: '/'
+      fullPath: '/listening/'
+      preLoaderRoute: typeof ListeningIndexRouteImport
+      parentRoute: typeof ListeningRouteRoute
+    }
+    '/pronunciation/': {
+      id: '/pronunciation/'
+      path: '/'
+      fullPath: '/pronunciation/'
+      preLoaderRoute: typeof PronunciationIndexRouteImport
+      parentRoute: typeof PronunciationRouteRoute
+    }
+    '/pronunciation/$ruleId': {
+      id: '/pronunciation/$ruleId'
+      path: '/$ruleId'
+      fullPath: '/pronunciation/$ruleId'
+      preLoaderRoute: typeof PronunciationRuleIdRouteImport
+      parentRoute: typeof PronunciationRouteRoute
+    }
+    '/pronunciation/minimal-pairs': {
+      id: '/pronunciation/minimal-pairs'
+      path: '/minimal-pairs'
+      fullPath: '/pronunciation/minimal-pairs'
+      preLoaderRoute: typeof PronunciationMinimalPairsRouteImport
+      parentRoute: typeof PronunciationRouteRoute
+    }
+    '/speaking/': {
+      id: '/speaking/'
+      path: '/'
+      fullPath: '/speaking/'
+      preLoaderRoute: typeof SpeakingIndexRouteImport
+      parentRoute: typeof SpeakingRouteRoute
+    }
+    '/speaking/shadowing': {
+      id: '/speaking/shadowing'
+      path: '/shadowing'
+      fullPath: '/speaking/shadowing'
+      preLoaderRoute: typeof SpeakingShadowingRouteImport
+      parentRoute: typeof SpeakingRouteRoute
+    }
     '/tools/': {
       id: '/tools/'
       path: '/'
@@ -475,6 +669,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/vocabulary/study'
       preLoaderRoute: typeof VocabularyStudyRouteImport
       parentRoute: typeof VocabularyRouteRoute
+    }
+    '/listening/dialogues/': {
+      id: '/listening/dialogues/'
+      path: '/dialogues'
+      fullPath: '/listening/dialogues/'
+      preLoaderRoute: typeof ListeningDialoguesIndexRouteImport
+      parentRoute: typeof ListeningRouteRoute
+    }
+    '/listening/dialogues/$dialogueId': {
+      id: '/listening/dialogues/$dialogueId'
+      path: '/dialogues/$dialogueId'
+      fullPath: '/listening/dialogues/$dialogueId'
+      preLoaderRoute: typeof ListeningDialoguesDialogueIdRouteImport
+      parentRoute: typeof ListeningRouteRoute
     }
     '/vocabulary/decks/': {
       id: '/vocabulary/decks/'
@@ -543,6 +751,51 @@ const HangulRouteRouteWithChildren = HangulRouteRoute._addFileChildren(
   HangulRouteRouteChildren,
 )
 
+interface ListeningRouteRouteChildren {
+  ListeningIndexRoute: typeof ListeningIndexRoute
+  ListeningDialoguesDialogueIdRoute: typeof ListeningDialoguesDialogueIdRoute
+  ListeningDialoguesIndexRoute: typeof ListeningDialoguesIndexRoute
+}
+
+const ListeningRouteRouteChildren: ListeningRouteRouteChildren = {
+  ListeningIndexRoute: ListeningIndexRoute,
+  ListeningDialoguesDialogueIdRoute: ListeningDialoguesDialogueIdRoute,
+  ListeningDialoguesIndexRoute: ListeningDialoguesIndexRoute,
+}
+
+const ListeningRouteRouteWithChildren = ListeningRouteRoute._addFileChildren(
+  ListeningRouteRouteChildren,
+)
+
+interface PronunciationRouteRouteChildren {
+  PronunciationRuleIdRoute: typeof PronunciationRuleIdRoute
+  PronunciationMinimalPairsRoute: typeof PronunciationMinimalPairsRoute
+  PronunciationIndexRoute: typeof PronunciationIndexRoute
+}
+
+const PronunciationRouteRouteChildren: PronunciationRouteRouteChildren = {
+  PronunciationRuleIdRoute: PronunciationRuleIdRoute,
+  PronunciationMinimalPairsRoute: PronunciationMinimalPairsRoute,
+  PronunciationIndexRoute: PronunciationIndexRoute,
+}
+
+const PronunciationRouteRouteWithChildren =
+  PronunciationRouteRoute._addFileChildren(PronunciationRouteRouteChildren)
+
+interface SpeakingRouteRouteChildren {
+  SpeakingShadowingRoute: typeof SpeakingShadowingRoute
+  SpeakingIndexRoute: typeof SpeakingIndexRoute
+}
+
+const SpeakingRouteRouteChildren: SpeakingRouteRouteChildren = {
+  SpeakingShadowingRoute: SpeakingShadowingRoute,
+  SpeakingIndexRoute: SpeakingIndexRoute,
+}
+
+const SpeakingRouteRouteWithChildren = SpeakingRouteRoute._addFileChildren(
+  SpeakingRouteRouteChildren,
+)
+
 interface ToolsRouteRouteChildren {
   ToolsDecomposerRoute: typeof ToolsDecomposerRoute
   ToolsPronunciationRoute: typeof ToolsPronunciationRoute
@@ -591,6 +844,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GrammarRouteRoute: GrammarRouteRouteWithChildren,
   HangulRouteRoute: HangulRouteRouteWithChildren,
+  ListeningRouteRoute: ListeningRouteRouteWithChildren,
+  PronunciationRouteRoute: PronunciationRouteRouteWithChildren,
+  SpeakingRouteRoute: SpeakingRouteRouteWithChildren,
   ToolsRouteRoute: ToolsRouteRouteWithChildren,
   VocabularyRouteRoute: VocabularyRouteRouteWithChildren,
 }

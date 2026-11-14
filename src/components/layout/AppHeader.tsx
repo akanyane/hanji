@@ -68,6 +68,9 @@ export function AppHeader() {
           <NavLink to="/hangul" label={t('nav.hangul')} />
           <NavLink to="/vocabulary" label={t('nav.vocabulary')} />
           <NavLink to="/grammar" label={t('nav.grammar')} />
+          <NavLink to="/pronunciation" label={t('nav.pronunciation')} />
+          <NavLink to="/listening" label={t('nav.listening')} />
+          <NavLink to="/speaking" label={t('nav.speaking')} />
           <NavLink to="/tools" label={t('nav.tools')} />
         </nav>
         <LanguageSwitcher />

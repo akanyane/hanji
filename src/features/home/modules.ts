@@ -26,11 +26,11 @@ export interface PlatformModule {
 // Platform module map. When a module ships, just fill in `to`.
 export const PLATFORM_MODULES: PlatformModule[] = [
   { id: 'hangul', korean: '한글', to: '/hangul' },
-  { id: 'pronunciation', korean: '발음' },
+  { id: 'pronunciation', korean: '발음', to: '/pronunciation' },
   { id: 'vocabulary', korean: '어휘', to: '/vocabulary' },
   { id: 'grammar', korean: '문법', to: '/grammar' },
-  { id: 'listening', korean: '듣기' },
-  { id: 'speaking', korean: '말하기' },
+  { id: 'listening', korean: '듣기', to: '/listening' },
+  { id: 'speaking', korean: '말하기', to: '/speaking' },
   { id: 'reading', korean: '읽기' },
   { id: 'writing', korean: '쓰기' },
   { id: 'numbers', korean: '숫자' },

@@ -16,11 +16,12 @@ export function useKoreanVoice(): VoiceStatus {
 
   useEffect(() => {
     if (!isSpeechSynthesisSupported()) return
+    // Keep the same object for cleanup, even if the global changes later.
+    const synth = window.speechSynthesis
     const update = () => setStatus(currentStatus())
-    window.speechSynthesis.addEventListener('voiceschanged', update)
+    synth.addEventListener('voiceschanged', update)
     update()
-    return () =>
-      window.speechSynthesis.removeEventListener('voiceschanged', update)
+    return () => synth.removeEventListener('voiceschanged', update)
   }, [])
 
   return status

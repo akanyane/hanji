@@ -15,6 +15,7 @@ export const ptBR: Messages = {
     previous: 'Anterior',
     next: 'Próximo',
     continue: 'Continuar',
+    speed: 'Velocidade da voz',
   },
   nav: {
     main: 'Navegação principal',
@@ -22,6 +23,9 @@ export const ptBR: Messages = {
     hangul: 'Hangul',
     vocabulary: 'Vocabulário',
     grammar: 'Gramática',
+    pronunciation: 'Pronúncia',
+    listening: 'Escuta',
+    speaking: 'Fala',
     tools: 'Ferramentas',
     skipToContent: 'Pular para o conteúdo',
     homeLabel: 'Aprenda Coreano: página inicial',
@@ -498,6 +502,113 @@ export const ptBR: Messages = {
         vocative: 'Chamar alguém (아/야)',
       },
       next: 'Próxima',
+    },
+  },
+  pronunciation: {
+    title: 'Pronúncia',
+    description:
+      'O coreano nem sempre se lê como se escreve. Aprenda as regras de mudança de som e treine o ouvido.',
+    sections: 'Seções de pronúncia',
+    tabs: {
+      rules: 'Regras de som',
+      minimalPairs: 'Pares mínimos',
+      tool: 'Como se pronuncia?',
+    },
+    rule: {
+      back: 'Todas as regras',
+      examples: 'Exemplos',
+      quiz: 'Como se pronuncia?',
+      quizStart: 'Praticar esta regra',
+      score: 'Você acertou {{score}} de {{total}}!',
+      retry: 'Tentar de novo',
+      openInTool: 'Ver passo a passo',
+    },
+    pairs: {
+      description:
+        'Ouça e escolha a palavra que você ouviu. Elas diferem em um único som.',
+      play: 'Tocar a palavra',
+      correct: 'Correto!',
+      incorrect: 'Era {{word}}.',
+      next: 'Próxima',
+      ttsNote:
+        'O áudio vem da voz sintética do seu navegador. É ótimo para praticar, mas contrastes sutis podem soar menos claros que na voz de um nativo.',
+    },
+  },
+  listening: {
+    title: 'Escuta',
+    description:
+      'Treine o ouvido com ditados e diálogos curtos, na velocidade que você escolher.',
+    sections: 'Seções de escuta',
+    tabs: { dictation: 'Ditado', dialogues: 'Diálogos' },
+    unsupported:
+      'Seu navegador não tem síntese de voz, então os exercícios de escuta não conseguem tocar áudio.',
+    dictation: {
+      description: 'Ouça a frase e digite exatamente o que ouviu.',
+      label: 'O que você ouviu?',
+      check: 'Verificar',
+      correct: 'Perfeito!',
+      incorrect: 'A frase era:',
+      similarity: 'Semelhança: {{score}}%',
+      next: 'Próxima frase',
+      progress: 'Frase {{current}} de {{total}}',
+      finished: 'Você acertou {{score}} de {{total}} frases exatamente!',
+      again: 'Novo ditado',
+    },
+    dialogues: {
+      description: 'Ouça a conversa e depois responda às perguntas.',
+      playAll: 'Tocar o diálogo',
+      stop: 'Parar',
+      showTranscript: 'Mostrar transcrição',
+      hideTranscript: 'Ocultar transcrição',
+      showTranslation: 'Mostrar tradução',
+      hideTranslation: 'Ocultar tradução',
+      questions: 'Perguntas de compreensão',
+      start: 'Responder às perguntas',
+      score: 'Você acertou {{score}} de {{total}}!',
+      back: 'Todos os diálogos',
+    },
+  },
+  speaking: {
+    title: 'Fala',
+    description:
+      'Repita depois do modelo, veja o que o computador entendeu e grave sua voz.',
+    sections: 'Seções de fala',
+    tabs: { repeat: 'Repetir', shadowing: 'Shadowing' },
+    repeat: {
+      description:
+        'Ouça e depois diga a frase. Sua fala é comparada letra por letra (jamo).',
+      speak: 'Falar',
+      stop: 'Parar',
+      listening: 'Ouvindo…',
+      youSaid: 'O que eu entendi',
+      similarity: 'Semelhança: {{score}}%',
+      great: 'Pronúncia excelente!',
+      good: 'Bom! Confira as sílabas destacadas.',
+      retry: 'Tente de novo, ouvindo o modelo antes.',
+      next: 'Próxima frase',
+      unsupported:
+        'Seu navegador não reconhece fala (o Firefox, por exemplo). Você ainda pode gravar sua voz e comparar ouvindo.',
+      privacy:
+        'No Chrome, o áudio é enviado ao Google para ser transcrito, então precisa de internet.',
+      error: 'Não consegui ouvir. Verifique o microfone e tente de novo.',
+    },
+    recorder: {
+      record: 'Gravar minha voz',
+      stop: 'Parar gravação',
+      play: 'Minha gravação',
+      unsupported: 'Gravação indisponível neste navegador.',
+      denied: 'Sem acesso ao microfone.',
+    },
+    shadowing: {
+      description:
+        'Shadowing: ouça e repita ao mesmo tempo, copiando o ritmo e a entonação. Esconda o texto para treinar o ouvido.',
+      play: 'Tocar',
+      loop: 'Repetir em loop',
+      hideText: 'Esconder texto',
+      showText: 'Mostrar texto',
+      previous: 'Anterior',
+      next: 'Próxima',
+      position: '{{current}} / {{total}}',
     },
   },
   tools: {

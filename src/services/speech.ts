@@ -29,6 +29,8 @@ export function findKoreanVoice(
 export interface SpeakOptions {
   /** 0.5–1.5, where 1 is normal speed. */
   rate?: number
+  /** 0–2, where 1 is the voice's normal pitch (used to tell dialogue speakers apart). */
+  pitch?: number
   onEnd?: () => void
 }
 
@@ -38,7 +40,7 @@ export interface SpeakOptions {
  */
 export function speakKorean(
   text: string,
-  { rate = 1, onEnd }: SpeakOptions = {},
+  { rate = 1, pitch, onEnd }: SpeakOptions = {},
 ): boolean {
   if (!isSpeechSynthesisSupported()) return false
   const synth = window.speechSynthesis
@@ -46,6 +48,7 @@ export function speakKorean(
   const utterance = new SpeechSynthesisUtterance(text)
   utterance.lang = KOREAN_LANG
   utterance.rate = rate
+  if (pitch !== undefined) utterance.pitch = pitch
   const voice = findKoreanVoice(synth.getVoices())
   if (voice) utterance.voice = voice
   if (onEnd) {
@@ -58,4 +61,47 @@ export function speakKorean(
 
 export function stopSpeaking() {
   if (isSpeechSynthesisSupported()) window.speechSynthesis.cancel()
+}
+
+export interface SpokenLine {
+  text: string
+  pitch?: number
+}
+
+/**
+ * Speaks lines one after another (e.g. a dialogue), calling `onLine` as each
+ * starts. Returns a function that stops playback.
+ */
+export function speakSequence(
+  lines: SpokenLine[],
+  {
+    rate = 1,
+    onLine,
+    onEnd,
+  }: {
+    rate?: number
+    onLine?: (index: number) => void
+    onEnd?: () => void
+  } = {},
+): () => void {
+  let stopped = false
+  const play = (index: number) => {
+    if (stopped) return
+    if (index >= lines.length) {
+      onEnd?.()
+      return
+    }
+    onLine?.(index)
+    const started = speakKorean(lines[index].text, {
+      rate,
+      pitch: lines[index].pitch,
+      onEnd: () => play(index + 1),
+    })
+    if (!started) onEnd?.()
+  }
+  play(0)
+  return () => {
+    stopped = true
+    stopSpeaking()
+  }
 }

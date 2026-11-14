@@ -16,6 +16,7 @@ export const en = {
     previous: 'Previous',
     next: 'Next',
     continue: 'Continue',
+    speed: 'Speech speed',
   },
   nav: {
     main: 'Main navigation',
@@ -23,6 +24,9 @@ export const en = {
     hangul: 'Hangul',
     vocabulary: 'Vocabulary',
     grammar: 'Grammar',
+    pronunciation: 'Pronunciation',
+    listening: 'Listening',
+    speaking: 'Speaking',
     tools: 'Tools',
     skipToContent: 'Skip to content',
     homeLabel: 'Learn Korean: home page',
@@ -500,6 +504,113 @@ export const en = {
         vocative: 'Calling someone (아/야)',
       },
       next: 'Next',
+    },
+  },
+  pronunciation: {
+    title: 'Pronunciation',
+    description:
+      'Korean is not always read the way it is written. Learn the sound-change rules and train your ear.',
+    sections: 'Pronunciation sections',
+    tabs: {
+      rules: 'Sound rules',
+      minimalPairs: 'Minimal pairs',
+      tool: 'How is it pronounced?',
+    },
+    rule: {
+      back: 'All rules',
+      examples: 'Examples',
+      quiz: 'How is it pronounced?',
+      quizStart: 'Practice this rule',
+      score: 'You got {{score}} out of {{total}}!',
+      retry: 'Try again',
+      openInTool: 'See step by step',
+    },
+    pairs: {
+      description:
+        'Listen and pick the word you heard. These words differ in a single sound.',
+      play: 'Play the word',
+      correct: 'Correct!',
+      incorrect: 'It was {{word}}.',
+      next: 'Next',
+      ttsNote:
+        "The audio comes from your browser's synthetic voice. It's good for practice, but subtle contrasts may sound less clear than with a native speaker.",
+    },
+  },
+  listening: {
+    title: 'Listening',
+    description:
+      'Train your ear with dictation and short dialogues, at the speed you choose.',
+    sections: 'Listening sections',
+    tabs: { dictation: 'Dictation', dialogues: 'Dialogues' },
+    unsupported:
+      "Your browser doesn't support speech synthesis, so listening exercises can't play audio.",
+    dictation: {
+      description: 'Listen to the sentence and type exactly what you hear.',
+      label: 'What did you hear?',
+      check: 'Check',
+      correct: 'Perfect!',
+      incorrect: 'The sentence was:',
+      similarity: 'Similarity: {{score}}%',
+      next: 'Next sentence',
+      progress: 'Sentence {{current}} of {{total}}',
+      finished: 'You got {{score}} of {{total}} sentences exactly right!',
+      again: 'New dictation',
+    },
+    dialogues: {
+      description: 'Listen to the conversation, then answer the questions.',
+      playAll: 'Play the dialogue',
+      stop: 'Stop',
+      showTranscript: 'Show transcript',
+      hideTranscript: 'Hide transcript',
+      showTranslation: 'Show translation',
+      hideTranslation: 'Hide translation',
+      questions: 'Comprehension questions',
+      start: 'Answer the questions',
+      score: 'You got {{score}} out of {{total}}!',
+      back: 'All dialogues',
+    },
+  },
+  speaking: {
+    title: 'Speaking',
+    description:
+      'Repeat after the model, see what the computer understood, and record yourself.',
+    sections: 'Speaking sections',
+    tabs: { repeat: 'Repeat', shadowing: 'Shadowing' },
+    repeat: {
+      description:
+        'Listen, then say the sentence. Your speech is compared letter by letter (jamo).',
+      speak: 'Speak',
+      stop: 'Stop',
+      listening: 'Listening…',
+      youSaid: 'What I understood',
+      similarity: 'Similarity: {{score}}%',
+      great: 'Excellent pronunciation!',
+      good: 'Good! Check the highlighted syllables.',
+      retry: 'Try again, listening to the model first.',
+      next: 'Next sentence',
+      unsupported:
+        "Your browser can't recognize speech (Firefox, for example). You can still record yourself and compare by ear.",
+      privacy:
+        'In Chrome, the audio is sent to Google to be transcribed, so it needs an internet connection.',
+      error: "I couldn't hear you. Check your microphone and try again.",
+    },
+    recorder: {
+      record: 'Record my voice',
+      stop: 'Stop recording',
+      play: 'My recording',
+      unsupported: "Recording isn't available in this browser.",
+      denied: 'No access to the microphone.',
+    },
+    shadowing: {
+      description:
+        'Shadowing: listen and repeat at the same time, copying the rhythm and intonation. Hide the text to train your ear.',
+      play: 'Play',
+      loop: 'Loop',
+      hideText: 'Hide text',
+      showText: 'Show text',
+      previous: 'Previous',
+      next: 'Next',
+      position: '{{current}} / {{total}}',
     },
   },
   tools: {

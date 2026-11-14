@@ -9,6 +9,9 @@ The interface **and** the learning content are multilingual: English and Brazili
 > - **Hangul**: every consonant and vowel with audio, pronunciation tips and the origin of its shape; animated stroke order; handwriting practice with feedback; syllable builder; quizzes (recognize letters, listen and choose, read real words).
 > - **Vocabulary**: 243 words by approximate TOPIK level and topic, with examples, Hanja and audio; spaced repetition with [FSRS](https://github.com/open-spaced-repetition/ts-fsrs); four study modes (flashcards, multiple choice, typing, listen and write); custom decks; searchable dictionary; statistics and review forecast.
 > - **Grammar**: 22 lessons from 이다 and particles to connectives and reported speech, each with explanation, formation table, examples with audio, common mistakes written for speakers of each language, and exercises; a conjugator for any verb or adjective (tenses, formality levels, honorifics, negation, connectives and all irregular classes); endless particle practice.
+> - **Pronunciation**: lessons for all 11 sound-change rules with engine-verified examples, step-by-step transformations and quizzes whose wrong answers are the intermediate stages; minimal-pair ear training.
+> - **Listening**: dictation with a jamo-level diff, and dialogues read with a different voice pitch per speaker, with optional transcript, translation and comprehension questions; adjustable speech speed.
+> - **Speaking**: repeat-after-me with speech recognition and jamo-level scoring (with a recording fallback where recognition isn't available, e.g. Firefox), shadowing with loop and hidden text, and local voice recording.
 > - **Tools**: "how is it pronounced?" (applies the standard sound-change rules and explains each step), Hangul ↔ Revised Romanization converter, and syllable decomposer.
 >
 > The remaining modules show up on the home page as "Em breve" (coming soon).
@@ -58,7 +61,7 @@ src/
   db/          Local database (Dexie/IndexedDB), repositories and TanStack Query hooks
   i18n/        Languages, UI message catalogs (one file per language)
   stores/      Global UI state (TanStack Store)
-  services/    Browser APIs (speech synthesis)
+  services/    Browser APIs (speech synthesis, speech recognition, recording)
   hooks/       Shared React hooks
   components/  Reusable components (layout and ui)
 ```
