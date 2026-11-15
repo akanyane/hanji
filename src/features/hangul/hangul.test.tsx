@@ -152,7 +152,7 @@ describe('language', () => {
     renderApp('/hangul/cons-g')
     await screen.findByRole('heading', { name: 'Ordem dos traços' })
 
-    await user.click(screen.getByRole('button', { name: /^Idioma/ }))
+    await user.click(screen.getByRole('button', { name: /Idioma/ }))
     await user.click(screen.getByRole('menuitemradio', { name: /English/ }))
 
     expect(

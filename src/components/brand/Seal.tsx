@@ -44,7 +44,7 @@ export function Seal({
         'relative inline-flex shrink-0 select-none items-center justify-center font-serif font-bold leading-none',
         SIZES[size],
         muted
-          ? 'border-2 border-dashed border-ink-300 text-ink-400 dark:border-ink-600 dark:text-ink-500'
+          ? 'border-2 border-dashed border-ink-300 text-ink-500 dark:border-ink-600 dark:text-ink-500'
           : 'bg-seal-600 text-white shadow-[inset_0_0_0_2px_var(--color-seal-600),inset_0_0_0_4px_rgb(255_253_248/0.85)] dark:bg-seal-700',
         className,
       )}

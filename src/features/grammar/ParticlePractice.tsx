@@ -146,7 +146,7 @@ export function ParticlePractice({ initial }: { initial?: ParticleQuestion }) {
                     : 'border-ink-200 bg-white hover:border-pine-400 dark:border-ink-700 dark:bg-ink-900',
               )}
             >
-              <span className="mr-2 align-middle text-xs text-ink-400">
+              <span className="mr-2 align-middle text-xs text-ink-500">
                 {i + 1}
               </span>
               {choice}

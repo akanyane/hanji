@@ -1,9 +1,15 @@
 import { Link } from '@tanstack/react-router'
 import { motion } from 'motion/react'
+import { lazy, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Seal } from '../../components/brand/Seal'
-import { TodaySummary } from '../today/TodaySummary'
 import { useProgress } from './useProgress'
+
+// The daily plan pulls in all the course content: load it after the first
+// paint instead of in the home page's initial JavaScript.
+const TodaySummary = lazy(() =>
+  import('../today/TodaySummary').then((m) => ({ default: m.TodaySummary })),
+)
 
 /** Home page: the placement test invitation for newcomers, else today's session. */
 export function ProgressStrip() {
@@ -37,5 +43,9 @@ export function ProgressStrip() {
       </motion.div>
     )
 
-  return <TodaySummary />
+  return (
+    <Suspense fallback={null}>
+      <TodaySummary />
+    </Suspense>
+  )
 }

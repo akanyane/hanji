@@ -24,7 +24,6 @@ function applyLocale(locale: string) {
   if (i18next.language !== locale) i18next.changeLanguage(locale)
   if (typeof document !== 'undefined') {
     document.documentElement.lang = locale
-    document.title = i18next.t('common.appName')
   }
 }
 

@@ -32,7 +32,7 @@ export function SyllableDiff({
               'bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200',
             s.status === 'wrong' &&
               'bg-rose-100 text-rose-800 underline decoration-wavy dark:bg-rose-900/60 dark:text-rose-200',
-            s.status === 'ignored' && 'text-ink-400',
+            s.status === 'ignored' && 'text-ink-500',
           )}
         >
           {s.char === ' ' ? ' ' : s.char}

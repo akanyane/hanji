@@ -1,9 +1,11 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { getMockExam } from '../../../content/topik/mock'
 import { ExamRunner } from '../../../features/progress/MockExam'
 
 export const Route = createFileRoute('/progress/exam/$examId')({
-  loader: ({ params }) => {
+  // Content is imported inside the loader so it stays out of the app's
+  // initial JavaScript (route loaders are not code-split).
+  loader: async ({ params }) => {
+    const { getMockExam } = await import('../../../content/topik/mock')
     const exam = getMockExam(params.examId)
     if (!exam) throw notFound()
     return exam

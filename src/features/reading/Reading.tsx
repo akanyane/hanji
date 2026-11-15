@@ -139,7 +139,7 @@ function GlossaryCard({
           type="button"
           onClick={onClose}
           aria-label={t('reading.glossary.close')}
-          className="rounded-full px-2 text-xl text-ink-400 hover:text-ink-700 dark:hover:text-ink-200"
+          className="rounded-full px-2 text-xl text-ink-500 hover:text-ink-700 dark:hover:text-ink-200"
         >
           ✕
         </button>
@@ -355,7 +355,7 @@ export function ReadingPage({ text }: { text: ReadingText }) {
             {score === questions.length && <Confetti />}
             <p className="text-4xl font-extrabold">
               <AnimatedNumber value={score} />
-              <span className="text-xl text-ink-400">/{questions.length}</span>
+              <span className="text-xl text-ink-500">/{questions.length}</span>
             </p>
             <p className="font-semibold">
               {t('reading.score', { score, total: questions.length })}

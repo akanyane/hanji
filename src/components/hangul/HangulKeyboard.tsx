@@ -88,7 +88,7 @@ export function HangulKeyboard({
               >
                 {shown}
                 <span
-                  className="text-[9px] font-normal text-ink-400 uppercase"
+                  className="text-[9px] font-normal text-ink-500 uppercase"
                   aria-hidden="true"
                 >
                   {key}

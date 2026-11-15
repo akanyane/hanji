@@ -286,7 +286,7 @@ export function DialoguePage({
             {score === questions.length && <Confetti />}
             <p className="text-4xl font-extrabold">
               <AnimatedNumber value={score} />
-              <span className="text-xl text-ink-400">/{questions.length}</span>
+              <span className="text-xl text-ink-500">/{questions.length}</span>
             </p>
             <p className="font-semibold">
               {t('listening.dialogues.score', {

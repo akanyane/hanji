@@ -53,7 +53,7 @@ export function LanguageSwitcher() {
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
-        aria-label={`${t('nav.language')}: ${LOCALE_LABELS[locale]}`}
+        aria-label={`${SHORT[locale]} · ${t('nav.language')}: ${LOCALE_LABELS[locale]}`}
         onClick={() => setOpen((o) => !o)}
         className="flex items-center gap-1.5 rounded-md border border-ink-300 px-2.5 py-1 text-sm font-medium transition-colors hover:border-ink-900 dark:border-ink-700 dark:hover:border-ink-200"
       >
@@ -101,7 +101,7 @@ export function LanguageSwitcher() {
                     )}
                   >
                     {LOCALE_LABELS[l]}
-                    <span className="w-8 text-right text-xs text-ink-400">
+                    <span className="w-8 text-right text-xs text-ink-500">
                       {selected ? '●' : SHORT[l]}
                     </span>
                   </button>

@@ -10,8 +10,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Free platform to learn Korean, from Hangul to TOPIK II. Available in English and Brazilian Portuguese."
+      content="Hanji is a free app to learn Korean, from Hangul to TOPIK: lessons, spaced repetition, listening, speaking, reading and mock exams. In English and Brazilian Portuguese. Works offline, no account."
     />
+    <!-- Link previews (WhatsApp, social networks): read from the static HTML. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hanji" />
+    <meta property="og:title" content="Hanji · Learn Korean, from Hangul to TOPIK" />
+    <meta
+      property="og:description"
+      content="Free app to learn Korean: lessons, spaced repetition, listening, speaking and TOPIK-style mock exams. English and Português. Works offline."
+    />
+    <meta property="og:url" content="https://hanji.akanyane.dev/" />
+    <meta property="og:image" content="https://hanji.akanyane.dev/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hanji: learn Korean, from Hangul to TOPIK" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="pt_BR" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Hanji · Learn Korean</title>
     <script>
       // Apply the saved theme before React loads to avoid a light-theme flash.
@@ -28,9 +44,55 @@
         } catch {}
       })()
     </script>
+    <style>
+      /* Boot screen: painted straight from the HTML while the JavaScript
+         loads, replaced by React on its first render. Colors mirror the
+         design tokens (paper / ink night); .dark is set by the script above. */
+      html { background: #fbf8f1; }
+      html.dark { background: #13110e; }
+      .boot {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        color: #1d1915;
+        font-family: "Gowun Batang", "Nanum Myeongjo", "AppleMyungjo", serif;
+      }
+      html.dark .boot { color: #fbf8f1; }
+      .boot-seal {
+        width: 72px;
+        height: 72px;
+        border-radius: 12px;
+        background: #b03021;
+        color: #fffdf8;
+        box-shadow: inset 0 0 0 3px #b03021, inset 0 0 0 6px rgba(255, 253, 248, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        font-weight: 700;
+        transform: rotate(-4deg);
+      }
+      .boot-name { font-size: 44px; font-weight: 700; letter-spacing: -0.01em; }
+      .boot-name span { color: #b03021; font-size: 22px; margin-left: 8px; font-weight: 400; }
+      @media (prefers-reduced-motion: no-preference) {
+        .boot-seal { animation: boot-stamp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        @keyframes boot-stamp {
+          from { transform: scale(1.6) rotate(-14deg); opacity: 0; }
+          to { transform: scale(1) rotate(-4deg); opacity: 1; }
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="boot" aria-hidden="true">
+        <div class="boot-seal" lang="ko">한</div>
+        <div class="boot-name">Hanji<span lang="ko">한지</span></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -172,7 +172,7 @@ function NavMenu({
                   <span
                     aria-hidden="true"
                     lang="ko"
-                    className="w-12 font-serif text-xs text-ink-400 transition-colors group-hover:text-seal-600 group-data-[status=active]:text-seal-600 dark:text-ink-500"
+                    className="w-12 font-serif text-xs text-ink-500 transition-colors group-hover:text-seal-600 group-data-[status=active]:text-seal-600 dark:text-ink-500"
                   >
                     {item.icon}
                   </span>

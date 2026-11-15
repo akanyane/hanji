@@ -62,7 +62,7 @@ function JamoLine({
           </>
         ) : (
           <>
-            <span className="text-ink-400" aria-hidden="true">
+            <span className="text-ink-500" aria-hidden="true">
               —
             </span>
             <span className="sr-only">{t('common.none')}</span>

@@ -150,7 +150,7 @@ function TaskCard({ task, index }: { task: DailyTask; index: number }) {
       )}
     >
       <span className="flex items-center gap-3">
-        <span className="w-5 font-serif text-sm text-ink-400 tabular-nums">
+        <span className="w-5 font-serif text-sm text-ink-500 tabular-nums">
           {index + 1}
         </span>
         <Seal text={SEAL[task.kind]} size="md" muted={task.done} />

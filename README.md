@@ -46,6 +46,8 @@ bun run dev
 | `bun run lint`                | Check formatting and lint rules                                                      |
 | `bun run lint:fix`            | Apply safe lint/format fixes                                                         |
 | `bun run export:review`       | Export all Korean content to `review/korean-content.csv` for a native-speaker review |
+| `bun run generate-sitemap`    | Rewrite `public/sitemap.xml` from the content (a test fails when it is stale)        |
+| `bun run generate-og-image`   | Render `public/og-image.jpg`, the link-preview image (needs Chrome or `CHROME_PATH`) |
 | `bun run generate-pwa-assets` | Regenerate the app icons from `public/logo.svg`                                      |
 
 > Use `bun run test`, not `bun test`: the latter starts Bun's own test runner, while this project uses Vitest.

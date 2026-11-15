@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Source of public/og-image.jpg (bun run generate-og-image). -->
+    <link rel="stylesheet" href="../../node_modules/@fontsource/gowun-batang/700.css" />
+    <link rel="stylesheet" href="../../node_modules/@fontsource/gowun-batang/400.css" />
+    <link rel="stylesheet" href="../../node_modules/@fontsource/ibm-plex-sans/500.css" />
+    <link rel="stylesheet" href="../../node_modules/@fontsource/ibm-plex-sans-kr/400.css" />
+    <style>
+      * { box-sizing: border-box; margin: 0; }
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background-color: #f4eee2;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .18 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        color: #1d1915;
+        font-family: 'IBM Plex Sans', 'IBM Plex Sans KR', sans-serif;
+        display: flex;
+        align-items: center;
+        padding: 0 90px;
+        gap: 60px;
+        position: relative;
+      }
+      .frame {
+        position: absolute;
+        inset: 28px;
+        border: 3px double rgba(29, 25, 21, 0.25);
+        border-radius: 18px;
+      }
+      .text { flex: 1; display: flex; flex-direction: column; gap: 18px; }
+      .brand { display: flex; align-items: center; gap: 22px; }
+      .seal {
+        width: 92px; height: 92px; border-radius: 16px;
+        background: #b03021; color: #fffdf8;
+        box-shadow: inset 0 0 0 4px #b03021, inset 0 0 0 7px rgba(255,253,248,.85);
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Gowun Batang', serif; font-weight: 700; font-size: 54px;
+        transform: rotate(-4deg);
+      }
+      h1 { font-family: 'Gowun Batang', serif; font-size: 112px; line-height: 1; letter-spacing: -1px; }
+      h1 small { font-size: 44px; color: #b03021; margin-left: 14px; font-weight: 400; }
+      .stroke { width: 330px; height: 16px; }
+      .tagline { font-size: 40px; font-weight: 500; line-height: 1.25; max-width: 720px; }
+      .sub { font-size: 25px; color: #5d5345; }
+      .art { position: relative; width: 300px; height: 420px; display: flex; align-items: center; justify-content: center; }
+      .art svg.enso { position: absolute; inset: 0; margin: auto; width: 300px; height: 300px; color: rgba(29,25,21,.12); }
+      .vertical {
+        position: relative; writing-mode: vertical-rl; text-orientation: upright;
+        font-family: 'Gowun Batang', serif; font-weight: 700; font-size: 104px; letter-spacing: 12px;
+      }
+      .small-seal {
+        position: absolute; right: 18px; bottom: 34px; width: 74px; height: 74px; border-radius: 12px;
+        background: #b03021; color: #fffdf8; font-family: 'Gowun Batang', serif; font-weight: 700; font-size: 26px;
+        box-shadow: inset 0 0 0 3px #b03021, inset 0 0 0 5px rgba(255,253,248,.85);
+        display: flex; align-items: center; justify-content: center; transform: rotate(-6deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame"></div>
+    <div class="text">
+      <div class="brand">
+        <div class="seal" lang="ko">한</div>
+        <h1>Hanji<small lang="ko">한지</small></h1>
+      </div>
+      <svg class="stroke" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M4 14 C 40 6, 80 18, 130 11 S 230 6, 296 12" fill="none" stroke="#c9402e" stroke-opacity=".25" stroke-width="9" stroke-linecap="round" />
+        <path d="M4 14 C 40 6, 80 18, 130 11 S 230 6, 296 12" fill="none" stroke="#c9402e" stroke-width="5" stroke-linecap="round" />
+      </svg>
+      <p class="tagline">Learn Korean,<br />from Hangul to TOPIK.</p>
+      <p class="sub">Free · offline · English &amp; Português</p>
+    </div>
+    <div class="art">
+      <svg class="enso" viewBox="0 0 200 200" aria-hidden="true">
+        <path d="M 152 46 C 120 18, 58 24, 36 70 C 14 118, 48 172, 104 176 C 158 180, 188 132, 176 88 C 170 66, 158 54, 146 50" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" />
+      </svg>
+      <span class="vertical" lang="ko">한국어</span>
+      <span class="small-seal" lang="ko">배움</span>
+    </div>
+  </body>
+</html>

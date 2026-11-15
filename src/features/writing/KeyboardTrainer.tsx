@@ -197,7 +197,7 @@ export function KeyboardTrainer({ words: initialWords }: { words?: string[] }) {
           )}
         >
           {imeText(ime) || (
-            <span className="text-base font-normal text-ink-400">
+            <span className="text-base font-normal text-ink-500">
               {t('writing.keyboard.focusHint')}
             </span>
           )}
