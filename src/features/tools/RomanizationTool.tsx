@@ -111,7 +111,7 @@ export function RomanizationTool({
             exit={{ opacity: 0 }}
           >
             {result.output || (
-              <span className="text-base text-ink-400">
+              <span className="text-base text-ink-500">
                 {t('common.resultPlaceholder')}
               </span>
             )}

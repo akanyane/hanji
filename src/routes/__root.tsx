@@ -15,6 +15,7 @@ import { Toaster } from '../components/layout/Toaster'
 import { PageTransition } from '../components/motion/PageTransition'
 import { AchievementWatcher } from '../features/progress/AchievementWatcher'
 import { useStudyTimer } from '../hooks/useStudyTimer'
+import { useDocumentHead } from '../seo/useDocumentHead'
 import { useSettings } from '../stores/settings'
 
 export interface RouterContext {
@@ -43,6 +44,7 @@ function RootLayout() {
   // Animate between top-level sections only; nested layouts animate their own content.
   const section = useLocation({ select: (l) => l.pathname.split('/')[1] ?? '' })
   useStudyTimer(countStudyTime)
+  useDocumentHead()
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')

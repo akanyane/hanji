@@ -1,9 +1,11 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { getCultureNote } from '../../content/culture/notes'
 import { CultureNotePage } from '../../features/culture/Culture'
 
 export const Route = createFileRoute('/culture/$noteId')({
-  loader: ({ params }) => {
+  // Content is imported inside the loader so it stays out of the app's
+  // initial JavaScript (route loaders are not code-split).
+  loader: async ({ params }) => {
+    const { getCultureNote } = await import('../../content/culture/notes')
     const note = getCultureNote(params.noteId)
     if (!note) throw notFound()
     return note

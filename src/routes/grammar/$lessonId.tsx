@@ -1,9 +1,11 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { getLesson } from '../../content/grammar'
 import { LessonPage } from '../../features/grammar/LessonPage'
 
 export const Route = createFileRoute('/grammar/$lessonId')({
-  loader: ({ params }) => {
+  // Content is imported inside the loader so it stays out of the app's
+  // initial JavaScript (route loaders are not code-split).
+  loader: async ({ params }) => {
+    const { getLesson } = await import('../../content/grammar')
     const lesson = getLesson(params.lessonId)
     if (!lesson) throw notFound()
     return lesson

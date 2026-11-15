@@ -62,7 +62,7 @@ function ToastItem({ toast }: { toast: Toast }) {
         type="button"
         onClick={() => toastActions.dismiss(toast.id)}
         aria-label={t('common.close')}
-        className="rounded-full px-2 text-ink-400 hover:text-ink-700 dark:hover:text-ink-100"
+        className="rounded-full px-2 text-ink-500 hover:text-ink-700 dark:hover:text-ink-100"
       >
         ×
       </button>

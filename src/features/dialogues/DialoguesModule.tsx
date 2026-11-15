@@ -189,7 +189,7 @@ export function CompleteDialogue({ dialogue }: { dialogue: Dialogue }) {
           {score === steps.length && <Confetti />}
           <p className="text-4xl font-extrabold">
             <AnimatedNumber value={score} />
-            <span className="text-xl text-ink-400">/{steps.length}</span>
+            <span className="text-xl text-ink-500">/{steps.length}</span>
           </p>
           <Button
             variant="secondary"

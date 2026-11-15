@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { THEMES, type ThemeId, type TopikLevel } from '../../content/vocabulary'
+import { THEMES } from '../../content/vocabulary/themes'
+import type { ThemeId, TopikLevel } from '../../content/vocabulary/types'
 import { Dictionary } from '../../features/vocabulary/Dictionary'
-import { LEVELS } from '../../features/vocabulary/logic'
 import { useUrlSyncedText } from '../../hooks/useUrlSyncedText'
 import { parseTextParam } from '../tools/-search'
 
@@ -14,7 +14,7 @@ interface DictionarySearch {
 export const Route = createFileRoute('/vocabulary/dictionary')({
   validateSearch: (search: Record<string, unknown>): DictionarySearch => ({
     q: parseTextParam(search.q),
-    level: LEVELS.includes(Number(search.level) as TopikLevel)
+    level: [1, 2, 3, 4, 5, 6].includes(Number(search.level))
       ? (Number(search.level) as TopikLevel)
       : undefined,
     theme:

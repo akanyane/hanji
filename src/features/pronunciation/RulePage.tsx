@@ -87,7 +87,7 @@ function Quiz({ rule }: { rule: PronunciationRuleId }) {
         {score === questions.length && <Confetti />}
         <p className="text-5xl font-extrabold">
           <AnimatedNumber value={score} />
-          <span className="text-2xl text-ink-400">/{questions.length}</span>
+          <span className="text-2xl text-ink-500">/{questions.length}</span>
         </p>
         <p className="font-semibold">
           {t('pronunciation.rule.score', { score, total: questions.length })}
@@ -168,7 +168,7 @@ export function RulePage({ rule }: { rule: PronunciationRuleId }) {
                 >
                   {stages.map((stage, i) => (
                     <span key={stage} className="flex items-center gap-2">
-                      {i > 0 && <span className="text-ink-400">→</span>}
+                      {i > 0 && <span className="text-ink-500">→</span>}
                       <span
                         className={
                           i === stages.length - 1

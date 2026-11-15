@@ -109,7 +109,7 @@ export function Dictation({ sentences }: { sentences?: PracticeSentence[] }) {
         {exact / items.length >= 0.75 && <Confetti />}
         <p className="text-5xl font-extrabold">
           <AnimatedNumber value={exact} />
-          <span className="text-2xl text-ink-400">/{items.length}</span>
+          <span className="text-2xl text-ink-500">/{items.length}</span>
         </p>
         <p className="font-semibold">
           {t('listening.dictation.finished', {

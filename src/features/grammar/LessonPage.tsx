@@ -155,7 +155,7 @@ function Exercises({ lesson }: { lesson: GrammarLesson }) {
         {score === total && <Confetti />}
         <p className="text-5xl font-extrabold">
           <AnimatedNumber value={score} />
-          <span className="text-2xl text-ink-400">/{total}</span>
+          <span className="text-2xl text-ink-500">/{total}</span>
         </p>
         <p className="font-semibold">
           {t('grammar.lesson.score', { score, total })}

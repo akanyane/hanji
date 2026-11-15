@@ -235,7 +235,7 @@ export function HangulQuiz({
           {ratio >= 0.8 && <Confetti />}
           <p className="text-6xl font-extrabold">
             <AnimatedNumber value={result.score} />
-            <span className="text-3xl text-ink-400">/{result.total}</span>
+            <span className="text-3xl text-ink-500">/{result.total}</span>
           </p>
           <p className="text-xl font-semibold">
             {t('hangul.quiz.finished', result)}

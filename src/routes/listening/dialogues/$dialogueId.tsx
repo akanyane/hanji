@@ -1,9 +1,11 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { getDialogue } from '../../../content/listening/dialogues'
 import { DialoguePage } from '../../../features/listening/Dialogues'
 
 export const Route = createFileRoute('/listening/dialogues/$dialogueId')({
-  loader: ({ params }) => {
+  // Content is imported inside the loader so it stays out of the app's
+  // initial JavaScript (route loaders are not code-split).
+  loader: async ({ params }) => {
+    const { getDialogue } = await import('../../../content/listening/dialogues')
     const dialogue = getDialogue(params.dialogueId)
     if (!dialogue) throw notFound()
     return dialogue

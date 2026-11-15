@@ -21,6 +21,21 @@ import {
 
 const MotionLink = motion.create(Link)
 
+/**
+ * The hero title is the page's largest element: it must be painted at once
+ * (it counts for Largest Contentful Paint), so it soaks in from a blur
+ * without starting invisible.
+ */
+const titleIn = {
+  hidden: { y: 10, filter: 'blur(5px)' },
+  visible: {
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.6, ease: inkEase },
+    transitionEnd: { filter: 'none' },
+  },
+}
+
 const GROUP_KOREAN: Record<ModuleGroup, string> = {
   learn: '배우기',
   practice: '연습',
@@ -85,14 +100,14 @@ function Hero() {
           ))}
         </p>
         <motion.h1
-          variants={fadeUp}
+          variants={titleIn}
           className="max-w-xl text-4xl leading-tight font-bold sm:text-6xl"
         >
           {t('home.title')}
         </motion.h1>
         <BrushStroke className="-mt-2 w-48 sm:w-64" delay={0.6} />
         <motion.p
-          variants={fadeUp}
+          variants={titleIn}
           className="max-w-xl text-lg text-ink-600 dark:text-ink-300"
         >
           {t('home.description')}
@@ -152,7 +167,7 @@ function ModuleCard({
         )}
       />
       <span className="flex items-start justify-between gap-3">
-        <span className="font-serif text-sm text-ink-400 tabular-nums dark:text-ink-500">
+        <span className="font-serif text-sm text-ink-500 tabular-nums dark:text-ink-500">
           {String(number).padStart(2, '0')}
         </span>
         <span

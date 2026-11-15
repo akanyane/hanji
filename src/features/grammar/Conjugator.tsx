@@ -42,7 +42,7 @@ interface ConjugatorProps {
 /** A conjugated form; clicking it reads it aloud. */
 function FormCell({ value }: { value?: string }) {
   const rate = useSettings((s) => s.speechRate)
-  if (!value) return <span className="text-ink-400">—</span>
+  if (!value) return <span className="text-ink-500">—</span>
   return (
     <button
       type="button"
