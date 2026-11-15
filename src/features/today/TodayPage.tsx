@@ -28,6 +28,7 @@ const GOAL_NAMES: Record<DailyGoal, 'light' | 'regular' | 'intense'> = {
 const SEAL: Record<DailyTask['kind'], string> = {
   hangul: '한글',
   vocabulary: '단어',
+  grammarReview: '복습',
   grammar: '문법',
   reading: '읽기',
   dialogue: '대화',
@@ -74,6 +75,18 @@ function useTaskView(task: DailyTask) {
             search={{ deck: task.deck }}
             className={cls}
           >
+            {label}
+          </Link>
+        ),
+      }
+    case 'grammarReview':
+      return {
+        title: t('today.tasks.grammarReview.title'),
+        detail: task.done
+          ? t('today.tasks.grammarReview.reviewed')
+          : t('today.tasks.grammarReview.detail', { count: task.due }),
+        link: (
+          <Link to="/grammar/review" className={cls}>
             {label}
           </Link>
         ),

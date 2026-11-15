@@ -36,6 +36,12 @@ export const ptBR: Messages = {
         reviewed_one: '{{count}} palavra revisada hoje',
         reviewed_other: '{{count}} palavras revisadas hoje',
       },
+      grammarReview: {
+        title: 'Revisão de gramática',
+        detail_one: '{{count}} lição está na hora',
+        detail_other: '{{count}} lições estão na hora',
+        reviewed: 'Lições revisadas hoje',
+      },
       grammar: { title: 'Lição de gramática' },
       reading: { title: 'Leitura' },
       dialogue: { title: 'Diálogo' },
@@ -431,11 +437,31 @@ export const ptBR: Messages = {
     },
   },
   grammar: {
+    review: {
+      description:
+        'As lições em que você passou voltam em intervalos cada vez maiores, pouco antes de você esquecer. Cada revisão traz alguns exercícios de cada lição.',
+      due_one: '{{count}} lição para revisar',
+      due_other: '{{count}} lições para revisar',
+      start_one: 'Revisar ({{count}} exercício)',
+      start_other: 'Revisar ({{count}} exercícios)',
+      nothing: 'Nada para revisar agora.',
+      howTo:
+        'Passe nos exercícios de uma lição e ela volta aqui na hora certa.',
+      upcoming: 'Próxima revisão em {{when}}.',
+      finished: 'Revisão feita!',
+      lessonScore: '{{correct}} de {{total}} certas',
+      next: 'volta em {{when}}',
+      backToday: 'Voltar para Hoje',
+      backLessons: 'Ver as lições',
+      banner_one: '{{count}} lição está na hora de revisar',
+      banner_other: '{{count}} lições estão na hora de revisar',
+    },
     title: 'Gramática',
     description:
       'Das partículas aos conectivos, passo a passo, com um conjugador para qualquer verbo.',
     sections: 'Seções da gramática',
     tabs: {
+      review: 'Revisão',
       lessons: 'Lições',
       conjugator: 'Conjugador',
       particles: 'Partículas',

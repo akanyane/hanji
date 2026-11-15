@@ -37,6 +37,12 @@ export const en = {
         reviewed_one: '{{count}} word reviewed today',
         reviewed_other: '{{count}} words reviewed today',
       },
+      grammarReview: {
+        title: 'Grammar review',
+        detail_one: '{{count}} lesson is due',
+        detail_other: '{{count}} lessons are due',
+        reviewed: 'Lessons reviewed today',
+      },
       grammar: { title: 'Grammar lesson' },
       reading: { title: 'Reading' },
       dialogue: { title: 'Dialogue' },
@@ -432,11 +438,31 @@ export const en = {
     },
   },
   grammar: {
+    review: {
+      description:
+        'Lessons you passed come back at growing intervals, right before you would forget them. Each review asks a couple of exercises per lesson.',
+      due_one: '{{count}} lesson to review',
+      due_other: '{{count}} lessons to review',
+      start_one: 'Review ({{count}} exercise)',
+      start_other: 'Review ({{count}} exercises)',
+      nothing: 'Nothing to review right now.',
+      howTo:
+        'Pass a lesson’s exercises and it will come back here at the right time.',
+      upcoming: 'Next review in {{when}}.',
+      finished: 'Review done!',
+      lessonScore: '{{correct}} of {{total}} right',
+      next: 'back in {{when}}',
+      backToday: 'Back to Today',
+      backLessons: 'See the lessons',
+      banner_one: '{{count}} lesson is due for review',
+      banner_other: '{{count}} lessons are due for review',
+    },
     title: 'Grammar',
     description:
       'From particles to connectives, step by step, with a conjugator for any verb.',
     sections: 'Grammar sections',
     tabs: {
+      review: 'Review',
       lessons: 'Lessons',
       conjugator: 'Conjugator',
       particles: 'Particles',

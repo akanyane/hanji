@@ -124,8 +124,11 @@ export function computeProgress(data: ProgressData, now = Date.now()) {
 
   for (const log of data.logs) {
     addXp(log.reviewedAt, XP.review)
-    addSkill('vocabulary', log.grade === 'again' ? 0 : 1, 1)
+    // Grammar lessons are reviewed too (cards `grammar:<lessonId>`).
+    const skill = log.cardId.startsWith('grammar:') ? 'grammar' : 'vocabulary'
+    addSkill(skill, log.grade === 'again' ? 0 : 1, 1)
   }
+  const wordCards = data.cards.filter((c) => c.itemType === 'vocab')
 
   for (const p of data.practice) {
     addXp(p.at, XP.practice(p.correct, p.total))
@@ -157,8 +160,8 @@ export function computeProgress(data: ProgressData, now = Date.now()) {
     activeDays: active.size,
     studyMs,
     todayMs: data.studyDays.find((d) => d.id === today)?.ms ?? 0,
-    wordsSeen: data.cards.length,
-    wordsLearned: data.cards.filter((c) => c.card.state === SrsState.Review)
+    wordsSeen: wordCards.length,
+    wordsLearned: wordCards.filter((c) => c.card.state === SrsState.Review)
       .length,
     reviews: data.logs.length,
     quizzes,

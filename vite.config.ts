@@ -80,8 +80,9 @@ export default defineConfig(({ mode }) => ({
     // Integration tests drive whole study sessions through the real UI.
     testTimeout: 20_000,
     // Every integration test renders the whole app in jsdom, which is
-    // CPU-heavy: one worker per core starves them on a busy machine (the
-    // first test of each file then times out). Half the cores is plenty.
-    maxWorkers: '50%',
+    // CPU-heavy: many workers starve each other on a busy machine and tests
+    // time out. Four workers keep a full run under a minute and stay stable
+    // even when other projects load the CPU (GitHub runners have 4 cores).
+    maxWorkers: 4,
   },
 }))

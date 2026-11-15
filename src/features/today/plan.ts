@@ -21,6 +21,7 @@ export type DailyTask =
       /** Deck to study: everything when reviews are due, else the level deck. */
       deck: string
     }
+  | { kind: 'grammarReview'; done: boolean; due: number; reviewedToday: number }
   | { kind: 'grammar'; done: boolean; lesson: GrammarLesson }
   | { kind: 'reading'; done: boolean; text: ReadingText }
   | { kind: 'dialogue'; done: boolean; dialogue: Dialogue }
@@ -91,14 +92,17 @@ export function planDay({
     })
 
   // 2. Vocabulary: due reviews plus a few new words of the learner's level.
-  const seen = new Set(data.cards.map((c) => c.itemId))
-  const due = data.cards.filter((c) => c.dueAt.getTime() <= now).length
+  const wordCards = data.cards.filter((c) => c.itemType === 'vocab')
+  const seen = new Set(wordCards.map((c) => c.itemId))
+  const due = wordCards.filter((c) => c.dueAt.getTime() <= now).length
   const vocabLevel = Math.min(3, Math.max(1, level))
   const unseen = VOCABULARY.filter(
     (w) => w.level === vocabLevel && !seen.has(w.id),
   ).length
   const fresh = Math.min(newPerSession, unseen)
-  const reviewedToday = data.logs.filter((l) => isToday(l.reviewedAt)).length
+  const reviewedToday = data.logs.filter(
+    (l) => l.cardId.startsWith('vocab:') && isToday(l.reviewedAt),
+  ).length
   if (due + fresh > 0 || reviewedToday > 0)
     tasks.push({
       kind: 'vocabulary',
@@ -109,7 +113,30 @@ export function planDay({
       done: reviewedToday >= DAILY_REVIEWS || (due === 0 && reviewedToday > 0),
     })
 
-  // 3. Grammar: the lesson passed today, or the next one to learn.
+  // 3. Grammar reviews: lessons whose spaced-repetition card is due.
+  const grammarDue = data.cards.filter(
+    (c) => c.itemType === 'grammar' && c.dueAt.getTime() <= now,
+  ).length
+  const grammarReviewedToday = data.logs.filter(
+    (l) => l.cardId.startsWith('grammar:') && isToday(l.reviewedAt),
+  ).length
+  // Passing a lesson also logs a review: only count reviews beyond that.
+  const lessonQuizzesToday = attemptsToday.filter((a) =>
+    a.quizId.startsWith('grammar:'),
+  ).length
+  const reviewSessionsToday = Math.max(
+    0,
+    grammarReviewedToday - lessonQuizzesToday,
+  )
+  if (grammarDue > 0 || reviewSessionsToday > 0)
+    tasks.push({
+      kind: 'grammarReview',
+      due: grammarDue,
+      reviewedToday: reviewSessionsToday,
+      done: grammarDue === 0 && reviewSessionsToday > 0,
+    })
+
+  // 4. Grammar: the lesson passed today, or the next one to learn.
   if (level > 0) {
     const passedToday = attemptsToday.find(
       (a) => a.quizId.startsWith('grammar:') && passed(a.score, a.total),
@@ -130,7 +157,7 @@ export function planDay({
       tasks.push({ kind: 'grammar', lesson, done: Boolean(todayLesson) })
   }
 
-  // 4. Practice: a text or a dialogue (alternating by day), new ones first.
+  // 5. Practice: a text or a dialogue (alternating by day), new ones first.
   if (level > 0) {
     const maxLevel = practiceMaxLevel(level)
     const readingToday = attemptsToday.find((a) =>

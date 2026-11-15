@@ -39,6 +39,9 @@ export interface MetaEntry {
 /** How an item was practiced (the SRS grade comes from the mode's result). */
 export type StudyMode = 'flashcards' | 'choice' | 'typing' | 'listening'
 
+/** How a review happened: a vocabulary study mode, or a lesson's exercises. */
+export type ReviewMode = StudyMode | 'grammar'
+
 /**
  * Spaced-repetition state of one study item.
  *
@@ -47,7 +50,8 @@ export type StudyMode = 'flashcards' | 'choice' | 'typing' | 'listening'
  * instead of creating duplicates.
  */
 export interface SrsCardRecord extends SyncFields {
-  itemType: 'vocab'
+  /** A vocabulary word, or a grammar lesson reviewed through its exercises. */
+  itemType: 'vocab' | 'grammar'
   itemId: string
   /** Copy of card.dueAt, indexed for "what is due" queries. */
   dueAt: Date
@@ -58,7 +62,7 @@ export interface ReviewLogRecord extends SyncFields {
   cardId: string
   itemId: string
   grade: import('../lib/srs/scheduler').SrsGrade
-  mode: StudyMode
+  mode: ReviewMode
   reviewedAt: Date
   /** True when this was the first time the item was seen. */
   wasNew: boolean

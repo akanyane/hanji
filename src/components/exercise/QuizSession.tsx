@@ -1,7 +1,15 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { type ReactNode, useCallback, useEffect, useRef, useState } from 'react'
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '../../lib/cn'
+import { shuffle } from '../../lib/quiz/quiz'
 import { InkMark } from '../brand/InkMark'
 import { pop, shake, spring } from '../motion/presets'
 import { Button } from '../ui/Button'
@@ -31,6 +39,12 @@ interface QuizSessionProps {
   onAnswer?: (questionId: string, correct: boolean) => void
   /** "list" stacks the choices, for long sentence choices. */
   layout?: 'grid' | 'list'
+  /**
+   * Shuffle the choices of each question (default). Content is written with
+   * the right answer first, so showing choices as written gives it away.
+   * Turn off only when the caller already shuffled them.
+   */
+  shuffleChoices?: boolean
 }
 
 /**
@@ -42,13 +56,45 @@ export function QuizSession({
   onComplete,
   onAnswer,
   layout = 'grid',
+  shuffleChoices = true,
 }: QuizSessionProps) {
   const { t } = useTranslation()
+  // The order is drawn once per set of questions (by ids, not by array
+  // identity: callers may rebuild the questions on every render, e.g. after
+  // a language switch), so choices never move while answering.
+  const setKey = questions
+    .map((q) => `${q.id}:${q.choices.map((c) => c.id).join('|')}`)
+    .join(',')
+  // biome-ignore lint/correctness/useExhaustiveDependencies: keyed by setKey
+  const orders = useMemo(
+    () =>
+      new Map(
+        questions.map((q) => [
+          q.id,
+          shuffleChoices
+            ? shuffle(
+                q.choices.map((c) => c.id),
+                Math.random,
+              )
+            : q.choices.map((c) => c.id),
+        ]),
+      ),
+    [setKey, shuffleChoices],
+  )
+  const ordered = questions.map((q) => {
+    const order = orders.get(q.id)
+    if (!order) return q
+    const byId = new Map(q.choices.map((c) => [c.id, c]))
+    return {
+      ...q,
+      choices: order.flatMap((id) => byId.get(id) ?? []),
+    }
+  })
   const [index, setIndex] = useState(0)
   const [score, setScore] = useState(0)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const continueRef = useRef<HTMLButtonElement>(null)
-  const question = questions[index]
+  const question = ordered[index]
   const answered = selectedId !== null
   const correct = answered && selectedId === question.answerId
 

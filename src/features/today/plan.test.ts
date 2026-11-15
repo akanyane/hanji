@@ -161,6 +161,26 @@ describe('planDay', () => {
     expect(vocab?.done).toBe(true)
   })
 
+  it('adds due grammar reviews and keeps them out of vocabulary', () => {
+    const data = empty()
+    data.cards.push({
+      ...card('past-tense', YESTERDAY),
+      id: 'grammar:past-tense',
+      itemType: 'grammar',
+    })
+    const plan = planDay({
+      data,
+      placementLevel: 1,
+      newPerSession: 0,
+      now: NOW,
+    })
+    expect(plan.find((t) => t.kind === 'grammarReview')).toMatchObject({
+      due: 1,
+      done: false,
+    })
+    expect(plan.find((t) => t.kind === 'vocabulary')).toBeUndefined()
+  })
+
   it('marks practice done with the text read today', () => {
     const data = empty()
     data.attempts.push(attempt('reading:my-day', 3, 3))

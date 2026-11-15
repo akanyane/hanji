@@ -13,10 +13,11 @@ import { AudioButton } from '../../components/ui/AudioButton'
 import { Button } from '../../components/ui/Button'
 import { notesForLesson } from '../../content/culture/notes'
 import { GRAMMAR_LESSONS, type GrammarLesson } from '../../content/grammar'
-import { useRecordQuizAttempt } from '../../db/queries'
+import { useRecordLessonResult, useRecordQuizAttempt } from '../../db/queries'
 import { useLocalized } from '../../i18n/useLocalized'
 import { conjugate } from '../../lib/conjugation/conjugate'
 import { CultureCallout } from '../culture/CultureCallout'
+import { exerciseQuestion } from './exerciseQuestion'
 import { lessonQuizId } from './GrammarHome'
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -32,19 +33,6 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 }
 
 /** Renders a gap ("___") in an exercise prompt as a highlighted blank. */
-function Gapped({ text }: { text: string }) {
-  const [before, after] = text.split('___')
-  return (
-    <span lang="ko" className="text-2xl font-semibold sm:text-3xl">
-      {before}
-      <span className="mx-1 inline-block min-w-12 border-b-4 border-pine-500 align-baseline">
-        &nbsp;
-      </span>
-      {after}
-    </span>
-  )
-}
-
 function ConjugationTable({ lesson }: { lesson: GrammarLesson }) {
   const { t } = useTranslation()
   const table = lesson.conjugationTable
@@ -113,6 +101,7 @@ function Exercises({ lesson }: { lesson: GrammarLesson }) {
   const { t } = useTranslation()
   const l = useLocalized()
   const { mutate: save } = useRecordQuizAttempt()
+  const { mutate: recordLesson } = useRecordLessonResult()
   const [round, setRound] = useState(0)
   const [state, setState] = useState<'idle' | 'running' | 'done'>('idle')
   const [score, setScore] = useState(0)
@@ -121,23 +110,9 @@ function Exercises({ lesson }: { lesson: GrammarLesson }) {
 
   const questions = useMemo<SessionQuestion[]>(
     () =>
-      lesson.exercises.map((ex, i) => ({
-        id: `${lesson.id}-${i}`,
-        answerId: String(ex.answer),
-        choices: ex.choices.map((c, ci) => ({
-          id: String(ci),
-          label: c,
-          lang: 'ko',
-        })),
-        prompt: (
-          <>
-            <Gapped text={ex.prompt} />
-            <span className="text-sm text-ink-500 dark:text-ink-400">
-              {l(ex.translation)}
-            </span>
-          </>
-        ),
-      })),
+      lesson.exercises.map((ex, i) =>
+        exerciseQuestion(`${lesson.id}-${i}`, ex, l),
+      ),
     [lesson, l],
   )
 
@@ -153,6 +128,13 @@ function Exercises({ lesson }: { lesson: GrammarLesson }) {
             quizId: lessonQuizId(lesson.id),
             filter: 'all',
             score: s,
+            total: questions.length,
+          })
+          // Passing enrolls the lesson in spaced repetition; later results
+          // reschedule it.
+          recordLesson({
+            lessonId: lesson.id,
+            correct: s,
             total: questions.length,
           })
         }}
