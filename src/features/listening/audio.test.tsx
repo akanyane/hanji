@@ -117,14 +117,26 @@ describe('dialogues', () => {
     await user.click(
       screen.getByRole('button', { name: 'Responder às perguntas' }),
     )
-    for (let i = 0; i < dialogue.questions.length; i++) {
+    // Choices are shuffled on screen: pick the right one by its text.
+    for (const [i, q] of dialogue.questions.entries()) {
       await screen.findByText(
         new RegExp(`Questão ${i + 1} de ${dialogue.questions.length}`),
       )
-      await user.keyboard('1')
+      const label = q.choices[q.answer]['pt-BR'].replace(
+        /[.*+?^${}()|[\]\\]/g,
+        '\\$&',
+      )
+      // The previous question may still be animating out.
+      const button = await waitFor(() => {
+        const found = screen.getByRole('button', {
+          name: new RegExp(`^\\d${label}$`),
+        })
+        expect(found).toBeEnabled()
+        return found
+      })
+      await user.click(button)
       await user.click(await screen.findByRole('button', { name: /Continuar/ }))
     }
-    // The first choice is the right answer in every question of this dialogue.
     expect(
       await screen.findByText(
         `Você acertou ${dialogue.questions.length} de ${dialogue.questions.length}!`,

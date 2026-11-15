@@ -32,6 +32,7 @@ import {
   getAllCards,
   getReviewLogs,
   type ReviewInput,
+  recordLessonResult,
   recordReview,
 } from './srs'
 
@@ -45,6 +46,7 @@ export const queryKeys = {
   quizSummaries: (prefix: string) =>
     ['quiz-attempts', 'summaries', prefix] as const,
   srsCards: ['srs', 'cards'] as const,
+  grammarCards: ['srs', 'grammar'] as const,
   reviewLogs: (days: number) => ['srs', 'logs', days] as const,
   srs: ['srs'] as const,
   decks: ['decks'] as const,
@@ -95,7 +97,7 @@ export function useQuizSummaries(prefix: string) {
 
 export const srsCardsQuery = queryOptions({
   queryKey: queryKeys.srsCards,
-  queryFn: getAllCards,
+  queryFn: () => getAllCards('vocab'),
 })
 
 export function useSrsCards() {
@@ -212,3 +214,26 @@ export function useSetMeta(key: string) {
 }
 
 export { META_KEYS }
+
+// --- Grammar reviews ---------------------------------------------------------
+
+export const grammarCardsQuery = queryOptions({
+  queryKey: queryKeys.grammarCards,
+  queryFn: () => getAllCards('grammar'),
+})
+
+export function useGrammarCards() {
+  return useQuery(grammarCardsQuery)
+}
+
+export function useRecordLessonResult() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (input: { lessonId: string; correct: number; total: number }) =>
+      recordLessonResult(input.lessonId, input.correct, input.total),
+    onSuccess: () => {
+      refreshProgress(queryClient)
+      return queryClient.invalidateQueries({ queryKey: queryKeys.srs })
+    },
+  })
+}

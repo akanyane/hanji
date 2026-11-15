@@ -221,6 +221,24 @@ describe('computeProgress', () => {
     expect(stats.bestMock).toBe(0.6)
   })
 
+  it('counts grammar reviews for grammar, not as words', () => {
+    const data = empty()
+    data.cards.push(card('water', SrsState.Review), {
+      ...card('past-tense', SrsState.Review),
+      id: 'grammar:past-tense',
+      itemType: 'grammar',
+    })
+    data.logs.push(log('good'), {
+      ...log('again'),
+      cardId: 'grammar:past-tense',
+    })
+    const stats = computeProgress(data, NOW)
+    expect(stats.wordsSeen).toBe(1)
+    expect(stats.wordsLearned).toBe(1)
+    expect(stats.skills.vocabulary).toMatchObject({ correct: 1, total: 1 })
+    expect(stats.skills.grammar).toMatchObject({ correct: 0, total: 1 })
+  })
+
   it('maps quiz ids to skills', () => {
     expect(skillOfQuiz('hangul-listen')).toBe('hangul')
     expect(skillOfQuiz('listening:dialogue:cafe')).toBe('listening')

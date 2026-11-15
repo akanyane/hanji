@@ -17,7 +17,7 @@ function GrammarLayout() {
   // Lesson pages have their own big header.
   const inLesson =
     pathname.split('/').length > 2 &&
-    !['conjugator', 'particles'].includes(pathname.split('/')[2])
+    !['conjugator', 'particles', 'review'].includes(pathname.split('/')[2])
 
   return (
     <div className="flex flex-col gap-6">
@@ -37,6 +37,7 @@ function GrammarLayout() {
                 label: t('grammar.tabs.conjugator'),
               },
               { to: '/grammar/particles', label: t('grammar.tabs.particles') },
+              { to: '/grammar/review', label: t('grammar.tabs.review') },
             ]}
           />
         </div>

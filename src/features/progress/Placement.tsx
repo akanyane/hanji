@@ -194,6 +194,7 @@ export function Placement({ random = Math.random }: { random?: () => number }) {
         onAnswer={onAnswer}
         onComplete={onComplete}
         layout="list"
+        shuffleChoices={false}
       />
     )
 

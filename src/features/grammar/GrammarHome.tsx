@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
+import { Seal } from '../../components/brand/Seal'
 import {
   cardHover,
   cardTap,
@@ -8,7 +9,7 @@ import {
   stagger,
 } from '../../components/motion/presets'
 import { GRAMMAR_LESSONS } from '../../content/grammar'
-import { useQuizSummaries } from '../../db/queries'
+import { useGrammarCards, useQuizSummaries } from '../../db/queries'
 import { useLocalized } from '../../i18n/useLocalized'
 
 export const lessonQuizId = (lessonId: string) => `grammar:${lessonId}`
@@ -17,12 +18,32 @@ export function GrammarHome() {
   const { t } = useTranslation()
   const l = useLocalized()
   const { data: summaries = {} } = useQuizSummaries('grammar:')
+  const { data: grammarCards = [] } = useGrammarCards()
+  const dueCount = grammarCards.filter(
+    (c) => c.dueAt.getTime() <= Date.now(),
+  ).length
   const levels = [
     ...new Set(GRAMMAR_LESSONS.map((lesson) => lesson.level)),
   ].sort()
 
   return (
     <div className="flex flex-col gap-8">
+      {dueCount > 0 && (
+        <motion.div variants={fadeUp} initial="hidden" animate="visible">
+          <Link
+            to="/grammar/review"
+            className="group flex items-center gap-4 rounded-lg border border-seal-300 bg-seal-50 p-4 transition-shadow hover:shadow-lift dark:border-seal-800 dark:bg-seal-950/40"
+          >
+            <Seal text="복습" size="md" animate="stamp" delay={0.2} />
+            <span className="flex-1 font-semibold">
+              {t('grammar.review.banner', { count: dueCount })}
+            </span>
+            <span className="text-sm font-medium transition-transform group-hover:translate-x-1">
+              {t('grammar.tabs.review')} →
+            </span>
+          </Link>
+        </motion.div>
+      )}
       {levels.map((level) => {
         const lessons = GRAMMAR_LESSONS.filter(
           (lesson) => lesson.level === level,

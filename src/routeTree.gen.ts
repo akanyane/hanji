@@ -32,6 +32,7 @@ import { Route as GrammarIndexRouteImport } from './routes/grammar/index'
 import { Route as GrammarLessonIdRouteImport } from './routes/grammar/$lessonId'
 import { Route as GrammarConjugatorRouteImport } from './routes/grammar/conjugator'
 import { Route as GrammarParticlesRouteImport } from './routes/grammar/particles'
+import { Route as GrammarReviewRouteImport } from './routes/grammar/review'
 import { Route as HangulIndexRouteImport } from './routes/hangul/index'
 import { Route as HangulEntryIdRouteImport } from './routes/hangul/$entryId'
 import { Route as HangulBuilderRouteImport } from './routes/hangul/builder'
@@ -183,6 +184,11 @@ const GrammarConjugatorRoute = GrammarConjugatorRouteImport.update({
 const GrammarParticlesRoute = GrammarParticlesRouteImport.update({
   id: '/particles',
   path: '/particles',
+  getParentRoute: () => GrammarRouteRoute,
+} as any)
+const GrammarReviewRoute = GrammarReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
   getParentRoute: () => GrammarRouteRoute,
 } as any)
 const HangulIndexRoute = HangulIndexRouteImport.update({
@@ -394,6 +400,7 @@ export interface FileRoutesByFullPath {
   '/grammar/$lessonId': typeof GrammarLessonIdRoute
   '/grammar/conjugator': typeof GrammarConjugatorRoute
   '/grammar/particles': typeof GrammarParticlesRoute
+  '/grammar/review': typeof GrammarReviewRoute
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
@@ -443,6 +450,7 @@ export interface FileRoutesByTo {
   '/grammar/$lessonId': typeof GrammarLessonIdRoute
   '/grammar/conjugator': typeof GrammarConjugatorRoute
   '/grammar/particles': typeof GrammarParticlesRoute
+  '/grammar/review': typeof GrammarReviewRoute
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
@@ -506,6 +514,7 @@ export interface FileRoutesById {
   '/grammar/$lessonId': typeof GrammarLessonIdRoute
   '/grammar/conjugator': typeof GrammarConjugatorRoute
   '/grammar/particles': typeof GrammarParticlesRoute
+  '/grammar/review': typeof GrammarReviewRoute
   '/hangul/$entryId': typeof HangulEntryIdRoute
   '/hangul/builder': typeof HangulBuilderRoute
   '/hangul/quiz': typeof HangulQuizRoute
@@ -570,6 +579,7 @@ export interface FileRouteTypes {
     | '/grammar/$lessonId'
     | '/grammar/conjugator'
     | '/grammar/particles'
+    | '/grammar/review'
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
@@ -619,6 +629,7 @@ export interface FileRouteTypes {
     | '/grammar/$lessonId'
     | '/grammar/conjugator'
     | '/grammar/particles'
+    | '/grammar/review'
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
@@ -681,6 +692,7 @@ export interface FileRouteTypes {
     | '/grammar/$lessonId'
     | '/grammar/conjugator'
     | '/grammar/particles'
+    | '/grammar/review'
     | '/hangul/$entryId'
     | '/hangul/builder'
     | '/hangul/quiz'
@@ -902,6 +914,13 @@ declare module '@tanstack/react-router' {
       path: '/particles'
       fullPath: '/grammar/particles'
       preLoaderRoute: typeof GrammarParticlesRouteImport
+      parentRoute: typeof GrammarRouteRoute
+    }
+    '/grammar/review': {
+      id: '/grammar/review'
+      path: '/review'
+      fullPath: '/grammar/review'
+      preLoaderRoute: typeof GrammarReviewRouteImport
       parentRoute: typeof GrammarRouteRoute
     }
     '/hangul/': {
@@ -1198,6 +1217,7 @@ interface GrammarRouteRouteChildren {
   GrammarLessonIdRoute: typeof GrammarLessonIdRoute
   GrammarConjugatorRoute: typeof GrammarConjugatorRoute
   GrammarParticlesRoute: typeof GrammarParticlesRoute
+  GrammarReviewRoute: typeof GrammarReviewRoute
   GrammarIndexRoute: typeof GrammarIndexRoute
 }
 
@@ -1205,6 +1225,7 @@ const GrammarRouteRouteChildren: GrammarRouteRouteChildren = {
   GrammarLessonIdRoute: GrammarLessonIdRoute,
   GrammarConjugatorRoute: GrammarConjugatorRoute,
   GrammarParticlesRoute: GrammarParticlesRoute,
+  GrammarReviewRoute: GrammarReviewRoute,
   GrammarIndexRoute: GrammarIndexRoute,
 }
 

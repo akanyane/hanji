@@ -5,24 +5,35 @@ import {
   type SrsGrade,
 } from '../lib/srs/scheduler'
 import { db } from './db'
-import type { ReviewLogRecord, SrsCardRecord, StudyMode } from './types'
+import type { ReviewLogRecord, ReviewMode, SrsCardRecord } from './types'
 
 // Spaced-repetition repository. Components never touch Dexie directly.
 
-export const vocabCardId = (wordId: string) => `vocab:${wordId}`
+export type SrsItemType = SrsCardRecord['itemType']
+
+/** Deterministic ids (`vocab:<wordId>`, `grammar:<lessonId>`): see SrsCardRecord. */
+export const cardId = (type: SrsItemType, itemId: string) => `${type}:${itemId}`
+export const vocabCardId = (wordId: string) => cardId('vocab', wordId)
+export const grammarCardId = (lessonId: string) => cardId('grammar', lessonId)
 
 const alive = <T extends { deletedAt: number | null }>(
   r: T | undefined,
 ): r is T => r !== undefined && r.deletedAt === null
 
-export async function getAllCards(): Promise<SrsCardRecord[]> {
-  return (await db.srsCards.toArray()).filter(alive)
+/** Cards of one item type (vocabulary by default). */
+export async function getAllCards(
+  type: SrsItemType = 'vocab',
+): Promise<SrsCardRecord[]> {
+  return (await db.srsCards.where('itemType').equals(type).toArray()).filter(
+    alive,
+  )
 }
 
 export async function getCard(
   itemId: string,
+  type: SrsItemType = 'vocab',
 ): Promise<SrsCardRecord | undefined> {
-  const record = await db.srsCards.get(vocabCardId(itemId))
+  const record = await db.srsCards.get(cardId(type, itemId))
   return alive(record) ? record : undefined
 }
 
@@ -35,8 +46,10 @@ export async function previewItem(itemId: string, now: Date) {
 
 export interface ReviewInput {
   itemId: string
+  /** Defaults to vocabulary. */
+  itemType?: SrsItemType
   grade: SrsGrade
-  mode: StudyMode
+  mode: ReviewMode
   now?: Date
 }
 
@@ -47,21 +60,22 @@ export interface ReviewInput {
  */
 export async function recordReview({
   itemId,
+  itemType = 'vocab',
   grade,
   mode,
   now = new Date(),
 }: ReviewInput): Promise<SrsCardRecord> {
-  const existing = await getCard(itemId)
+  const existing = await getCard(itemId, itemType)
   const card = existing?.card ?? (await createCard(now))
   const result = await reviewCard(card, grade, now)
-  const id = vocabCardId(itemId)
+  const id = cardId(itemType, itemId)
   const stamp = now.getTime()
 
   const record: SrsCardRecord = {
     id,
     updatedAt: stamp,
     deletedAt: null,
-    itemType: 'vocab',
+    itemType,
     itemId,
     dueAt: result.card.dueAt,
     card: result.card,
@@ -86,10 +100,52 @@ export async function recordReview({
   return record
 }
 
-export async function getReviewLogs(since: Date): Promise<ReviewLogRecord[]> {
+/** Review logs since a date, of one item type (vocabulary by default). */
+export async function getReviewLogs(
+  since: Date,
+  type: SrsItemType = 'vocab',
+): Promise<ReviewLogRecord[]> {
   return (
     await db.reviewLogs.where('reviewedAt').aboveOrEqual(since).toArray()
-  ).filter(alive)
+  ).filter((log) => alive(log) && log.cardId.startsWith(`${type}:`))
+}
+
+// --- Grammar ---------------------------------------------------------------
+
+/**
+ * FSRS grade from a share of right answers on a lesson's exercises:
+ * all right → good, at least half → hard, less → again.
+ */
+export function gradeFromScore(correct: number, total: number): SrsGrade {
+  if (total <= 0) return 'again'
+  if (correct >= total) return 'good'
+  return correct / total >= 0.5 ? 'hard' : 'again'
+}
+
+/** Share of right answers a lesson quiz needs to enter the reviews. */
+export const LESSON_ENROLL_RATIO = 0.7
+
+/**
+ * Records a lesson quiz or grammar review result. A lesson enters spaced
+ * repetition the first time it is passed; after that, every result
+ * reschedules it. Returns null when a never-passed lesson was failed.
+ */
+export async function recordLessonResult(
+  lessonId: string,
+  correct: number,
+  total: number,
+  now = new Date(),
+): Promise<SrsCardRecord | null> {
+  const existing = await getCard(lessonId, 'grammar')
+  if (!existing && (total <= 0 || correct / total < LESSON_ENROLL_RATIO))
+    return null
+  return recordReview({
+    itemId: lessonId,
+    itemType: 'grammar',
+    grade: gradeFromScore(correct, total),
+    mode: 'grammar',
+    now,
+  })
 }
 
 /**
